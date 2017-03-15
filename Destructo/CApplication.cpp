@@ -7,6 +7,7 @@ CApplication::CApplication()
 	: window()
 	, m_renderer(nullptr)
 	, instance(GetModuleHandle(nullptr))
+  , m_soundEngine(nullptr)
 {
 
 }
@@ -18,11 +19,13 @@ CApplication::~CApplication()
 }
 
 
-bool CApplication::InitializeApplication(SRenderer::ERenderer a_chosenRenderer)
+bool CApplication::InitializeApplication(SRenderer::ERenderer a_chosenRenderer, ISoundEngine* a_soundEngine)
 {
 	printf("Engine Start\n");
 
 	bool wResult = false;
+
+  SetSoundEngine(a_soundEngine);
 
 	// Create window
 	WNDCLASS wc;
@@ -49,6 +52,9 @@ bool CApplication::InitializeApplication(SRenderer::ERenderer a_chosenRenderer)
 	wResult = ChangeScene();
 	if (!wResult)
 		return false;
+
+  // initialize sound
+  m_soundEngine->Initialize();
 
 	return true;
 }
@@ -117,6 +123,10 @@ void CApplication::Run()
 	MSG message;
 	engineRunning = true;
 
+  // just a sound-test
+  auto sound = m_soundEngine->LoadSound("Audio\\throw.mp3"); // load sound into memory
+  m_soundEngine->PlaySoundOneShot(sound); // play sound
+
 	// Start "Gameloop"
 	while (engineRunning)
 	{
@@ -126,9 +136,12 @@ void CApplication::Run()
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
-
+    
 		// Update everything inside the m_scene
 		m_scene->Update();
+
+    // update sound system
+    m_soundEngine->Update();
 
 		//Draw m_scene
 		m_scene->Draw(m_renderer);
@@ -141,6 +154,10 @@ void CApplication::Run()
 	m_renderer->ShutdownGraphics();
 	SafeDelete(m_scene);
 	SafeDelete(m_renderer);
+
+  m_soundEngine->UnloadSound(sound); // unload sound from memory
+  m_soundEngine->Shutdown(); // shutdown sound engine
+  SafeDelete(m_soundEngine); // delete sound engine
 }
 
 
@@ -203,6 +220,21 @@ bool CApplication::Failed(HRESULT a_aResult)
 		return true;
 	}
 	return false;
+}
+
+void CApplication::SetSoundEngine(ISoundEngine * a_soundEngine)
+{
+  if (a_soundEngine == nullptr)
+  {
+    return;
+  }
+
+  if (m_soundEngine)
+  {
+    SafeDelete(m_soundEngine);
+  }
+
+  m_soundEngine = a_soundEngine;
 }
 
 //CreateMemoryDC

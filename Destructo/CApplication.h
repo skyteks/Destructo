@@ -10,6 +10,7 @@
 #include "IRenderer.h"
 #include "CMouse.h"
 #include "CScene.h"
+#include "ISoundEngine.h"
 
 class CApplication
 {
@@ -17,7 +18,7 @@ public:
 	CApplication();
 	~CApplication();
 
-	bool InitializeApplication(SRenderer::ERenderer currentRenderer);
+	bool InitializeApplication(SRenderer::ERenderer currentRenderer, ISoundEngine* a_soundEngine);
 
 	bool ChangeRenderer(SRenderer::ERenderer newRenderer);
 
@@ -32,6 +33,8 @@ public:
 	static bool engineRunning;
 	static SRenderer::ERenderer currentRenderer;
 
+  void SetSoundEngine(ISoundEngine* a_soundEngine);
+
 private:
 	SWindowDesc wndDesc = { "All Renderers TestEngine", 800, 600 };
 	CWindow window;
@@ -39,5 +42,7 @@ private:
 	CScene* m_scene = nullptr;
 	HINSTANCE instance;
 	POINT curserPos;
+
+  ISoundEngine* m_soundEngine;
 };
 

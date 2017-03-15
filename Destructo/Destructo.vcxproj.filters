@@ -99,6 +99,12 @@
     <ClInclude Include="SVertex.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="CSoundEngine.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ISoundEngine.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp">
@@ -151,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="SVector3.cpp">
       <Filter>Ressourcendateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundEngine.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

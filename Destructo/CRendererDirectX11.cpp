@@ -124,7 +124,7 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(char* a_path)
 	textureDesc.SampleDesc.Count = 1;
 	textureDesc.Usage = D3D11_USAGE_DEFAULT;//D3D11_USAGE_DYNAMIC;
 	textureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	textureDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	textureDesc.CPUAccessFlags = 0; // previous: D3D11_CPU_ACCESS_WRITE
 	textureDesc.MiscFlags = 0;
 	//	bmp.header.Width,
 	//	bmp.header.Height,

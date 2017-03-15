@@ -1,5 +1,7 @@
 #include "CApplication.h"
 
+#include "CSoundEngine.h"
+
 CApplication* app = nullptr;
 
 int CALLBACK WinMain(
@@ -12,7 +14,7 @@ int CALLBACK WinMain(
 
 	bool wResult = false;
 	SRenderer::ERenderer chosenRenderer = SRenderer::DirectX11;
-	wResult = app->InitializeApplication(chosenRenderer);
+	wResult = app->InitializeApplication(chosenRenderer, new CSoundEngine());
 	if (!wResult)
 		return false;
 

@@ -88,12 +88,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Middleware\fmod\api\lowlevel\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Middleware\fmod\api\lowlevel\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -152,6 +152,7 @@
     <ClInclude Include="CRendererGDI.h" />
     <ClInclude Include="CRendererOpenGL.h" />
     <ClInclude Include="CScene.h" />
+    <ClInclude Include="CSoundEngine.h" />
     <ClInclude Include="CTextureDirectX11.h" />
     <ClInclude Include="CTextureGDI.h" />
     <ClInclude Include="CTextureOpenGL.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="GlobalFunctions.h" />
     <ClInclude Include="IInput.h" />
     <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="ISoundEngine.h" />
     <ClInclude Include="ITexture.h" />
     <ClInclude Include="SBitmap.h" />
     <ClInclude Include="SBitmapHeader.h" />
@@ -186,6 +188,7 @@
     <ClCompile Include="CRendererGDI.cpp" />
     <ClCompile Include="CRendererOpenGL.cpp" />
     <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSoundEngine.cpp" />
     <ClCompile Include="CTextureDirectX11.cpp" />
     <ClCompile Include="CTextureGDI.cpp" />
     <ClCompile Include="CTextureOpenGL.cpp" />
