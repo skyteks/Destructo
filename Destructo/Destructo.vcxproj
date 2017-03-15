@@ -174,9 +174,9 @@
     <ClInclude Include="SVertex.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </FxCompile>
+    <None Include="Shader.hlsl">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp" />

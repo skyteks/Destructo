@@ -36,7 +36,7 @@ private:
 	SWindowDesc wndDesc = { "All Renderers TestEngine", 800, 600 };
 	CWindow window;
 	IRenderer* m_renderer = nullptr;
-	CScene* scene = nullptr;
+	CScene* m_scene = nullptr;
 	HINSTANCE instance;
 	POINT curserPos;
 };

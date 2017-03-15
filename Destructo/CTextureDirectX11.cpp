@@ -16,7 +16,8 @@ CTextureDirectX11::CTextureDirectX11(ID3D11Texture2D* a_texture, ID3D11ShaderRes
 
 CTextureDirectX11::~CTextureDirectX11()
 {
-
+	SafeRelease(m_texture);
+	SafeRelease(m_shaderResourceView);
 }
 
 int CTextureDirectX11::GetWidth()

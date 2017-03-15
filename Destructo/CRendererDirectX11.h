@@ -47,15 +47,6 @@ public:
 
 	void Flush();
 
-	template<typename T> void SafeRelease(T*& a_interface)
-	{
-		if (a_interface != nullptr)
-		{
-			a_interface->Release();
-			a_interface = nullptr;
-		}
-	}
-
 private:
 	HWND m_windowHandle;
 	HDC m_windowDC;

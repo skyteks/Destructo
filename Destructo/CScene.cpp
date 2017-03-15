@@ -3,8 +3,7 @@
 
 
 CScene::CScene()
-	: m_renderer(nullptr)
-	, m_backgroundTexture(nullptr)
+	: m_backgroundTexture(nullptr)
 	, m_collisionTexture(nullptr)
 	, m_terrainTexture(nullptr)
 	, m_playerTexture(nullptr)
@@ -22,10 +21,8 @@ CScene::~CScene()
 
 bool CScene::InitializeScene(IRenderer* a_renderer)
 {
-	this->m_renderer = a_renderer;
-
-	LoadTextures();
-	//LoadButtons();
+	LoadTextures(a_renderer);
+	LoadButtons();
 
 	return true;
 }
@@ -51,29 +48,29 @@ void CScene::Update()
 }
 
 
-void CScene::Draw()
+void CScene::Draw(IRenderer* a_renderer)
 {
-	if (m_renderer != nullptr)
+	if (a_renderer != nullptr)
 	{
-		m_renderer->Begin();
+		a_renderer->Begin();
 
-		m_renderer->DrawTexture(0, 0, 800, 600, m_backgroundTexture, 0, 0, m_backgroundTexture->GetWidth(), m_backgroundTexture->GetHeight());
-		m_renderer->DrawTexture(0, 0, 800, 600, m_terrainTexture, 0, 0, m_terrainTexture->GetWidth(), m_terrainTexture->GetHeight());
-		m_renderer->DrawTexture(m_playerPosX, m_playerPosY, 32, 32, m_playerTexture, 0, 0, m_playerTexture->GetWidth(), m_playerTexture->GetHeight());
-		m_renderer->DrawTexture(0, 0, 0, 0, m_buttonTexture, 0, 0, 0, 0);
+		a_renderer->DrawTexture(0, 0, 800, 600, m_backgroundTexture, 0, 0, m_backgroundTexture->GetWidth(), m_backgroundTexture->GetHeight());
+		a_renderer->DrawTexture(0, 0, 800, 600, m_terrainTexture, 0, 0, m_terrainTexture->GetWidth(), m_terrainTexture->GetHeight());
+		a_renderer->DrawTexture(m_playerPosX, m_playerPosY, 32, 32, m_playerTexture, 0, 0, m_playerTexture->GetWidth(), m_playerTexture->GetHeight());
+		a_renderer->DrawTexture(0, 0, 0, 0, m_buttonTexture, 0, 0, 0, 0);
 
-		//m_renderer->DrawTexture(m_uiButtonGDI.GetDestination().m_x1, m_uiButtonGDI.GetDestination().m_y1, m_uiButtonGDI.GetDestination().m_x2, m_uiButtonGDI.GetDestination().m_y2, m_uiButtonGDI.GetTexture(), m_uiButtonGDI.GetSource().m_x1, m_uiButtonGDI.GetSource().m_y1, m_uiButtonGDI.GetSource().m_x2, m_uiButtonGDI.GetSource().m_y2);
-		//m_renderer->DrawTexture(m_uiButtonOpenGL.GetDestination().m_x1, m_uiButtonOpenGL.GetDestination().m_y1, m_uiButtonOpenGL.GetDestination().m_x2, m_uiButtonOpenGL.GetDestination().m_y2, m_uiButtonOpenGL.GetTexture(), m_uiButtonOpenGL.GetSource().m_x1, m_uiButtonOpenGL.GetSource().m_y1, m_uiButtonOpenGL.GetSource().m_x2, m_uiButtonOpenGL.GetSource().m_y2);
-		//m_renderer->DrawTexture(m_uiButtonDirectX11.GetDestination().m_x1, m_uiButtonDirectX11.GetDestination().m_y1, m_uiButtonDirectX11.GetDestination().m_x2, m_uiButtonDirectX11.GetDestination().m_y2, m_uiButtonDirectX11.GetTexture(), m_uiButtonDirectX11.GetSource().m_x1, m_uiButtonDirectX11.GetSource().m_y1, m_uiButtonDirectX11.GetSource().m_x2, m_uiButtonDirectX11.GetSource().m_y2);
+		a_renderer->DrawTexture(m_uiButtonGDI.GetDestination().m_x1, m_uiButtonGDI.GetDestination().m_y1, m_uiButtonGDI.GetDestination().m_x2, m_uiButtonGDI.GetDestination().m_y2, m_uiButtonGDI.GetTexture(), m_uiButtonGDI.GetSource().m_x1, m_uiButtonGDI.GetSource().m_y1, m_uiButtonGDI.GetSource().m_x2, m_uiButtonGDI.GetSource().m_y2);
+		a_renderer->DrawTexture(m_uiButtonOpenGL.GetDestination().m_x1, m_uiButtonOpenGL.GetDestination().m_y1, m_uiButtonOpenGL.GetDestination().m_x2, m_uiButtonOpenGL.GetDestination().m_y2, m_uiButtonOpenGL.GetTexture(), m_uiButtonOpenGL.GetSource().m_x1, m_uiButtonOpenGL.GetSource().m_y1, m_uiButtonOpenGL.GetSource().m_x2, m_uiButtonOpenGL.GetSource().m_y2);
+		a_renderer->DrawTexture(m_uiButtonDirectX11.GetDestination().m_x1, m_uiButtonDirectX11.GetDestination().m_y1, m_uiButtonDirectX11.GetDestination().m_x2, m_uiButtonDirectX11.GetDestination().m_y2, m_uiButtonDirectX11.GetTexture(), m_uiButtonDirectX11.GetSource().m_x1, m_uiButtonDirectX11.GetSource().m_y1, m_uiButtonDirectX11.GetSource().m_x2, m_uiButtonDirectX11.GetSource().m_y2);
 
-		//m_renderer->DrawString(110, 540, "GDI", RGB(255, 0, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
-		//m_renderer->DrawString(310, 540, "OpenGL", RGB(0, 255, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
-		//m_renderer->DrawString(510, 540, "DirectX", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
+		a_renderer->DrawString(110, 540, "GDI", RGB(255, 0, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
+		a_renderer->DrawString(310, 540, "OpenGL", RGB(0, 255, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
+		a_renderer->DrawString(510, 540, "DirectX", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
 		char buffer[200] = {};
-		//sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s", CMouse::x, CMouse::y, CMouse::isLeftMouseDown ? "true" : "false", CMouse::isRightMouseDown ? "true" : "false");
-		//m_renderer->DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
+		sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s", CMouse::x, CMouse::y, CMouse::isLeftMouseDown ? "true" : "false", CMouse::isRightMouseDown ? "true" : "false");
+		a_renderer->DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
 
-		m_renderer->End();
+		a_renderer->End();
 	}
 }
 
@@ -97,29 +94,28 @@ void CScene::LoadButtons()
 }
 
 
-void CScene::LoadTextures()
+void CScene::LoadTextures(IRenderer* a_renderer)
 {
 	ReleaseTextures();
 
-	m_backgroundTexture = m_renderer->LoadTextureFromFile("Textures/background.bmp");//("Textures/goblin.bmp");
-	m_collisionTexture = m_renderer->LoadTextureFromFile("Textures/collision.bmp");
-	m_terrainTexture = m_renderer->LoadTextureFromFile("Textures/terrain.bmp");
-	m_playerTexture = m_renderer->LoadTextureFromFile("Textures/player.bmp");
+	m_backgroundTexture = a_renderer->LoadTextureFromFile("Textures/background.bmp");//("Textures/goblin.bmp");
+	m_collisionTexture = a_renderer->LoadTextureFromFile("Textures/collision.bmp");
+	m_terrainTexture = a_renderer->LoadTextureFromFile("Textures/terrain.bmp");
+	m_playerTexture = a_renderer->LoadTextureFromFile("Textures/player.bmp");
 
-	m_buttonTexture = m_renderer->LoadTextureFromFile("Textures/button.bmp");
-	m_fontTexture = m_renderer->LoadTextureFromFile("Textures/font.bmp");
+	m_buttonTexture = a_renderer->LoadTextureFromFile("Textures/button.bmp");
+	m_fontTexture = a_renderer->LoadTextureFromFile("Textures/font.bmp");
 }
 
 
 void CScene::ReleaseTextures()
 {
-	SafeRelease(m_backgroundTexture);
-	SafeRelease(m_collisionTexture);
-	SafeRelease(m_terrainTexture);
-	SafeRelease(m_playerTexture);
-
-	SafeRelease(m_buttonTexture);
-	SafeRelease(m_fontTexture);
+	SafeDelete(m_backgroundTexture);
+	SafeDelete(m_collisionTexture);
+	SafeDelete(m_terrainTexture);
+	SafeDelete(m_playerTexture);
+	SafeDelete(m_buttonTexture);
+	SafeDelete(m_fontTexture);
 }
 
 

@@ -6,6 +6,7 @@
 #include <D3DX11.h>
 
 #include "ITexture.h"
+#include "GlobalFunctions.h"
 
 #pragma comment(lib, "d3d11.lib")
 

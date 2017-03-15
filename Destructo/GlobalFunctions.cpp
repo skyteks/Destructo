@@ -66,3 +66,30 @@ float Map(float a_value, float a_inMin, float a_inMax, float a_outMin, float a_o
 {
 	return (a_value - a_inMin) * (a_outMax - a_outMin) / (a_inMax - a_inMin) + a_outMin;
 }
+
+
+static unsigned int newDeleteCounter = 0;
+static unsigned int newCounter = 0;
+
+void NewDeleteLeaks()
+{
+	unsigned int tmp = newDeleteCounter;
+	unsigned int tmp2 = newCounter;
+}
+
+void* operator new (size_t a_size)
+{
+	atexit(NewDeleteLeaks);
+	newDeleteCounter++;
+	newCounter++;
+	return malloc(a_size);
+}
+void operator delete (void* a_pData)
+{
+	newDeleteCounter--;
+	if (a_pData != nullptr)
+	{
+		free(a_pData);
+	}
+}
+

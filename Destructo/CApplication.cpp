@@ -58,17 +58,16 @@ bool CApplication::ChangeScene()
 {
 	bool wResult = false;
 
-	// Delete old scene, if One exists
-	if (scene != nullptr)
+	// Delete old m_scene, if One exists
+	if (m_scene != nullptr)
 	{
-		scene->ShutdownScene();
-		delete scene;
-		scene = nullptr;
+		m_scene->ShutdownScene();
+		SafeDelete(m_scene);
 	}
 
-	// Create a new scene
-	scene = new CScene();
-	wResult = scene->InitializeScene(m_renderer);
+	// Create newDeleteCounter new m_scene
+	m_scene = new CScene();
+	wResult = m_scene->InitializeScene(m_renderer);
 	if (!wResult)
 		return false;
 
@@ -84,11 +83,10 @@ bool CApplication::ChangeRenderer(SRenderer::ERenderer a_newRenderer)
 	if (m_renderer != nullptr)
 	{
 		m_renderer->ShutdownGraphics();
-		delete m_renderer;
-		m_renderer = nullptr;
+		SafeDelete(m_renderer);
 	}
 
-	// Create a new Renderer
+	// Create newDeleteCounter new Renderer
 	currentRenderer = a_newRenderer;
 	switch (currentRenderer)
 	{
@@ -129,19 +127,20 @@ void CApplication::Run()
 			DispatchMessage(&message);
 		}
 
-		// Update everything inside the scene
-		scene->Update();
+		// Update everything inside the m_scene
+		m_scene->Update();
 
-		//Draw scene
-		scene->Draw();
+		//Draw m_scene
+		m_scene->Draw(m_renderer);
 
 		Sleep(1);
 	}
 
 	// Delete Renderer for shutdown
+	m_scene->ShutdownScene();
 	m_renderer->ShutdownGraphics();
-	delete m_renderer;
-	m_renderer = nullptr;
+	SafeDelete(m_scene);
+	SafeDelete(m_renderer);
 }
 
 

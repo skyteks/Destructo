@@ -261,7 +261,6 @@ void CRendererDirectX11::ShutdownGraphics()
 	SafeRelease(m_vertexShader);
 	SafeRelease(m_samplerState);
 	SafeRelease(m_blendState);
-	SafeRelease(m_shaderResourceView);
 }
 
 bool CRendererDirectX11::Failed(HRESULT a_aResult)

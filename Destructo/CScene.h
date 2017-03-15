@@ -1,9 +1,11 @@
 #pragma once
 #include <stdio.h>
 #include <memory>
+
 #include "IRenderer.h"
 #include "CUIButton.h"
 #include "CUISystem.h"
+#include "GlobalFunctions.h"
 
 class CScene
 {
@@ -15,27 +17,17 @@ public:
 
 	void Update();
 
-	void Draw();
+	void Draw(IRenderer* a_renderer);
 
 	void LoadButtons();
 
-	void LoadTextures();
+	void LoadTextures(IRenderer* a_renderer);
 
 	void ReleaseTextures();
 
 	void ShutdownScene();
 
-	template<typename T> void SafeRelease(T*& a_texture)
-	{
-		if (a_texture != nullptr)
-		{
-			delete a_texture;
-			a_texture = nullptr;
-		}
-	}
-
 private:
-	IRenderer* m_renderer = nullptr;
 
 	ITexture* m_backgroundTexture = nullptr;
 	ITexture* m_terrainTexture = nullptr;
@@ -51,6 +43,7 @@ private:
 	CUIButton m_uiButtonOpenGL;
 	ButtonMap m_buttonMapButtonDirectX11;
 	CUIButton m_uiButtonDirectX11;
+
 	int m_playerPosX = 0;
 	int m_playerPosY = 0;
 };

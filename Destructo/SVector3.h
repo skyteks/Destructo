@@ -54,7 +54,7 @@ public:
 	float Distance(SVector3 a_other);
 };
 
-//inline bool operator<(SVector3 a, SVector3  b)
+//inline bool operator<(SVector3 newDeleteCounter, SVector3  b)
 //{
 //	//
 //}

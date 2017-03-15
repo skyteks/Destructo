@@ -10,7 +10,6 @@ int CALLBACK WinMain(
 {
 	app = new CApplication();
 
-
 	bool wResult = false;
 	SRenderer::ERenderer chosenRenderer = SRenderer::DirectX11;
 	wResult = app->InitializeApplication(chosenRenderer);
@@ -18,6 +17,8 @@ int CALLBACK WinMain(
 		return false;
 
 	app->Run();
+
+	delete app;
 
 	return true;
 }

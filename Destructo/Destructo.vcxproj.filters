@@ -101,11 +101,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader.hlsl">
-      <Filter>Quelldateien</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="CApplication.cpp">
       <Filter>Ressourcendateien</Filter>
     </ClCompile>
@@ -157,5 +152,10 @@
     <ClCompile Include="SVector3.cpp">
       <Filter>Ressourcendateien</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader.hlsl">
+      <Filter>Quelldateien</Filter>
+    </None>
   </ItemGroup>
 </Project>

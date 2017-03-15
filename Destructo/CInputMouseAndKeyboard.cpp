@@ -25,7 +25,7 @@ void CInputMouseAndKeyboard::Release()
 
 bool CInputMouseAndKeyboard::IsKeyPressed(int a_key)
 {
-	return false;
+	return GetAsyncKeyState(a_key);
 }
 
 void CInputMouseAndKeyboard::Begin()
