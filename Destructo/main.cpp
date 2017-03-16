@@ -1,6 +1,7 @@
 #include "CApplication.h"
 
 #include "CSoundEngine.h"
+#include "WindowsInput.h"
 
 CApplication* app = nullptr;
 
@@ -14,7 +15,7 @@ int CALLBACK WinMain(
 
 	bool wResult = false;
 	SRenderer::ERenderer chosenRenderer = SRenderer::DirectX11;
-	wResult = app->InitializeApplication(chosenRenderer, new CSoundEngine());
+	wResult = app->InitializeApplication(chosenRenderer, new CSoundEngine(), new WindowsInput());
 	if (!wResult)
 		return false;
 

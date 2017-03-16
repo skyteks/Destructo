@@ -146,7 +146,6 @@
   <ItemGroup>
     <ClInclude Include="Callback.h" />
     <ClInclude Include="CApplication.h" />
-    <ClInclude Include="CInputMouseAndKeyboard.h" />
     <ClInclude Include="CMouse.h" />
     <ClInclude Include="CRendererDirectX11.h" />
     <ClInclude Include="CRendererGDI.h" />
@@ -162,8 +161,11 @@
     <ClInclude Include="EButtonState.h" />
     <ClInclude Include="EKeyCode.h" />
     <ClInclude Include="ERenderer.h" />
+    <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GlobalFunctions.h" />
     <ClInclude Include="IInput.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="WindowsInput.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="ISoundEngine.h" />
     <ClInclude Include="ITexture.h" />
@@ -182,7 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp" />
-    <ClCompile Include="CInputMouseAndKeyboard.cpp" />
     <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CRendererDirectX11.cpp" />
     <ClCompile Include="CRendererGDI.cpp" />
@@ -195,7 +196,10 @@
     <ClCompile Include="CUIButton.cpp" />
     <ClCompile Include="CUISystem.cpp" />
     <ClCompile Include="CWindow.cpp" />
+    <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="GlobalFunctions.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SMatrix4x4.cpp" />
     <ClCompile Include="SVector3.cpp" />

@@ -11,6 +11,7 @@
 #include "CMouse.h"
 #include "CScene.h"
 #include "ISoundEngine.h"
+#include "InputManager.h"
 
 class CApplication
 {
@@ -18,7 +19,7 @@ public:
 	CApplication();
 	~CApplication();
 
-	bool InitializeApplication(SRenderer::ERenderer currentRenderer, ISoundEngine* a_soundEngine);
+	bool InitializeApplication(SRenderer::ERenderer currentRenderer, ISoundEngine* a_soundEngine, IInput* a_input);
 
 	bool ChangeRenderer(SRenderer::ERenderer newRenderer);
 

@@ -19,13 +19,14 @@ CApplication::~CApplication()
 }
 
 
-bool CApplication::InitializeApplication(SRenderer::ERenderer a_chosenRenderer, ISoundEngine* a_soundEngine)
+bool CApplication::InitializeApplication(SRenderer::ERenderer a_chosenRenderer, ISoundEngine* a_soundEngine, IInput* a_input)
 {
 	printf("Engine Start\n");
 
 	bool wResult = false;
 
   SetSoundEngine(a_soundEngine);
+  InputManager::GetInstance().Initialize(a_input);
 
 	// Create window
 	WNDCLASS wc;
@@ -125,7 +126,6 @@ void CApplication::Run()
 
   // just a sound-test
   auto sound = m_soundEngine->LoadSound("Audio\\throw.mp3"); // load sound into memory
-  m_soundEngine->PlaySoundOneShot(sound); // play sound
 
 	// Start "Gameloop"
 	while (engineRunning)
@@ -138,6 +138,11 @@ void CApplication::Run()
 		}
     
 		// Update everything inside the m_scene
+    if (InputManager::GetInstance().GetKeyDown(EKeyCode::A))
+    {
+      m_soundEngine->PlaySoundOneShot(sound);
+    }
+
 		m_scene->Update();
 
     // update sound system
@@ -158,6 +163,8 @@ void CApplication::Run()
   m_soundEngine->UnloadSound(sound); // unload sound from memory
   m_soundEngine->Shutdown(); // shutdown sound engine
   SafeDelete(m_soundEngine); // delete sound engine
+
+  InputManager::GetInstance().Shutdown();
 }
 
 
@@ -193,6 +200,15 @@ LRESULT CApplication::WndProc(HWND a_Hwnd, unsigned int a_Message, WPARAM a_WPar
 	case WM_RBUTTONUP:
 		CMouse::isRightMouseDown = false;
 		break;
+
+  case WM_KEYDOWN:
+    InputManager::GetInstance().SetKeyDown(static_cast<EKeyCode>(a_WParam));
+    break;
+
+  case WM_KEYUP:
+    InputManager::GetInstance().SetKeyUp(static_cast<EKeyCode>(a_WParam));
+    break;
+
 	case WM_QUIT:
 	case WM_DESTROY:
 	case WM_CLOSE:

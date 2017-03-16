@@ -13,18 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Headerdateien\Input">
+      <UniqueIdentifier>{b3eba74c-49db-492d-8260-7db965f89446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Time">
+      <UniqueIdentifier>{fb71e149-9aed-440e-ab3a-99511b9a7041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Input">
+      <UniqueIdentifier>{0a12f509-90fe-46cb-82f7-627d0b097fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Time">
+      <UniqueIdentifier>{77c973e9-30ea-4dea-9ba6-e0ac46965e3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Callback.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="CApplication.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CInputMouseAndKeyboard.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CMouse.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="CRendererDirectX11.h">
@@ -60,16 +66,10 @@
     <ClInclude Include="EButtonState.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="EKeyCode.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="ERenderer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="GlobalFunctions.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="IInput.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IRenderer.h">
@@ -105,66 +105,90 @@
     <ClInclude Include="ISoundEngine.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="EKeyCode.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="IInput.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsInput.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimer.h">
+      <Filter>Headerdateien\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="CMouse.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CApplication.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CInputMouseAndKeyboard.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CMouse.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CRendererDirectX11.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CRendererGDI.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CRendererOpenGL.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CScene.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CTextureDirectX11.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CTextureGDI.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CTextureOpenGL.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIButton.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CUISystem.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CWindow.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="GlobalFunctions.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="SMatrix4x4.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
-    <ClCompile Include="SVector3.cpp">
-      <Filter>Ressourcendateien</Filter>
-    </ClCompile>
     <ClCompile Include="CSoundEngine.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CApplication.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CRendererDirectX11.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CRendererGDI.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CRendererOpenGL.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureDirectX11.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureGDI.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureOpenGL.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIButton.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISystem.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalFunctions.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SMatrix4x4.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SVector3.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Quelldateien\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Quelldateien\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimer.cpp">
+      <Filter>Quelldateien\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="CMouse.cpp">
+      <Filter>Quelldateien\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader.hlsl">
-      <Filter>Quelldateien</Filter>
+      <Filter>Ressourcendateien</Filter>
     </None>
   </ItemGroup>
 </Project>
