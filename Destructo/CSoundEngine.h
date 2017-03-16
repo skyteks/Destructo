@@ -1,8 +1,7 @@
 #pragma once
 
-
-#include "fmod.hpp"
-#include "fmod_errors.h"
+#include <fmod.hpp>
+#include <fmod_errors.h>
 
 #include "ISoundEngine.h"
 
@@ -13,17 +12,17 @@
 class CSoundEngine : public ISoundEngine
 {
 public:
-  CSoundEngine();
-  ~CSoundEngine();
+	CSoundEngine();
+	~CSoundEngine();
 
-  // interface functions
-  bool Initialize() override;
-  void Shutdown() override;
-  void* LoadSound(const char* a_file) override;
-  void UnloadSound(void*& a_sound) override;
-  bool PlaySoundOneShot(void* a_sound) override;
-  void Update() override;
+	// interface functions
+	bool Initialize() override;
+	void Shutdown() override;
+	void* LoadSound(const char* a_file) override;
+	void UnloadSound(void*& a_sound) override;
+	bool PlaySoundOneShot(void* a_sound) override;
+	void Update() override;
 
 private:
-  FMOD::System* m_system;
+	FMOD::System* m_system;
 };

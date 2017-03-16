@@ -12,7 +12,7 @@ CRendererGDI::~CRendererGDI()
 }
 
 
-bool CRendererGDI::InitializeGraphics(HWND a_hwnd)
+bool CRendererGDI::Initialize(HWND a_hwnd)
 {
 	m_windowHandle = a_hwnd;
 
@@ -92,15 +92,15 @@ void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int 
 		{
 			unsigned char c = *a_string++;
 
-			source.m_x1 = (c % 16) * 16;
-			source.m_y1 = (c / 16) * 16;
-			source.m_x2 = 16;
-			source.m_y2 = 16;
+			source.m_x = (c % 16) * 16;
+			source.m_y = (c / 16) * 16;
+			source.m_width = 16;
+			source.m_height = 16;
 
-			dest.m_x1 = a_posX + counter * 16;
-			dest.m_y1 = a_posY + (newLines * 16);
-			dest.m_x2 = 16;
-			dest.m_y2 = 16;
+			dest.m_x = a_posX + counter * 16;
+			dest.m_y = a_posY + (newLines * 16);
+			dest.m_width = 16;
+			dest.m_height = 16;
 
 			if (c == '\n')
 			{
@@ -109,7 +109,7 @@ void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int 
 			}
 			else
 			{
-				DrawTexture(dest.m_x1, dest.m_y1, dest.m_x2, dest.m_y2, a_fontTexture, source.m_x1, source.m_y1, source.m_x2, source.m_y2);
+				DrawTexture(dest.m_x, dest.m_y, dest.m_width, dest.m_height, a_fontTexture, source.m_x, source.m_y, source.m_width, source.m_height);
 				counter++;
 			}
 		}
@@ -129,7 +129,7 @@ void CRendererGDI::End()
 }
 
 
-void CRendererGDI::ShutdownGraphics()
+void CRendererGDI::Shutdown()
 {
 
 }

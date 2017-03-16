@@ -13,7 +13,7 @@ public:
 
 	~CRendererOpenGL();
 
-	bool InitializeGraphics(HWND a_hwnd);
+	bool Initialize(HWND a_hwnd);
 
 	ITexture* LoadTextureFromFile(char* a_path);
 
@@ -25,7 +25,7 @@ public:
 
 	void End();
 
-	void ShutdownGraphics();
+	void Shutdown();
 
 private:
 	HWND m_windowHandle;

@@ -7,7 +7,6 @@ struct SVertex
 
 	float m_u;
 	float m_v;
-
 	float m_r;
 	float m_g;
 	float m_b;

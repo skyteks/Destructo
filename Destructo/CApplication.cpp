@@ -4,10 +4,11 @@ bool CApplication::engineRunning = false;
 SRenderer::ERenderer CApplication::currentRenderer;
 
 CApplication::CApplication()
-	: window()
+	: m_window()
 	, m_renderer(nullptr)
-	, instance(GetModuleHandle(nullptr))
-  , m_soundEngine(nullptr)
+	, m_instance(GetModuleHandle(nullptr))
+	, m_soundEngine(nullptr)
+	, m_timer(nullptr)
 {
 
 }
@@ -19,33 +20,41 @@ CApplication::~CApplication()
 }
 
 
-bool CApplication::InitializeApplication(SRenderer::ERenderer a_chosenRenderer, ISoundEngine* a_soundEngine, IInput* a_input)
+bool CApplication::Initialize(SRenderer::ERenderer a_chosenRenderer, ISoundEngine* a_soundEngine, IInput* a_input)
 {
 	printf("Engine Start\n");
 
 	bool wResult = false;
 
-  SetSoundEngine(a_soundEngine);
-  InputManager::GetInstance().Initialize(a_input);
+	SetSoundEngine(a_soundEngine);
+	CInputManager::GetInstance().Initialize(a_input);
 
-	// Create window
+	// Create m_window
 	WNDCLASS wc;
 
 	ZeroMemory(&wc, sizeof(wc));
 	wc.lpfnWndProc = CApplication::WndProc;
-	wc.hInstance = instance;
+	wc.hInstance = m_instance;
 	wc.hbrBackground = static_cast<HBRUSH>(GetStockObject(HOLLOW_BRUSH));
-	wc.lpszClassName = wndDesc.WindowName.c_str();
+	wc.lpszClassName = m_wndDesc.WindowName.c_str();
 	wc.style = CS_VREDRAW | CS_HREDRAW;
 
 	RegisterClass(&wc);
 
-	wResult = window.InitializeWindow(wndDesc, this);
+	wResult = m_window.Initialize(m_wndDesc, this);
 	if (!wResult)
 		return false;
 
+	// Create Timer
+	m_timer = new CGameTimer();
+
 	// Create Renderer
 	wResult = ChangeRenderer(a_chosenRenderer);
+	if (!wResult)
+		return false;
+
+	// initialize sound
+	wResult = m_soundEngine->Initialize();
 	if (!wResult)
 		return false;
 
@@ -53,9 +62,6 @@ bool CApplication::InitializeApplication(SRenderer::ERenderer a_chosenRenderer, 
 	wResult = ChangeScene();
 	if (!wResult)
 		return false;
-
-  // initialize sound
-  m_soundEngine->Initialize();
 
 	return true;
 }
@@ -68,13 +74,13 @@ bool CApplication::ChangeScene()
 	// Delete old m_scene, if One exists
 	if (m_scene != nullptr)
 	{
-		m_scene->ShutdownScene();
+		m_scene->Shutdown(m_soundEngine);
 		SafeDelete(m_scene);
 	}
 
 	// Create newDeleteCounter new m_scene
 	m_scene = new CScene();
-	wResult = m_scene->InitializeScene(m_renderer);
+	wResult = m_scene->Initialize(m_renderer, m_timer);
 	if (!wResult)
 		return false;
 
@@ -89,7 +95,7 @@ bool CApplication::ChangeRenderer(SRenderer::ERenderer a_newRenderer)
 	// Delete old renderer, if One exists
 	if (m_renderer != nullptr)
 	{
-		m_renderer->ShutdownGraphics();
+		m_renderer->Shutdown();
 		SafeDelete(m_renderer);
 	}
 
@@ -111,9 +117,12 @@ bool CApplication::ChangeRenderer(SRenderer::ERenderer a_newRenderer)
 		return false;
 	}
 
-	wResult = this->m_renderer->InitializeGraphics(window.GetWindowHandle());
+	wResult = this->m_renderer->Initialize(m_window.GetWindowHandle());
 	if (!wResult)
 		return false;
+
+	if (m_scene != nullptr)
+		m_scene->Initialize(m_renderer, m_timer);
 
 	return true;
 }
@@ -124,47 +133,46 @@ void CApplication::Run()
 	MSG message;
 	engineRunning = true;
 
-  // just a sound-test
-  auto sound = m_soundEngine->LoadSound("Audio\\throw.mp3"); // load sound into memory
-
-	// Start "Gameloop"
+	  // Start "Gameloop"
 	while (engineRunning)
 	{
+		// A new frame has started, so do a tick
+		m_timer->Tick();
 		// Go trought all events
 		while (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
-    
-		// Update everything inside the m_scene
-    if (InputManager::GetInstance().GetKeyDown(EKeyCode::A))
-    {
-      m_soundEngine->PlaySoundOneShot(sound);
-    }
 
+		// Update everything inside the m_scene
 		m_scene->Update();
 
-    // update sound system
-    m_soundEngine->Update();
+		// update sound system
+		m_soundEngine->Update();
 
 		//Draw m_scene
 		m_scene->Draw(m_renderer);
 
-		Sleep(1);
+		//Sleep(1);
 	}
+}
 
-	// Delete Renderer for shutdown
-	m_scene->ShutdownScene();
-	m_renderer->ShutdownGraphics();
+void CApplication::Shutdown()
+{
+	m_scene->Shutdown(m_soundEngine);
+
+	m_renderer->Shutdown();
 	SafeDelete(m_scene);
 	SafeDelete(m_renderer);
 
-  m_soundEngine->UnloadSound(sound); // unload sound from memory
-  m_soundEngine->Shutdown(); // shutdown sound engine
-  SafeDelete(m_soundEngine); // delete sound engine
+	; // unload sound from memory
+	m_soundEngine->Shutdown(); // shutdown sound engine
+	SafeDelete(m_soundEngine); // delete sound engine
 
-  InputManager::GetInstance().Shutdown();
+	CInputManager::GetInstance().Shutdown();
+
+	SafeDelete(m_timer);
 }
 
 
@@ -201,13 +209,13 @@ LRESULT CApplication::WndProc(HWND a_Hwnd, unsigned int a_Message, WPARAM a_WPar
 		CMouse::isRightMouseDown = false;
 		break;
 
-  case WM_KEYDOWN:
-    InputManager::GetInstance().SetKeyDown(static_cast<EKeyCode>(a_WParam));
-    break;
+	case WM_KEYDOWN:
+		CInputManager::GetInstance().SetKeyDown(static_cast<EKeyCode>(a_WParam));
+		break;
 
-  case WM_KEYUP:
-    InputManager::GetInstance().SetKeyUp(static_cast<EKeyCode>(a_WParam));
-    break;
+	case WM_KEYUP:
+		CInputManager::GetInstance().SetKeyUp(static_cast<EKeyCode>(a_WParam));
+		break;
 
 	case WM_QUIT:
 	case WM_DESTROY:
@@ -240,17 +248,17 @@ bool CApplication::Failed(HRESULT a_aResult)
 
 void CApplication::SetSoundEngine(ISoundEngine * a_soundEngine)
 {
-  if (a_soundEngine == nullptr)
-  {
-    return;
-  }
+	if (a_soundEngine == nullptr)
+	{
+		return;
+	}
 
-  if (m_soundEngine)
-  {
-    SafeDelete(m_soundEngine);
-  }
+	if (m_soundEngine)
+	{
+		SafeDelete(m_soundEngine);
+	}
 
-  m_soundEngine = a_soundEngine;
+	m_soundEngine = a_soundEngine;
 }
 
 //CreateMemoryDC

@@ -8,11 +8,11 @@ CRendererDirectX11::CRendererDirectX11()
 
 CRendererDirectX11::~CRendererDirectX11()
 {
-	ShutdownGraphics();
+	Shutdown();
 }
 
 
-bool CRendererDirectX11::InitializeGraphics(HWND a_hwnd)
+bool CRendererDirectX11::Initialize(HWND a_hwnd)
 {
 	m_windowHandle = a_hwnd;
 
@@ -173,25 +173,27 @@ void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_
 	}
 	m_shaderResourceView = directX11Texture->GetShaderResourceView();
 
-	float mappedPosX = Map(a_posX, 0, m_windowWidth, -1, 1);
-	float mappedPosY = Map(a_posY, 0, m_windowHeight, -1, 1);
-	float mappedWidth = Map(a_width, 0, m_windowWidth, 0, 2);
-	float mappedHeight = Map(a_height, 0, m_windowHeight, 0, 2);
+	SRect source;
+	source.m_x = Map(a_posX, 0, m_windowWidth, -1, 1);
+	source.m_y = Map(a_posY, 0, m_windowHeight, -1, 1);
+	source.m_width = Map(a_width, 0, m_windowWidth, 0, 2);
+	source.m_height = Map(a_height, 0, m_windowHeight, 0, 2);
 
-	float mappedImgX = Map(a_imgX, 0, a_texture->GetWidth(), 0, 1);
-	float mappedImgY = Map(a_texture->GetHeight() - a_imgY, 0, a_texture->GetHeight(), 0, 1);
-	float mappedImgWidth = Map(a_imgWidth, 0, a_texture->GetWidth(), 0, 1);
-	float mappedImgHeight = -Map(a_imgHeight, 0, a_texture->GetHeight(), 0, 1);
+	SRect dest;
+	dest.m_x = Map(a_imgX, 0, a_texture->GetWidth(), 0, 1);
+	dest.m_y = Map(a_texture->GetHeight() - a_imgY, 0, a_texture->GetHeight(), 0, 1);
+	dest.m_width = Map(a_imgWidth, 0, a_texture->GetWidth(), 0, 1);
+	dest.m_height = -Map(a_imgHeight, 0, a_texture->GetHeight(), 0, 1);
 
 	if (vertexIndex > 0)
-		vertices[vertexIndex++] = SVertex(mappedPosX, mappedPosY, 0, mappedImgX, mappedImgY + mappedImgHeight, 1, 1, 1, 1);
+		vertices[vertexIndex++] = SVertex(source.m_x, source.m_y, 0, dest.m_x, dest.m_y + dest.m_height, 1, 1, 1, 1);
 
-	vertices[vertexIndex++] = SVertex(mappedPosX, mappedPosY, 0, mappedImgX, mappedImgY, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(mappedPosX + mappedWidth, mappedPosY, 0, mappedImgX + mappedImgWidth, mappedImgY, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(mappedPosX, mappedPosY + mappedHeight, 0, mappedImgX, mappedImgY + mappedImgHeight, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(mappedPosX + mappedWidth, mappedPosY + mappedHeight, 0, mappedImgX + mappedImgWidth, mappedImgY + mappedImgHeight, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.m_x, source.m_y, 0, dest.m_x, dest.m_y, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.m_x + source.m_width, source.m_y, 0, dest.m_x + dest.m_width, dest.m_y, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.m_x, source.m_y + source.m_height, 0, dest.m_x, dest.m_y + dest.m_height, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.m_x + source.m_width, source.m_y + source.m_height, 0, dest.m_x + dest.m_width, dest.m_y + dest.m_height, 1, 1, 1, 1);
 
-	vertices[vertexIndex++] = SVertex(mappedPosX + mappedWidth, mappedPosY + mappedHeight, 0, mappedImgX + mappedImgWidth, mappedImgY + mappedImgHeight, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.m_x + source.m_width, source.m_y + source.m_height, 0, dest.m_x + dest.m_width, dest.m_y + dest.m_height, 1, 1, 1, 1);
 }
 
 
@@ -210,15 +212,15 @@ void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string
 	{
 		unsigned char c = *a_string++;
 
-		source.m_x1 = (c % 16) * 16;
-		source.m_y1 = (c / 16) * 16;
-		source.m_x2 = 16;
-		source.m_y2 = 16;
+		source.m_x = (c % 16) * 16;
+		source.m_y = (c / 16) * 16;
+		source.m_width = 16;
+		source.m_height = 16;
 
-		dest.m_x1 = a_posX + counter * 16;
-		dest.m_y1 = a_posY + (newLines * 16);
-		dest.m_x2 = 16;
-		dest.m_y2 = 16;
+		dest.m_x = a_posX + counter * 16;
+		dest.m_y = a_posY + (newLines * 16);
+		dest.m_width = 16;
+		dest.m_height = 16;
 
 		if (c == '\n')
 		{
@@ -227,7 +229,7 @@ void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string
 		}
 		else
 		{
-			DrawTexture(dest.m_x1, dest.m_y1, dest.m_x2, dest.m_y2, a_fontTexture, source.m_x1, source.m_y1, source.m_x2, source.m_y2);
+			DrawTexture(dest.m_x, dest.m_y, dest.m_width, dest.m_height, a_fontTexture, source.m_x, source.m_y, source.m_width, source.m_height);
 			counter++;
 		}
 	}
@@ -249,7 +251,7 @@ void CRendererDirectX11::End()
 }
 
 
-void CRendererDirectX11::ShutdownGraphics()
+void CRendererDirectX11::Shutdown()
 {
 	SafeRelease(m_swapChain);
 	SafeRelease(m_renderTargetView);

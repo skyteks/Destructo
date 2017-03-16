@@ -25,6 +25,30 @@
     <Filter Include="Quelldateien\Time">
       <UniqueIdentifier>{77c973e9-30ea-4dea-9ba6-e0ac46965e3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Renderer">
+      <UniqueIdentifier>{c5f3f6a6-6293-4697-b873-214d29b91eb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Renderer\DirectX11">
+      <UniqueIdentifier>{e9517ef9-e1ab-4e2e-b88b-0fe356771c44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Renderer\GDI">
+      <UniqueIdentifier>{98c77a24-9b49-4278-97e6-564a27fc69e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Renderer\OpenGL">
+      <UniqueIdentifier>{1282d4f7-862f-40af-82c0-e06baefdfa96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Renderer">
+      <UniqueIdentifier>{5d237c4a-9785-4de8-8865-ef4cd00c3426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Renderer\GDI">
+      <UniqueIdentifier>{dcca7421-a5c2-467c-9a78-23f8acd95f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Renderer\DirectX11">
+      <UniqueIdentifier>{519c3ded-f877-48b8-8d88-53a55d97b169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Renderer\OpenGL">
+      <UniqueIdentifier>{0b3e6b5f-2573-48e8-9f09-6ae5fa95ffa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Callback.h">
@@ -33,25 +57,7 @@
     <ClInclude Include="CApplication.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="CRendererDirectX11.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CRendererGDI.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CRendererOpenGL.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="CScene.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CTextureDirectX11.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CTextureGDI.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CTextureOpenGL.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="CUIButton.h">
@@ -70,12 +76,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="GlobalFunctions.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="IRenderer.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="ITexture.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="SBitmap.h">
@@ -111,17 +111,41 @@
     <ClInclude Include="IInput.h">
       <Filter>Headerdateien\Input</Filter>
     </ClInclude>
-    <ClInclude Include="WindowsInput.h">
-      <Filter>Headerdateien\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Headerdateien\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTimer.h">
-      <Filter>Headerdateien\Time</Filter>
-    </ClInclude>
     <ClInclude Include="CMouse.h">
       <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="CRendererDirectX11.h">
+      <Filter>Headerdateien\Renderer\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextureDirectX11.h">
+      <Filter>Headerdateien\Renderer\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="CRendererOpenGL.h">
+      <Filter>Headerdateien\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextureOpenGL.h">
+      <Filter>Headerdateien\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextureGDI.h">
+      <Filter>Headerdateien\Renderer\GDI</Filter>
+    </ClInclude>
+    <ClInclude Include="CRendererGDI.h">
+      <Filter>Headerdateien\Renderer\GDI</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderer.h">
+      <Filter>Headerdateien\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ITexture.h">
+      <Filter>Headerdateien\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="CWindowsInput.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="CInputManager.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameTimer.h">
+      <Filter>Headerdateien\Time</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -131,25 +155,7 @@
     <ClCompile Include="CApplication.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="CRendererDirectX11.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CRendererGDI.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CRendererOpenGL.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="CScene.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CTextureDirectX11.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CTextureGDI.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CTextureOpenGL.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CUIButton.cpp">
@@ -173,17 +179,35 @@
     <ClCompile Include="SVector3.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Quelldateien\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Quelldateien\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTimer.cpp">
-      <Filter>Quelldateien\Time</Filter>
-    </ClCompile>
     <ClCompile Include="CMouse.cpp">
       <Filter>Quelldateien\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="CRendererGDI.cpp">
+      <Filter>Quelldateien\Renderer\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureGDI.cpp">
+      <Filter>Quelldateien\Renderer\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="CRendererDirectX11.cpp">
+      <Filter>Quelldateien\Renderer\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureDirectX11.cpp">
+      <Filter>Quelldateien\Renderer\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureOpenGL.cpp">
+      <Filter>Quelldateien\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="CRendererOpenGL.cpp">
+      <Filter>Quelldateien\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="CInput.cpp">
+      <Filter>Quelldateien\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="CInputManager.cpp">
+      <Filter>Quelldateien\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameTimer.cpp">
+      <Filter>Quelldateien\Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

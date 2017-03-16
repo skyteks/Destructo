@@ -42,7 +42,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -103,10 +103,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Middleware\fmod\api\lowlevel\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Middleware\fmod\api\lowlevel\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -161,11 +163,11 @@
     <ClInclude Include="EButtonState.h" />
     <ClInclude Include="EKeyCode.h" />
     <ClInclude Include="ERenderer.h" />
-    <ClInclude Include="GameTimer.h" />
+    <ClInclude Include="CGameTimer.h" />
     <ClInclude Include="GlobalFunctions.h" />
     <ClInclude Include="IInput.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="WindowsInput.h" />
+    <ClInclude Include="CInputManager.h" />
+    <ClInclude Include="CWindowsInput.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="ISoundEngine.h" />
     <ClInclude Include="ITexture.h" />
@@ -196,10 +198,10 @@
     <ClCompile Include="CUIButton.cpp" />
     <ClCompile Include="CUISystem.cpp" />
     <ClCompile Include="CWindow.cpp" />
-    <ClCompile Include="GameTimer.cpp" />
+    <ClCompile Include="CGameTimer.cpp" />
     <ClCompile Include="GlobalFunctions.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="CInput.cpp" />
+    <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SMatrix4x4.cpp" />
     <ClCompile Include="SVector3.cpp" />

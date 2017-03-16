@@ -21,7 +21,7 @@ public:
 
 	HWND GetWindowHandle();
 
-	bool InitializeWindow(const SWindowDesc& a_windowDesc, CApplication* a_application);
+	bool Initialize(const SWindowDesc& a_windowDesc, CApplication* a_application);
 
 private:
 	HWND m_hwnd;

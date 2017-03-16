@@ -12,7 +12,7 @@ public:
 
 	virtual ~IRenderer(){}
 
-	virtual bool InitializeGraphics(HWND a_hwnd) = 0;
+	virtual bool Initialize(HWND a_hwnd) = 0;
 
 	virtual ITexture* LoadTextureFromFile(char* a_path) = 0;
 
@@ -24,5 +24,5 @@ public:
 
 	virtual void End() = 0;
 
-	virtual void ShutdownGraphics() = 0;
+	virtual void Shutdown() = 0;
 };

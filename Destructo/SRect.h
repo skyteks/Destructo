@@ -3,9 +3,9 @@
 
 struct SRect
 {
-	unsigned int m_x1;
-	unsigned int m_y1;
-	unsigned int m_x2;
-	unsigned int m_y2;
+	float m_x;
+	float m_y;
+	float m_width;
+	float m_height;
 };
 

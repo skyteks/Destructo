@@ -23,7 +23,7 @@ public:
 
 	~CRendererDirectX11();
 
-	bool InitializeGraphics(HWND a_hwnd);
+	bool Initialize(HWND a_hwnd);
 
 	ITexture* LoadTextureFromFile(char* a_path);
 
@@ -35,7 +35,7 @@ public:
 
 	void End();
 
-	void ShutdownGraphics();
+	void Shutdown();
 
 	bool Failed(HRESULT a_aResult);
 

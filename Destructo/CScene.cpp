@@ -1,5 +1,5 @@
 #include "CScene.h"
-#include "EKeyCode.h"
+
 
 
 CScene::CScene()
@@ -9,7 +9,8 @@ CScene::CScene()
 	, m_playerTexture(nullptr)
 	, m_buttonTexture(nullptr)
 	, m_fontTexture(nullptr)
-
+	, m_timer(nullptr)
+	, m_soundEngine(nullptr)
 {
 }
 
@@ -19,8 +20,10 @@ CScene::~CScene()
 }
 
 
-bool CScene::InitializeScene(IRenderer* a_renderer)
+bool CScene::Initialize(IRenderer* a_renderer, CGameTimer* a_timer)
 {
+	m_timer = a_timer;
+
 	LoadTextures(a_renderer);
 	LoadButtons();
 
@@ -34,14 +37,16 @@ void CScene::Update()
 	m_uiButtonOpenGL.UpdateState();
 	m_uiButtonDirectX11.UpdateState();
 
-	if (m_playerPosX < 800 - 32 && GetAsyncKeyState((int)EKeyCode::D))
-		m_playerPosX++;
-	if (m_playerPosX >= 0 && GetAsyncKeyState((int)EKeyCode::A))
-		m_playerPosX--;
-	if (m_playerPosY < 600 - 32 && GetAsyncKeyState((int)EKeyCode::S))
-		m_playerPosY++;
-	if (m_playerPosY >= 0 && GetAsyncKeyState((int)EKeyCode::W))
-		m_playerPosY--;
+	float speed = 100 * m_timer->DeltaTime();
+
+	if (m_playerPosX < 800 - 32 && CInputManager::GetInstance().GetKeyDown(EKeyCode::D))
+		m_playerPosX += static_cast<int>(speed);
+	if (m_playerPosX >= 0 && CInputManager::GetInstance().GetKeyDown(EKeyCode::A))
+		m_playerPosX -= static_cast<int>(speed);
+	if (m_playerPosY < 600 - 32 && CInputManager::GetInstance().GetKeyDown(EKeyCode::S))
+		m_playerPosY += static_cast<int>(speed);
+	if (m_playerPosY >= 0 && CInputManager::GetInstance().GetKeyDown(EKeyCode::W))
+		m_playerPosY -= static_cast<int>(speed);
 
 	//m_arrowPosX = CMouse::x;
 	//m_arrowPosY = CMouse::y;
@@ -59,15 +64,15 @@ void CScene::Draw(IRenderer* a_renderer)
 		a_renderer->DrawTexture(m_playerPosX, m_playerPosY, 32, 32, m_playerTexture, 0, 0, m_playerTexture->GetWidth(), m_playerTexture->GetHeight());
 		a_renderer->DrawTexture(0, 0, 0, 0, m_buttonTexture, 0, 0, 0, 0);
 
-		a_renderer->DrawTexture(m_uiButtonGDI.GetDestination().m_x1, m_uiButtonGDI.GetDestination().m_y1, m_uiButtonGDI.GetDestination().m_x2, m_uiButtonGDI.GetDestination().m_y2, m_uiButtonGDI.GetTexture(), m_uiButtonGDI.GetSource().m_x1, m_uiButtonGDI.GetSource().m_y1, m_uiButtonGDI.GetSource().m_x2, m_uiButtonGDI.GetSource().m_y2);
-		a_renderer->DrawTexture(m_uiButtonOpenGL.GetDestination().m_x1, m_uiButtonOpenGL.GetDestination().m_y1, m_uiButtonOpenGL.GetDestination().m_x2, m_uiButtonOpenGL.GetDestination().m_y2, m_uiButtonOpenGL.GetTexture(), m_uiButtonOpenGL.GetSource().m_x1, m_uiButtonOpenGL.GetSource().m_y1, m_uiButtonOpenGL.GetSource().m_x2, m_uiButtonOpenGL.GetSource().m_y2);
-		a_renderer->DrawTexture(m_uiButtonDirectX11.GetDestination().m_x1, m_uiButtonDirectX11.GetDestination().m_y1, m_uiButtonDirectX11.GetDestination().m_x2, m_uiButtonDirectX11.GetDestination().m_y2, m_uiButtonDirectX11.GetTexture(), m_uiButtonDirectX11.GetSource().m_x1, m_uiButtonDirectX11.GetSource().m_y1, m_uiButtonDirectX11.GetSource().m_x2, m_uiButtonDirectX11.GetSource().m_y2);
+		a_renderer->DrawTexture(m_uiButtonGDI.GetDestination().m_x, m_uiButtonGDI.GetDestination().m_y, m_uiButtonGDI.GetDestination().m_width, m_uiButtonGDI.GetDestination().m_height, m_uiButtonGDI.GetTexture(), m_uiButtonGDI.GetSource().m_x, m_uiButtonGDI.GetSource().m_y, m_uiButtonGDI.GetSource().m_width, m_uiButtonGDI.GetSource().m_height);
+		a_renderer->DrawTexture(m_uiButtonOpenGL.GetDestination().m_x, m_uiButtonOpenGL.GetDestination().m_y, m_uiButtonOpenGL.GetDestination().m_width, m_uiButtonOpenGL.GetDestination().m_height, m_uiButtonOpenGL.GetTexture(), m_uiButtonOpenGL.GetSource().m_x, m_uiButtonOpenGL.GetSource().m_y, m_uiButtonOpenGL.GetSource().m_width, m_uiButtonOpenGL.GetSource().m_height);
+		a_renderer->DrawTexture(m_uiButtonDirectX11.GetDestination().m_x, m_uiButtonDirectX11.GetDestination().m_y, m_uiButtonDirectX11.GetDestination().m_width, m_uiButtonDirectX11.GetDestination().m_height, m_uiButtonDirectX11.GetTexture(), m_uiButtonDirectX11.GetSource().m_x, m_uiButtonDirectX11.GetSource().m_y, m_uiButtonDirectX11.GetSource().m_width, m_uiButtonDirectX11.GetSource().m_height);
 
 		a_renderer->DrawString(110, 540, "GDI", RGB(255, 0, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
 		a_renderer->DrawString(310, 540, "OpenGL", RGB(0, 255, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
 		a_renderer->DrawString(510, 540, "DirectX", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
 		char buffer[200] = {};
-		sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s", CMouse::x, CMouse::y, CMouse::isLeftMouseDown ? "true" : "false", CMouse::isRightMouseDown ? "true" : "false");
+		sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i", CMouse::x, CMouse::y, CMouse::isLeftMouseDown ? "true" : "false", CMouse::isRightMouseDown ? "true" : "false", static_cast<int>(1 / m_timer->DeltaTime()));
 		a_renderer->DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, m_fontTexture);
 
 		a_renderer->End();
@@ -107,6 +112,12 @@ void CScene::LoadTextures(IRenderer* a_renderer)
 	m_fontTexture = a_renderer->LoadTextureFromFile("Textures/font.bmp");
 }
 
+void CScene::LoadSounds(ISoundEngine * a_soundEngine)
+{
+	// just a sound-test
+	m_testSound = m_soundEngine->LoadSound("Audio/throw.mp3"); // load sound into memory
+}
+
 
 void CScene::ReleaseTextures()
 {
@@ -118,8 +129,14 @@ void CScene::ReleaseTextures()
 	SafeDelete(m_fontTexture);
 }
 
+void CScene::ReleaseSound(ISoundEngine* a_soundEngine)
+{
+	a_soundEngine->UnloadSound(m_testSound);
+}
 
-void CScene::ShutdownScene()
+
+void CScene::Shutdown(ISoundEngine* a_soundEngine)
 {
 	ReleaseTextures();
+	ReleaseSound(a_soundEngine);
 }

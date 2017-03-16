@@ -12,7 +12,7 @@ CWindow::~CWindow()
 
 }
 
-bool CWindow::InitializeWindow(const SWindowDesc& a_windowDesc, CApplication* a_application)
+bool CWindow::Initialize(const SWindowDesc& a_windowDesc, CApplication* a_application)
 {
 	RECT m_rect = { 0,0,a_windowDesc.m_width, a_windowDesc.m_height };
 	const int windowStyle = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_BORDER | WS_VISIBLE;
