@@ -149,11 +149,13 @@
     <ClInclude Include="Callback.h" />
     <ClInclude Include="CApplication.h" />
     <ClInclude Include="CMouse.h" />
+    <ClInclude Include="CRendererDirect2D.h" />
     <ClInclude Include="CRendererDirectX11.h" />
     <ClInclude Include="CRendererGDI.h" />
     <ClInclude Include="CRendererOpenGL.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSoundEngine.h" />
+    <ClInclude Include="CTextureDirect2D.h" />
     <ClInclude Include="CTextureDirectX11.h" />
     <ClInclude Include="CTextureGDI.h" />
     <ClInclude Include="CTextureOpenGL.h" />
@@ -178,6 +180,7 @@
     <ClInclude Include="SRect.h" />
     <ClInclude Include="SVector3.h" />
     <ClInclude Include="SVertex.h" />
+    <ClInclude Include="CTime.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader.hlsl">
@@ -187,11 +190,13 @@
   <ItemGroup>
     <ClCompile Include="CApplication.cpp" />
     <ClCompile Include="CMouse.cpp" />
+    <ClCompile Include="CRendererDirect2D.cpp" />
     <ClCompile Include="CRendererDirectX11.cpp" />
     <ClCompile Include="CRendererGDI.cpp" />
     <ClCompile Include="CRendererOpenGL.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSoundEngine.cpp" />
+    <ClCompile Include="CTextureDirect2D.cpp" />
     <ClCompile Include="CTextureDirectX11.cpp" />
     <ClCompile Include="CTextureGDI.cpp" />
     <ClCompile Include="CTextureOpenGL.cpp" />
@@ -205,6 +210,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SMatrix4x4.cpp" />
     <ClCompile Include="SVector3.cpp" />
+    <ClCompile Include="CTime.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

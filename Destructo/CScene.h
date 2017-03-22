@@ -7,8 +7,8 @@
 #include "CUISystem.h"
 #include "GlobalFunctions.h"
 #include "CInputManager.h"
-#include "CGameTimer.h"
 #include "ISoundEngine.h"
+#include "CTime.h"
 
 class CScene
 {
@@ -16,7 +16,7 @@ public:
 	CScene();
 	~CScene();
 
-	bool Initialize(IRenderer* a_renderer, CGameTimer* a_timer);
+	bool Initialize(IRenderer* a_renderer);
 
 	void Update();
 
@@ -52,11 +52,14 @@ private:
 	CUIButton m_uiButtonOpenGL;
 	ButtonMap m_buttonMapButtonDirectX11;
 	CUIButton m_uiButtonDirectX11;
+	ButtonMap m_buttonMapButtonDirect2D;
+	CUIButton m_uiButtonDirect2D;
 
-	CGameTimer* m_timer = nullptr;
 	ISoundEngine* m_soundEngine = nullptr;
 
-	int m_playerPosX = 0;
-	int m_playerPosY = 0;
+	int m_playerPosX = 800 / 2;
+	int m_playerPosY = 600 / 2;
+
+	float speed = 0;
 };
 

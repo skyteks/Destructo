@@ -22,6 +22,8 @@ public:
 
 	void DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight);
 
+	//void MakeCircleInTexture(int a_posX, int a_posY, CTextureGDI* a_texture, int a_color, int a_radius);
+
 	void DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture);
 
 	void End();

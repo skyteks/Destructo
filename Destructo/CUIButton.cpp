@@ -92,8 +92,8 @@ SRect CUIButton::GetSource()
 }
 bool CUIButton::IsMouseHovering()
 {
-	if (CMouse::x >= m_size.m_x && CMouse::x <= (m_size.m_x + m_size.m_width) &&
-		CMouse::y >= m_size.m_y && CMouse::y <= (m_size.m_y + m_size.m_height))
+	if (CMouse::x >= m_size.x1 && CMouse::x <= (m_size.x1 + m_size.x2) &&
+		CMouse::y >= m_size.y1 && CMouse::y <= (m_size.y1 + m_size.y2))
 	{
 		return true;
 	}

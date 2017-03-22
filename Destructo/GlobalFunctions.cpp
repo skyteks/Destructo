@@ -6,7 +6,7 @@ SBitmap LoadBitmapAndAddAlpha(char* a_path)
 	fopen_s(&file, a_path, "rb");
 
 	SBitmap bmp;
-
+	
 	fread(&bmp.m_header, sizeof(SBitmapHeader), 1, file);
 
 	fseek(file, 0, SEEK_END);
@@ -22,14 +22,14 @@ SBitmap LoadBitmapAndAddAlpha(char* a_path)
 
 	fclose(file);
 
-	bmp.m_pitch = bmp.m_header.m_width * 3;
+	bmp.m_pitch = bmp.m_header.x2 * 3;
 
 	if (bmp.m_pitch % 4 != 0)
 	{
 		bmp.m_pitch += 4 - (bmp.m_pitch % 4);
 	}
 
-	bmp.m_pitch -= (bmp.m_header.m_width * 3);
+	bmp.m_pitch -= (bmp.m_header.x2 * 3);
 
 	unsigned char* buffer = (unsigned char*)malloc(bmp.m_header.m_sizeOfImageData * 4 / 3);
 

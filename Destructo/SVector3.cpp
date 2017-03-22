@@ -1,10 +1,10 @@
 #include "SVector3.h"
 
-SVector3::SVector3() : m_x(0), m_y(0), m_z(0)
+SVector3::SVector3() : x1(0), y1(0), m_z(0)
 {
 }
 
-SVector3::SVector3(float a_x, float a_y, float a_z) : m_x(a_x), m_y(a_y), m_z(a_z)
+SVector3::SVector3(float a_x, float a_y, float a_z) : x1(a_x), y1(a_y), m_z(a_z)
 {
 }
 
@@ -50,21 +50,21 @@ SVector3 SVector3::Backward()
 
 float SVector3::Magnitude()
 {
-	return static_cast<float>(sqrt(m_x * m_x + m_y * m_y + m_z * m_z));
+	return static_cast<float>(sqrt(x1 * x1 + y1 * y1 + m_z * m_z));
 }
 
 SVector3 SVector3::operator -(SVector3 a_v)
 {
-	return SVector3(-a_v.m_x, -a_v.m_y, -a_v.m_z);
+	return SVector3(-a_v.x1, -a_v.y1, -a_v.m_z);
 }
 
 SVector3 operator +(SVector3 a_v1, SVector3 a_v2)
 {
-	return SVector3(a_v1.m_x + a_v2.m_x, a_v1.m_y + a_v2.m_y, a_v1.m_z + a_v2.m_z);
+	return SVector3(a_v1.x1 + a_v2.x1, a_v1.y1 + a_v2.y1, a_v1.m_z + a_v2.m_z);
 }
 SVector3 operator -(SVector3 a_v1, SVector3 a_v2)
 {
-	return SVector3(a_v1.m_x - a_v2.m_x, a_v1.m_y - a_v2.m_y, a_v1.m_z - a_v2.m_z);
+	return SVector3(a_v1.x1 - a_v2.x1, a_v1.y1 - a_v2.y1, a_v1.m_z - a_v2.m_z);
 }
 
 bool operator <(SVector3 a_v1, SVector3 a_v2)
@@ -86,8 +86,8 @@ bool operator >=(SVector3 a_v1, SVector3 a_v2)
 
 bool operator ==(SVector3 a_v1, SVector3 a_v2)
 {
-	return (a_v1.m_x >= a_v2.m_x - std::numeric_limits<float>::epsilon() && a_v1.m_x <= a_v2.m_x + std::numeric_limits<float>::epsilon()) &&
-		(a_v1.m_y >= a_v2.m_y - std::numeric_limits<float>::epsilon() && a_v1.m_y <= a_v2.m_y + std::numeric_limits<float>::epsilon()) &&
+	return (a_v1.x1 >= a_v2.x1 - std::numeric_limits<float>::epsilon() && a_v1.x1 <= a_v2.x1 + std::numeric_limits<float>::epsilon()) &&
+		(a_v1.y1 >= a_v2.y1 - std::numeric_limits<float>::epsilon() && a_v1.y1 <= a_v2.y1 + std::numeric_limits<float>::epsilon()) &&
 		(a_v1.m_z >= a_v2.m_z - std::numeric_limits<float>::epsilon() && a_v1.m_z <= a_v2.m_z + std::numeric_limits<float>::epsilon());
 }
 bool operator !=(SVector3 a_v1, SVector3 a_v2)
@@ -97,12 +97,12 @@ bool operator !=(SVector3 a_v1, SVector3 a_v2)
 
 SVector3 operator /(SVector3 a_v, float a_f)
 {
-	return SVector3(a_v.m_x / a_f, a_v.m_y / a_f, a_v.m_z / a_f);
+	return SVector3(a_v.x1 / a_f, a_v.y1 / a_f, a_v.m_z / a_f);
 }
 
 SVector3 operator *(SVector3 a_v, float a_f)
 {
-	return SVector3(a_v.m_x * a_f, a_v.m_y * a_f, a_v.m_z * a_f);
+	return SVector3(a_v.x1 * a_f, a_v.y1 * a_f, a_v.m_z * a_f);
 }
 SVector3 operator *(float a_f, SVector3 a_v)
 {
@@ -110,15 +110,15 @@ SVector3 operator *(float a_f, SVector3 a_v)
 }
 SVector3 operator *(SVector3 a_v1, SVector3 a_v2)
 {
-	return SVector3(a_v1.m_x * a_v2.m_x, a_v1.m_y * a_v2.m_y, a_v1.m_z * a_v2.m_z);
+	return SVector3(a_v1.x1 * a_v2.x1, a_v1.y1 * a_v2.y1, a_v1.m_z * a_v2.m_z);
 }
 
 
 SVector3 SVector3::Cross(SVector3 a_v1, SVector3 a_v2)
 {
-	return SVector3(a_v1.m_y * a_v2.m_z - a_v1.m_z * a_v2.m_y,
-		a_v1.m_z * a_v2.m_x - a_v1.m_x * a_v2.m_z,
-		a_v1.m_z * a_v2.m_y - a_v1.m_y * a_v2.m_x);
+	return SVector3(a_v1.y1 * a_v2.m_z - a_v1.m_z * a_v2.y1,
+		a_v1.m_z * a_v2.x1 - a_v1.x1 * a_v2.m_z,
+		a_v1.m_z * a_v2.y1 - a_v1.y1 * a_v2.x1);
 }
 SVector3 SVector3::Cross(SVector3 a_other)
 {
@@ -127,8 +127,8 @@ SVector3 SVector3::Cross(SVector3 a_other)
 
 float SVector3::Dot(SVector3 a_v1, SVector3 a_v2)
 {
-	return a_v1.m_x * a_v2.m_x +
-		a_v1.m_y * a_v2.m_y +
+	return a_v1.x1 * a_v2.x1 +
+		a_v1.y1 * a_v2.y1 +
 		a_v1.m_z * a_v2.m_z;
 }
 float SVector3::Dot(SVector3 a_other)
@@ -145,8 +145,8 @@ SVector3 SVector3::Normalized(SVector3 a_v)
 
 	float inverse = 1 / a_v.Magnitude();
 
-	return SVector3(a_v.m_x * inverse,
-		a_v.m_y * inverse,
+	return SVector3(a_v.x1 * inverse,
+		a_v.y1 * inverse,
 		a_v.m_z * inverse);
 }
 SVector3 SVector3::Normalize()
@@ -157,8 +157,8 @@ SVector3 SVector3::Normalize()
 float SVector3::Distance(SVector3 a_v1, SVector3 a_v2)
 {
 	return static_cast<float>(sqrt(
-		(a_v1.m_x - a_v2.m_x) * (a_v1.m_x - a_v2.m_x) +
-		(a_v1.m_y - a_v2.m_y) * (a_v1.m_y - a_v2.m_y) +
+		(a_v1.x1 - a_v2.x1) * (a_v1.x1 - a_v2.x1) +
+		(a_v1.y1 - a_v2.y1) * (a_v1.y1 - a_v2.y1) +
 		(a_v1.m_z - a_v2.m_z) * (a_v1.m_z - a_v2.m_z)
 	));
 }

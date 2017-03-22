@@ -6,7 +6,7 @@ struct SVector3
 {
 
 public:
-	float m_x, m_y, m_z;
+	float x1, y1, m_z;
 public:
 	SVector3();
 	SVector3(float a_x, float a_y, float a_z = 0);

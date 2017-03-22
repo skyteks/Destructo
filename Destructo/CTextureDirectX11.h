@@ -25,8 +25,8 @@ public:
 
 private:
 
-	int m_width;
-	int m_height;
+	int x2;
+	int y2;
 	int m_pitch;
 	int m_bitsPerPixel;
 	bool m_isLocked;

@@ -5,6 +5,9 @@
 #include <DirectXMath.h>
 #include <D3DX11.h>
 
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dx11.lib")
+
 //#include <vector>
 
 #include "IRenderer.h"
@@ -12,9 +15,6 @@
 #include "GlobalFunctions.h"
 #include "SRect.h"
 #include "SVertex.h"
-
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3dx11.lib")
 
 class CRendererDirectX11 : public IRenderer
 {
@@ -58,7 +58,6 @@ private:
 	//std::vector<SVertex> vertices;
 	int vertexIndex = 0;
 
-	HRESULT hResult;
 	IDXGISwapChain* m_swapChain = nullptr;
 	ID3D11RenderTargetView* m_renderTargetView = nullptr;
 	ID3D11Device* m_device = nullptr;
@@ -67,7 +66,7 @@ private:
 	ID3D11Buffer* m_vertexBuffer = nullptr;
 	ID3D11PixelShader* m_pixelShader = nullptr;
 	ID3D11VertexShader* m_vertexShader = nullptr;
-	D3D11_PRIMITIVE_TOPOLOGY primitiveTopology;
+	D3D11_PRIMITIVE_TOPOLOGY m_primitiveTopology;
 	ID3D11SamplerState* m_samplerState = nullptr;
 	ID3D11BlendState* m_blendState = nullptr;
 	ID3D11ShaderResourceView* m_shaderResourceView = nullptr;

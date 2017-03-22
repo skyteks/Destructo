@@ -6,12 +6,14 @@
 #include "CRendererGDI.h"
 #include "CRendererOpenGL.h"
 #include "CRendererDirectX11.h"
+#include "CRendererDirect2D.h"
 #include "CWindow.h"
 #include "IRenderer.h"
 #include "CMouse.h"
 #include "CScene.h"
 #include "ISoundEngine.h"
 #include "CInputManager.h"
+#include "CTime.h"
 
 class CApplication
 {
@@ -46,6 +48,5 @@ private:
 	HINSTANCE m_instance;
 	POINT m_curserPos;
 	ISoundEngine* m_soundEngine = nullptr;
-	CGameTimer* m_timer = nullptr;
 };
 

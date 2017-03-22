@@ -48,10 +48,25 @@ ITexture* CRendererGDI::LoadTextureFromFile(char* a_path)
 
 void CRendererGDI::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
-	CTextureGDI* image = (CTextureGDI*)a_texture;
+	CTextureGDI* openGLTexture = reinterpret_cast<CTextureGDI*>(a_texture);
 
-	TransparentBlt(m_backbufferDC, a_posX, a_posY, a_width, a_height, image->GetBitmapDeviceContect(), a_imgX, a_imgY, a_imgWidth, a_imgHeight, RGB(255, 0, 255));
+	TransparentBlt(m_backbufferDC, a_posX, a_posY, a_width, a_height, openGLTexture->GetBitmapDeviceContect(), a_imgX, a_imgY, a_imgWidth, a_imgHeight, RGB(255, 0, 255));
 }
+
+//void CRendererGDI::MakeCircleInTexture(int a_posX, int a_posY, CTextureGDI* a_texture, int a_color, int a_radius)
+//{
+//	if (a_texture->GetWidth() < a_posX - a_radius || a_texture->GetHeight() < a_posY - a_radius || a_posX + a_radius < 0 || a_posY + a_radius < 0 || a_radius == 0)
+//		return;
+//
+//	Ellipse(a_texture->GetBitmapDeviceContect(), a_posX, a_posY, a_posX - a_radius, a_posY - a_radius);
+//	//for (int y = a_posY; y < a_posY - a_radius; y++)
+//	//{
+//	//	for (int x = a_posX; x < a_posX - a_radius; x++)
+//	//	{
+//	//		//SetPixel(a_texture->GetBitmapDeviceContect(), x, y, 255 * 255 * 255);
+//	//	}
+//	//}
+//}
 
 
 void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture)
@@ -92,15 +107,15 @@ void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int 
 		{
 			unsigned char c = *a_string++;
 
-			source.m_x = (c % 16) * 16;
-			source.m_y = (c / 16) * 16;
-			source.m_width = 16;
-			source.m_height = 16;
+			source.x1 = (c % 16) * 16;
+			source.y1 = (c / 16) * 16;
+			source.x2 = 16;
+			source.y2 = 16;
 
-			dest.m_x = a_posX + counter * 16;
-			dest.m_y = a_posY + (newLines * 16);
-			dest.m_width = 16;
-			dest.m_height = 16;
+			dest.x1 = a_posX + counter * 16;
+			dest.y1 = a_posY + (newLines * 16);
+			dest.x2 = 16;
+			dest.y2 = 16;
 
 			if (c == '\n')
 			{
@@ -109,7 +124,7 @@ void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int 
 			}
 			else
 			{
-				DrawTexture(dest.m_x, dest.m_y, dest.m_width, dest.m_height, a_fontTexture, source.m_x, source.m_y, source.m_width, source.m_height);
+				DrawTexture(dest.x1, dest.y1, dest.x2, dest.y2, a_fontTexture, source.x1, source.y1, source.x2, source.y2);
 				counter++;
 			}
 		}

@@ -6,5 +6,6 @@ struct SRenderer
 		GDI,
 		OpenGL,
 		DirectX11,
+		Direct2D,
 	};
 };

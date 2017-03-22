@@ -8,7 +8,6 @@ CApplication::CApplication()
 	, m_renderer(nullptr)
 	, m_instance(GetModuleHandle(nullptr))
 	, m_soundEngine(nullptr)
-	, m_timer(nullptr)
 {
 
 }
@@ -45,9 +44,6 @@ bool CApplication::Initialize(SRenderer::ERenderer a_chosenRenderer, ISoundEngin
 	if (!wResult)
 		return false;
 
-	// Create Timer
-	m_timer = new CGameTimer();
-
 	// Create Renderer
 	wResult = ChangeRenderer(a_chosenRenderer);
 	if (!wResult)
@@ -80,7 +76,7 @@ bool CApplication::ChangeScene()
 
 	// Create newDeleteCounter new m_scene
 	m_scene = new CScene();
-	wResult = m_scene->Initialize(m_renderer, m_timer);
+	wResult = m_scene->Initialize(m_renderer);
 	if (!wResult)
 		return false;
 
@@ -101,20 +97,23 @@ bool CApplication::ChangeRenderer(SRenderer::ERenderer a_newRenderer)
 
 	// Create newDeleteCounter new Renderer
 	currentRenderer = a_newRenderer;
+
 	switch (currentRenderer)
 	{
 	case SRenderer::GDI:
 		m_renderer = new CRendererGDI();
 		break;
-	case SRenderer::DirectX11:
-		m_renderer = new CRendererDirectX11();
-		break;
 	case SRenderer::OpenGL:
 		m_renderer = new CRendererOpenGL();
 		break;
+	case SRenderer::DirectX11:
+		m_renderer = new CRendererDirectX11();
+		break;
+	case SRenderer::Direct2D:
+		m_renderer = new CRendererDirect2D();
+		break;
 	default:
-		m_renderer = nullptr;
-		return false;
+		break;
 	}
 
 	wResult = this->m_renderer->Initialize(m_window.GetWindowHandle());
@@ -122,7 +121,7 @@ bool CApplication::ChangeRenderer(SRenderer::ERenderer a_newRenderer)
 		return false;
 
 	if (m_scene != nullptr)
-		m_scene->Initialize(m_renderer, m_timer);
+		m_scene->Initialize(m_renderer);
 
 	return true;
 }
@@ -132,12 +131,29 @@ void CApplication::Run()
 {
 	MSG message;
 	engineRunning = true;
+	
+	CTime::GetInstance().Reset();
+	float totalTime = CTime::GetInstance().TotalTime();
+	const uint32_t capFPS = 60;
+	uint32_t currentFPS = 0;
 
-	  // Start "Gameloop"
+	float frameTime = 1.0f / capFPS;
+
+	// 200fps = 2,5
+	// 60 = 8,5
+
+	// 200 / 60 = 3,4
+	// 8,5 / 2,5 = 3,3
+
+	CGameTimer m_timer;
+	m_timer.Reset();
+	
+	CGameTimer deltaTimer;
+	deltaTimer.Reset();
+
+	// Start "Gameloop"
 	while (engineRunning)
-	{
-		// A new frame has started, so do a tick
-		m_timer->Tick();
+	{		
 		// Go trought all events
 		while (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
 		{
@@ -145,16 +161,34 @@ void CApplication::Run()
 			DispatchMessage(&message);
 		}
 
-		// Update everything inside the m_scene
+		// Update everything inside the scene
 		m_scene->Update();
 
 		// update sound system
 		m_soundEngine->Update();
 
-		//Draw m_scene
+		// Draw scene
 		m_scene->Draw(m_renderer);
 
-		//Sleep(1);
+		deltaTimer.Tick();
+		CTime::GetInstance().SetDeltaTime(deltaTimer.DeltaTime());
+
+		m_timer.Tick();
+		m_timer.Pause();
+		if (m_timer.DeltaTime() < frameTime)
+		{
+			float currentTime = CTime::GetInstance().TotalTime();
+
+			float sleep = abs(frameTime - m_timer.DeltaTime());
+
+			while (CTime::GetInstance().TotalTime() - currentTime < sleep)
+			{
+				// wait
+			}
+		}
+		
+		CTime::GetInstance().Tick();
+		m_timer.Unpause();
 	}
 }
 
@@ -171,8 +205,6 @@ void CApplication::Shutdown()
 	SafeDelete(m_soundEngine); // delete sound engine
 
 	CInputManager::GetInstance().Shutdown();
-
-	SafeDelete(m_timer);
 }
 
 

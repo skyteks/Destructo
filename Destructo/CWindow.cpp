@@ -14,7 +14,7 @@ CWindow::~CWindow()
 
 bool CWindow::Initialize(const SWindowDesc& a_windowDesc, CApplication* a_application)
 {
-	RECT m_rect = { 0,0,a_windowDesc.m_width, a_windowDesc.m_height };
+	RECT m_rect = { 0,0,a_windowDesc.x2, a_windowDesc.y2 };
 	const int windowStyle = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_BORDER | WS_VISIBLE;
 	AdjustWindowRect(&m_rect, windowStyle, false);
 

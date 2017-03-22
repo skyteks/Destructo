@@ -9,8 +9,8 @@ struct SBitmapHeader
 	unsigned short m_reserved1;
 	unsigned int m_imageDataOffset;
 	unsigned int m_structSize;
-	int m_width;
-	int m_height;
+	int x2;
+	int y2;
 	unsigned short m_numPlanes;
 	unsigned short m_bitsPerPixel;
 	unsigned int m_compression;

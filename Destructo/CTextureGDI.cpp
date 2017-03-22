@@ -10,8 +10,8 @@ CTextureGDI::CTextureGDI(char* a_path)
 
 	GetObject(bitmapHandle, sizeof(bitmap), &bitmap);
 
-	m_width = bitmap.bmWidth;
-	m_height = bitmap.bmHeight;
+	x2 = bitmap.bmWidth;
+	y2 = bitmap.bmHeight;
 
 	m_bitmapDC = CreateCompatibleDC(NULL);
 	
@@ -26,12 +26,12 @@ CTextureGDI::~CTextureGDI()
 
 int CTextureGDI::GetWidth()
 {
-	return m_width;
+	return x2;
 }
 
 int CTextureGDI::GetHeight()
 {
-	return m_height;
+	return y2;
 }
 
 HBITMAP CTextureGDI::GetBitmapHandle()

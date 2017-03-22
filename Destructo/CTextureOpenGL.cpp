@@ -7,12 +7,12 @@ CTextureOpenGL::CTextureOpenGL(char* a_path)
 	GetCurrentDirectoryA(MAX_PATH, cwd);
 	SBitmap bmp = LoadBitmapAndAddAlpha(a_path);
 
-	m_width = bmp.m_header.m_width;
-	m_height = bmp.m_header.m_height;
+	x2 = bmp.m_header.x2;
+	y2 = bmp.m_header.y2;
 
 	glGenTextures(1, &m_textureID);
 	glBindTexture(GL_TEXTURE_2D, m_textureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bmp.m_header.m_width, bmp.m_header.m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bmp.m_data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bmp.m_header.x2, bmp.m_header.y2, 0, GL_RGBA, GL_UNSIGNED_BYTE, bmp.m_data);
 }
 
 
@@ -24,13 +24,13 @@ CTextureOpenGL::~CTextureOpenGL()
 
 int CTextureOpenGL::GetWidth()
 {
-	return m_width;
+	return x2;
 }
 
 
 int CTextureOpenGL::GetHeight()
 {
-	return m_height;
+	return y2;
 }
 
 

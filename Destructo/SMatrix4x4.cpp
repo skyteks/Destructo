@@ -147,8 +147,8 @@ SMatrix4x4 SMatrix4x4::Scale(SVector3 a_v)
 {
 	SMatrix4x4 tmp = Identity();
 
-	tmp.m_m11 = a_v.m_x;
-	tmp.m_m22 = a_v.m_y;
+	tmp.m_m11 = a_v.x1;
+	tmp.m_m22 = a_v.y1;
 	tmp.m_m33 = a_v.m_z;
 
 	return tmp;
@@ -158,8 +158,8 @@ SMatrix4x4 SMatrix4x4::Translation(SVector3 a_v)
 {
 	SMatrix4x4 tmp = Identity();
 
-	tmp.m_m41 = a_v.m_x;
-	tmp.m_m42 = a_v.m_y;
+	tmp.m_m41 = a_v.x1;
+	tmp.m_m42 = a_v.y1;
 	tmp.m_m43 = a_v.m_z;
 
 	return tmp;

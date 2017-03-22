@@ -99,36 +99,37 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	glBegin(GL_QUADS);
 
 	SRect source;
-	source.m_x = a_imgX;
-	source.m_y = a_imgWidth;
-	source.m_width = a_imgY;
-	source.m_height = a_imgHeight;
+	source.x1 = a_imgX;
+	source.x2 = a_imgWidth;
+	source.y1 = a_imgY;
+	source.y2 = a_imgHeight;
 
 	SRect dest;
-	dest.m_x = a_posX;
-	dest.m_y = a_width;
-	dest.m_width = a_posY;
-	dest.m_height = a_height;
+	dest.x1 = a_posX;
+	dest.x2 = a_width;
+	dest.y1 = a_posY;
+	dest.y2 = a_height;
 
 	float texWidth = static_cast<float>(a_texture->GetWidth());
 	float texHeight = static_cast<float>(a_texture->GetHeight());
 
-	dest.m_x = static_cast<float>(source.m_x / texWidth);
-	dest.m_y = static_cast<float>(source.m_y / texWidth);
-	dest.m_width = static_cast<float>(source.m_width / texHeight);
-	dest.m_height = static_cast<float>(source.m_height / texHeight);
+	SRect tex;
+	tex.x1 = source.x1 / texWidth;
+	tex.x2 = source.x2 / texWidth;
+	tex.y1 = source.y1 / texHeight;
+	tex.y2 = source.y2 / texHeight;
 
-	glTexCoord2f(dest.m_x, 1 - dest.m_width); // bottom-left
-	glVertex3f(dest.m_x, dest.m_width, 0); // top-left
+	glTexCoord2f(tex.x1, 1 - tex.y1); // bottom-left
+	glVertex3f(dest.x1, dest.y1, 0); // topleft
 
-	glTexCoord2f(dest.m_x + dest.m_y, 1 - dest.m_width); // bottom-right
-	glVertex3f(dest.m_x + dest.m_y, dest.m_width, 0); // top-right
+	glTexCoord2f(tex.x1 + tex.x2, 1 - tex.y1); // bottom-right
+	glVertex3f(dest.x1 + dest.x2, dest.y1, 0); // topright
 
-	glTexCoord2f(dest.m_x + dest.m_y, 1 - (dest.m_width + dest.m_height)); // top-right
-	glVertex3f(dest.m_x + dest.m_y, dest.m_width + dest.m_height, 0); // bottom-right
+	glTexCoord2f(tex.x1 + tex.x2, 1 - (tex.y1 + tex.y2)); // top-right
+	glVertex3f(dest.x1 + dest.x2, dest.y1 + dest.y2, 0); // bottomright
 
-	glTexCoord2f(dest.m_x, 1 - (dest.m_width + dest.m_height)); // top-left
-	glVertex3f(dest.m_x, dest.m_width + dest.m_height, 0); // bottom-left
+	glTexCoord2f(tex.x1, 1 - (tex.y1 + tex.y2)); // top-left
+	glVertex3f(dest.x1, dest.y1 + dest.y2, 0); // bottomleft
 
 	glEnd();
 }
@@ -149,15 +150,15 @@ void CRendererOpenGL::DrawString(int a_posX, int a_posY, const char* a_string, i
 	{
 		char c = *a_string++;
 
-		source.m_x = (c % 16) * 16;
-		source.m_y = (c / 16) * 16;
-		source.m_width = 16;
-		source.m_height = 16;
+		source.x1 = (c % 16) * 16;
+		source.y1 = (c / 16) * 16;
+		source.x2 = 16;
+		source.y2 = 16;
 
-		dest.m_x = a_posX + counter * 16;
-		dest.m_y = a_posY + (newLines * 16);
-		dest.m_width = 16;
-		dest.m_height = 16;
+		dest.x1 = a_posX + counter * 16;
+		dest.y1 = a_posY + (newLines * 16);
+		dest.x2 = 16;
+		dest.y2 = 16;
 
 		if (c == '\n')
 		{
@@ -166,7 +167,7 @@ void CRendererOpenGL::DrawString(int a_posX, int a_posY, const char* a_string, i
 		}
 		else
 		{
-			DrawTexture(dest.m_x, dest.m_y, dest.m_width, dest.m_height, a_fontTexture, source.m_x, source.m_y, source.m_width, source.m_height);
+			DrawTexture(dest.x1, dest.y1, dest.x2, dest.y2, a_fontTexture, source.x1, source.y1, source.x2, source.y2);
 			counter++;
 		}
 	}

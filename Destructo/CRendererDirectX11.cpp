@@ -1,6 +1,17 @@
 #include "CRendererDirectX11.h"
 
 CRendererDirectX11::CRendererDirectX11()
+	: m_swapChain(nullptr)
+	, m_renderTargetView(nullptr)
+	, m_device(nullptr)
+	, m_deviceContext(nullptr)
+	, m_inputLayout(nullptr)
+	, m_vertexBuffer(nullptr)
+	, m_pixelShader(nullptr)
+	, m_vertexShader(nullptr)
+	, m_samplerState(nullptr)
+	, m_blendState(nullptr)
+	, m_shaderResourceView(nullptr)
 {
 	//memset(vertices, 0, sizeof(SVertex) * verticesMacCount);
 }
@@ -51,7 +62,7 @@ bool CRendererDirectX11::Initialize(HWND a_hwnd)
 
 	m_deviceContext = nullptr;
 
-	hResult = D3D11CreateDeviceAndSwapChain(
+	HRESULT hResult = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
@@ -117,8 +128,8 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(char* a_path)
 	};
 
 	D3D11_TEXTURE2D_DESC textureDesc = {};
-	textureDesc.Width = bmp.m_header.m_width;
-	textureDesc.Height = bmp.m_header.m_height;
+	textureDesc.Width = bmp.m_header.x2;
+	textureDesc.Height = bmp.m_header.y2;
 	textureDesc.MipLevels = textureDesc.ArraySize = 1;
 	textureDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;//DXGI_FORMAT_R8G8B8A8_UNORM;
 	textureDesc.SampleDesc.Count = 1;
@@ -140,11 +151,11 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(char* a_path)
 
 	D3D11_SUBRESOURCE_DATA textureData = {};
 	textureData.pSysMem = bmp.m_data;
-	textureData.SysMemPitch = bmp.m_header.m_width * 4;
+	textureData.SysMemPitch = bmp.m_header.x2 * 4;
 
 	ID3D11Texture2D* directX11Texture = nullptr;
 
-	hResult = m_device->CreateTexture2D(&textureDesc, &textureData, &directX11Texture);
+	HRESULT hResult = m_device->CreateTexture2D(&textureDesc, &textureData, &directX11Texture);
 
 	free(bmp.m_data);
 	bmp.m_data = nullptr;
@@ -174,28 +185,27 @@ void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_
 	m_shaderResourceView = directX11Texture->GetShaderResourceView();
 
 	SRect source;
-	source.m_x = Map(a_posX, 0, m_windowWidth, -1, 1);
-	source.m_y = Map(a_posY, 0, m_windowHeight, -1, 1);
-	source.m_width = Map(a_width, 0, m_windowWidth, 0, 2);
-	source.m_height = Map(a_height, 0, m_windowHeight, 0, 2);
+	source.x1 = Map(a_posX, 0, m_windowWidth, -1, 1);
+	source.y1 = Map(a_posY, 0, m_windowHeight, -1, 1);
+	source.x2 = Map(a_width, 0, m_windowWidth, 0, 2);
+	source.y2 = Map(a_height, 0, m_windowHeight, 0, 2);
 
 	SRect dest;
-	dest.m_x = Map(a_imgX, 0, a_texture->GetWidth(), 0, 1);
-	dest.m_y = Map(a_texture->GetHeight() - a_imgY, 0, a_texture->GetHeight(), 0, 1);
-	dest.m_width = Map(a_imgWidth, 0, a_texture->GetWidth(), 0, 1);
-	dest.m_height = -Map(a_imgHeight, 0, a_texture->GetHeight(), 0, 1);
+	dest.x1 = Map(a_imgX, 0, a_texture->GetWidth(), 0, 1);
+	dest.y1 = Map(a_texture->GetHeight() - a_imgY, 0, a_texture->GetHeight(), 0, 1);
+	dest.x2 = Map(a_imgWidth, 0, a_texture->GetWidth(), 0, 1);
+	dest.y2 = -Map(a_imgHeight, 0, a_texture->GetHeight(), 0, 1);
 
 	if (vertexIndex > 0)
-		vertices[vertexIndex++] = SVertex(source.m_x, source.m_y, 0, dest.m_x, dest.m_y + dest.m_height, 1, 1, 1, 1);
+		vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
 
-	vertices[vertexIndex++] = SVertex(source.m_x, source.m_y, 0, dest.m_x, dest.m_y, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(source.m_x + source.m_width, source.m_y, 0, dest.m_x + dest.m_width, dest.m_y, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(source.m_x, source.m_y + source.m_height, 0, dest.m_x, dest.m_y + dest.m_height, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(source.m_x + source.m_width, source.m_y + source.m_height, 0, dest.m_x + dest.m_width, dest.m_y + dest.m_height, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1, 0, dest.x1 + dest.x2, dest.y1, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
 
-	vertices[vertexIndex++] = SVertex(source.m_x + source.m_width, source.m_y + source.m_height, 0, dest.m_x + dest.m_width, dest.m_y + dest.m_height, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
 }
-
 
 void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture)
 {
@@ -212,15 +222,15 @@ void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string
 	{
 		unsigned char c = *a_string++;
 
-		source.m_x = (c % 16) * 16;
-		source.m_y = (c / 16) * 16;
-		source.m_width = 16;
-		source.m_height = 16;
+		source.x1 = (c % 16) * 16;
+		source.y1 = (c / 16) * 16;
+		source.x2 = 16;
+		source.y2 = 16;
 
-		dest.m_x = a_posX + counter * 16;
-		dest.m_y = a_posY + (newLines * 16);
-		dest.m_width = 16;
-		dest.m_height = 16;
+		dest.x1 = a_posX + counter * 16;
+		dest.y1 = a_posY + (newLines * 16);
+		dest.x2 = 16;
+		dest.y2 = 16;
 
 		if (c == '\n')
 		{
@@ -229,7 +239,7 @@ void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string
 		}
 		else
 		{
-			DrawTexture(dest.m_x, dest.m_y, dest.m_width, dest.m_height, a_fontTexture, source.m_x, source.m_y, source.m_width, source.m_height);
+			DrawTexture(dest.x1, dest.y1, dest.x2, dest.y2, a_fontTexture, source.x1, source.y1, source.x2, source.y2);
 			counter++;
 		}
 	}
@@ -283,6 +293,8 @@ bool CRendererDirectX11::LoadShader()
 {
 	ID3D10Blob* dataBlob = nullptr;
 	ID3D10Blob* errorBlob = nullptr;
+
+	HRESULT hResult;
 
 	//pixel shader
 	D3DX11CompileFromFile(

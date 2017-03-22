@@ -27,10 +27,10 @@ int CALLBACK WinMain(
 	app = new CApplication();
 
 	bool wResult = false;
-	SRenderer::ERenderer chosenRenderer = SRenderer::DirectX11;
+	SRenderer::ERenderer chosenRenderer = SRenderer::OpenGL;
 	wResult = app->Initialize(chosenRenderer, new CSoundEngine(), new CWindowsInput());
 	if (!wResult)
-		return false;
+		return wResult;
 
 	app->Run();
 
@@ -38,5 +38,5 @@ int CALLBACK WinMain(
 
 	delete app;
 
-	return true;
+	return 1;
 }

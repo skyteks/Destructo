@@ -40,3 +40,9 @@ void CUISystem::EventHandler_OnPressButtonDirectX11()
 {
 	app->ChangeRenderer(SRenderer::DirectX11);
 }
+
+
+void CUISystem::EventHandler_OnPressButtonDirect2D()
+{
+	app->ChangeRenderer(SRenderer::Direct2D);
+}

@@ -49,6 +49,12 @@
     <Filter Include="Quelldateien\Renderer\OpenGL">
       <UniqueIdentifier>{0b3e6b5f-2573-48e8-9f09-6ae5fa95ffa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Renderer\Direct2D">
+      <UniqueIdentifier>{b78889a4-ccbc-46eb-a880-3bbd02919072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Renderer\Direct2D">
+      <UniqueIdentifier>{4bda5161-e26f-44ae-8ac2-30b9e456a775}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Callback.h">
@@ -147,6 +153,15 @@
     <ClInclude Include="CGameTimer.h">
       <Filter>Headerdateien\Time</Filter>
     </ClInclude>
+    <ClInclude Include="CRendererDirect2D.h">
+      <Filter>Headerdateien\Renderer\Direct2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextureDirect2D.h">
+      <Filter>Headerdateien\Renderer\Direct2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CTime.h">
+      <Filter>Headerdateien\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CSoundEngine.cpp">
@@ -207,6 +222,15 @@
       <Filter>Quelldateien\Input</Filter>
     </ClCompile>
     <ClCompile Include="CGameTimer.cpp">
+      <Filter>Quelldateien\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="CRendererDirect2D.cpp">
+      <Filter>Quelldateien\Renderer\Direct2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureDirect2D.cpp">
+      <Filter>Quelldateien\Renderer\Direct2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CTime.cpp">
       <Filter>Quelldateien\Time</Filter>
     </ClCompile>
   </ItemGroup>

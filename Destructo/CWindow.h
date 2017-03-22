@@ -8,8 +8,8 @@ class CApplication;
 struct SWindowDesc
 {
 	std::string WindowName;
-	int m_width;
-	int m_height;
+	int x2;
+	int y2;
 };
 
 class CWindow
