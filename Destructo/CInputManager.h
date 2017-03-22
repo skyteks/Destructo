@@ -23,6 +23,9 @@ public:
 	void SetKeyDown(const EKeyCode a_key) override;
 	void SetKeyUp(const EKeyCode a_key) override;
 
+  bool GetKey(const EKeyCode a_key) override;
+
+  void Clear() override;
 
 private:
 	CInputManager(const CInputManager&);

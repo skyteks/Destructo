@@ -39,7 +39,7 @@ void CScene::Update()
 
 	if (m_playerPosX < 800 - 32 && CInputManager::GetInstance().GetKeyDown(EKeyCode::D))
 		m_playerPosX += static_cast<int>(speed);
-	if (m_playerPosX >= 0 && CInputManager::GetInstance().GetKeyDown(EKeyCode::A))
+	if (m_playerPosX >= 0 && CInputManager::GetInstance().GetKey(EKeyCode::A))
 		m_playerPosX -= static_cast<int>(speed);
 	if (m_playerPosY < 600 - 32 && CInputManager::GetInstance().GetKeyDown(EKeyCode::S))
 		m_playerPosY += static_cast<int>(speed);

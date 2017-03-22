@@ -215,9 +215,6 @@
     <ClCompile Include="CRendererOpenGL.cpp">
       <Filter>Quelldateien\Renderer\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="CInput.cpp">
-      <Filter>Quelldateien\Input</Filter>
-    </ClCompile>
     <ClCompile Include="CInputManager.cpp">
       <Filter>Quelldateien\Input</Filter>
     </ClCompile>
@@ -232,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="CTime.cpp">
       <Filter>Quelldateien\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="CWindowsInput.cpp">
+      <Filter>Quelldateien\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

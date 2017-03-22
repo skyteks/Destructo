@@ -45,6 +45,16 @@ void CInputManager::SetKeyUp(const EKeyCode a_key)
   return m_input->SetKeyUp(a_key);
 }
 
+bool CInputManager::GetKey(const EKeyCode a_key)
+{
+  return m_input->GetKey(a_key);
+}
+
+void CInputManager::Clear()
+{
+  m_input->Clear();
+}
+
 void CInputManager::Initialize(IInput * a_input)
 {
   SetInput(a_input);

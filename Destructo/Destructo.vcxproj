@@ -205,7 +205,7 @@
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="CGameTimer.cpp" />
     <ClCompile Include="GlobalFunctions.cpp" />
-    <ClCompile Include="CInput.cpp" />
+    <ClCompile Include="CWindowsInput.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SMatrix4x4.cpp" />

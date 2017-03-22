@@ -139,6 +139,8 @@ void CApplication::Run()
 
 	float frameTime = 1.0f / capFPS;
 
+  //auto sound = m_soundEngine->LoadSound("Audio/Throw.mp3");
+  
 	// 200fps = 2,5
 	// 60 = 8,5
 
@@ -189,6 +191,7 @@ void CApplication::Run()
 		
 		CTime::GetInstance().Tick();
 		m_timer.Unpause();
+    CInputManager::GetInstance().Clear();
 	}
 }
 
@@ -241,13 +244,29 @@ LRESULT CApplication::WndProc(HWND a_Hwnd, unsigned int a_Message, WPARAM a_WPar
 		CMouse::isRightMouseDown = false;
 		break;
 
-	case WM_KEYDOWN:
-		CInputManager::GetInstance().SetKeyDown(static_cast<EKeyCode>(a_WParam));
-		break;
+  case WM_KEYDOWN:
+  {
+    bool isBitSet = a_LPARAM & (1 << 30); // if bit 30 is set in lparam then it is a repeadingly message, which must be ignored.
+    if (isBitSet)
+    {
+      break;
+    }
+    else
+    {
+      CInputManager::GetInstance().SetKeyDown(static_cast<EKeyCode>(a_WParam));
+      break;
+    }
+  }
 
-	case WM_KEYUP:
-		CInputManager::GetInstance().SetKeyUp(static_cast<EKeyCode>(a_WParam));
-		break;
+  case WM_KEYUP:
+  {
+    bool isBitSet = a_LPARAM & (1 << 30); // not required, but is fine... WM_KEYUP only occoures once
+    if (isBitSet)
+    {
+      CInputManager::GetInstance().SetKeyUp(static_cast<EKeyCode>(a_WParam));
+    }
+    break;
+  }
 
 	case WM_QUIT:
 	case WM_DESTROY:
