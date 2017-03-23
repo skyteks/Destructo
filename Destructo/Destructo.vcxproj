@@ -148,13 +148,14 @@
   <ItemGroup>
     <ClInclude Include="Callback.h" />
     <ClInclude Include="CApplication.h" />
+    <ClInclude Include="CAudio.h" />
+    <ClInclude Include="CAudioChannel.h" />
     <ClInclude Include="CMouse.h" />
     <ClInclude Include="CRendererDirect2D.h" />
     <ClInclude Include="CRendererDirectX11.h" />
     <ClInclude Include="CRendererGDI.h" />
     <ClInclude Include="CRendererOpenGL.h" />
     <ClInclude Include="CScene.h" />
-    <ClInclude Include="CSoundEngine.h" />
     <ClInclude Include="CTextureDirect2D.h" />
     <ClInclude Include="CTextureDirectX11.h" />
     <ClInclude Include="CTextureGDI.h" />
@@ -167,11 +168,12 @@
     <ClInclude Include="ERenderer.h" />
     <ClInclude Include="CGameTimer.h" />
     <ClInclude Include="GlobalFunctions.h" />
+    <ClInclude Include="IAudio.h" />
+    <ClInclude Include="IAudioChannel.h" />
     <ClInclude Include="IInput.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CWindowsInput.h" />
     <ClInclude Include="IRenderer.h" />
-    <ClInclude Include="ISoundEngine.h" />
     <ClInclude Include="ITexture.h" />
     <ClInclude Include="SBitmap.h" />
     <ClInclude Include="SBitmapHeader.h" />
@@ -189,13 +191,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp" />
+    <ClCompile Include="CAudio.cpp" />
+    <ClCompile Include="CAudioChannel.cpp" />
     <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CRendererDirect2D.cpp" />
     <ClCompile Include="CRendererDirectX11.cpp" />
     <ClCompile Include="CRendererGDI.cpp" />
     <ClCompile Include="CRendererOpenGL.cpp" />
     <ClCompile Include="CScene.cpp" />
-    <ClCompile Include="CSoundEngine.cpp" />
     <ClCompile Include="CTextureDirect2D.cpp" />
     <ClCompile Include="CTextureDirectX11.cpp" />
     <ClCompile Include="CTextureGDI.cpp" />

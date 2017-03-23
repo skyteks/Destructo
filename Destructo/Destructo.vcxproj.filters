@@ -55,30 +55,33 @@
     <Filter Include="Quelldateien\Renderer\Direct2D">
       <UniqueIdentifier>{4bda5161-e26f-44ae-8ac2-30b9e456a775}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Audio">
+      <UniqueIdentifier>{6f941499-449d-4bb0-b26d-7720329dd85f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Audio">
+      <UniqueIdentifier>{85f4983e-a28e-4d4d-8b40-2e35685a6e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Math">
+      <UniqueIdentifier>{dfbc721a-9f27-401d-8dff-cb315164b586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Math">
+      <UniqueIdentifier>{fbfb823b-e41b-47fa-8543-b0a51595b262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\UI">
+      <UniqueIdentifier>{1fc8afff-88af-4bc0-8255-f2112ee6ab48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\UI">
+      <UniqueIdentifier>{b321ba71-15b2-491b-b5e7-cca6c2d4ec5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Callback.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="CApplication.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="CScene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="CUIButton.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CUISystem.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="CWindow.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="EButtonState.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="ERenderer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="GlobalFunctions.h">
@@ -90,25 +93,10 @@
     <ClInclude Include="SBitmapHeader.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="SButtonData.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="SMatrix4x4.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="SRect.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="SVector3.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="SVertex.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CSoundEngine.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="ISoundEngine.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="EKeyCode.h">
@@ -162,21 +150,48 @@
     <ClInclude Include="CTime.h">
       <Filter>Headerdateien\Time</Filter>
     </ClInclude>
+    <ClInclude Include="SVector3.h">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SMatrix4x4.h">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIButton.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISystem.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ERenderer.h">
+      <Filter>Headerdateien\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="EButtonState.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Callback.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SButtonData.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAudio.h">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="IAudioChannel.h">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="CAudioChannel.h">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="IAudio.h">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CSoundEngine.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="CApplication.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CScene.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIButton.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CUISystem.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CWindow.cpp">
@@ -186,12 +201,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="SMatrix4x4.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="SVector3.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CMouse.cpp">
@@ -232,6 +241,24 @@
     </ClCompile>
     <ClCompile Include="CWindowsInput.cpp">
       <Filter>Quelldateien\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="SMatrix4x4.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="SVector3.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIButton.cpp">
+      <Filter>Quelldateien\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISystem.cpp">
+      <Filter>Quelldateien\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAudioChannel.cpp">
+      <Filter>Quelldateien\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="CAudio.cpp">
+      <Filter>Quelldateien\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

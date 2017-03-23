@@ -122,11 +122,11 @@ void CScene::LoadTextures(IRenderer* a_renderer)
 	m_fontTexture = a_renderer->LoadTextureFromFile("Textures/font.bmp");
 }
 
-void CScene::LoadSounds(ISoundEngine * a_soundEngine)
-{
-	// just a sound-test
-	m_testSound = m_soundEngine->LoadSound("Audio/throw.mp3"); // load sound into memory
-}
+//void CScene::LoadSounds(ISoundEngine * a_soundEngine)
+//{
+//	// just a sound-test
+//	m_testSound = m_soundEngine->LoadSound("Audio/throw.mp3"); // load sound into memory
+//}
 
 
 void CScene::ReleaseTextures()
@@ -139,14 +139,14 @@ void CScene::ReleaseTextures()
 	SafeDelete(m_fontTexture);
 }
 
-void CScene::ReleaseSound(ISoundEngine* a_soundEngine)
-{
-	a_soundEngine->UnloadSound(m_testSound);
-}
+//void CScene::ReleaseSound(ISoundEngine* a_soundEngine)
+//{
+//	a_soundEngine->UnloadSound(m_testSound);
+//}
 
 
-void CScene::Shutdown(ISoundEngine* a_soundEngine)
+void CScene::Shutdown()
 {
 	ReleaseTextures();
-	ReleaseSound(a_soundEngine);
+	//ReleaseSound(a_soundEngine);
 }

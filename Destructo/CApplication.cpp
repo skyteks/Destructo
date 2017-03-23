@@ -19,7 +19,7 @@ CApplication::~CApplication()
 }
 
 
-bool CApplication::Initialize(SRenderer::ERenderer a_chosenRenderer, ISoundEngine* a_soundEngine, IInput* a_input)
+bool CApplication::Initialize(SRenderer::ERenderer a_chosenRenderer, IAudio* a_soundEngine, IInput* a_input)
 {
 	printf("Engine Start\n");
 
@@ -70,7 +70,7 @@ bool CApplication::ChangeScene()
 	// Delete old m_scene, if One exists
 	if (m_scene != nullptr)
 	{
-		m_scene->Shutdown(m_soundEngine);
+		m_scene->Shutdown();
 		SafeDelete(m_scene);
 	}
 
@@ -139,7 +139,8 @@ void CApplication::Run()
 
 	float frameTime = 1.0f / capFPS;
 
-  //auto sound = m_soundEngine->LoadSound("Audio/Throw.mp3");
+  
+  m_soundEngine->Load("Audio/Throw.mp3");
   
 	// 200fps = 2,5
 	// 60 = 8,5
@@ -162,6 +163,13 @@ void CApplication::Run()
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
+
+    if (CInputManager::GetInstance().GetKeyDown(EKeyCode::Escape))
+    {
+      auto channel = m_soundEngine->Play("Audio/Throw.mp3");
+      channel->SetPitch(5.0f); // funny how this changes the sound lol try 10, 50, 100
+      channel->SetVolume(0.3f);
+    }
 
 		// Update everything inside the scene
 		m_scene->Update();
@@ -197,7 +205,7 @@ void CApplication::Run()
 
 void CApplication::Shutdown()
 {
-	m_scene->Shutdown(m_soundEngine);
+	m_scene->Shutdown();
 
 	m_renderer->Shutdown();
 	SafeDelete(m_scene);
@@ -297,7 +305,7 @@ bool CApplication::Failed(HRESULT a_aResult)
 	return false;
 }
 
-void CApplication::SetSoundEngine(ISoundEngine * a_soundEngine)
+void CApplication::SetSoundEngine(IAudio * a_soundEngine)
 {
 	if (a_soundEngine == nullptr)
 	{

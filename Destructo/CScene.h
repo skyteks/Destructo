@@ -26,13 +26,13 @@ public:
 
 	void LoadTextures(IRenderer* a_renderer);
 
-	void LoadSounds(ISoundEngine* a_soundEngine);
+	//void LoadSounds(ISoundEngine* a_soundEngine);
 
 	void ReleaseTextures();
 
-	void ReleaseSound(ISoundEngine* a_soundEngine);
+	//void ReleaseSound(ISoundEngine* a_soundEngine);
 
-	void Shutdown(ISoundEngine* a_soundEngine);
+	void Shutdown();
 
 private:
 

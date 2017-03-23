@@ -11,7 +11,7 @@
 #include "IRenderer.h"
 #include "CMouse.h"
 #include "CScene.h"
-#include "ISoundEngine.h"
+#include "CAudio.h"
 #include "CInputManager.h"
 #include "CTime.h"
 
@@ -21,7 +21,7 @@ public:
 	CApplication();
 	~CApplication();
 
-	bool Initialize(SRenderer::ERenderer currentRenderer, ISoundEngine* a_soundEngine, IInput* a_input);
+	bool Initialize(SRenderer::ERenderer currentRenderer, IAudio* a_soundEngine, IInput* a_input);
 
 	bool ChangeRenderer(SRenderer::ERenderer newRenderer);
 
@@ -38,7 +38,7 @@ public:
 	static bool engineRunning;
 	static SRenderer::ERenderer currentRenderer;
 
-	void SetSoundEngine(ISoundEngine* a_soundEngine);
+	void SetSoundEngine(IAudio* a_soundEngine);
 
 private:
 	SWindowDesc m_wndDesc = { "All Renderers TestEngine", 800, 600 };
@@ -47,6 +47,6 @@ private:
 	CScene* m_scene = nullptr;
 	HINSTANCE m_instance;
 	POINT m_curserPos;
-	ISoundEngine* m_soundEngine = nullptr;
+	IAudio* m_soundEngine = nullptr;
 };
 

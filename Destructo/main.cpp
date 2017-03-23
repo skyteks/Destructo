@@ -1,6 +1,7 @@
 #include "CApplication.h"
 #include "CSoundEngine.h"
 #include "CWindowsInput.h"
+#include "CAudio.h"
 
 CApplication* app = nullptr;
 
@@ -28,7 +29,7 @@ int CALLBACK WinMain(
 
 	bool wResult = false;
 	SRenderer::ERenderer chosenRenderer = SRenderer::OpenGL;
-	wResult = app->Initialize(chosenRenderer, new CSoundEngine(), new CWindowsInput());
+	wResult = app->Initialize(chosenRenderer, new CAudio(), new CWindowsInput());
 	if (!wResult)
 		return wResult;
 
@@ -40,3 +41,24 @@ int CALLBACK WinMain(
 
 	return 1;
 }
+
+
+/*
+CAudio audio;
+IAudio* audioSystem = &audio;
+audioSystem->Initialize();
+
+audioSystem->Load("Audio/Throw.mp3");
+
+
+
+for (;;)
+{
+IAudioChannel* channel = audioSystem->Play("Audio/Throw.mp3");
+audioSystem->Update();
+
+
+}
+
+audioSystem->Shutdown();
+*/
