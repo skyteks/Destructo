@@ -7,7 +7,6 @@
 #include "CUISystem.h"
 #include "GlobalFunctions.h"
 #include "CInputManager.h"
-#include "ISoundEngine.h"
 #include "CTime.h"
 
 class CScene
@@ -54,8 +53,6 @@ private:
 	CUIButton m_uiButtonDirectX11;
 	ButtonMap m_buttonMapButtonDirect2D;
 	CUIButton m_uiButtonDirect2D;
-
-	ISoundEngine* m_soundEngine = nullptr;
 
 	int m_playerPosX = 800 / 2;
 	int m_playerPosY = 600 / 2;

@@ -9,7 +9,6 @@ CScene::CScene()
 	, m_playerTexture(nullptr)
 	, m_buttonTexture(nullptr)
 	, m_fontTexture(nullptr)
-	, m_soundEngine(nullptr)
 {
 }
 

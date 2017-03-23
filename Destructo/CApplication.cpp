@@ -141,6 +141,7 @@ void CApplication::Run()
 
   
   m_soundEngine->Load("Audio/Throw.mp3");
+  m_soundEngine->Load("Audio/t.mp3");
   
 	// 200fps = 2,5
 	// 60 = 8,5
@@ -168,6 +169,13 @@ void CApplication::Run()
     {
       auto channel = m_soundEngine->Play("Audio/Throw.mp3");
       channel->SetPitch(5.0f); // funny how this changes the sound lol try 10, 50, 100
+      channel->SetVolume(1.0f);
+    }
+
+    if (CInputManager::GetInstance().GetKeyDown(EKeyCode::x))
+    {
+      auto channel = m_soundEngine->Play("Audio/t.mp3");
+      //channel->SetPitch(5.0f); // funny how this changes the sound lol try 10, 50, 100
       channel->SetVolume(0.3f);
     }
 
