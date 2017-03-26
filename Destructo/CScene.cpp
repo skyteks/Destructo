@@ -42,7 +42,7 @@ void CScene::Update()
 		m_playerPosX -= static_cast<int>(speed);
 	if (m_playerPosY < 600 - 32 && CInputManager::GetInstance().GetKeyDown(EKeyCode::S))
 		m_playerPosY += static_cast<int>(speed);
-	if (m_playerPosY >= 0 && CInputManager::GetInstance().GetKeyDown(EKeyCode::W))
+	if (m_playerPosY >= 0 && CInputManager::GetInstance().GetKeyUp(EKeyCode::W))
 		m_playerPosY -= static_cast<int>(speed);
 
 	//m_arrowPosX = CMouse::x;

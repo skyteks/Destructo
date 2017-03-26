@@ -14,6 +14,10 @@ public:
 
 	int GetHeight();
 
+	int GetPitch();
+
+	int GetBPP();
+
 	GLuint GetTextureID();
 
 private:
@@ -26,6 +30,6 @@ private:
 	
 	UINT* m_data = nullptr;
 
-	GLuint m_textureID;
+	GLuint m_textureID;	
 };
 

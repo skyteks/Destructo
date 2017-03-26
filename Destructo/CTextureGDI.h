@@ -13,6 +13,10 @@ public:
 
 	int GetHeight();
 
+	int GetPitch();
+
+	int GetBPP();
+
 	HBITMAP GetBitmapHandle();
 
 	HDC GetBitmapDeviceContect();

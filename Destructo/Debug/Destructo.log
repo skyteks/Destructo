@@ -1,7 +1,4 @@
-﻿  CTime.cpp
-  SVector3.cpp
-  SMatrix4x4.cpp
-  main.cpp
+﻿  main.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: "DXGI_STATUS_OCCLUDED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50092): note: Siehe vorherige Definition von "DXGI_STATUS_OCCLUDED"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: "DXGI_STATUS_CLIPPED": Makro-Neudefinition
@@ -130,12 +127,6 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4988):
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50966): note: Siehe vorherige Definition von "DWRITE_E_FONTCOLLECTIONOBSOLETE"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4993): warning C4005: "DWRITE_E_ALREADYREGISTERED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50975): note: Siehe vorherige Definition von "DWRITE_E_ALREADYREGISTERED"
-  CInputManager.cpp
-  CInput.cpp
-  GlobalFunctions.cpp
-c:\users\daniel\desktop\destructo\destructo\globalfunctions.cpp(38): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
-  CGameTimer.cpp
-  CWindow.cpp
   CUISystem.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: "DXGI_STATUS_OCCLUDED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50092): note: Siehe vorherige Definition von "DXGI_STATUS_OCCLUDED"
@@ -265,7 +256,6 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4988):
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50966): note: Siehe vorherige Definition von "DWRITE_E_FONTCOLLECTIONOBSOLETE"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4993): warning C4005: "DWRITE_E_ALREADYREGISTERED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50975): note: Siehe vorherige Definition von "DWRITE_E_ALREADYREGISTERED"
-  CUIButton.cpp
   CTextureOpenGL.cpp
   CTextureGDI.cpp
   CTextureDirectX11.cpp
@@ -432,36 +422,30 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): w
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50445): note: Siehe vorherige Definition von "D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: "D3D10_ERROR_FILE_NOT_FOUND": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50454): note: Siehe vorherige Definition von "D3D10_ERROR_FILE_NOT_FOUND"
-c:\users\daniel\desktop\destructo\destructo\ctexturedirect2d.cpp(39): warning C4996: 'mbstowcs': This function or variable may be unsafe. Consider using mbstowcs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\ctexturedirect2d.cpp(39): warning C4996: 'mbstowcs': This function or variable may be unsafe. Consider using mbstowcs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdlib.h(920): note: Siehe Deklaration von "mbstowcs"
-  CSoundEngine.cpp
-  CScene.cpp
-c:\users\daniel\desktop\destructo\destructo\cscene.cpp(70): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\cscene.cpp(71): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\cscene.cpp(72): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\cscene.cpp(73): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   CRendererOpenGL.cpp
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(102): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(103): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(104): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(105): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(108): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(109): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(110): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(111): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(153): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(154): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(158): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(159): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendereropengl.cpp(170): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(102): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(103): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(104): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(105): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(108): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(109): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(110): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(111): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(153): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(154): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(158): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(159): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendereropengl.cpp(170): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   CRendererGDI.cpp
-c:\users\daniel\desktop\destructo\destructo\crenderergdi.cpp(24): warning C4800: "BOOL": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
-c:\users\daniel\desktop\destructo\destructo\crenderergdi.cpp(36): warning C4800: "BOOL": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
-c:\users\daniel\desktop\destructo\destructo\crenderergdi.cpp(110): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crenderergdi.cpp(111): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crenderergdi.cpp(115): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crenderergdi.cpp(116): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crenderergdi.cpp(127): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crenderergdi.cpp(24): warning C4800: "BOOL": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crenderergdi.cpp(36): warning C4800: "BOOL": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crenderergdi.cpp(110): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crenderergdi.cpp(111): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crenderergdi.cpp(115): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crenderergdi.cpp(116): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crenderergdi.cpp(127): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   CRendererDirectX11.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: "DXGI_STATUS_OCCLUDED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50092): note: Siehe vorherige Definition von "DXGI_STATUS_OCCLUDED"
@@ -519,23 +503,21 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): w
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50445): note: Siehe vorherige Definition von "D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: "D3D10_ERROR_FILE_NOT_FOUND": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50454): note: Siehe vorherige Definition von "D3D10_ERROR_FILE_NOT_FOUND"
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(188): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(189): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(190): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(191): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(194): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(195): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(196): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(197): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(225): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(226): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(230): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(231): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(242): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(455): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirectx11.cpp(456): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
-  Code wird generiert...
-  Kompilieren...
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(188): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(189): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(190): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(191): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(194): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(195): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(196): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(197): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(225): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(226): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(230): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(231): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(242): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(455): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirectx11.cpp(456): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
   CRendererDirect2D.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\d2derr.h(59): warning C4005: "D2DERR_WRONG_STATE": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50511): note: Siehe vorherige Definition von "D2DERR_WRONG_STATE"
@@ -657,19 +639,26 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4988):
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50966): note: Siehe vorherige Definition von "DWRITE_E_FONTCOLLECTIONOBSOLETE"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4993): warning C4005: "DWRITE_E_ALREADYREGISTERED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50975): note: Siehe vorherige Definition von "DWRITE_E_ALREADYREGISTERED"
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(50): warning C4800: "BOOL": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(126): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(127): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(128): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(129): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(182): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(183): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(187): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(188): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(199): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-c:\users\daniel\desktop\destructo\destructo\crendererdirect2d.cpp(161): warning C4996: 'mbstowcs': This function or variable may be unsafe. Consider using mbstowcs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(50): warning C4800: "BOOL": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(126): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(127): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(128): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(129): warning C4244: "=": Konvertierung von "int" in "FLOAT", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(182): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(183): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(187): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(188): warning C4244: "=": Konvertierung von "unsigned int" in "float", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(199): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\crendererdirect2d.cpp(161): warning C4996: 'mbstowcs': This function or variable may be unsafe. Consider using mbstowcs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdlib.h(920): note: Siehe Deklaration von "mbstowcs"
-  CMouse.cpp
+  Code wird generiert...
+  Kompilieren...
+  CUIButton.cpp
+  CScene.cpp
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\cscene.cpp(69): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\cscene.cpp(70): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\cscene.cpp(71): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\cscene.cpp(72): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   CApplication.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: "DXGI_STATUS_OCCLUDED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50092): note: Siehe vorherige Definition von "DXGI_STATUS_OCCLUDED"
@@ -799,6 +788,8 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4988):
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50966): note: Siehe vorherige Definition von "DWRITE_E_FONTCOLLECTIONOBSOLETE"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4993): warning C4005: "DWRITE_E_ALREADYREGISTERED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50975): note: Siehe vorherige Definition von "DWRITE_E_ALREADYREGISTERED"
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\capplication.cpp(265): warning C4800: "LPARAM": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
+c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\capplication.cpp(279): warning C4800: "LPARAM": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
   Code wird generiert...
-  Destructo.vcxproj -> C:\Users\Daniel\Desktop\Destructo\Debug\Destructo.exe
-  Destructo.vcxproj -> C:\Users\Daniel\Desktop\Destructo\Debug\Destructo.pdb (Full PDB)
+  Destructo.vcxproj -> C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Destructo\Debug\Destructo.exe
+  Destructo.vcxproj -> C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Destructo\Debug\Destructo.pdb (Full PDB)

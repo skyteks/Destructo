@@ -34,3 +34,13 @@ ID3D11ShaderResourceView* CTextureDirectX11::GetShaderResourceView()
 {
 	return m_shaderResourceView;
 }
+
+int CTextureDirectX11::GetPitch()
+{
+	return m_pitch;
+}
+
+int CTextureDirectX11::GetBPP()
+{
+	return m_bitsPerPixel;
+}

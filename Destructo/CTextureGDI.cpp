@@ -43,3 +43,13 @@ HDC CTextureGDI::GetBitmapDeviceContect()
 {
 	return m_bitmapDC;
 }
+
+int CTextureGDI::GetPitch()
+{
+	return m_pitch;
+}
+
+int CTextureGDI::GetBPP()
+{
+	return m_bitsPerPixel;
+}

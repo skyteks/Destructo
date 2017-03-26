@@ -39,3 +39,13 @@ GLuint CTextureOpenGL::GetTextureID()
 	return m_textureID;
 }
 
+int CTextureOpenGL::GetPitch()
+{
+	return m_pitch;
+}
+
+int CTextureOpenGL::GetBPP()
+{
+	return m_bitsPerPixel;
+}
+

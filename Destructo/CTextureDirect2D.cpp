@@ -101,4 +101,14 @@ ID2D1Bitmap * CTextureDirect2D::GetBitmapHandle()
 	return m_bitmap;
 }
 
+int CTextureDirect2D::GetPitch()
+{
+	return m_pitch;
+}
+
+int CTextureDirect2D::GetBPP()
+{
+	return m_bitsPerPixel;
+}
+
 

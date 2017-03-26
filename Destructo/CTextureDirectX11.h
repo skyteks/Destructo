@@ -21,6 +21,10 @@ public:
 
 	int GetHeight();
 
+	int GetPitch();
+
+	int GetBPP();
+
 	ID3D11ShaderResourceView* GetShaderResourceView();
 
 private:

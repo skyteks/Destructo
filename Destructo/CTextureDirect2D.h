@@ -27,6 +27,10 @@ public:
 
 	int GetHeight();
 
+	int GetPitch();
+
+	int GetBPP();
+
 	ID2D1Bitmap* GetBitmapHandle();
 
 	static ID2D1HwndRenderTarget* s_renderTarget;
@@ -39,7 +43,6 @@ private:
 	bool m_isLocked;
 
 	ID2D1Bitmap *m_bitmap = nullptr;
-	
 };
 
 
