@@ -165,6 +165,7 @@
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="EButtonState.h" />
     <ClInclude Include="EKeyCode.h" />
+    <ClInclude Include="EKeyState.h" />
     <ClInclude Include="ERenderer.h" />
     <ClInclude Include="CGameTimer.h" />
     <ClInclude Include="GlobalFunctions.h" />

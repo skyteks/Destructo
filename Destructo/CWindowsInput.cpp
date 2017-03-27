@@ -11,23 +11,23 @@ CWindowsInput::~CWindowsInput()
 
 bool CWindowsInput::GetKeyDown(const EKeyCode a_key)
 {
-  return m_keyMap[a_key];
+  return m_keyMap[a_key] == EKeyState::PRESSED;
 }
 
 bool CWindowsInput::GetKeyUp(const EKeyCode a_key)
 {
-  return !m_keyMap[a_key];
+  return m_keyMap[a_key] == EKeyState::UP;
 }
 
 void CWindowsInput::SetKeyDown(const EKeyCode a_key)
 {
-  m_keyMap[a_key] = true;
+  m_keyMap[a_key] = EKeyState::PRESSED;
   m_keyPressedMap[a_key] = true;
 }
 
 void CWindowsInput::SetKeyUp(const EKeyCode a_key)
 {
-  m_keyMap[a_key] = false;
+  m_keyMap[a_key] = EKeyState::UP;
   m_keyPressedMap[a_key] = false;
 }
 
@@ -40,6 +40,6 @@ void CWindowsInput::Clear()
 {
   for (auto& e : m_keyMap)
   {
-    e.second = false;
+    e.second = EKeyState::UNPRESSED;
   }
 }

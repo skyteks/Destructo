@@ -186,6 +186,9 @@
     <ClInclude Include="IAudio.h">
       <Filter>Headerdateien\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="EKeyState.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp">
