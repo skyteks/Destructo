@@ -45,6 +45,11 @@ void CScene::Update()
 	if (m_playerPosY >= 0 && CInputManager::GetInstance().GetKeyUp(EKeyCode::W))
 		m_playerPosY -= static_cast<int>(speed);
 
+	if (CMouse::isLeftMouseDown)
+	{
+		m_collisionTexture->SetPixel(CMouse::x, CMouse::y, 0xFF000000);
+	}
+
 	//m_arrowPosX = CMouse::x;
 	//m_arrowPosY = CMouse::y;
 }
@@ -111,10 +116,12 @@ void CScene::LoadButtons()
 void CScene::LoadTextures(IRenderer* a_renderer)
 {
 	ReleaseTextures();
-	//.\\data\\graphics\\Wall.bmp
-	m_backgroundTexture = a_renderer->LoadTextureFromFile("Textures/background.bmp");//("Textures/goblin.bmp");
-	m_collisionTexture = a_renderer->LoadTextureFromFile("Textures/collision.bmp");
+
 	m_terrainTexture = a_renderer->LoadTextureFromFile("Textures/terrain.bmp");
+	m_collisionTexture = a_renderer->LoadTextureFromFile("Textures/collision.bmp");
+
+	m_backgroundTexture = a_renderer->LoadTextureFromFile("Textures/background.bmp");//("Textures/goblin.bmp");
+
 	m_playerTexture = a_renderer->LoadTextureFromFile("Textures/player.bmp");
 
 	m_buttonTexture = a_renderer->LoadTextureFromFile("Textures/button.bmp");
@@ -130,8 +137,8 @@ void CScene::LoadTextures(IRenderer* a_renderer)
 
 void CScene::ReleaseTextures()
 {
-	SafeDelete(m_backgroundTexture);
 	SafeDelete(m_collisionTexture);
+	SafeDelete(m_backgroundTexture);
 	SafeDelete(m_terrainTexture);
 	SafeDelete(m_playerTexture);
 	SafeDelete(m_buttonTexture);

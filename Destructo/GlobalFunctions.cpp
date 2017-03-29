@@ -22,14 +22,14 @@ SBitmap LoadBitmapAndAddAlpha(char* a_path)
 
 	fclose(file);
 
-	bmp.m_pitch = bmp.m_header.x2 * 3;
+	bmp.m_pitch = bmp.m_header.m_width * 3;
 
 	if (bmp.m_pitch % 4 != 0)
 	{
 		bmp.m_pitch += 4 - (bmp.m_pitch % 4);
 	}
 
-	bmp.m_pitch -= (bmp.m_header.x2 * 3);
+	bmp.m_pitch -= (bmp.m_header.m_width * 3);
 
 	unsigned char* buffer = (unsigned char*)malloc(bmp.m_header.m_sizeOfImageData * 4 / 3);
 
@@ -38,14 +38,14 @@ SBitmap LoadBitmapAndAddAlpha(char* a_path)
 	while (i < bmp.m_header.m_sizeOfImageData)
 	{
 		unsigned char r = bmp.m_data[i + 2];
-		unsigned char m_g = bmp.m_data[i + 1];
+		unsigned char g = bmp.m_data[i + 1];
 		unsigned char b = bmp.m_data[i];
 
 		buffer[j++] = bmp.m_data[i++ + 2];
 		buffer[j++] = bmp.m_data[i++];
 		buffer[j++] = bmp.m_data[i++ - 2];
 
-		if (r == 255 && m_g == 0 && b == 255)
+		if (r == 255 && g == 0 && b == 255)
 			buffer[j++] = 0;
 		else
 			buffer[j++] = 255;

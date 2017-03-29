@@ -25,12 +25,14 @@ public:
 
 	int GetBPP();
 
+	void SetPixel(int a_x, int a_y, int a_color);
+
 	ID3D11ShaderResourceView* GetShaderResourceView();
 
 private:
 
-	int x2;
-	int y2;
+	int m_width;
+	int m_height;
 	int m_pitch;
 	int m_bitsPerPixel;
 	bool m_isLocked;

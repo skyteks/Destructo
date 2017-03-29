@@ -12,4 +12,6 @@ public:
 	virtual int GetPitch() = 0;
 
 	virtual int GetBPP() = 0;
+
+	virtual void SetPixel(int a_x, int a_y, int a_color) = 0;
 };

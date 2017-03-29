@@ -4,18 +4,18 @@
 
 CTextureGDI::CTextureGDI(char* a_path)
 {
-	bitmapHandle = (HBITMAP)LoadImage(GetModuleHandle(NULL), a_path, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	m_bitmapHandle = (HBITMAP)LoadImage(GetModuleHandle(NULL), a_path, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
 	BITMAP bitmap;
 
-	GetObject(bitmapHandle, sizeof(bitmap), &bitmap);
+	GetObject(m_bitmapHandle, sizeof(bitmap), &bitmap);
 
-	x2 = bitmap.bmWidth;
-	y2 = bitmap.bmHeight;
+	m_width = bitmap.bmWidth;
+	m_height = bitmap.bmHeight;
 
 	m_bitmapDC = CreateCompatibleDC(NULL);
 	
-	SelectObject(m_bitmapDC, bitmapHandle);
+	SelectObject(m_bitmapDC, m_bitmapHandle);
 }
 
 
@@ -26,17 +26,17 @@ CTextureGDI::~CTextureGDI()
 
 int CTextureGDI::GetWidth()
 {
-	return x2;
+	return m_width;
 }
 
 int CTextureGDI::GetHeight()
 {
-	return y2;
+	return m_height;
 }
 
 HBITMAP CTextureGDI::GetBitmapHandle()
 {
-	return bitmapHandle;
+	return m_bitmapHandle;
 }
 
 HDC CTextureGDI::GetBitmapDeviceContect()
@@ -52,4 +52,8 @@ int CTextureGDI::GetPitch()
 int CTextureGDI::GetBPP()
 {
 	return m_bitsPerPixel;
+}
+
+void CTextureGDI::SetPixel(int a_x, int a_y, int a_color)
+{
 }

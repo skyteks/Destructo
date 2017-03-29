@@ -31,13 +31,15 @@ public:
 
 	int GetBPP();
 
+	void SetPixel(int a_x, int a_y, int a_color);
+
 	ID2D1Bitmap* GetBitmapHandle();
 
 	static ID2D1HwndRenderTarget* s_renderTarget;
 
 private:
-	int x2;
-	int y2;
+	int m_width;
+	int m_height;
 	int m_pitch;
 	int m_bitsPerPixel;
 	bool m_isLocked;

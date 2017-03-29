@@ -65,7 +65,7 @@ bool CRendererOpenGL::Initialize(HWND a_hwnd)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// load font
-	m_fontTexture = LoadTextureFromFile("Textures/font.bmp");
+	//m_fontTexture = LoadTextureFromFile("Textures/font.bmp");
 
 	return true;
 }
@@ -89,6 +89,18 @@ void CRendererOpenGL::Begin()
 void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
 	CTextureOpenGL* openGLTexture = reinterpret_cast<CTextureOpenGL*>(a_texture);
+
+	// Singleton
+	// char* => ITexture*
+	// GetTextureByName(char*) => ITexture*
+
+
+
+	if (openGLTexture->GetTextureID() == 1)
+	{
+		openGLTexture->AddOpacityMask();
+	}
+	
 	glBindTexture(GL_TEXTURE_2D, openGLTexture->GetTextureID());
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -97,7 +109,7 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 	glBegin(GL_QUADS);
-
+	
 	SRect source;
 	source.x1 = a_imgX;
 	source.x2 = a_imgWidth;
@@ -123,7 +135,7 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	glVertex3f(dest.x1, dest.y1, 0); // topleft
 
 	glTexCoord2f(tex.x1 + tex.x2, 1 - tex.y1); // bottom-right
-	glVertex3f(dest.x1 + dest.x2, dest.y1, 0); // topright
+	glVertex3f(dest.x1 + dest.x2, dest.y1, 0); // topright ==> Vector2 * rotationmatrix ==> rotated Vector2
 
 	glTexCoord2f(tex.x1 + tex.x2, 1 - (tex.y1 + tex.y2)); // top-right
 	glVertex3f(dest.x1 + dest.x2, dest.y1 + dest.y2, 0); // bottomright

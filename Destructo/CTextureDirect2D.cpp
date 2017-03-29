@@ -65,8 +65,8 @@ CTextureDirect2D::CTextureDirect2D(char* a_path)
 
 	// get width & height
 	D2D1_SIZE_F size = m_bitmap->GetSize();
-	x2 = (int)size.width;
-	y2 = (int)size.height;
+	m_width = (int)size.width;
+	m_height = (int)size.height;
 	if (!SUCCEEDED(hResult))
 		goto broke;
 
@@ -87,18 +87,22 @@ CTextureDirect2D::~CTextureDirect2D()
 
 int CTextureDirect2D::GetWidth()
 {
-	return x2;
+	return m_width;
 }
 
 
 int CTextureDirect2D::GetHeight()
 {
-	return y2;
+	return m_height;
 }
 
 ID2D1Bitmap * CTextureDirect2D::GetBitmapHandle()
 {
 	return m_bitmap;
+}
+
+void CTextureDirect2D::SetPixel(int a_x, int a_y, int a_color)
+{
 }
 
 int CTextureDirect2D::GetPitch()

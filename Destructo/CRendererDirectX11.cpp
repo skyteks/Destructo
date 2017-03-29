@@ -128,8 +128,8 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(char* a_path)
 	};
 
 	D3D11_TEXTURE2D_DESC textureDesc = {};
-	textureDesc.Width = bmp.m_header.x2;
-	textureDesc.Height = bmp.m_header.y2;
+	textureDesc.Width = bmp.m_header.m_width;
+	textureDesc.Height = bmp.m_header.m_height;
 	textureDesc.MipLevels = textureDesc.ArraySize = 1;
 	textureDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;//DXGI_FORMAT_R8G8B8A8_UNORM;
 	textureDesc.SampleDesc.Count = 1;
@@ -151,7 +151,7 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(char* a_path)
 
 	D3D11_SUBRESOURCE_DATA textureData = {};
 	textureData.pSysMem = bmp.m_data;
-	textureData.SysMemPitch = bmp.m_header.x2 * 4;
+	textureData.SysMemPitch = bmp.m_header.m_width * 4;
 
 	ID3D11Texture2D* directX11Texture = nullptr;
 

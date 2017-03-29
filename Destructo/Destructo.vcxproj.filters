@@ -87,18 +87,6 @@
     <ClInclude Include="GlobalFunctions.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="SBitmap.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="SBitmapHeader.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="SRect.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="SVertex.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="EKeyCode.h">
       <Filter>Headerdateien\Input</Filter>
     </ClInclude>
@@ -188,6 +176,18 @@
     </ClInclude>
     <ClInclude Include="EKeyState.h">
       <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="SBitmap.h">
+      <Filter>Headerdateien\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SBitmapHeader.h">
+      <Filter>Headerdateien\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SVertex.h">
+      <Filter>Headerdateien\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SRect.h">
+      <Filter>Headerdateien\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
