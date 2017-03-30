@@ -5,7 +5,7 @@
 class CTextureGDI : public ITexture
 {
 public:
-	CTextureGDI(char* a_path);
+	CTextureGDI(const char* a_path);
 
 	~CTextureGDI();
 

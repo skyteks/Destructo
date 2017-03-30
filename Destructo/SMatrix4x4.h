@@ -1,6 +1,7 @@
 #pragma once
 #include <limits>
 #include "SVector3.h"
+#include "SVector4.h"
 
 
 struct SMatrix4x4
@@ -27,8 +28,8 @@ public:
 	friend SMatrix4x4 operator *(SMatrix4x4 a_m1, SMatrix4x4 a_m2);
 	friend SMatrix4x4 operator *(SMatrix4x4 a_m, float a_f);
 	friend SMatrix4x4 operator *(float a_f, SMatrix4x4 a_m);
-	//friend SVector4 operator *(SMatrix4x4 a_m, SVector3 a_v);
-	//friend SVector4 operator *(SVector3 a_v, SMatrix4x4 a_m);
+	friend SVector4 operator *(SMatrix4x4 a_m, SVector3 a_v);
+	friend SVector4 operator *(SVector3 a_v, SMatrix4x4 a_m);
 
 	friend bool operator ==(SMatrix4x4 a_m1, SMatrix4x4 a_m2);
 	friend bool operator !=(SMatrix4x4 a_m1, SMatrix4x4 a_m2);

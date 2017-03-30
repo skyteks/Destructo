@@ -14,6 +14,7 @@
 #include "CAudio.h"
 #include "CInputManager.h"
 #include "CTime.h"
+#include "CTextureManager.h"
 
 class CApplication
 {

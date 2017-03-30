@@ -1,4 +1,5 @@
 #include "CRendererOpenGL.h"
+#include "DataNames.h"
 
 CRendererOpenGL::CRendererOpenGL()
 {
@@ -71,7 +72,7 @@ bool CRendererOpenGL::Initialize(HWND a_hwnd)
 }
 
 
-ITexture* CRendererOpenGL::LoadTextureFromFile(char* a_path)
+ITexture* CRendererOpenGL::LoadTextureFromFile(const char* a_path)
 {
 	return new CTextureOpenGL(a_path);
 }
@@ -95,12 +96,13 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	// GetTextureByName(char*) => ITexture*
 
 
-
-	if (openGLTexture->GetTextureID() == 1)
+	const char* name = CTextureManager::GetInstance().GetNameByTexture(a_texture);
+	
+	if (strcmp(name, TEXTURE_TERRAIN) == 0) //if (openGLTexture->GetTextureID() == 1)
 	{
 		openGLTexture->AddOpacityMask();
 	}
-	
+
 	glBindTexture(GL_TEXTURE_2D, openGLTexture->GetTextureID());
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -109,7 +111,7 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 	glBegin(GL_QUADS);
-	
+
 	SRect source;
 	source.x1 = a_imgX;
 	source.x2 = a_imgWidth;
@@ -131,6 +133,64 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	tex.y1 = source.y1 / texHeight;
 	tex.y2 = source.y2 / texHeight;
 
+
+	// x,y
+	// scale
+	// rotationZ
+	// ITexture*
+	// GetCoordinates(); return => 4 vectoren
+
+	if (strcmp(name, TEXTURE_PLAYER) == 0) //if (openGLTexture->GetTextureID() == 4)
+	{
+		static float rotValue = 0.0f;
+
+		rotValue += 0.01f;
+
+		dest.x1 -= a_posX + a_width / 2;
+		dest.y1 -= a_posY + a_height / 2;
+
+		// rotate
+		SVector3 vec1(dest.x1, dest.y1, 0.0f);
+		SVector3 vec2(dest.x1 + dest.x2, dest.y1, 0.0f);
+		SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2, 0.0f);
+		SVector3 vec4(dest.x1, dest.y1 + dest.y2, 0.0f);
+		SMatrix4x4 rotation = SMatrix4x4::RotationZ(rotValue);
+
+		auto result1 = rotation * vec1;
+		auto result2 = rotation * vec2;
+		auto result3 = rotation * vec3;
+		auto result4 = rotation * vec4;
+
+		dest.x1 += a_posX + a_width / 2;
+		dest.y1 += a_posY + a_height / 2;
+
+		result1.x += dest.x1;
+		result2.x += dest.x1;
+		result3.x += dest.x1;
+		result4.x += dest.x1;
+
+		result1.y += dest.y1;
+		result2.y += dest.y1;
+		result3.y += dest.y1;
+		result4.y += dest.y1;
+
+		glTexCoord2f(tex.x1, 1 - tex.y1); // bottom-left
+		glVertex3f(result1.x, result1.y, 0); // topleft
+
+		glTexCoord2f(tex.x1 + tex.x2, 1 - tex.y1); // bottom-right
+		glVertex3f(result2.x, result2.y, 0); // topright ==> Vector2 * rotationmatrix ==> rotated Vector2
+
+		glTexCoord2f(tex.x1 + tex.x2, 1 - (tex.y1 + tex.y2)); // top-right
+		glVertex3f(result3.x, result3.y, 0); // bottomright
+
+		glTexCoord2f(tex.x1, 1 - (tex.y1 + tex.y2)); // top-left
+		glVertex3f(result4.x, result4.y, 0); // bottomleft
+
+		glEnd();
+		return;
+	}
+
+	//BACKUP
 	glTexCoord2f(tex.x1, 1 - tex.y1); // bottom-left
 	glVertex3f(dest.x1, dest.y1, 0); // topleft
 

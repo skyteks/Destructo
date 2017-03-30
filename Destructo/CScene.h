@@ -8,6 +8,7 @@
 #include "GlobalFunctions.h"
 #include "CInputManager.h"
 #include "CTime.h"
+#include "CTextureManager.h"
 
 class CScene
 {
@@ -35,13 +36,21 @@ public:
 
 private:
 
-	ITexture* m_backgroundTexture = nullptr;
-	ITexture* m_terrainTexture = nullptr;
-	ITexture* m_collisionTexture = nullptr;
-	ITexture* m_playerTexture = nullptr;
+	//ITexture* m_backgroundTexture = nullptr;
+	//ITexture* m_terrainTexture = nullptr;
+	//ITexture* m_collisionTexture = nullptr;
+	//ITexture* m_playerTexture = nullptr;
 
-	ITexture* m_buttonTexture = nullptr;
-	ITexture* m_fontTexture = nullptr;
+	//ITexture* m_buttonTexture = nullptr;
+	//ITexture* m_fontTexture = nullptr;
+
+	std::string m_backgroundTexture;
+	std::string m_terrainTexture;
+	std::string m_collisionTexture;
+	std::string m_playerTexture;
+
+	std::string m_buttonTexture;
+	std::string m_fontTexture;
 
 	void* m_testSound = nullptr;
 

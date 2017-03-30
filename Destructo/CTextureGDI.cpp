@@ -2,7 +2,7 @@
 
 
 
-CTextureGDI::CTextureGDI(char* a_path)
+CTextureGDI::CTextureGDI(const char* a_path)
 {
 	m_bitmapHandle = (HBITMAP)LoadImage(GetModuleHandle(NULL), a_path, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 

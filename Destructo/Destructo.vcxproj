@@ -159,10 +159,12 @@
     <ClInclude Include="CTextureDirect2D.h" />
     <ClInclude Include="CTextureDirectX11.h" />
     <ClInclude Include="CTextureGDI.h" />
+    <ClInclude Include="CTextureManager.h" />
     <ClInclude Include="CTextureOpenGL.h" />
     <ClInclude Include="CUIButton.h" />
     <ClInclude Include="CUISystem.h" />
     <ClInclude Include="CWindow.h" />
+    <ClInclude Include="DataNames.h" />
     <ClInclude Include="EButtonState.h" />
     <ClInclude Include="EKeyCode.h" />
     <ClInclude Include="EKeyState.h" />
@@ -174,14 +176,17 @@
     <ClInclude Include="IInput.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CWindowsInput.h" />
+    <ClInclude Include="IManager.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="ITexture.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="SBitmap.h" />
     <ClInclude Include="SBitmapHeader.h" />
     <ClInclude Include="SButtonData.h" />
     <ClInclude Include="SMatrix4x4.h" />
     <ClInclude Include="SRect.h" />
     <ClInclude Include="SVector3.h" />
+    <ClInclude Include="SVector4.h" />
     <ClInclude Include="SVertex.h" />
     <ClInclude Include="CTime.h" />
   </ItemGroup>
@@ -203,6 +208,7 @@
     <ClCompile Include="CTextureDirect2D.cpp" />
     <ClCompile Include="CTextureDirectX11.cpp" />
     <ClCompile Include="CTextureGDI.cpp" />
+    <ClCompile Include="CTextureManager.cpp" />
     <ClCompile Include="CTextureOpenGL.cpp" />
     <ClCompile Include="CUIButton.cpp" />
     <ClCompile Include="CUISystem.cpp" />
@@ -215,6 +221,7 @@
     <ClCompile Include="SMatrix4x4.cpp" />
     <ClCompile Include="SVector3.cpp" />
     <ClCompile Include="CTime.cpp" />
+    <ClCompile Include="SVector4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

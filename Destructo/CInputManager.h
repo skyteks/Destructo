@@ -14,7 +14,7 @@ public:
 
 	void Initialize(IInput* a_input);
 	void Shutdown();
-
+	
 	static CInputManager& GetInstance();
 	void SetInput(IInput* a_input);
 
@@ -23,9 +23,9 @@ public:
 	void SetKeyDown(const EKeyCode a_key) override;
 	void SetKeyUp(const EKeyCode a_key) override;
 
-  bool GetKey(const EKeyCode a_key) override;
+	bool GetKey(const EKeyCode a_key) override;
 
-  void Clear() override;
+	void Clear() override;
 
 private:
 	CInputManager(const CInputManager&);

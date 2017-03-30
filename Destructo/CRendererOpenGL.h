@@ -1,9 +1,18 @@
 #pragma once
 
+// TODO:
+// IObject interface
+// GameObject class (position, scale, rotation, ITexture*)
+// DrawObject method for all renderers
+// DrawOpacity method for all renderers
+
 #include "IRenderer.h"
 #include "CTextureOpenGL.h"
 #include <gl\GL.h>
 #include "SRect.h"
+#include "Math.h"
+#include "CTextureManager.h"
+#include "DataNames.h"
 #pragma comment(lib, "opengl32.lib")
 
 class CRendererOpenGL : public IRenderer
@@ -15,7 +24,7 @@ public:
 
 	bool Initialize(HWND a_hwnd);
 
-	ITexture* LoadTextureFromFile(char* a_path);
+	ITexture* LoadTextureFromFile(const char* a_path);
 
 	void Begin();
 

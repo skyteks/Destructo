@@ -118,7 +118,7 @@ bool CRendererDirectX11::Initialize(HWND a_hwnd)
 }
 
 
-ITexture* CRendererDirectX11::LoadTextureFromFile(char* a_path)
+ITexture* CRendererDirectX11::LoadTextureFromFile(const char* a_path)
 {
 	SBitmap bmp = LoadBitmapAndAddAlpha(a_path);
 

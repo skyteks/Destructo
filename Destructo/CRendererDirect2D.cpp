@@ -105,7 +105,7 @@ bool CRendererDirect2D::Initialize(HWND a_hwnd)
 }
 
 
-ITexture * CRendererDirect2D::LoadTextureFromFile(char * a_path)
+ITexture * CRendererDirect2D::LoadTextureFromFile(const char * a_path)
 {
 	return new CTextureDirect2D(a_path);
 }

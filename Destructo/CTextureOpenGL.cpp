@@ -1,8 +1,7 @@
 #include "CTextureOpenGL.h"
 #include "GlobalFunctions.h"
 
-CTextureOpenGL::CTextureOpenGL(char* a_path)
-	: m_path(a_path)
+CTextureOpenGL::CTextureOpenGL(const char* a_path)
 {
 	char cwd[MAX_PATH + 1] = { 0 };
 	GetCurrentDirectoryA(MAX_PATH, cwd);

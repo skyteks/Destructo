@@ -98,14 +98,28 @@ SMatrix4x4 operator *(float a_f, SMatrix4x4 a_m)
 	return a_m * a_f;
 }
 
-//SVector4 operator *(SMatrix4x4 a_m, SVector3 a_v)
-//{
-//	return SVector3(); // WIP
-//}
-//SVector4 operator *(SVector3 a_v, SMatrix4x4 a_m)
-//{
-//	return a_m * a_v; // ERROR
-//}
+SVector4 operator *(SMatrix4x4 a_matrix, SVector3 a_vector)
+{
+	SVector4 result;
+
+	/*
+	    return CVector3(
+        (lhs.x * rhs.mtx[1][1]) + (lhs.y * rhs.mtx[1][0]) + (lhs.z * rhs.mtx[2][0]),
+        (lhs.x * rhs.mtx[1][2]) + (lhs.y * rhs.mtx[1][1]) + (lhs.z * rhs.mtx[2][1]),
+        (lhs.x * rhs.mtx[1][3]) + (lhs.y * rhs.mtx[1][2]) + (lhs.z * rhs.mtx[2][2]));
+	*/
+
+	result.x = a_matrix.m_m11 * a_vector.x + a_matrix.m_m12 * a_vector.y + a_matrix.m_m13 * a_vector.z + a_matrix.m_m14 * 1.0f;
+	result.y = a_matrix.m_m21 * a_vector.x + a_matrix.m_m22 * a_vector.y + a_matrix.m_m23 * a_vector.z + a_matrix.m_m24 * 1.0f;
+	result.z = a_matrix.m_m31 * a_vector.x + a_matrix.m_m32 * a_vector.y + a_matrix.m_m33 * a_vector.z + a_matrix.m_m34 * 1.0f;
+	result.w = a_matrix.m_m41 * a_vector.x + a_matrix.m_m42 * a_vector.y + a_matrix.m_m43 * a_vector.z + a_matrix.m_m44 * 1.0f;
+
+	return result;
+}
+SVector4 operator *(SVector3 a_v, SMatrix4x4 a_m)
+{
+	return a_m * a_v;
+}
 
 bool operator ==(SMatrix4x4 a_m1, SMatrix4x4 a_m2)
 {
@@ -147,9 +161,9 @@ SMatrix4x4 SMatrix4x4::Scale(SVector3 a_v)
 {
 	SMatrix4x4 tmp = Identity();
 
-	tmp.m_m11 = a_v.x1;
-	tmp.m_m22 = a_v.y1;
-	tmp.m_m33 = a_v.m_z;
+	tmp.m_m11 = a_v.x;
+	tmp.m_m22 = a_v.y;
+	tmp.m_m33 = a_v.z;
 
 	return tmp;
 }
@@ -158,9 +172,9 @@ SMatrix4x4 SMatrix4x4::Translation(SVector3 a_v)
 {
 	SMatrix4x4 tmp = Identity();
 
-	tmp.m_m41 = a_v.x1;
-	tmp.m_m42 = a_v.y1;
-	tmp.m_m43 = a_v.m_z;
+	tmp.m_m41 = a_v.x;
+	tmp.m_m42 = a_v.y;
+	tmp.m_m43 = a_v.z;
 
 	return tmp;
 }
@@ -191,11 +205,19 @@ SMatrix4x4 SMatrix4x4::RotationZ(float a_f)
 {
 	SMatrix4x4 tmp = Identity();
 
-	tmp.m_m11 = tmp.m_m22 = static_cast<float>(cos(a_f));
-	tmp.m_m12 = static_cast<float>(sin(a_f));
+	tmp.m_m11 = tmp.m_m22 = cos(a_f);
+	tmp.m_m12 = -sin(a_f);
 	tmp.m_m21 = -tmp.m_m12;
 
 	return tmp;
+
+	/*
+	return SMatrix4x4(
+		cos(a_f), sin(a_f), 0, 0,
+		-sin(a_f), cos(a_f), 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1);
+	*/
 }
 
 SMatrix4x4 SMatrix4x4::Invert(SMatrix4x4 a_m)

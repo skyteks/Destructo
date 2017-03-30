@@ -44,6 +44,9 @@ bool CApplication::Initialize(SRenderer::ERenderer a_chosenRenderer, IAudio* a_s
 	if (!wResult)
 		return false;
 
+	// initialize texture manager
+	CTextureManager::GetInstance().Initialize(&m_renderer);
+
 	// Create Renderer
 	wResult = ChangeRenderer(a_chosenRenderer);
 	if (!wResult)
@@ -91,9 +94,11 @@ bool CApplication::ChangeRenderer(SRenderer::ERenderer a_newRenderer)
 	// Delete old renderer, if One exists
 	if (m_renderer != nullptr)
 	{
+		CTextureManager::GetInstance().Shutdown();
 		m_renderer->Shutdown();
 		SafeDelete(m_renderer);
 	}
+
 
 	// Create newDeleteCounter new Renderer
 	currentRenderer = a_newRenderer;
@@ -131,7 +136,7 @@ void CApplication::Run()
 {
 	MSG message;
 	engineRunning = true;
-	
+
 	CTime::GetInstance().Reset();
 	float totalTime = CTime::GetInstance().TotalTime();
 	const uint32_t capFPS = 60;
@@ -139,10 +144,10 @@ void CApplication::Run()
 
 	float frameTime = 1.0f / capFPS;
 
-  
-  m_soundEngine->Load("Audio/Throw.mp3");
-  m_soundEngine->Load("Audio/t.mp3");
-  
+
+	m_soundEngine->Load("Audio/Throw.mp3");
+	m_soundEngine->Load("Audio/t.mp3");
+
 	// 200fps = 2,5
 	// 60 = 8,5
 
@@ -151,13 +156,13 @@ void CApplication::Run()
 
 	CGameTimer m_timer;
 	m_timer.Reset();
-	
+
 	CGameTimer deltaTimer;
 	deltaTimer.Reset();
 
 	// Start "Gameloop"
 	while (engineRunning)
-	{		
+	{
 		// Go trought all events
 		while (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
 		{
@@ -165,19 +170,19 @@ void CApplication::Run()
 			DispatchMessage(&message);
 		}
 
-    if (CInputManager::GetInstance().GetKeyDown(EKeyCode::Escape))
-    {
-      auto channel = m_soundEngine->Play("Audio/Throw.mp3");
-      channel->SetPitch(5.0f); // funny how this changes the sound lol try 10, 50, 100
-      channel->SetVolume(1.0f);
-    }
+		if (CInputManager::GetInstance().GetKeyDown(EKeyCode::Escape))
+		{
+			auto channel = m_soundEngine->Play("Audio/Throw.mp3");
+			channel->SetPitch(2.0f); // funny how this changes the sound lol try 10, 50, 100
+			channel->SetVolume(0.2f);
+		}
 
-    if (CInputManager::GetInstance().GetKeyDown(EKeyCode::x))
-    {
-      auto channel = m_soundEngine->Play("Audio/t.mp3");
-      //channel->SetPitch(5.0f); // funny how this changes the sound lol try 10, 50, 100
-      channel->SetVolume(0.3f);
-    }
+		if (CInputManager::GetInstance().GetKeyDown(EKeyCode::x))
+		{
+			auto channel = m_soundEngine->Play("Audio/t.mp3");
+			//channel->SetPitch(5.0f); // funny how this changes the sound lol try 10, 50, 100
+			channel->SetVolume(0.3f);
+		}
 
 		// Update everything inside the scene
 		m_scene->Update();
@@ -204,16 +209,18 @@ void CApplication::Run()
 				// wait
 			}
 		}
-		
+
 		CTime::GetInstance().Tick();
 		m_timer.Unpause();
-    CInputManager::GetInstance().Clear();
+		CInputManager::GetInstance().Clear();
 	}
 }
 
 void CApplication::Shutdown()
 {
 	m_scene->Shutdown();
+
+	CTextureManager::GetInstance().Shutdown();
 
 	m_renderer->Shutdown();
 	SafeDelete(m_scene);
@@ -260,29 +267,29 @@ LRESULT CApplication::WndProc(HWND a_Hwnd, unsigned int a_Message, WPARAM a_WPar
 		CMouse::isRightMouseDown = false;
 		break;
 
-  case WM_KEYDOWN:
-  {
-    bool isBitSet = a_LPARAM & (1 << 30); // if bit 30 is set in lparam then it is a repeadingly message, which must be ignored.
-    if (isBitSet)
-    {
-      break;
-    }
-    else
-    {
-      CInputManager::GetInstance().SetKeyDown(static_cast<EKeyCode>(a_WParam));
-      break;
-    }
-  }
+	case WM_KEYDOWN:
+	{
+		bool isBitSet = a_LPARAM & (1 << 30); // if bit 30 is set in lparam then it is a repeadingly message, which must be ignored.
+		if (isBitSet)
+		{
+			break;
+		}
+		else
+		{
+			CInputManager::GetInstance().SetKeyDown(static_cast<EKeyCode>(a_WParam));
+			break;
+		}
+	}
 
-  case WM_KEYUP:
-  {
-    bool isBitSet = a_LPARAM & (1 << 30); // not required, but is fine... WM_KEYUP only occoures once
-    if (isBitSet)
-    {
-      CInputManager::GetInstance().SetKeyUp(static_cast<EKeyCode>(a_WParam));
-    }
-    break;
-  }
+	case WM_KEYUP:
+	{
+		bool isBitSet = a_LPARAM & (1 << 30); // not required, but is fine... WM_KEYUP only occoures once
+		if (isBitSet)
+		{
+			CInputManager::GetInstance().SetKeyUp(static_cast<EKeyCode>(a_WParam));
+		}
+		break;
+	}
 
 	case WM_QUIT:
 	case WM_DESTROY:

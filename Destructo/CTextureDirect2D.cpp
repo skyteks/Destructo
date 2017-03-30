@@ -2,7 +2,7 @@
 
 ID2D1HwndRenderTarget* CTextureDirect2D::s_renderTarget = nullptr;
 
-CTextureDirect2D::CTextureDirect2D(char* a_path)
+CTextureDirect2D::CTextureDirect2D(const char* a_path)
 	: m_bitmap(nullptr)
 {
 	// image loading with factory

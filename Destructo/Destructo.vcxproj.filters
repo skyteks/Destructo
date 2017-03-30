@@ -73,6 +73,12 @@
     <Filter Include="Quelldateien\UI">
       <UniqueIdentifier>{b321ba71-15b2-491b-b5e7-cca6c2d4ec5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Manager">
+      <UniqueIdentifier>{5e1d25a0-700f-4fbf-b25a-c42bcc15083a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Manager">
+      <UniqueIdentifier>{a600ab67-1b34-42ae-bf44-4f72a83db73e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CApplication.h">
@@ -189,6 +195,21 @@
     <ClInclude Include="SRect.h">
       <Filter>Headerdateien\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="SVector4.h">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextureManager.h">
+      <Filter>Headerdateien\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IManager.h">
+      <Filter>Headerdateien\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DataNames.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp">
@@ -262,6 +283,12 @@
     </ClCompile>
     <ClCompile Include="CAudio.cpp">
       <Filter>Quelldateien\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SVector4.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureManager.cpp">
+      <Filter>Quelldateien\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

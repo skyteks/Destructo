@@ -40,24 +40,3 @@ int CALLBACK WinMain(
 
 	return 1;
 }
-
-
-/*
-CAudio audio;
-IAudio* audioSystem = &audio;
-audioSystem->Initialize();
-
-audioSystem->Load("Audio/Throw.mp3");
-
-
-
-for (;;)
-{
-IAudioChannel* channel = audioSystem->Play("Audio/Throw.mp3");
-audioSystem->Update();
-
-
-}
-
-audioSystem->Shutdown();
-*/

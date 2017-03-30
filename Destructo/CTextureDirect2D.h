@@ -19,7 +19,7 @@ class CTextureDirect2D : public ITexture
 {
 public:
 	
-	CTextureDirect2D(char* a_path);
+	CTextureDirect2D(const char* a_path);
 
 	~CTextureDirect2D();
 

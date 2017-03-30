@@ -25,7 +25,7 @@ public:
 
 	bool Initialize(HWND a_hwnd);
 
-	ITexture* LoadTextureFromFile(char* a_path);
+	ITexture* LoadTextureFromFile(const char* a_path);
 
 	void Begin();
 

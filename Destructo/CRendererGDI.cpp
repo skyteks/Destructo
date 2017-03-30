@@ -40,7 +40,7 @@ bool CRendererGDI::Initialize(HWND a_hwnd)
 	return true;
 }
 
-ITexture* CRendererGDI::LoadTextureFromFile(char* a_path)
+ITexture* CRendererGDI::LoadTextureFromFile(const char* a_path)
 {
 	return new CTextureGDI(a_path);
 }

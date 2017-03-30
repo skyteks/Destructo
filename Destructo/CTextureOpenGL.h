@@ -6,7 +6,7 @@
 class CTextureOpenGL : public ITexture
 {
 public:
-	CTextureOpenGL(char* a_path);
+	CTextureOpenGL(const char* a_path);
 	
 	~CTextureOpenGL();
 
@@ -35,7 +35,6 @@ private:
 	int m_pitch;
 	int m_bitsPerPixel;
 	bool m_isLocked;
-	char* m_path = nullptr;
 	
 	UINT* m_data = nullptr;
 
