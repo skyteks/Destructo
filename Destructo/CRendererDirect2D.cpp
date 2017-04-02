@@ -116,6 +116,11 @@ void CRendererDirect2D::Begin()
 	m_renderTarget->BeginDraw();
 }
 
+void CRendererDirect2D::DrawObject(CGameObject a_gameObject)
+{
+
+}
+
 
 void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
@@ -129,6 +134,11 @@ void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_h
 	rect.bottom = a_posY + a_height;
 
 	m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), rect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
+}
+
+void CRendererDirect2D::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
+{
+
 }
 
 

@@ -86,6 +86,9 @@ void CRendererOpenGL::Begin()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void CRendererOpenGL::DrawObject(CGameObject a_gameObject)
+{
+}
 
 void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
@@ -94,7 +97,6 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	// Singleton
 	// char* => ITexture*
 	// GetTextureByName(char*) => ITexture*
-
 
 	const char* name = CTextureManager::GetInstance().GetNameByTexture(a_texture);
 	
@@ -206,6 +208,9 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	glEnd();
 }
 
+void CRendererOpenGL::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
+{
+}
 
 void CRendererOpenGL::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture)
 {
@@ -256,3 +261,7 @@ void CRendererOpenGL::Shutdown()
 {
 
 }
+
+
+
+

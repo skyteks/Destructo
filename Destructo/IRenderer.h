@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "ITexture.h"
 #include "ERenderer.h"
+#include "CGameObject.h"
 
 class IRenderer
 {
@@ -18,7 +19,11 @@ public:
 
 	virtual void Begin() = 0;
 
+	virtual void DrawObject(CGameObject a_gameObject) = 0;
+
 	virtual void DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight) = 0;
+
+	virtual void DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture* a_opacityMask) = 0;
 
 	virtual void DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture) = 0;
 

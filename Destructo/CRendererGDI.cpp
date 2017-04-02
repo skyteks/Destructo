@@ -53,6 +53,11 @@ void CRendererGDI::DrawTexture(int a_posX, int a_posY, int a_width, int a_height
 	TransparentBlt(m_backbufferDC, a_posX, a_posY, a_width, a_height, openGLTexture->GetBitmapDeviceContect(), a_imgX, a_imgY, a_imgWidth, a_imgHeight, RGB(255, 0, 255));
 }
 
+void CRendererGDI::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
+{
+
+}
+
 //void CRendererGDI::MakeCircleInTexture(int a_posX, int a_posY, CTextureGDI* a_texture, int a_color, int a_radius)
 //{
 //	if (a_texture->GetWidth() < a_posX - a_radius || a_texture->GetHeight() < a_posY - a_radius || a_posX + a_radius < 0 || a_posY + a_radius < 0 || a_radius == 0)
@@ -135,6 +140,11 @@ void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int 
 void CRendererGDI::Begin()
 {
 	BitBlt(m_windowDC, 0, 0, m_windowWidth, m_windowHeight, m_backbufferDC, 0, 0, SRCCOPY);
+}
+
+void CRendererGDI::DrawObject(CGameObject a_gameObject)
+{
+
 }
 
 

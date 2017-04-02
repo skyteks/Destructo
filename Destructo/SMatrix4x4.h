@@ -7,10 +7,10 @@
 struct SMatrix4x4
 {
 public:
-	float m_m11, m_m12, m_m13, m_m14;
-	float m_m21, m_m22, m_m23, m_m24;
-	float m_m31, m_m32, m_m33, m_m34;
-	float m_m41, m_m42, m_m43, m_m44;
+	float m11, m12, m13, m14;
+	float m21, m22, m23, m24;
+	float m31, m32, m33, m34;
+	float m41, m42, m43, m44;
 
 
 public:
@@ -22,28 +22,28 @@ public:
 
 	static SMatrix4x4 Identity();
 
-	friend SMatrix4x4 operator +(SMatrix4x4 a_m1, SMatrix4x4 a_m2);
-	friend SMatrix4x4 operator -(SMatrix4x4 a_m1, SMatrix4x4 a_m2);
+	friend SMatrix4x4 operator +(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
+	friend SMatrix4x4 operator -(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
 
-	friend SMatrix4x4 operator *(SMatrix4x4 a_m1, SMatrix4x4 a_m2);
-	friend SMatrix4x4 operator *(SMatrix4x4 a_m, float a_f);
-	friend SMatrix4x4 operator *(float a_f, SMatrix4x4 a_m);
-	friend SVector4 operator *(SMatrix4x4 a_m, SVector3 a_v);
-	friend SVector4 operator *(SVector3 a_v, SMatrix4x4 a_m);
+	friend SMatrix4x4 operator *(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
+	friend SMatrix4x4 operator *(SMatrix4x4 a_matrix, float a_f);
+	friend SMatrix4x4 operator *(float a_f, SMatrix4x4 a_matrix);
+	friend SVector4 operator *(SMatrix4x4 a_matrix, SVector3 a_vector);
+	friend SVector4 operator *(SVector3 a_vector, SMatrix4x4 a_matrix);
 
-	friend bool operator ==(SMatrix4x4 a_m1, SMatrix4x4 a_m2);
-	friend bool operator !=(SMatrix4x4 a_m1, SMatrix4x4 a_m2);
+	friend bool operator ==(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
+	friend bool operator !=(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
 
-	static SMatrix4x4 Transpose(SMatrix4x4 a_m);
+	static SMatrix4x4 Transpose(SMatrix4x4 a_matrix);
 
-	static SMatrix4x4 Scale(SVector3 a_v);
-	static SMatrix4x4 Translation(SVector3 a_v);
+	static SMatrix4x4 Scale(SVector3 a_vector);
+	static SMatrix4x4 Translation(SVector3 a_vector);
 	static SMatrix4x4 RotationX(float a_f);
 	static SMatrix4x4 RotationY(float a_f);
 	static SMatrix4x4 RotationZ(float a_f);
 
-	static SMatrix4x4 Invert(SMatrix4x4 a_m);
+	static SMatrix4x4 Invert(SMatrix4x4 a_matrix);
 
-	static float Determinant(SMatrix4x4 a_m);
+	static float Determinant(SMatrix4x4 a_matrix);
 };
 

@@ -150,6 +150,7 @@
     <ClInclude Include="CApplication.h" />
     <ClInclude Include="CAudio.h" />
     <ClInclude Include="CAudioChannel.h" />
+    <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CMouse.h" />
     <ClInclude Include="CRendererDirect2D.h" />
     <ClInclude Include="CRendererDirectX11.h" />
@@ -179,7 +180,6 @@
     <ClInclude Include="IManager.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="ITexture.h" />
-    <ClInclude Include="Math.h" />
     <ClInclude Include="SBitmap.h" />
     <ClInclude Include="SBitmapHeader.h" />
     <ClInclude Include="SButtonData.h" />
@@ -199,6 +199,7 @@
     <ClCompile Include="CApplication.cpp" />
     <ClCompile Include="CAudio.cpp" />
     <ClCompile Include="CAudioChannel.cpp" />
+    <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CRendererDirect2D.cpp" />
     <ClCompile Include="CRendererDirectX11.cpp" />

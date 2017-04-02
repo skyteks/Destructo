@@ -198,9 +198,6 @@
     <ClInclude Include="SVector4.h">
       <Filter>Headerdateien\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Math.h">
-      <Filter>Headerdateien\Math</Filter>
-    </ClInclude>
     <ClInclude Include="CTextureManager.h">
       <Filter>Headerdateien\Manager</Filter>
     </ClInclude>
@@ -208,6 +205,9 @@
       <Filter>Headerdateien\Manager</Filter>
     </ClInclude>
     <ClInclude Include="DataNames.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -289,6 +289,9 @@
     </ClCompile>
     <ClCompile Include="CTextureManager.cpp">
       <Filter>Quelldateien\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

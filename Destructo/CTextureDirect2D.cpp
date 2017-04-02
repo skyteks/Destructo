@@ -10,22 +10,6 @@ CTextureDirect2D::CTextureDirect2D(const char* a_path)
 	IWICBitmapDecoder *decoder = nullptr;
 	IWICBitmapFrameDecode *frameDecoder = nullptr;
 	IWICFormatConverter *converter = nullptr;
-	
-	//ID2D1Bitmap
-
-	/*
-	What I think you want is a regular WIC bitmap, IWICBitmap, 
-	which you can create with IWICImagingFactory::CreateBitmap().
-	From there you can call Lock() to get at the buffer, and then read/write
-	using pointers and do whatever you want. Then, when you need to draw it
-	on-screen with Direct2D, use ID2D1RenderTarget::CreateBitmap() to create
-	a new device bitmap, or ID2D1Bitmap::CopyFromMemory() to update an existing
-	device bitmap. You can also render into an IWICBitmap by making use of
-	ID2D1Factory::CreateWicBitmapRenderTarget() (not hardware accelerated).
-	
-	*/
-	//s_renderTarget->CreateBitmap()
-	
 
 	// create factory
 	HRESULT hResult = CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_IWICImagingFactory, reinterpret_cast<LPVOID*>(&imageFactory));

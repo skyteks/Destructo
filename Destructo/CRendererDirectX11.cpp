@@ -207,6 +207,11 @@ void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_
 	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
 }
 
+void CRendererDirectX11::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
+{
+
+}
+
 void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture)
 {
 	if (a_string == nullptr)
@@ -250,6 +255,11 @@ void CRendererDirectX11::Begin()
 {
 	float color[4] = { 1, 0, 1, 1 };
 	m_deviceContext->ClearRenderTargetView(m_renderTargetView, color);
+}
+
+void CRendererDirectX11::DrawObject(CGameObject a_gameObject)
+{
+
 }
 
 

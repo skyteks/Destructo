@@ -1,4 +1,4 @@
-﻿  CApplication.cpp
+﻿  main.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: "DXGI_STATUS_OCCLUDED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50092): note: Siehe vorherige Definition von "DXGI_STATUS_OCCLUDED"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: "DXGI_STATUS_CLIPPED": Makro-Neudefinition
@@ -127,7 +127,10 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4988):
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50966): note: Siehe vorherige Definition von "DWRITE_E_FONTCOLLECTIONOBSOLETE"
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dwrite.h(4993): warning C4005: "DWRITE_E_ALREADYREGISTERED": Makro-Neudefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50975): note: Siehe vorherige Definition von "DWRITE_E_ALREADYREGISTERED"
-c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\capplication.cpp(272): warning C4800: "LPARAM": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
-c:\users\daniel\documents\visual studio 2015\projects\destructo\destructo\capplication.cpp(286): warning C4800: "LPARAM": Variable wird auf booleschen Wert ("True" oder "False") gesetzt (Auswirkungen auf Leistungsverhalten möglich)
+  SVector4.cpp
+  SVector3.cpp
+  SMatrix4x4.cpp
+  Code wird generiert...
+cl : Befehlszeile warning D9028: Fehler beim minimalen Neukompilieren, normale Erstellung wird durchgeführt.
   Destructo.vcxproj -> C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Destructo\Debug\Destructo.exe
   Destructo.vcxproj -> C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Destructo\Debug\Destructo.pdb (Full PDB)

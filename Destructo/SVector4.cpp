@@ -8,6 +8,7 @@ SVector4::SVector4()
 	, w(0.0f)
 {
 }
+
 SVector4::SVector4(const float a_x, const float a_y, const float a_z, const float a_w)
 	: x(a_x)
 	, y(a_y)
@@ -16,13 +17,6 @@ SVector4::SVector4(const float a_x, const float a_y, const float a_z, const floa
 {
 }
 
-SVector4::SVector4(const SVector4& a_vector1)
-{
-	this->x = a_vector1.x;
-	this->y = a_vector1.y;
-	this->z = a_vector1.z;
-	this->w = a_vector1.w;
-}
 SVector4 SVector4::Normalized() const
 {
 	SVector4 tmp;
@@ -78,4 +72,14 @@ float SVector4::Distance(const SVector4& a_vector1, const SVector4& a_vector2)
 {
 	auto tmp = a_vector1 - a_vector2;
 	return tmp.Length();
+}
+
+SVector4 SVector4::Zero()
+{
+	return SVector4(0, 0, 0, 0);
+}
+
+SVector4 SVector4::One()
+{
+	return SVector4(1, 1, 1, 1);
 }
