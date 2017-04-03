@@ -257,7 +257,7 @@ void CRendererDirectX11::Begin()
 	m_deviceContext->ClearRenderTargetView(m_renderTargetView, color);
 }
 
-void CRendererDirectX11::DrawObject(CGameObject a_gameObject)
+void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
 {
 
 }

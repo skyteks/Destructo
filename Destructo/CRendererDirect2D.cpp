@@ -116,7 +116,7 @@ void CRendererDirect2D::Begin()
 	m_renderTarget->BeginDraw();
 }
 
-void CRendererDirect2D::DrawObject(CGameObject a_gameObject)
+void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 {
 
 }

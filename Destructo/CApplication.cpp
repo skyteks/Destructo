@@ -1,7 +1,7 @@
 ﻿#include "CApplication.h"
 
 bool CApplication::engineRunning = false;
-SRenderer::ERenderer CApplication::currentRenderer;
+ERenderer CApplication::currentRenderer;
 
 CApplication::CApplication()
 	: m_window()
@@ -19,7 +19,7 @@ CApplication::~CApplication()
 }
 
 
-bool CApplication::Initialize(SRenderer::ERenderer a_chosenRenderer, IAudio* a_soundEngine, IInput* a_input)
+bool CApplication::Initialize(ERenderer a_chosenRenderer, IAudio* a_soundEngine, IInput* a_input)
 {
 	printf("Engine Start\n");
 
@@ -58,7 +58,7 @@ bool CApplication::Initialize(SRenderer::ERenderer a_chosenRenderer, IAudio* a_s
 		return false;
 
 	// Create Scene
-	wResult = ChangeScene();
+	wResult = ChangeScene(EScenes::MENU);
 	if (!wResult)
 		return false;
 
@@ -66,7 +66,7 @@ bool CApplication::Initialize(SRenderer::ERenderer a_chosenRenderer, IAudio* a_s
 }
 
 
-bool CApplication::ChangeScene()
+bool CApplication::ChangeScene(EScenes a_newScene)
 {
 	bool wResult = false;
 
@@ -78,7 +78,18 @@ bool CApplication::ChangeScene()
 	}
 
 	// Create newDeleteCounter new m_scene
-	m_scene = new CScene();
+	switch (a_newScene)
+	{
+	case MENU:
+		m_scene = new CMenuScene();
+		break;
+	case GAME:
+		m_scene = new CGameScene();
+		break;
+	default:
+		break;
+	}
+	
 	wResult = m_scene->Initialize(m_renderer);
 	if (!wResult)
 		return false;
@@ -87,7 +98,7 @@ bool CApplication::ChangeScene()
 }
 
 
-bool CApplication::ChangeRenderer(SRenderer::ERenderer a_newRenderer)
+bool CApplication::ChangeRenderer(ERenderer a_newRenderer)
 {
 	bool wResult = false;
 
@@ -105,16 +116,16 @@ bool CApplication::ChangeRenderer(SRenderer::ERenderer a_newRenderer)
 
 	switch (currentRenderer)
 	{
-	case SRenderer::GDI:
+	case GDI:
 		m_renderer = new CRendererGDI();
 		break;
-	case SRenderer::OpenGL:
+	case OpenGL:
 		m_renderer = new CRendererOpenGL();
 		break;
-	case SRenderer::DirectX11:
+	case DirectX11:
 		m_renderer = new CRendererDirectX11();
 		break;
-	case SRenderer::Direct2D:
+	case Direct2D:
 		m_renderer = new CRendererDirect2D();
 		break;
 	default:
@@ -191,7 +202,9 @@ void CApplication::Run()
 		m_soundEngine->Update();
 
 		// Draw scene
+		m_renderer->Begin();
 		m_scene->Draw(m_renderer);
+		m_renderer->End();
 
 		deltaTimer.Tick();
 		CTime::GetInstance().SetDeltaTime(deltaTimer.DeltaTime());

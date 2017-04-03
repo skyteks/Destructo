@@ -21,17 +21,17 @@ public:
 	
 	CTextureDirect2D(const char* a_path);
 
-	~CTextureDirect2D();
+	~CTextureDirect2D() override;
 
-	int GetWidth();
+	int GetWidth() override;
 
-	int GetHeight();
+	int GetHeight() override;
 
-	int GetPitch();
+	int GetPitch() override;
 
-	int GetBPP();
+	int GetBPP() override;
 
-	void SetPixel(int a_x, int a_y, int a_color);
+	void SetPixel(int a_x, int a_y, int a_color) override;
 
 	ID2D1Bitmap* GetBitmapHandle();
 

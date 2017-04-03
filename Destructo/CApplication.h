@@ -9,8 +9,11 @@
 #include "CRendererDirect2D.h"
 #include "CWindow.h"
 #include "IRenderer.h"
+#include "ERenderer.h"
 #include "CMouse.h"
-#include "CScene.h"
+#include "EScenes.h"
+#include "CGameScene.h"
+#include "CMenuScene.h"
 #include "CAudio.h"
 #include "CInputManager.h"
 #include "CTime.h"
@@ -20,13 +23,14 @@ class CApplication
 {
 public:
 	CApplication();
+
 	~CApplication();
 
-	bool Initialize(SRenderer::ERenderer currentRenderer, IAudio* a_soundEngine, IInput* a_input);
+	bool Initialize(ERenderer a_currentRenderer, IAudio* a_soundEngine, IInput* a_input);
 
-	bool ChangeRenderer(SRenderer::ERenderer newRenderer);
+	bool ChangeRenderer(ERenderer a_newRenderer);
 
-	bool ChangeScene();
+	bool ChangeScene(EScenes a_newScene);
 
 	void Run();
 
@@ -37,15 +41,15 @@ public:
 	bool Failed(HRESULT aResult);
 
 	static bool engineRunning;
-	static SRenderer::ERenderer currentRenderer;
+	static ERenderer currentRenderer;
 
 	void SetSoundEngine(IAudio* a_soundEngine);
 
 private:
-	SWindowDesc m_wndDesc = { "All Renderers TestEngine", 800, 600 };
+	SWindowDesc m_wndDesc = { "Destructo", 800 * 2, 600 * 2};
 	CWindow m_window;
 	IRenderer* m_renderer = nullptr;
-	CScene* m_scene = nullptr;
+	IScene* m_scene = nullptr;
 	HINSTANCE m_instance;
 	POINT m_curserPos;
 	IAudio* m_soundEngine = nullptr;

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "ERenderer.h"
+#include "EScenes.h"
+
 class CUISystem
 {
 public:
@@ -11,5 +14,7 @@ public:
 	static void EventHandler_OnPressButtonOpenGL();
 	static void EventHandler_OnPressButtonDirectX11();
 	static void EventHandler_OnPressButtonDirect2D();
+
+	static void EventHandler_OnPressButtonGame();
 };
 

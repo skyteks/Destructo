@@ -50,7 +50,7 @@ bool CTextureManager::LoadTexture(const char* a_path)
 	return true;
 }
 
-ITexture* CTextureManager::GetTexture(const char* a_path)
+ITexture* CTextureManager::GetTextureByName(const char* a_path)
 {
 	return m_textureMap[a_path];
 }

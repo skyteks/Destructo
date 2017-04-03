@@ -142,7 +142,7 @@ void CRendererGDI::Begin()
 	BitBlt(m_windowDC, 0, 0, m_windowWidth, m_windowHeight, m_backbufferDC, 0, 0, SRCCOPY);
 }
 
-void CRendererGDI::DrawObject(CGameObject a_gameObject)
+void CRendererGDI::DrawObject(CGameObject& a_gameObject)
 {
 
 }

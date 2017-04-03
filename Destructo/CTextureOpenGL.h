@@ -8,19 +8,19 @@ class CTextureOpenGL : public ITexture
 public:
 	CTextureOpenGL(const char* a_path);
 	
-	~CTextureOpenGL();
+	~CTextureOpenGL() override;
 
-	int GetWidth();
+	int GetWidth() override;
 
-	int GetHeight();
+	int GetHeight() override;
 
-	int GetPitch();
+	int GetPitch() override;
 
-	int GetBPP();
+	int GetBPP() override;
 
-	void SetPixel(int a_x, int a_y, int a_color);
+	void SetPixel(int a_x, int a_y, int a_color) override;
 
-	void AddOpacityMask();
+	void AddOpacityMask(CTextureOpenGL* a_opacityMask);
 
 	GLuint GetTextureID();
 

@@ -1,11 +1,9 @@
 #pragma once
-struct SRenderer
+
+enum ERenderer
 {
-	enum ERenderer
-	{
-		GDI,
-		OpenGL,
-		DirectX11,
-		Direct2D,
-	};
+	GDI,
+	OpenGL,
+	DirectX11,
+	Direct2D,
 };

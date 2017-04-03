@@ -7,17 +7,17 @@ class CTextureGDI : public ITexture
 public:
 	CTextureGDI(const char* a_path);
 
-	~CTextureGDI();
+	~CTextureGDI() override;
 
-	int GetWidth();
+	int GetWidth() override;
 
-	int GetHeight();
+	int GetHeight() override;
 
-	int GetPitch();
+	int GetPitch() override;
 
-	int GetBPP();
+	int GetBPP() override;
 
-	void SetPixel(int a_x, int a_y, int a_color);
+	void SetPixel(int a_x, int a_y, int a_color) override;
 
 	HBITMAP GetBitmapHandle();
 

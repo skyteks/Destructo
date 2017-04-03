@@ -151,12 +151,13 @@
     <ClInclude Include="CAudio.h" />
     <ClInclude Include="CAudioChannel.h" />
     <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CMenuScene.h" />
     <ClInclude Include="CMouse.h" />
     <ClInclude Include="CRendererDirect2D.h" />
     <ClInclude Include="CRendererDirectX11.h" />
     <ClInclude Include="CRendererGDI.h" />
     <ClInclude Include="CRendererOpenGL.h" />
-    <ClInclude Include="CScene.h" />
+    <ClInclude Include="CGameScene.h" />
     <ClInclude Include="CTextureDirect2D.h" />
     <ClInclude Include="CTextureDirectX11.h" />
     <ClInclude Include="CTextureGDI.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="EKeyState.h" />
     <ClInclude Include="ERenderer.h" />
     <ClInclude Include="CGameTimer.h" />
+    <ClInclude Include="EScenes.h" />
     <ClInclude Include="GlobalFunctions.h" />
     <ClInclude Include="IAudio.h" />
     <ClInclude Include="IAudioChannel.h" />
@@ -179,6 +181,7 @@
     <ClInclude Include="CWindowsInput.h" />
     <ClInclude Include="IManager.h" />
     <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="IScene.h" />
     <ClInclude Include="ITexture.h" />
     <ClInclude Include="SBitmap.h" />
     <ClInclude Include="SBitmapHeader.h" />
@@ -200,12 +203,13 @@
     <ClCompile Include="CAudio.cpp" />
     <ClCompile Include="CAudioChannel.cpp" />
     <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CMenuScene.cpp" />
     <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CRendererDirect2D.cpp" />
     <ClCompile Include="CRendererDirectX11.cpp" />
     <ClCompile Include="CRendererGDI.cpp" />
     <ClCompile Include="CRendererOpenGL.cpp" />
-    <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CGameScene.cpp" />
     <ClCompile Include="CTextureDirect2D.cpp" />
     <ClCompile Include="CTextureDirectX11.cpp" />
     <ClCompile Include="CTextureGDI.cpp" />

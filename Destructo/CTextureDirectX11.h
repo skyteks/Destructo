@@ -15,17 +15,17 @@ class CTextureDirectX11 : public ITexture
 public:
 	CTextureDirectX11(ID3D11Texture2D* a_texture, ID3D11ShaderResourceView* a_shaderResView);
 
-	~CTextureDirectX11();
+	~CTextureDirectX11() override;
 
-	int GetWidth();
+	int GetWidth() override;
 
-	int GetHeight();
+	int GetHeight() override;
 
-	int GetPitch();
+	int GetPitch() override;
 
-	int GetBPP();
+	int GetBPP() override;
 
-	void SetPixel(int a_x, int a_y, int a_color);
+	void SetPixel(int a_x, int a_y, int a_color) override;
 
 	ID3D11ShaderResourceView* GetShaderResourceView();
 

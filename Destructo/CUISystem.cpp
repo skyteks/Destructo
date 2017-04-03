@@ -26,23 +26,28 @@ extern CApplication* app;
 
 void CUISystem::EventHandler_OnPressButtonGDI()
 {
-	app->ChangeRenderer(SRenderer::GDI);
+	app->ChangeRenderer(ERenderer::GDI);
 }
 
 
 void CUISystem::EventHandler_OnPressButtonOpenGL()
 {
-	app->ChangeRenderer(SRenderer::OpenGL);
+	app->ChangeRenderer(ERenderer::OpenGL);
 }
 
 
 void CUISystem::EventHandler_OnPressButtonDirectX11()
 {
-	app->ChangeRenderer(SRenderer::DirectX11);
+	app->ChangeRenderer(ERenderer::DirectX11);
 }
 
 
 void CUISystem::EventHandler_OnPressButtonDirect2D()
 {
-	app->ChangeRenderer(SRenderer::Direct2D);
+	app->ChangeRenderer(ERenderer::Direct2D);
+}
+
+void CUISystem::EventHandler_OnPressButtonGame()
+{
+	app->ChangeScene(EScenes::GAME);
 }

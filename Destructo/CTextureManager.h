@@ -19,8 +19,9 @@ public:
 	
 	static CTextureManager& GetInstance();
 	bool LoadTexture(const char* a_path);
-	ITexture* GetTexture(const char* a_path);
+	ITexture* GetTextureByName(const char* a_path);
 	const char* GetNameByTexture(ITexture* a_texture);
+
 private:
 	TextureMap m_textureMap;
 	IRenderer** m_renderer = nullptr;

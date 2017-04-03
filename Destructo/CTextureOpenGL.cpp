@@ -74,7 +74,7 @@ void CTextureOpenGL::SetPixel(int a_x, int a_y, int a_color)
 	*(p + index) = 0xFF000000; // ABGR
 }
 
-void CTextureOpenGL::AddOpacityMask()
+void CTextureOpenGL::AddOpacityMask(CTextureOpenGL* a_opacityMask)
 {
 	for (auto y = 0; y < m_height; y++)
 	{
@@ -83,7 +83,7 @@ void CTextureOpenGL::AddOpacityMask()
 			int index = x + y * m_width;
 
 			// read mask
-			int* pMask = reinterpret_cast<int*>(s_collisionTexture->m_data);
+			int* pMask = reinterpret_cast<int*>(a_opacityMask->m_data);
 			//unsigned int value = *(pMask + index);
 			if (*(pMask + index) == 0xFF000000) // black
 			{

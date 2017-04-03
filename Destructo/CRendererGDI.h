@@ -12,27 +12,27 @@ class CRendererGDI : public IRenderer
 public:
 	CRendererGDI();
 
-	~CRendererGDI();
+	~CRendererGDI() override;
 
-	bool Initialize(HWND a_hwnd);
+	bool Initialize(HWND a_hwnd) override;
 
-	ITexture* LoadTextureFromFile(const char* a_path);
+	ITexture* LoadTextureFromFile(const char* a_path) override;
 
-	void Begin();
+	void Begin() override;
 
-	void DrawObject(CGameObject a_gameObject);
+	void DrawObject(CGameObject& a_gameObject) override;
 
-	void DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight);
+	void DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight) override;
 
-	void DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask);
+	void DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask) override;
 
 	//void MakeCircleInTexture(int a_posX, int a_posY, CTextureGDI* a_texture, int a_color, int a_radius);
 
-	void DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture);
+	void DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture) override;
 
-	void End();
+	void End() override;
 
-	void Shutdown();
+	void Shutdown() override;
 
 private:
 
