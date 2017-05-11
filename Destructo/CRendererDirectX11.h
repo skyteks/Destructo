@@ -15,6 +15,7 @@
 #include "GlobalFunctions.h"
 #include "SRect.h"
 #include "SVertex.h"
+#include "CTextureManager.h"
 
 class CRendererDirectX11 : public IRenderer
 {

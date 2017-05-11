@@ -118,7 +118,19 @@ void CRendererDirect2D::Begin()
 
 void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 {
+	CTextureDirect2D* direct2DTexture = reinterpret_cast<CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
 
+	SVector3 position = a_gameObject.GetPosition();
+	SVector3 scale = a_gameObject.GetScale();
+
+	D2D1_RECT_F rect;
+
+	rect.left = position.x;
+	rect.top = position.y;
+	rect.right = position.x + direct2DTexture->GetWidth() * scale.x;
+	rect.bottom = position.y + direct2DTexture->GetHeight() * scale.y;
+
+	m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), rect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
 }
 
 

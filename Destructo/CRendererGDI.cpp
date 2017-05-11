@@ -40,23 +40,37 @@ bool CRendererGDI::Initialize(HWND a_hwnd)
 	return true;
 }
 
+
 ITexture* CRendererGDI::LoadTextureFromFile(const char* a_path)
 {
 	return new CTextureGDI(a_path);
 }
 
 
+void CRendererGDI::DrawObject(CGameObject& a_gameObject)
+{
+	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+
+	SVector3 position = a_gameObject.GetPosition();
+	SVector3 scale = a_gameObject.GetScale();
+
+	TransparentBlt(m_backbufferDC, position.x, position.y, gdiTexture->GetWidth() * scale.x, gdiTexture->GetHeight() * scale.y, gdiTexture->GetBitmapDeviceContect(), a_gameObject.GetImageSection().x1, a_gameObject.GetImageSection().y1, a_gameObject.GetImageSection().x2, a_gameObject.GetImageSection().y2, RGB(255, 0, 255));
+}
+
+
 void CRendererGDI::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
-	CTextureGDI* openGLTexture = reinterpret_cast<CTextureGDI*>(a_texture);
+	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(a_texture);
 
-	TransparentBlt(m_backbufferDC, a_posX, a_posY, a_width, a_height, openGLTexture->GetBitmapDeviceContect(), a_imgX, a_imgY, a_imgWidth, a_imgHeight, RGB(255, 0, 255));
+	TransparentBlt(m_backbufferDC, a_posX, a_posY, a_width, a_height, gdiTexture->GetBitmapDeviceContect(), a_imgX, a_imgY, a_imgWidth, a_imgHeight, RGB(255, 0, 255));
 }
+
 
 void CRendererGDI::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
 {
 
 }
+
 
 //void CRendererGDI::MakeCircleInTexture(int a_posX, int a_posY, CTextureGDI* a_texture, int a_color, int a_radius)
 //{
@@ -140,11 +154,6 @@ void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int 
 void CRendererGDI::Begin()
 {
 	BitBlt(m_windowDC, 0, 0, m_windowWidth, m_windowHeight, m_backbufferDC, 0, 0, SRCCOPY);
-}
-
-void CRendererGDI::DrawObject(CGameObject& a_gameObject)
-{
-
 }
 
 

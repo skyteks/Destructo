@@ -24,9 +24,6 @@ bool CGameScene::Initialize(IRenderer* a_renderer)
 	m_objectTerrain = new CGameObject({ 0.0f, 0.0f }, { 1.0f, 1.0f }, 0.0f, TEXTURE_TERRAIN, TEXTURE_COLLISION);
 	m_objectBackground = new CGameObject({ 0.0f, 0.0f }, { 1.0f, 1.0f }, 0.0f, TEXTURE_BACKGROUND);
 
-
-
-
 	return true;
 }
 

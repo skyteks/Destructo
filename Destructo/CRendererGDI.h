@@ -3,6 +3,7 @@
 #include "IRenderer.h"
 #include "CTextureGDI.h"
 #include "SRect.h"
+#include "CTextureManager.h"
 #include <wingdi.h>
 
 #pragma comment(lib, "msimg32.lib")

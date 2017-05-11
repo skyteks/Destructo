@@ -46,7 +46,7 @@ public:
 	void SetSoundEngine(IAudio* a_soundEngine);
 
 private:
-	SWindowDesc m_wndDesc = { "Destructo", 800 * 2, 600 * 2};
+	SWindowDesc m_wndDesc = { "Destructo", 800, 600 };
 	CWindow m_window;
 	IRenderer* m_renderer = nullptr;
 	IScene* m_scene = nullptr;

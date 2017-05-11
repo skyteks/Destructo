@@ -91,7 +91,7 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 	CTextureOpenGL* openGLTexture = reinterpret_cast<CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
 
 	char* opacityMaskName = a_gameObject.GetOpacityMaskName();
-	if (opacityMaskName)
+	if (opacityMaskName != nullptr)
 	{
 		CTextureOpenGL* openGLOpacityMask = reinterpret_cast<CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(opacityMaskName));
 		openGLTexture->AddOpacityMask(openGLOpacityMask);
@@ -100,31 +100,25 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 	SVector3 position = a_gameObject.GetPosition();
 	SVector3 scale = a_gameObject.GetScale();
 
-	if (openGLTexture == nullptr)
-	{
-		MessageBox(0, "ERROR", "", MB_OK);
-		return;
-	}
-
 	glBindTexture(GL_TEXTURE_2D, openGLTexture->GetTextureID());
-
+	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
+	
 	glBegin(GL_QUADS);
 
-	SRect source = a_gameObject.GetImageSection();
-	/*source.x1 = a_imgX;
-	source.x2 = a_imgWidth;
-	source.y1 = a_imgY;
-	source.y2 = a_imgHeight;*/
+	SRect source;
+	source.x1 = a_gameObject.GetImageSection().x1;
+	source.y1 = a_gameObject.GetImageSection().y1;
+	source.x2 = a_gameObject.GetImageSection().x2;
+	source.y2 = a_gameObject.GetImageSection().y2;
 
 	SRect dest;
 	dest.x1 = position.x;
-	dest.x2 = openGLTexture->GetWidth() * scale.x;
 	dest.y1 = position.y;
+	dest.x2 = openGLTexture->GetWidth() * scale.x;
 	dest.y2 = openGLTexture->GetHeight() * scale.y;
 
 	float texWidth = static_cast<float>(openGLTexture->GetWidth());
@@ -136,13 +130,13 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 	tex.y1 = source.y1 / texHeight;
 	tex.y2 = source.y2 / texHeight;
 
+	// rotate
 	if (dest.x1 != 0.0f && dest.y1 != 0.0f)
 	{
 		dest.x1 -= position.x + dest.x2 / 2;
 		dest.y1 -= position.y + dest.y2 / 2;
 	}
 
-	// rotate
 	SVector3 vec1(dest.x1, dest.y1, 0.0f);
 	SVector3 vec2(dest.x1 + dest.x2, dest.y1, 0.0f);
 	SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2, 0.0f);
@@ -183,10 +177,6 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 	glVertex3f(result4.x, result4.y, 0); // bottomleft
 
 	glEnd();
-
-
-	// int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight
-	// DrawTexture
 }
 
 void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
@@ -238,7 +228,7 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	glEnd();
 }
 
-void CRendererOpenGL::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
+void CRendererOpenGL::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture* a_opacityMask)
 {
 	CTextureOpenGL* openGLTexture = reinterpret_cast<CTextureOpenGL*>(a_texture);
 	CTextureOpenGL* openGLOpacityMask = reinterpret_cast<CTextureOpenGL*>(a_opacityMask);

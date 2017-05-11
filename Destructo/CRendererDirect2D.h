@@ -11,6 +11,7 @@
 
 #include "IRenderer.h"
 #include "CTextureDirect2D.h"
+#include "CTextureManager.h"
 
 class CRendererDirect2D : public IRenderer
 {
