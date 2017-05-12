@@ -119,16 +119,30 @@ void CRendererDirect2D::Begin()
 void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 {
 	CTextureDirect2D* direct2DTexture = reinterpret_cast<CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+	CTextureDirect2D* direct2DOpacityMask = nullptr;
+	if (a_gameObject.GetOpacityMaskName() != nullptr)
+	{
+		direct2DOpacityMask = reinterpret_cast<CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+	}
 
 	SVector3 position = a_gameObject.GetPosition();
 	SVector3 scale = a_gameObject.GetScale();
+	SMatrix4x4 rotation = a_gameObject.GetRotation();
 
 	D2D1_RECT_F rect;
-
 	rect.left = position.x;
 	rect.top = position.y;
 	rect.right = position.x + direct2DTexture->GetWidth() * scale.x;
 	rect.bottom = position.y + direct2DTexture->GetHeight() * scale.y;
+
+	D2D1_MATRIX_3X2_F rot;
+	rot._11 = rotation.m11;
+	rot._12 = rotation.m12;
+	rot._21 = rotation.m21;
+	rot._22 = rotation.m22;
+	rot._31 = rotation.m31;
+	rot._32 = rotation.m32;
+	m_renderTarget->SetTransform(rot);
 
 	m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), rect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
 }
@@ -139,7 +153,6 @@ void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_h
 	CTextureDirect2D* direct2DTexture = reinterpret_cast<CTextureDirect2D*>(a_texture);
 
 	D2D1_RECT_F rect;
-
 	rect.left = a_posX;
 	rect.top = a_posY;
 	rect.right = a_posX + a_width;

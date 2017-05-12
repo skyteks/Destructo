@@ -61,6 +61,8 @@ SBitmap LoadBitmapAndAddAlpha(const char* a_path)
 
 	return bmp;
 }
+
+
 float Map(float a_value, float a_inMin, float a_inMax, float a_outMin, float a_outMax)
 {
 	return (a_value - a_inMin) * (a_outMax - a_outMin) / (a_inMax - a_inMin) + a_outMin;
@@ -91,4 +93,3 @@ void operator delete (void* a_pData)
 		free(a_pData);
 	}
 }
-

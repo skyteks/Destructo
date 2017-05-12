@@ -19,7 +19,7 @@ CTextureOpenGL::CTextureOpenGL(const char* a_path)
 	if (m_textureID == 2)
 	{
 		s_collisionTexture = this;
-	}	
+	}
 }
 
 

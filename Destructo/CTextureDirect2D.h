@@ -43,6 +43,7 @@ private:
 	int m_pitch;
 	int m_bitsPerPixel;
 	bool m_isLocked;
+	char* m_name;
 
 	ID2D1Bitmap *m_bitmap = nullptr;
 };

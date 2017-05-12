@@ -143,10 +143,10 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 	SVector3 vec4(dest.x1, dest.y1 + dest.y2, 0.0f);
 	SMatrix4x4 rotation = a_gameObject.GetRotation();
 
-	auto result1 = rotation * vec1;
-	auto result2 = rotation * vec2;
-	auto result3 = rotation * vec3;
-	auto result4 = rotation * vec4;
+	SVector4 result1 = rotation * vec1;
+	SVector4 result2 = rotation * vec2;
+	SVector4 result3 = rotation * vec3;
+	SVector4 result4 = rotation * vec4;
 
 	if (dest.x1 != 0.0f && dest.y1 != 0.0f)
 	{

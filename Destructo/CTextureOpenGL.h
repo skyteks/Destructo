@@ -35,6 +35,7 @@ private:
 	int m_pitch;
 	int m_bitsPerPixel;
 	bool m_isLocked;
+	char* m_name;
 	
 	UINT* m_data = nullptr;
 

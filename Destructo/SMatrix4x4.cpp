@@ -1,10 +1,10 @@
 #include "SMatrix4x4.h"
 
 SMatrix4x4::SMatrix4x4() :
-	m11(1), m21(0), m31(0), m41(0),
-	m12(0), m22(1), m32(0), m42(0),
-	m13(0), m23(0), m33(1), m43(0),
-	m14(0), m24(0), m34(0), m44(1)
+	m11(1.0f), m21(0.0f), m31(0.0f), m41(0.0f),
+	m12(0.0f), m22(1.0f), m32(0.0f), m42(0.0f),
+	m13(0.0f), m23(0.0f), m33(1.0f), m43(0.0f),
+	m14(0.0f), m24(0.0f), m34(0.0f), m44(1.0f)
 {
 }
 
@@ -39,10 +39,10 @@ SMatrix4x4::SMatrix4x4(
 SMatrix4x4 SMatrix4x4::Identity()
 {
 	return SMatrix4x4(
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, 0, 0, 1);
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 SMatrix4x4 operator +(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2)

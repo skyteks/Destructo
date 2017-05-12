@@ -50,25 +50,119 @@ ITexture* CRendererGDI::LoadTextureFromFile(const char* a_path)
 void CRendererGDI::DrawObject(CGameObject& a_gameObject)
 {
 	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+	CTextureGDI* gdiOpacityMask = nullptr;
+	if (a_gameObject.GetOpacityMaskName() != nullptr)
+	{
+		gdiOpacityMask = reinterpret_cast<CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+	}
 
 	SVector3 position = a_gameObject.GetPosition();
 	SVector3 scale = a_gameObject.GetScale();
 
-	TransparentBlt(m_backbufferDC, position.x, position.y, gdiTexture->GetWidth() * scale.x, gdiTexture->GetHeight() * scale.y, gdiTexture->GetBitmapDeviceContect(), a_gameObject.GetImageSection().x1, a_gameObject.GetImageSection().y1, a_gameObject.GetImageSection().x2, a_gameObject.GetImageSection().y2, RGB(255, 0, 255));
+	SRect source;
+	source.x1 = a_gameObject.GetImageSection().x1;
+	source.y1 = a_gameObject.GetImageSection().y1;
+	source.x2 = a_gameObject.GetImageSection().x2;
+	source.y2 = a_gameObject.GetImageSection().y2;
+
+	SRect dest;
+	dest.x1 = position.x;
+	dest.y1 = position.y;
+	dest.x2 = gdiTexture->GetWidth() * scale.x;
+	dest.y2 = gdiTexture->GetHeight() * scale.y;
+
+	// rotate
+	if (dest.x1 != 0.0f && dest.y1 != 0.0f)
+	{
+		dest.x1 -= position.x + dest.x2 / 2;
+		dest.y1 -= position.y + dest.y2 / 2;
+	}
+
+	SVector3 vec1(dest.x1, dest.y1, 0.0f);
+	SVector3 vec2(dest.x1 + dest.x2, dest.y1, 0.0f);
+	SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2, 0.0f);
+	SVector3 vec4(dest.x1, dest.y1 + dest.y2, 0.0f);
+	SMatrix4x4 rotation = a_gameObject.GetRotation();
+
+	SVector4 result1 = rotation * vec1;
+	SVector4 result2 = rotation * vec2;
+	SVector4 result3 = rotation * vec3;
+	SVector4 result4 = rotation * vec4;
+
+	if (dest.x1 != 0.0f && dest.y1 != 0.0f)
+	{
+		dest.x1 += position.x + dest.x2 / 2;
+		dest.y1 += position.y + dest.y2 / 2;
+	}
+
+	result1.x += dest.x1;
+	result2.x += dest.x1;
+	result3.x += dest.x1;
+	result4.x += dest.x1;
+
+	result1.y += dest.y1;
+	result2.y += dest.y1;
+	result3.y += dest.y1;
+	result4.y += dest.y1;
+
+	POINT points[3];
+	points[0].x = result1.x;
+	points[0].y = result1.y;
+
+	points[1].x = result2.x;
+	points[1].y = result2.y;
+
+	points[2].x = result4.x;
+	points[2].y = result4.y;
+	if (gdiOpacityMask != nullptr)
+	{
+		PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), source.x1, source.y1, source.x2, source.y2, gdiOpacityMask->GetBitmapHandle(), source.x1, source.y1);
+	}
+	else
+	{
+		PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), source.x1, source.y1, source.x2, source.y2, nullptr, 0, 0);
+	}
+	//PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), source.x1, source.y1, source.x2, source.y2, (gdiOpacityMask != nullptr ? gdiOpacityMask->GetBitmapHandle() : nullptr), 0, 0);
 }
 
 
 void CRendererGDI::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
 	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(a_texture);
-
 	TransparentBlt(m_backbufferDC, a_posX, a_posY, a_width, a_height, gdiTexture->GetBitmapDeviceContect(), a_imgX, a_imgY, a_imgWidth, a_imgHeight, RGB(255, 0, 255));
 }
 
 
 void CRendererGDI::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
 {
+	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(a_texture);
+	CTextureGDI* gdiOpacityMask = nullptr;
+	if (a_opacityMask != nullptr)
+	{
+		gdiOpacityMask = reinterpret_cast<CTextureGDI*>(a_opacityMask);
+	}
 
+	float texWidth = static_cast<float>(gdiTexture->GetWidth());
+	float texHeight = static_cast<float>(gdiTexture->GetHeight());
+
+	SRect tex;
+	tex.x1 = a_imgX / texWidth;
+	tex.x2 = a_imgWidth / texWidth;
+	tex.y1 = a_imgY / texHeight;
+	tex.y2 = a_imgWidth / texHeight;
+
+	POINT points[3];
+	points[0].x = a_posX;
+	points[0].y = a_posY;
+
+	points[1].x = a_posX + a_width;
+	points[1].y = a_posY;
+
+	points[2].x = a_posX;
+	points[2].y = a_posY + a_height;
+
+	PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), tex.x1, tex.y1, tex.x2, tex.y2, (gdiOpacityMask != nullptr ? gdiOpacityMask->GetBitmapHandle() : nullptr), 0, 0);
+	TransparentBlt(m_backbufferDC, a_posX, a_posY, a_width, a_height, gdiTexture->GetBitmapDeviceContect(), a_imgX, a_imgY, a_imgWidth, a_imgHeight, RGB(255, 0, 255));
 }
 
 
