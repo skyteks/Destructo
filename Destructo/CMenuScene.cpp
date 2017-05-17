@@ -56,9 +56,14 @@ void CMenuScene::Draw(IRenderer * a_renderer)
 	a_renderer->DrawString(270 + 12, 370 + 10, "Start Game", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
 
 	char buffer[200] = {};
-	sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i", CMouse::x, CMouse::y, CMouse::isLeftMouseDown ? "true" : "false", CMouse::isRightMouseDown ? "true" : "false", static_cast<int>(1 / CTime::GetInstance().DeltaTime()));
+	sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i",
+		CMouse::x,
+		CMouse::y,
+		CMouse::isLeftMouseDown ? "true" : "false",
+		CMouse::isRightMouseDown ? "true" : "false",
+		static_cast<int>(1 / CTime::GetInstance().DeltaTime())
+	);
 	a_renderer->DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
-
 }
 
 void CMenuScene::Shutdown()

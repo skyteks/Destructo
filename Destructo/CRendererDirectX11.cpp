@@ -184,27 +184,64 @@ void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
 	}
 	m_shaderResourceView = directX11Texture->GetShaderResourceView();
 
-	SRect source;
-	source.x1 = Map(a_gameObject.GetImageSection().x1, 0, m_windowWidth, -1, 1);
-	source.y1 = Map(a_gameObject.GetImageSection().y1, 0, m_windowHeight, -1, 1);
-	source.x2 = Map(a_gameObject.GetImageSection().x2, 0, m_windowWidth, 0, 2);
-	source.y2 = Map(a_gameObject.GetImageSection().y2, 0, m_windowHeight, 0, 2);
+	SVector3 position = a_gameObject.GetPosition();
+	SVector3 scale = a_gameObject.GetScale();
 
 	SRect dest;
 	dest.x1 = Map(a_gameObject.GetImageSection().x1, 0, directX11Texture->GetWidth(), 0, 1);
 	dest.y1 = Map(directX11Texture->GetHeight() - a_gameObject.GetImageSection().y1, 0, directX11Texture->GetHeight(), 0, 1);
-	dest.x2 = Map(directX11Texture->GetWidth(), 0, directX11Texture->GetWidth(), 0, 1);
-	dest.y2 = -Map(directX11Texture->GetHeight(), 0, directX11Texture->GetHeight(), 0, 1);
+	dest.x2 = Map(a_gameObject.GetImageSection().x2, 0, directX11Texture->GetWidth(), 0, 1);
+	dest.y2 = -1.0f * Map(a_gameObject.GetImageSection().y2, 0, directX11Texture->GetHeight(), 0, 1);
 
-	if (vertexIndex > 0)
-		vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
+	SRect source;
+	source.x1 = Map(position.x, 0, m_windowWidth, -1, 1);
+	source.y1 = Map(position.y, 0, m_windowHeight, -1, 1);
+	source.x2 = Map(directX11Texture->GetWidth() * scale.x, 0, m_windowWidth, 0, 2);
+	source.y2 = Map(directX11Texture->GetHeight() * scale.y, 0, m_windowHeight, 0, 2);
 
-	vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1, 0, dest.x1 + dest.x2, dest.y1, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
-	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
+	// rotate
+	if (dest.x1 != 0.0f && dest.y1 != 0.0f)
+	{
+		dest.x1 -= position.x + dest.x2 / 2;
+		dest.y1 -= position.y + dest.y2 / 2;
+	}
 
-	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
+	SVector3 vec1(dest.x1, dest.y1);
+	SVector3 vec2(dest.x1 + dest.x2, dest.y1);
+	SVector3 vec3(dest.x1, dest.y1 + dest.y2);
+	SVector3 vec4(dest.x1 + dest.x2, dest.y1 + dest.y2);
+	SMatrix4x4 rotation = a_gameObject.GetRotation();
+
+	SVector4 point1 = rotation * vec1;
+	SVector4 point2 = rotation * vec2;
+	SVector4 point3 = rotation * vec3;
+	SVector4 point4 = rotation * vec4;
+
+	if (dest.x1 != 0.0f && dest.y1 != 0.0f)
+	{
+		dest.x1 += position.x + dest.x2 / 2;
+		dest.y1 += position.y + dest.y2 / 2;
+	}
+
+	//point1.x += dest.x1;
+	//point2.x += dest.x1;
+	//point3.x += dest.x1;
+	//point4.x += dest.x1;
+	//
+	//point1.y += dest.y1;
+	//point2.y += dest.y1;
+	//point3.y += dest.y1;
+	//point4.y += dest.y1;
+
+	//if (vertexIndex > 0)
+	//	vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0, point3.x, point3.y, 1, 1, 1, 1);
+
+	vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, point1.x, point1.y, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1, 0, point2.x, point2.y, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0, point3.x, point3.y, 1, 1, 1, 1);
+	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, point4.x, point4.y, 1, 1, 1, 1);
+
+	//vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, point4.x, point4.y, 1, 1, 1, 1);
 }
 
 

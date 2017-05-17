@@ -222,8 +222,14 @@
     <ClInclude Include="CMenuScene.h">
       <Filter>Headerdateien\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="SAABB.h">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="CQuadTree.h">
+      <Filter>Headerdateien\Manager</Filter>
+    </ClInclude>
     <ClInclude Include="EScenes.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +316,12 @@
     </ClCompile>
     <ClCompile Include="CMenuScene.cpp">
       <Filter>Quelldateien\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SAABB.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CQuadTree.cpp">
+      <Filter>Quelldateien\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

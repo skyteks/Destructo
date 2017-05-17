@@ -129,22 +129,28 @@ void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 	SVector3 scale = a_gameObject.GetScale();
 	SMatrix4x4 rotation = a_gameObject.GetRotation();
 
-	D2D1_RECT_F rect;
-	rect.left = position.x;
-	rect.top = position.y;
-	rect.right = position.x + direct2DTexture->GetWidth() * scale.x;
-	rect.bottom = position.y + direct2DTexture->GetHeight() * scale.y;
+	D2D1_RECT_F direct2DSource;
+	direct2DSource.left = a_gameObject.GetImageSection().x1;
+	direct2DSource.top = a_gameObject.GetImageSection().y1;
+	direct2DSource.right = a_gameObject.GetImageSection().x2;
+	direct2DSource.bottom = a_gameObject.GetImageSection().y2;
 
-	D2D1_MATRIX_3X2_F rot;
-	rot._11 = rotation.m11;
-	rot._12 = rotation.m12;
-	rot._21 = rotation.m21;
-	rot._22 = rotation.m22;
-	rot._31 = rotation.m31;
-	rot._32 = rotation.m32;
-	m_renderTarget->SetTransform(rot);
+	D2D1_RECT_F direct2DDest;
+	direct2DDest.left = position.x;
+	direct2DDest.top = position.y;
+	direct2DDest.right = position.x + direct2DTexture->GetWidth() * scale.x;
+	direct2DDest.bottom = position.y + direct2DTexture->GetHeight() * scale.y;
 
-	m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), rect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
+	D2D1_MATRIX_3X2_F direct2DRot;
+	direct2DRot._11 = rotation.m11;
+	direct2DRot._12 = rotation.m12;
+	direct2DRot._21 = rotation.m21;
+	direct2DRot._22 = rotation.m22;
+	direct2DRot._31 = rotation.m31;
+	direct2DRot._32 = rotation.m32;
+	m_renderTarget->SetTransform(direct2DRot);
+
+	m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), direct2DDest, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, direct2DSource);
 }
 
 
@@ -152,13 +158,30 @@ void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_h
 {
 	CTextureDirect2D* direct2DTexture = reinterpret_cast<CTextureDirect2D*>(a_texture);
 
-	D2D1_RECT_F rect;
-	rect.left = a_posX;
-	rect.top = a_posY;
-	rect.right = a_posX + a_width;
-	rect.bottom = a_posY + a_height;
+	D2D1_RECT_F direct2DSource;
+	direct2DSource.left = a_imgX;
+	direct2DSource.top = a_imgY;
+	direct2DSource.right = a_imgWidth;
+	direct2DSource.bottom = a_imgHeight;
 
-	m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), rect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
+	D2D1_RECT_F direct2DDest;
+	direct2DDest.left = a_posX;
+	direct2DDest.top = a_posY;
+	direct2DDest.right = a_posX + a_width;
+	direct2DDest.bottom = a_posY + a_height;
+
+	SMatrix4x4 rotation = SMatrix4x4::Identity();
+
+	D2D1_MATRIX_3X2_F direct2DRot;
+	direct2DRot._11 = rotation.m11;
+	direct2DRot._12 = rotation.m12;
+	direct2DRot._21 = rotation.m21;
+	direct2DRot._22 = rotation.m22;
+	direct2DRot._31 = rotation.m31;
+	direct2DRot._32 = rotation.m32;
+	m_renderTarget->SetTransform(direct2DRot);
+
+	m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), direct2DDest, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, direct2DSource);
 }
 
 void CRendererDirect2D::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)

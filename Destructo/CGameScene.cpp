@@ -46,20 +46,20 @@ void CGameScene::Update()
 
 	m_objectPlayer->SetPosition(SVector3(m_playerPosX, m_playerPosY));
 
-	if (CInputManager::GetInstance().GetKey(EKeyCode::R))
+	if (CInputManager::GetInstance().GetKey(EKeyCode::E))
 	{
-		m_objectPlayer->AddRotation(1.0f * CTime::GetInstance().DeltaTime());
+		m_objectPlayer->AddRotation(CTime::GetInstance().DeltaTime());
 	}
-	if (CInputManager::GetInstance().GetKey(EKeyCode::F))
+	if (CInputManager::GetInstance().GetKey(EKeyCode::Q))
 	{
 		m_objectPlayer->AddRotation(-1.0f * CTime::GetInstance().DeltaTime());
 	}
 
-	if (CInputManager::GetInstance().GetKey(EKeyCode::Q))
+	if (CInputManager::GetInstance().GetKey(EKeyCode::R))
 	{
 		m_objectPlayer->SetScale(m_objectPlayer->GetScale() + SVector3::One() * CTime::GetInstance().DeltaTime());
 	}
-	if (CInputManager::GetInstance().GetKey(EKeyCode::E))
+	if (CInputManager::GetInstance().GetKey(EKeyCode::F))
 	{
 		m_objectPlayer->SetScale(m_objectPlayer->GetScale() - SVector3::One() * CTime::GetInstance().DeltaTime());
 	}
@@ -94,9 +94,16 @@ void CGameScene::Draw(IRenderer* a_renderer)
 	//a_renderer->DrawTexture(0, 0, 0, 0, buttonTexture, 0, 0, 0, 0);//DO NOT REMOVE (BUG)
 
 	char buffer[200] = {};
-	sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i", CMouse::x, CMouse::y, CMouse::isLeftMouseDown ? "true" : "false", CMouse::isRightMouseDown ? "true" : "false", static_cast<int>(1 / CTime::GetInstance().DeltaTime()));
+	sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i\n %f %f",
+		CMouse::x,
+		CMouse::y,
+		CMouse::isLeftMouseDown ? "true" : "false",
+		CMouse::isRightMouseDown ? "true" : "false",
+		static_cast<int>(1 / CTime::GetInstance().DeltaTime()),
+		m_objectPlayer->GetPosition().x,
+		m_objectPlayer->GetPosition().y
+	);
 	a_renderer->DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
-
 }
 
 

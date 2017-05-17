@@ -153,6 +153,7 @@
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CMenuScene.h" />
     <ClInclude Include="CMouse.h" />
+    <ClInclude Include="CQuadTree.h" />
     <ClInclude Include="CRendererDirect2D.h" />
     <ClInclude Include="CRendererDirectX11.h" />
     <ClInclude Include="CRendererGDI.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="ITexture.h" />
+    <ClInclude Include="SAABB.h" />
     <ClInclude Include="SBitmap.h" />
     <ClInclude Include="SBitmapHeader.h" />
     <ClInclude Include="SButtonData.h" />
@@ -205,6 +207,7 @@
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CMenuScene.cpp" />
     <ClCompile Include="CMouse.cpp" />
+    <ClCompile Include="CQuadTree.cpp" />
     <ClCompile Include="CRendererDirect2D.cpp" />
     <ClCompile Include="CRendererDirectX11.cpp" />
     <ClCompile Include="CRendererGDI.cpp" />
@@ -223,6 +226,7 @@
     <ClCompile Include="CWindowsInput.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SAABB.cpp" />
     <ClCompile Include="SMatrix4x4.cpp" />
     <ClCompile Include="SVector3.cpp" />
     <ClCompile Include="CTime.cpp" />

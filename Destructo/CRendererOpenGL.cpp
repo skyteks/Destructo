@@ -137,16 +137,16 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 		dest.y1 -= position.y + dest.y2 / 2;
 	}
 
-	SVector3 vec1(dest.x1, dest.y1, 0.0f);
-	SVector3 vec2(dest.x1 + dest.x2, dest.y1, 0.0f);
-	SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2, 0.0f);
-	SVector3 vec4(dest.x1, dest.y1 + dest.y2, 0.0f);
+	SVector3 vec1(dest.x1, dest.y1);
+	SVector3 vec2(dest.x1 + dest.x2, dest.y1);
+	SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2);
+	SVector3 vec4(dest.x1, dest.y1 + dest.y2);
 	SMatrix4x4 rotation = a_gameObject.GetRotation();
 
-	SVector4 result1 = rotation * vec1;
-	SVector4 result2 = rotation * vec2;
-	SVector4 result3 = rotation * vec3;
-	SVector4 result4 = rotation * vec4;
+	SVector4 point1 = rotation * vec1;
+	SVector4 point2 = rotation * vec2;
+	SVector4 point3 = rotation * vec3;
+	SVector4 point4 = rotation * vec4;
 
 	if (dest.x1 != 0.0f && dest.y1 != 0.0f)
 	{
@@ -154,27 +154,27 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 		dest.y1 += position.y + dest.y2 / 2;
 	}
 
-	result1.x += dest.x1;
-	result2.x += dest.x1;
-	result3.x += dest.x1;
-	result4.x += dest.x1;
+	point1.x += dest.x1;
+	point2.x += dest.x1;
+	point3.x += dest.x1;
+	point4.x += dest.x1;
 
-	result1.y += dest.y1;
-	result2.y += dest.y1;
-	result3.y += dest.y1;
-	result4.y += dest.y1;
+	point1.y += dest.y1;
+	point2.y += dest.y1;
+	point3.y += dest.y1;
+	point4.y += dest.y1;
 
 	glTexCoord2f(tex.x1, 1 - tex.y1); // bottom-left
-	glVertex3f(result1.x, result1.y, 0); // topleft
+	glVertex3f(point1.x, point1.y, 0); // topleft
 
 	glTexCoord2f(tex.x1 + tex.x2, 1 - tex.y1); // bottom-right
-	glVertex3f(result2.x, result2.y, 0); // topright ==> Vector2 * rotationmatrix ==> rotated Vector2
+	glVertex3f(point2.x, point2.y, 0); // topright ==> Vector2 * rotationmatrix ==> rotated Vector2
 
 	glTexCoord2f(tex.x1 + tex.x2, 1 - (tex.y1 + tex.y2)); // top-right
-	glVertex3f(result3.x, result3.y, 0); // bottomright
+	glVertex3f(point3.x, point3.y, 0); // bottomright
 
 	glTexCoord2f(tex.x1, 1 - (tex.y1 + tex.y2)); // top-left
-	glVertex3f(result4.x, result4.y, 0); // bottomleft
+	glVertex3f(point4.x, point4.y, 0); // bottomleft
 
 	glEnd();
 }

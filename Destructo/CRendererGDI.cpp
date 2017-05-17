@@ -78,16 +78,16 @@ void CRendererGDI::DrawObject(CGameObject& a_gameObject)
 		dest.y1 -= position.y + dest.y2 / 2;
 	}
 
-	SVector3 vec1(dest.x1, dest.y1, 0.0f);
-	SVector3 vec2(dest.x1 + dest.x2, dest.y1, 0.0f);
-	SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2, 0.0f);
-	SVector3 vec4(dest.x1, dest.y1 + dest.y2, 0.0f);
+	SVector3 vec1(dest.x1, dest.y1);
+	SVector3 vec2(dest.x1 + dest.x2, dest.y1);
+	SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2);
+	SVector3 vec4(dest.x1, dest.y1 + dest.y2);
 	SMatrix4x4 rotation = a_gameObject.GetRotation();
 
-	SVector4 result1 = rotation * vec1;
-	SVector4 result2 = rotation * vec2;
-	SVector4 result3 = rotation * vec3;
-	SVector4 result4 = rotation * vec4;
+	SVector4 point1 = rotation * vec1;
+	SVector4 point2 = rotation * vec2;
+	SVector4 point3 = rotation * vec3;
+	SVector4 point4 = rotation * vec4;
 
 	if (dest.x1 != 0.0f && dest.y1 != 0.0f)
 	{
@@ -95,25 +95,25 @@ void CRendererGDI::DrawObject(CGameObject& a_gameObject)
 		dest.y1 += position.y + dest.y2 / 2;
 	}
 
-	result1.x += dest.x1;
-	result2.x += dest.x1;
-	result3.x += dest.x1;
-	result4.x += dest.x1;
+	point1.x += dest.x1;
+	point2.x += dest.x1;
+	point3.x += dest.x1;
+	point4.x += dest.x1;
 
-	result1.y += dest.y1;
-	result2.y += dest.y1;
-	result3.y += dest.y1;
-	result4.y += dest.y1;
+	point1.y += dest.y1;
+	point2.y += dest.y1;
+	point3.y += dest.y1;
+	point4.y += dest.y1;
 
 	POINT points[3];
-	points[0].x = result1.x;
-	points[0].y = result1.y;
+	points[0].x = point1.x;
+	points[0].y = point1.y;
 
-	points[1].x = result2.x;
-	points[1].y = result2.y;
+	points[1].x = point2.x;
+	points[1].y = point2.y;
 
-	points[2].x = result4.x;
-	points[2].y = result4.y;
+	points[2].x = point4.x;
+	points[2].y = point4.y;
 	if (gdiOpacityMask != nullptr)
 	{
 		PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), source.x1, source.y1, source.x2, source.y2, gdiOpacityMask->GetBitmapHandle(), source.x1, source.y1);
