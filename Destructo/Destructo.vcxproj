@@ -150,6 +150,9 @@
     <ClInclude Include="CApplication.h" />
     <ClInclude Include="CAudio.h" />
     <ClInclude Include="CAudioChannel.h" />
+    <ClInclude Include="CBucketAllocator.h" />
+    <ClInclude Include="CFrameAllocator.h" />
+    <ClInclude Include="CFreeListAllocator.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CMenuScene.h" />
     <ClInclude Include="CMouse.h" />
@@ -204,6 +207,9 @@
     <ClCompile Include="CApplication.cpp" />
     <ClCompile Include="CAudio.cpp" />
     <ClCompile Include="CAudioChannel.cpp" />
+    <ClCompile Include="CBucketAllocator.cpp" />
+    <ClCompile Include="CFrameAllocator.cpp" />
+    <ClCompile Include="CFreeListAllocator.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CMenuScene.cpp" />
     <ClCompile Include="CMouse.cpp" />

@@ -85,6 +85,12 @@
     <Filter Include="Quelldateien\Scenes">
       <UniqueIdentifier>{97c8d1b0-ea21-49ea-99ab-41a0da20b140}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Allocators">
+      <UniqueIdentifier>{33992a97-6f91-4143-adb2-05f4be75e992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Allocators">
+      <UniqueIdentifier>{4ead1577-b3b7-4cc5-a563-a5384c9c82eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CApplication.h">
@@ -231,6 +237,15 @@
     <ClInclude Include="EScenes.h">
       <Filter>Headerdateien\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="CBucketAllocator.h">
+      <Filter>Headerdateien\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="CFrameAllocator.h">
+      <Filter>Headerdateien\Allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="CFreeListAllocator.h">
+      <Filter>Headerdateien\Allocators</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp">
@@ -322,6 +337,15 @@
     </ClCompile>
     <ClCompile Include="CQuadTree.cpp">
       <Filter>Quelldateien\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CBucketAllocator.cpp">
+      <Filter>Quelldateien\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="CFrameAllocator.cpp">
+      <Filter>Quelldateien\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="CFreeListAllocator.cpp">
+      <Filter>Quelldateien\Allocators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

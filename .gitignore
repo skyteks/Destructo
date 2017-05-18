@@ -11,7 +11,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+#*.dll
 
 # Fortran module files
 *.mod
@@ -28,4 +28,8 @@
 *.out
 *.app
 /Destructo/Debug
+/Destructo/Release
 Debug
+
+# Visual Studio Files
+/.vs
