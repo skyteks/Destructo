@@ -1,25 +1,21 @@
 #pragma once
 
-
-
 #pragma comment(lib, "Windowscodecs.lib")
 
 #include "GlobalFunctions.h"
-
-//#include <d2d1_1.h>
 
 #include <d2d1.h>
 #include <Wincodec.h>
 
 #include "ITexture.h"
-
+#include <string>
 
 
 class CTextureDirect2D : public ITexture
 {
 public:
 	
-	CTextureDirect2D(const char* a_path);
+	CTextureDirect2D(std::string a_path);
 
 	~CTextureDirect2D() override;
 
@@ -43,7 +39,6 @@ private:
 	int m_pitch;
 	int m_bitsPerPixel;
 	bool m_isLocked;
-	char* m_name;
 
 	ID2D1Bitmap *m_bitmap = nullptr;
 };

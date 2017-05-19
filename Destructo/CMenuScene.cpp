@@ -14,9 +14,9 @@ bool CMenuScene::Initialize(IRenderer * a_renderer)
 {
 	CTextureManager::GetInstance().LoadTexture(TEXTURE_BUTTON);
 	CTextureManager::GetInstance().LoadTexture(TEXTURE_FONT);
-	CTextureManager::GetInstance().LoadTexture("Textures/goblin.bmp");
+	CTextureManager::GetInstance().LoadTexture(TEXTURE_MENU);
 
-	m_objectBackground = new CGameObject({ 0.0f, 0.0f }, { 1.0f, 1.0f }, 0.0f, "Textures/goblin.bmp");
+	m_objectBackground = new CGameObject(SVector3(0.0f, 0.0f), SVector3( 1.0f, 1.0f), 0.0f, TEXTURE_MENU, "", nullptr, nullptr);
 
 	LoadButtons();
 	return true;

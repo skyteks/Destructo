@@ -180,6 +180,7 @@
     <ClInclude Include="GlobalFunctions.h" />
     <ClInclude Include="IAudio.h" />
     <ClInclude Include="IAudioChannel.h" />
+    <ClInclude Include="IComponent.h" />
     <ClInclude Include="IInput.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CWindowsInput.h" />
@@ -191,8 +192,10 @@
     <ClInclude Include="SBitmap.h" />
     <ClInclude Include="SBitmapHeader.h" />
     <ClInclude Include="SButtonData.h" />
+    <ClInclude Include="SCircleBB.h" />
     <ClInclude Include="SMatrix4x4.h" />
     <ClInclude Include="SRect.h" />
+    <ClInclude Include="SRigidbody.h" />
     <ClInclude Include="SVector3.h" />
     <ClInclude Include="SVector4.h" />
     <ClInclude Include="SVertex.h" />
@@ -233,7 +236,9 @@
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SAABB.cpp" />
+    <ClCompile Include="SCircleBB.cpp" />
     <ClCompile Include="SMatrix4x4.cpp" />
+    <ClCompile Include="SRigidbody.cpp" />
     <ClCompile Include="SVector3.cpp" />
     <ClCompile Include="CTime.cpp" />
     <ClCompile Include="SVector4.cpp" />

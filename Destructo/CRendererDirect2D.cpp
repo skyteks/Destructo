@@ -105,7 +105,7 @@ bool CRendererDirect2D::Initialize(HWND a_hwnd)
 }
 
 
-ITexture * CRendererDirect2D::LoadTextureFromFile(const char * a_path)
+ITexture * CRendererDirect2D::LoadTextureFromFile(std::string a_path)
 {
 	return new CTextureDirect2D(a_path);
 }
@@ -120,7 +120,7 @@ void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 {
 	CTextureDirect2D* direct2DTexture = reinterpret_cast<CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
 	CTextureDirect2D* direct2DOpacityMask = nullptr;
-	if (a_gameObject.GetOpacityMaskName() != nullptr)
+	if (a_gameObject.GetOpacityMaskName() != "")
 	{
 		direct2DOpacityMask = reinterpret_cast<CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
 	}

@@ -47,6 +47,7 @@ float SVector4::Dot(const SVector4& a_vector1, const SVector4& a_vector2)
 {
 	return ((a_vector1.x * a_vector2.x) + (a_vector1.y * a_vector2.y) + (a_vector1.z * a_vector2.z) + (a_vector1.w * a_vector2.w));
 }
+
 void SVector4::Normalize(SVector4& a_vector1)
 {
 	float length = a_vector1.Length();

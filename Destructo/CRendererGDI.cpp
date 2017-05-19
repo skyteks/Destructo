@@ -41,7 +41,7 @@ bool CRendererGDI::Initialize(HWND a_hwnd)
 }
 
 
-ITexture* CRendererGDI::LoadTextureFromFile(const char* a_path)
+ITexture* CRendererGDI::LoadTextureFromFile(std::string a_path)
 {
 	return new CTextureGDI(a_path);
 }
@@ -51,7 +51,7 @@ void CRendererGDI::DrawObject(CGameObject& a_gameObject)
 {
 	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
 	CTextureGDI* gdiOpacityMask = nullptr;
-	if (a_gameObject.GetOpacityMaskName() != nullptr)
+	if (a_gameObject.GetOpacityMaskName() != "")
 	{
 		gdiOpacityMask = reinterpret_cast<CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
 	}

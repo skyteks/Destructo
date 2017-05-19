@@ -72,7 +72,7 @@ bool CRendererOpenGL::Initialize(HWND a_hwnd)
 }
 
 
-ITexture* CRendererOpenGL::LoadTextureFromFile(const char* a_path)
+ITexture* CRendererOpenGL::LoadTextureFromFile(std::string a_path)
 {
 	return new CTextureOpenGL(a_path);
 }
@@ -90,10 +90,10 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 {
 	CTextureOpenGL* openGLTexture = reinterpret_cast<CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
 
-	char* opacityMaskName = a_gameObject.GetOpacityMaskName();
-	if (opacityMaskName != nullptr)
+	CTextureOpenGL* openGLOpacityMask = nullptr;
+	if (a_gameObject.GetOpacityMaskName() != "")
 	{
-		CTextureOpenGL* openGLOpacityMask = reinterpret_cast<CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(opacityMaskName));
+		openGLOpacityMask = reinterpret_cast<CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
 		openGLTexture->AddOpacityMask(openGLOpacityMask);
 	}
 
@@ -101,12 +101,12 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 	SVector3 scale = a_gameObject.GetScale();
 
 	glBindTexture(GL_TEXTURE_2D, openGLTexture->GetTextureID());
-	
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	
+
 	glBegin(GL_QUADS);
 
 	SRect source;

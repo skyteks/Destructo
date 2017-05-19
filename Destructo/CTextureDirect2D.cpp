@@ -2,7 +2,7 @@
 
 ID2D1HwndRenderTarget* CTextureDirect2D::s_renderTarget = nullptr;
 
-CTextureDirect2D::CTextureDirect2D(const char* a_path)
+CTextureDirect2D::CTextureDirect2D(std::string a_path)
 	: m_bitmap(nullptr)
 {
 	// image loading with factory
@@ -20,7 +20,7 @@ CTextureDirect2D::CTextureDirect2D(const char* a_path)
 	// https://msdn.microsoft.com/en-us/library/windows/desktop/dd370990(v=vs.85).aspx
 
 	wchar_t wtext[MAX_PATH] = {};
-	mbstowcs(wtext, a_path, strlen(a_path) + 1);//Plus null
+	mbstowcs(wtext, a_path.c_str(), strlen(a_path.c_str()) + 1);//Plus null
 
 	// create decoder
 	hResult = imageFactory->CreateDecoderFromFilename(wtext, nullptr, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &decoder);

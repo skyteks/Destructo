@@ -18,8 +18,8 @@ public:
 	void Shutdown();
 	
 	static CTextureManager& GetInstance();
-	bool LoadTexture(const char* a_path);
-	ITexture* GetTextureByName(const char* a_path);
+	bool LoadTexture(std::string a_path);
+	ITexture* GetTextureByName(std::string a_path);
 	const char* GetNameByTexture(ITexture* a_texture);
 
 private:

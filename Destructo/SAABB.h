@@ -5,7 +5,6 @@ struct SAABB
 {
 public:
 	SAABB(SVector3 a_center, float a_halfWidths);
-	~SAABB();
 
 	SVector3 GetCenter();
 	float GetHalfWidths();

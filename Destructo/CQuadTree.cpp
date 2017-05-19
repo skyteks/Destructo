@@ -12,6 +12,10 @@ CQuadTree::CQuadTree(SAABB a_boundary)
 
 CQuadTree::~CQuadTree()
 {
+	SafeDelete(m_northWest);
+	SafeDelete(m_northEast);
+	SafeDelete(m_southWest);
+	SafeDelete(m_southEast);
 }
 
 SAABB CQuadTree::GetBoundary()
@@ -68,7 +72,7 @@ void CQuadTree::Subdivide()
 	m_southWest = &CQuadTree(SAABB(m_boundary.GetCenter() + SVector3(m_boundary.GetHalfWidths() * 0.5f, -m_boundary.GetHalfWidths() * 0.5f), m_boundary.GetHalfWidths() * 0.25f));
 	m_southEast = &CQuadTree(SAABB(m_boundary.GetCenter() + SVector3(m_boundary.GetHalfWidths() * 0.5f, m_boundary.GetHalfWidths() * 0.5f), m_boundary.GetHalfWidths() * 0.25f));
 
-	for (int i = m_elements.size(); i > 0 ; i--)
+	for (int i = m_elements.size(); i > 0; i--)
 	{
 		if (m_northWest->GetBoundary().ContainsPoint(m_elements.at(i)->GetPosition()))
 		{
@@ -147,4 +151,46 @@ std::vector<CGameObject*> CQuadTree::QueryRange(SAABB a_range)
 		elementsInRange.push_back(tmp.at(i));
 	}
 	return elementsInRange;
+}
+
+void CQuadTree::Update()
+{
+	if (m_elements.size() > 0)
+	{
+		for (auto &element : m_elements)
+		{
+			for (auto &other : m_elements)
+			{
+				if (other != element)
+				{
+					if (element->GetCircleCollider() != nullptr && other->GetCircleCollider() != nullptr &&
+						element->GetCircleCollider()->Intersects(*other->GetCircleCollider()))
+					{
+						int a = 1;
+					}
+				}
+				if (element->GetRigidbody() != nullptr)
+				{
+					element->GetRigidbody()->Update(element);
+				}
+			}
+			element->Update();
+		}
+	}
+	if (m_northWest != nullptr)
+	{
+		m_northWest->Update();
+	}
+	if (m_northEast != nullptr)
+	{
+		m_northEast->Update();
+	}
+	if (m_southWest != nullptr)
+	{
+		m_southWest->Update();
+	}
+	if (m_southEast != nullptr)
+	{
+		m_southEast->Update();
+	}
 }

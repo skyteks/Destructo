@@ -17,7 +17,7 @@ public:
 
 	bool Initialize(HWND a_hwnd) override;
 
-	ITexture* LoadTextureFromFile(const char* a_path) override;
+	ITexture* LoadTextureFromFile(std::string a_path) override;
 
 	void Begin() override;
 

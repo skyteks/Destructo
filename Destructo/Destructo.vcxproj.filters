@@ -246,6 +246,15 @@
     <ClInclude Include="CFreeListAllocator.h">
       <Filter>Headerdateien\Allocators</Filter>
     </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SRigidbody.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SCircleBB.h">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp">
@@ -346,6 +355,12 @@
     </ClCompile>
     <ClCompile Include="CFreeListAllocator.cpp">
       <Filter>Quelldateien\Allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="SRigidbody.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SCircleBB.cpp">
+      <Filter>Quelldateien\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

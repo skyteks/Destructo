@@ -10,6 +10,8 @@
 #include "CTime.h"
 #include "CTextureManager.h"
 #include "CGameObject.h"
+#include "CQuadTree.h"
+#include "SCircleBB.h"
 
 class CGameScene : public IScene
 {
@@ -32,15 +34,13 @@ private:
 
 	void* m_testSound = nullptr;
 
-	
-
-	int m_playerPosX = 800 / 2;
-	int m_playerPosY = 600 / 2;
-
 	float speed = 0;
 
 	CGameObject* m_objectPlayer;
 	CGameObject* m_objectTerrain;
 	CGameObject* m_objectBackground;
+	CGameObject* m_objectPlayer2;
+
+	CQuadTree* m_quadTree;
 };
 

@@ -2,11 +2,12 @@
 
 #include "ITexture.h"
 #include <gl\GL.h>
+#include <string>
 
 class CTextureOpenGL : public ITexture
 {
 public:
-	CTextureOpenGL(const char* a_path);
+	CTextureOpenGL(std::string a_path);
 	
 	~CTextureOpenGL() override;
 
@@ -35,7 +36,6 @@ private:
 	int m_pitch;
 	int m_bitsPerPixel;
 	bool m_isLocked;
-	char* m_name;
 	
 	UINT* m_data = nullptr;
 

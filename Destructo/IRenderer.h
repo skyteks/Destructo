@@ -14,7 +14,7 @@ public:
 
 	virtual bool Initialize(HWND a_hwnd) = 0;
 
-	virtual ITexture* LoadTextureFromFile(const char* a_path) = 0;
+	virtual ITexture* LoadTextureFromFile(std::string a_path) = 0;
 
 	virtual void Begin() = 0;
 

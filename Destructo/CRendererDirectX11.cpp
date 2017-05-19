@@ -118,7 +118,7 @@ bool CRendererDirectX11::Initialize(HWND a_hwnd)
 }
 
 
-ITexture* CRendererDirectX11::LoadTextureFromFile(const char* a_path)
+ITexture* CRendererDirectX11::LoadTextureFromFile(std::string a_path)
 {
 	SBitmap bmp = LoadBitmapAndAddAlpha(a_path);
 
@@ -176,6 +176,11 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(const char* a_path)
 void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
 {
 	CTextureDirectX11* directX11Texture = reinterpret_cast<CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+	CTextureDirectX11* directX11OpacityMask = nullptr;
+	if (a_gameObject.GetOpacityMaskName() != "")
+	{
+		directX11OpacityMask = reinterpret_cast<CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+	}
 
 	m_deviceContext->PSSetShaderResources(0, 1, &m_shaderResourceView);
 	if (m_shaderResourceView != directX11Texture->GetShaderResourceView())

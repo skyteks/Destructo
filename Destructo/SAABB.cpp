@@ -6,10 +6,6 @@ SAABB::SAABB(SVector3 a_center, float a_halfWidths)
 {
 }
 
-SAABB::~SAABB()
-{
-}
-
 SVector3 SAABB::GetCenter()
 {
 	return m_center;

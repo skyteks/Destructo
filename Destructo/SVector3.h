@@ -76,6 +76,8 @@ public:
 	/// @return Returns a float value which ranges from -1.0f to 1.0f depending on the vector direction.
 	static float Dot(const SVector3& a_vector1, const SVector3& a_vector2);
 
+	static SVector3 Cross(const SVector3& a_vector1, const SVector3& a_vector2);
+
 	/// @brief Normalizes a vector. The length will be set to 1.0f.
 	/// @param a_vector1 A vector as reference.
 	static void Normalize(SVector3& a_vector1);

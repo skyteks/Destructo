@@ -16,6 +16,8 @@ public:
 	void Subdivide();
 	std::vector<CGameObject*> QueryRange(SAABB a_range);
 
+	void Update();
+
 private:
 	//Elements-storage size indicator
 	static const int m_nodeCapacity = 4;

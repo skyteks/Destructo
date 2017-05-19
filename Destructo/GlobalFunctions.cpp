@@ -1,9 +1,9 @@
 #include "GlobalFunctions.h"
 
-SBitmap LoadBitmapAndAddAlpha(const char* a_path)
+SBitmap LoadBitmapAndAddAlpha(std::string a_path)
 {
 	FILE* file;
-	fopen_s(&file, a_path, "rb");
+	fopen_s(&file, a_path.c_str(), "rb");
 
 	SBitmap bmp;
 	

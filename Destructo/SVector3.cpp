@@ -48,6 +48,15 @@ float SVector3::Distance(const SVector3& a_vector1, const SVector3& a_vector2)
 	return tmp.Length();
 }
 
+SVector3 SVector3::Cross(const SVector3 & a_vector1, const SVector3 & a_vector2)
+{
+	SVector3 result;
+	result.x = a_vector1.y * a_vector2.z - a_vector2.y * a_vector1.z;
+	result.y = a_vector1.z * a_vector2.x - a_vector2.z * a_vector1.x;
+	result.z = a_vector1.x * a_vector2.y - a_vector2.x * a_vector1.y;
+	return result;
+}
+
 SVector3 SVector3::Zero()
 {
 	return SVector3(0, 0, 0);
