@@ -70,7 +70,7 @@ void CGameScene::Update()
 	if (m_objectPlayer2->GetPosition().y >= 0 && CInputManager::GetInstance().GetKey(EKeyCode::Up))
 		player2PosY -= speed;
 
-	m_objectPlayer2->SetPosition(m_objectPlayer2->GetPosition() + SVector3(playerPosX, playerPosY));
+	m_objectPlayer2->SetPosition(m_objectPlayer2->GetPosition() + SVector3(player2PosX, player2PosY));
 
 	if (CInputManager::GetInstance().GetKey(EKeyCode::E))
 	{

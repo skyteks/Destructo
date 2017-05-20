@@ -24,10 +24,10 @@
 *.lib
 
 # Executables
-*.exe
-*.out
-*.app
-/Destructo/Debug
+/Destructo/Debug/*.exe
+/Destructo/Debug/*.out
+/Destructo/Debug/*.app
+#/Destructo/Debug
 /Destructo/Release
 Debug
 
