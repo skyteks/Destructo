@@ -5,7 +5,7 @@ CUIButton::CUIButton()
 	m_bitmap = nullptr;
 }
 
-CUIButton::CUIButton(ITexture* a_bitmap, const SRect& a_size)
+CUIButton::CUIButton(const ITexture* a_bitmap, const SRect& a_size)
 	: m_bitmap(a_bitmap)
 	, m_size(a_size)
 	, m_state(EButtonState::OnNormal)
@@ -13,7 +13,7 @@ CUIButton::CUIButton(ITexture* a_bitmap, const SRect& a_size)
 {
 }
 
-CUIButton::CUIButton(ITexture* a_bitmap, const SRect& a_size, ButtonMap& a_map)
+CUIButton::CUIButton(const ITexture* a_bitmap, const SRect& a_size, ButtonMap& a_map)
 	: m_bitmap(a_bitmap)
 	, m_size(a_size)
 	, m_state(EButtonState::OnNormal)
@@ -78,17 +78,17 @@ void CUIButton::UpdateState()
 		SetState(EButtonState::OnNormal);
 	}
 }
-ITexture * CUIButton::GetTexture()
+const ITexture& CUIButton::GetTexture() const
 {
-	return m_bitmap;
+	return *m_bitmap;
 }
-SRect CUIButton::GetDestination()
+const SRect& CUIButton::GetDestination() const
 {
 	return m_size;
 }
-SRect CUIButton::GetSource()
+const SRect& CUIButton::GetSource() const
 {
-	return m_buttonMap[m_state].m_rect;
+	return m_buttonMap.at(m_state).m_rect;
 }
 bool CUIButton::IsMouseHovering()
 {

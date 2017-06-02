@@ -28,19 +28,19 @@ CTextureOpenGL::~CTextureOpenGL()
 }
 
 
-int CTextureOpenGL::GetWidth()
+int CTextureOpenGL::GetWidth() const
 {
 	return m_width;
 }
 
 
-int CTextureOpenGL::GetHeight()
+int CTextureOpenGL::GetHeight() const
 {
 	return m_height;
 }
 
 
-GLuint CTextureOpenGL::GetTextureID()
+GLuint CTextureOpenGL::GetTextureID() const
 {
 	return m_textureID;
 }
@@ -52,13 +52,13 @@ void * CTextureOpenGL::GetData() const
 }
 
 
-int CTextureOpenGL::GetPitch()
+int CTextureOpenGL::GetPitch() const
 {
 	return m_pitch;
 }
 
 
-int CTextureOpenGL::GetBPP()
+int CTextureOpenGL::GetBPP() const
 {
 	return m_bitsPerPixel;
 }
@@ -74,7 +74,7 @@ void CTextureOpenGL::SetPixel(int a_x, int a_y, int a_color)
 	*(p + index) = 0xFF000000; // ABGR
 }
 
-void CTextureOpenGL::AddOpacityMask(CTextureOpenGL* a_opacityMask)
+void CTextureOpenGL::AddOpacityMask(const CTextureOpenGL* a_opacityMask) const
 {
 	for (auto y = 0; y < m_height; y++)
 	{
@@ -84,7 +84,7 @@ void CTextureOpenGL::AddOpacityMask(CTextureOpenGL* a_opacityMask)
 
 			// read mask
 			int* pMask = reinterpret_cast<int*>(a_opacityMask->m_data);
-			//unsigned int value = *(pMask + index);
+			//uint32_t value = *(pMask + index);
 			if (*(pMask + index) == 0xFF000000) // black
 			{
 				// access to modify pixel data

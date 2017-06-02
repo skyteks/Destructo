@@ -10,7 +10,7 @@ CMenuScene::~CMenuScene()
 {
 }
 
-bool CMenuScene::Initialize(IRenderer * a_renderer)
+bool CMenuScene::Initialize(IRenderer& a_renderer)
 {
 	CTextureManager::GetInstance().LoadTexture(TEXTURE_BUTTON);
 	CTextureManager::GetInstance().LoadTexture(TEXTURE_FONT);
@@ -32,28 +32,24 @@ void CMenuScene::Update()
 	m_uiButtonGame.UpdateState();
 }
 
-void CMenuScene::Draw(IRenderer * a_renderer)
+void CMenuScene::Draw(IRenderer& a_renderer) const
 {
-	if (a_renderer == nullptr)
-	{
-		return;
-	}
-	a_renderer->DrawObject(*m_objectBackground);
+	a_renderer.DrawObject(*m_objectBackground);
 
-	a_renderer->DrawTexture(m_uiButtonGDI.GetDestination().x1, m_uiButtonGDI.GetDestination().y1, m_uiButtonGDI.GetDestination().x2, m_uiButtonGDI.GetDestination().y2, m_uiButtonGDI.GetTexture(), m_uiButtonGDI.GetSource().x1, m_uiButtonGDI.GetSource().y1, m_uiButtonGDI.GetSource().x2, m_uiButtonGDI.GetSource().y2);
-	a_renderer->DrawTexture(m_uiButtonOpenGL.GetDestination().x1, m_uiButtonOpenGL.GetDestination().y1, m_uiButtonOpenGL.GetDestination().x2, m_uiButtonOpenGL.GetDestination().y2, m_uiButtonOpenGL.GetTexture(), m_uiButtonOpenGL.GetSource().x1, m_uiButtonOpenGL.GetSource().y1, m_uiButtonOpenGL.GetSource().x2, m_uiButtonOpenGL.GetSource().y2);
-	a_renderer->DrawTexture(m_uiButtonDirectX11.GetDestination().x1, m_uiButtonDirectX11.GetDestination().y1, m_uiButtonDirectX11.GetDestination().x2, m_uiButtonDirectX11.GetDestination().y2, m_uiButtonDirectX11.GetTexture(), m_uiButtonDirectX11.GetSource().x1, m_uiButtonDirectX11.GetSource().y1, m_uiButtonDirectX11.GetSource().x2, m_uiButtonDirectX11.GetSource().y2);
-	a_renderer->DrawTexture(m_uiButtonDirect2D.GetDestination().x1, m_uiButtonDirect2D.GetDestination().y1, m_uiButtonDirect2D.GetDestination().x2, m_uiButtonDirect2D.GetDestination().y2, m_uiButtonDirect2D.GetTexture(), m_uiButtonDirect2D.GetSource().x1, m_uiButtonDirect2D.GetSource().y1, m_uiButtonDirect2D.GetSource().x2, m_uiButtonDirect2D.GetSource().y2);
+	a_renderer.DrawTexture(m_uiButtonGDI.GetDestination().x1, m_uiButtonGDI.GetDestination().y1, m_uiButtonGDI.GetDestination().x2, m_uiButtonGDI.GetDestination().y2, &m_uiButtonGDI.GetTexture(), m_uiButtonGDI.GetSource().x1, m_uiButtonGDI.GetSource().y1, m_uiButtonGDI.GetSource().x2, m_uiButtonGDI.GetSource().y2);
+	a_renderer.DrawTexture(m_uiButtonOpenGL.GetDestination().x1, m_uiButtonOpenGL.GetDestination().y1, m_uiButtonOpenGL.GetDestination().x2, m_uiButtonOpenGL.GetDestination().y2, &m_uiButtonOpenGL.GetTexture(), m_uiButtonOpenGL.GetSource().x1, m_uiButtonOpenGL.GetSource().y1, m_uiButtonOpenGL.GetSource().x2, m_uiButtonOpenGL.GetSource().y2);
+	a_renderer.DrawTexture(m_uiButtonDirectX11.GetDestination().x1, m_uiButtonDirectX11.GetDestination().y1, m_uiButtonDirectX11.GetDestination().x2, m_uiButtonDirectX11.GetDestination().y2, &m_uiButtonDirectX11.GetTexture(), m_uiButtonDirectX11.GetSource().x1, m_uiButtonDirectX11.GetSource().y1, m_uiButtonDirectX11.GetSource().x2, m_uiButtonDirectX11.GetSource().y2);
+	a_renderer.DrawTexture(m_uiButtonDirect2D.GetDestination().x1, m_uiButtonDirect2D.GetDestination().y1, m_uiButtonDirect2D.GetDestination().x2, m_uiButtonDirect2D.GetDestination().y2, &m_uiButtonDirect2D.GetTexture(), m_uiButtonDirect2D.GetSource().x1, m_uiButtonDirect2D.GetSource().y1, m_uiButtonDirect2D.GetSource().x2, m_uiButtonDirect2D.GetSource().y2);
 
 	auto fontTexture = CTextureManager::GetInstance().GetTextureByName(TEXTURE_FONT);
 
-	a_renderer->DrawString(100 + 10, 530 + 10, "GDI", RGB(255, 0, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
-	a_renderer->DrawString(266 + 10, 530 + 10, "OpenGL", RGB(0, 255, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
-	a_renderer->DrawString(433 + 10, 530 + 10, "DirectX", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
-	a_renderer->DrawString(600 + 10, 530 + 10, "Direct2D", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
+	a_renderer.DrawString(100 + 10, 530 + 10, "GDI", RGB(255, 0, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
+	a_renderer.DrawString(266 + 10, 530 + 10, "OpenGL", RGB(0, 255, 0), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
+	a_renderer.DrawString(433 + 10, 530 + 10, "DirectX", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
+	a_renderer.DrawString(600 + 10, 530 + 10, "Direct2D", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
 
-	a_renderer->DrawTexture(m_uiButtonGame.GetDestination().x1, m_uiButtonGame.GetDestination().y1, m_uiButtonGame.GetDestination().x2, m_uiButtonGame.GetDestination().y2, m_uiButtonGame.GetTexture(), m_uiButtonGame.GetSource().x1, m_uiButtonGame.GetSource().y1, m_uiButtonGame.GetSource().x2, m_uiButtonGame.GetSource().y2);
-	a_renderer->DrawString(270 + 12, 370 + 10, "Start Game", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
+	a_renderer.DrawTexture(m_uiButtonGame.GetDestination().x1, m_uiButtonGame.GetDestination().y1, m_uiButtonGame.GetDestination().x2, m_uiButtonGame.GetDestination().y2, &m_uiButtonGame.GetTexture(), m_uiButtonGame.GetSource().x1, m_uiButtonGame.GetSource().y1, m_uiButtonGame.GetSource().x2, m_uiButtonGame.GetSource().y2);
+	a_renderer.DrawString(270 + 12, 370 + 10, "Start Game", RGB(0, 0, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
 
 	char buffer[200] = {};
 	sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i",
@@ -63,7 +59,7 @@ void CMenuScene::Draw(IRenderer * a_renderer)
 		CMouse::isRightMouseDown ? "true" : "false",
 		static_cast<int>(1 / CTime::GetInstance().DeltaTime())
 	);
-	a_renderer->DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
+	a_renderer.DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
 }
 
 void CMenuScene::Shutdown()

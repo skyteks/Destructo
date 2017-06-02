@@ -153,9 +153,9 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(std::string a_path)
 	textureData.pSysMem = bmp.m_data;
 	textureData.SysMemPitch = bmp.m_header.m_width * 4;
 
-	ID3D11Texture2D* directX11Texture = nullptr;
+	ID3D11Texture2D* texture2D = nullptr;
 
-	HRESULT hResult = m_device->CreateTexture2D(&textureDesc, &textureData, &directX11Texture);
+	HRESULT hResult = m_device->CreateTexture2D(&textureDesc, &textureData, &texture2D);
 
 	free(bmp.m_data);
 	bmp.m_data = nullptr;
@@ -164,30 +164,23 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(std::string a_path)
 		return nullptr;
 
 	ID3D11ShaderResourceView* m_shaderResourceView;
-	hResult = m_device->CreateShaderResourceView(directX11Texture, nullptr, &m_shaderResourceView);
+	hResult = m_device->CreateShaderResourceView(texture2D, nullptr, &m_shaderResourceView);
 
 	if (Failed(hResult))
 		return nullptr;
 
-	return new CTextureDirectX11(directX11Texture, m_shaderResourceView);
+	return new CTextureDirectX11(texture2D, m_shaderResourceView);
 }
 
 
 void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
 {
-	CTextureDirectX11* directX11Texture = reinterpret_cast<CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
-	CTextureDirectX11* directX11OpacityMask = nullptr;
+	const CTextureDirectX11* directX11Texture = static_cast<const CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+	const CTextureDirectX11* directX11OpacityMask = nullptr;
 	if (a_gameObject.GetOpacityMaskName() != "")
 	{
-		directX11OpacityMask = reinterpret_cast<CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+		directX11OpacityMask = static_cast<const CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
 	}
-
-	m_deviceContext->PSSetShaderResources(0, 1, &m_shaderResourceView);
-	if (m_shaderResourceView != directX11Texture->GetShaderResourceView())
-	{
-		Flush();
-	}
-	m_shaderResourceView = directX11Texture->GetShaderResourceView();
 
 	SVector3 position = a_gameObject.GetPosition();
 	SVector3 scale = a_gameObject.GetScale();
@@ -247,19 +240,21 @@ void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
 	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, point4.x, point4.y, 1, 1, 1, 1);
 
 	//vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, point4.x, point4.y, 1, 1, 1, 1);
+
+	ID3D11ShaderResourceView* shaderResourceView = directX11Texture->GetShaderResourceView();
+	m_deviceContext->PSSetShaderResources(0, 1, &shaderResourceView);
+	if (directX11OpacityMask != nullptr)
+	{
+		ID3D11ShaderResourceView* shaderResourceView = directX11OpacityMask->GetShaderResourceView();
+		m_deviceContext->PSSetShaderResources(1, 1, &shaderResourceView);
+	}
+	Flush();
 }
 
 
-void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
+void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
-	CTextureDirectX11* directX11Texture = reinterpret_cast<CTextureDirectX11*>(a_texture);
-
-	m_deviceContext->PSSetShaderResources(0, 1, &m_shaderResourceView);
-	if (m_shaderResourceView != directX11Texture->GetShaderResourceView())
-	{
-		Flush();
-	}
-	m_shaderResourceView = directX11Texture->GetShaderResourceView();
+	const CTextureDirectX11* directX11Texture = reinterpret_cast<const CTextureDirectX11*>(a_texture);
 
 	SRect source;
 	source.x1 = Map(a_posX, 0, m_windowWidth, -1, 1);
@@ -282,16 +277,23 @@ void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_
 	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
 
 	vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
+
+	m_deviceContext->PSSetShaderResources(0, 1, &m_shaderResourceView);
+	//if (m_shaderResourceView != directX11Texture->GetShaderResourceView())
+	{
+		Flush();
+	}
+	//m_shaderResourceView = directX11Texture->GetShaderResourceView();
 }
 
 
-void CRendererDirectX11::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
+void CRendererDirectX11::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, const ITexture* a_opacityMask)
 {
 
 }
 
 
-void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture)
+void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, const ITexture* a_fontTexture)
 {
 	if (a_string == nullptr)
 		return;
@@ -299,8 +301,8 @@ void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string
 	SRect source;
 	SRect dest;
 
-	unsigned int counter = 0;
-	unsigned int newLines = 0;
+	uint32_t counter = 0;
+	uint32_t newLines = 0;
 
 	while (*a_string)
 	{

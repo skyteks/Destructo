@@ -49,11 +49,11 @@ ITexture* CRendererGDI::LoadTextureFromFile(std::string a_path)
 
 void CRendererGDI::DrawObject(CGameObject& a_gameObject)
 {
-	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
-	CTextureGDI* gdiOpacityMask = nullptr;
+	const CTextureGDI* gdiTexture = static_cast<const CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+	const CTextureGDI* gdiOpacityMask = nullptr;
 	if (a_gameObject.GetOpacityMaskName() != "")
 	{
-		gdiOpacityMask = reinterpret_cast<CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+		gdiOpacityMask = static_cast<const CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
 	}
 
 	SVector3 position = a_gameObject.GetPosition();
@@ -126,20 +126,20 @@ void CRendererGDI::DrawObject(CGameObject& a_gameObject)
 }
 
 
-void CRendererGDI::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
+void CRendererGDI::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
-	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(a_texture);
+	const CTextureGDI* gdiTexture = static_cast<const CTextureGDI*>(a_texture);
 	TransparentBlt(m_backbufferDC, a_posX, a_posY, a_width, a_height, gdiTexture->GetBitmapDeviceContect(), a_imgX, a_imgY, a_imgWidth, a_imgHeight, RGB(255, 0, 255));
 }
 
 
-void CRendererGDI::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
+void CRendererGDI::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, const ITexture* a_opacityMask)
 {
-	CTextureGDI* gdiTexture = reinterpret_cast<CTextureGDI*>(a_texture);
-	CTextureGDI* gdiOpacityMask = nullptr;
+	const CTextureGDI* gdiTexture = static_cast<const CTextureGDI*>(a_texture);
+	const CTextureGDI* gdiOpacityMask = nullptr;
 	if (a_opacityMask != nullptr)
 	{
-		gdiOpacityMask = reinterpret_cast<CTextureGDI*>(a_opacityMask);
+		gdiOpacityMask = static_cast<const CTextureGDI*>(a_opacityMask);
 	}
 
 	float texWidth = static_cast<float>(gdiTexture->GetWidth());
@@ -182,7 +182,7 @@ void CRendererGDI::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_widt
 //}
 
 
-void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture)
+void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, const ITexture* a_fontTexture)
 {
 	if (a_string == nullptr)
 		return;
@@ -213,8 +213,8 @@ void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int 
 		SRect source;
 		SRect dest;
 
-		unsigned int counter = 0;
-		unsigned int newLines = 0;
+		uint32_t counter = 0;
+		uint32_t newLines = 0;
 
 		while (*a_string)
 		{

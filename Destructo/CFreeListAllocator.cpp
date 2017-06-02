@@ -78,7 +78,7 @@ void CFreeListAllocator::Deallocate(char* chunk)
 	} while (header->inUse);
 }
 
-size_t CFreeListAllocator::GetBiggestFreeChunk()
+size_t CFreeListAllocator::GetBiggestFreeChunk() const
 {
 	size_t chunkSize = 0;
 	SFreeListHeader* header = firstHeader;

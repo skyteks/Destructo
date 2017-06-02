@@ -7,7 +7,6 @@ CTextureManager::CTextureManager()
 
 CTextureManager::~CTextureManager()
 {
-
 }
 
 void CTextureManager::Initialize(IRenderer ** a_renderer)
@@ -34,7 +33,7 @@ CTextureManager& CTextureManager::GetInstance()
 	return s_textureManager;
 }
 
-bool CTextureManager::LoadTexture(std::string a_path)
+bool CTextureManager::LoadTexture(const std::string a_path)
 {
 	// is present in map? ==> return false;
 	//auto found = m_textureMap.find(a_path);
@@ -50,12 +49,12 @@ bool CTextureManager::LoadTexture(std::string a_path)
 	return true;
 }
 
-ITexture* CTextureManager::GetTextureByName(std::string a_path)
+ITexture* CTextureManager::GetTextureByName(const std::string a_path) const
 {
-	return m_textureMap[a_path];
+	return m_textureMap.at(a_path);
 }
 
-const char * CTextureManager::GetNameByTexture(ITexture* a_texture)
+const char* CTextureManager::GetNameByTexture(const ITexture* a_texture) const
 {
 	for (auto& element : m_textureMap)
 	{

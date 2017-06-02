@@ -1,7 +1,5 @@
 #include "CTextureDirectX11.h"
 
-
-
 CTextureDirectX11::CTextureDirectX11(ID3D11Texture2D* a_texture, ID3D11ShaderResourceView* a_shaderResView)
 {
 	m_texture = a_texture;
@@ -20,27 +18,27 @@ CTextureDirectX11::~CTextureDirectX11()
 	SafeRelease(m_shaderResourceView);
 }
 
-int CTextureDirectX11::GetWidth()
+int CTextureDirectX11::GetWidth() const
 {
 	return m_width;
 }
 
-int CTextureDirectX11::GetHeight()
+int CTextureDirectX11::GetHeight() const
 {
 	return m_height;
 }
 
-ID3D11ShaderResourceView* CTextureDirectX11::GetShaderResourceView()
+ID3D11ShaderResourceView* CTextureDirectX11::GetShaderResourceView() const
 {
 	return m_shaderResourceView;
 }
 
-int CTextureDirectX11::GetPitch()
+int CTextureDirectX11::GetPitch() const
 {
 	return m_pitch;
 }
 
-int CTextureDirectX11::GetBPP()
+int CTextureDirectX11::GetBPP() const
 {
 	return m_bitsPerPixel;
 }

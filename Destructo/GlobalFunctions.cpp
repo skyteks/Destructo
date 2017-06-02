@@ -6,7 +6,7 @@ SBitmap LoadBitmapAndAddAlpha(std::string a_path)
 	fopen_s(&file, a_path.c_str(), "rb");
 
 	SBitmap bmp;
-	
+
 	fread(&bmp.m_header, sizeof(SBitmapHeader), 1, file);
 
 	fseek(file, 0, SEEK_END);
@@ -69,18 +69,37 @@ float Map(float a_value, float a_inMin, float a_inMax, float a_outMin, float a_o
 }
 
 
-static unsigned int newDeleteCounter = 0;
-static unsigned int newCounter = 0;
+static uint32_t newDeleteCounter = 0;
+static uint32_t newCounter = 0;
+#include <queue>
+#include <Windows.h>
+#include <WinBase.h>
+
+//static std::queue<char*> callstack;// = std::queue<char*>();
+static bool first = true;
 
 void NewDeleteLeaks()
 {
-	unsigned int tmp = newDeleteCounter;
-	unsigned int tmp2 = newCounter;
+	
+	//leakdetektor
+	//valgrind
+	uint32_t tmp = newDeleteCounter;
+	uint32_t tmp2 = newCounter;
 }
 
 void* operator new (size_t a_size)
 {
+	//system backtrace (callstack holen, hinter new adresse speichern)
 	atexit(NewDeleteLeaks);
+	if (first)
+	{
+		first = false;
+		//callstack = std::queue<char*>();
+	}
+	//void* backtrace;
+	//CaptureStackBackTrace(0, 60, &backtrace, nullptr);
+	//callstack.push(reinterpret_cast<char*>(backtrace));
+
 	newDeleteCounter++;
 	newCounter++;
 	return malloc(a_size);

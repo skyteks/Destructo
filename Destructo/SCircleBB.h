@@ -6,10 +6,10 @@ struct SCircleBB
 public:
 	SCircleBB(SVector3 a_center, float a_radius);
 
-	SVector3 GetCenter();
-	float GetRadius();
-	bool ContainsPoint(SVector3 a_point);
-	bool Intersects(SCircleBB& a_other);
+	const SVector3& GetCenter() const;
+	float GetRadius() const;
+	bool ContainsPoint(SVector3 a_point) const;
+	bool Intersects(SCircleBB a_other) const;
 
 
 private:

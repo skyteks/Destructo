@@ -12,11 +12,11 @@ public:
 	CMenuScene();
 
 	~CMenuScene();
-	bool Initialize(IRenderer * a_renderer) override;
+	bool Initialize(IRenderer& a_renderer) override;
 
 	void Update() override;
 
-	void Draw(IRenderer * a_renderer) override;
+	void Draw(IRenderer& a_renderer) const override;
 
 	void Shutdown() override;
 

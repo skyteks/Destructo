@@ -11,19 +11,19 @@ public:
 	
 	~CTextureOpenGL() override;
 
-	int GetWidth() override;
+	int GetWidth() const override;
 
-	int GetHeight() override;
+	int GetHeight() const override;
 
-	int GetPitch() override;
+	int GetPitch() const override;
 
-	int GetBPP() override;
+	int GetBPP() const override;
 
 	void SetPixel(int a_x, int a_y, int a_color) override;
 
-	void AddOpacityMask(CTextureOpenGL* a_opacityMask);
+	void AddOpacityMask(const CTextureOpenGL* a_opacityMask) const;
 
-	GLuint GetTextureID();
+	GLuint GetTextureID() const;
 
 	void* GetData() const;
 

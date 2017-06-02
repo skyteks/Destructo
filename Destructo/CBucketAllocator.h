@@ -11,7 +11,7 @@ public:
 
 	void Deallocate(char* bucket);
 
-	unsigned int GetFreeSize();
+	size_t GetFreeSize() const;
 private:
 	char* allocationBeginning;
 	char* bucketsBeginning;

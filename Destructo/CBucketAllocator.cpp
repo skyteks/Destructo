@@ -85,7 +85,7 @@ void CBucketAllocator::Deallocate(char* bucket)
 	throw std::exception();
 }
 
-size_t CBucketAllocator::GetFreeSize()
+size_t CBucketAllocator::GetFreeSize() const
 {
 	size_t freeOnes = 0;
 	for (size_t i = 0; i < totalBuckets; i++)

@@ -249,11 +249,14 @@
     <ClInclude Include="IComponent.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="SRigidbody.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="SCircleBB.h">
       <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CRigidbody.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -356,11 +359,14 @@
     <ClCompile Include="CFreeListAllocator.cpp">
       <Filter>Quelldateien\Allocators</Filter>
     </ClCompile>
-    <ClCompile Include="SRigidbody.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="SCircleBB.cpp">
       <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CRigidbody.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

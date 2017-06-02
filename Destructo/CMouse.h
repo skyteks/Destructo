@@ -1,10 +1,12 @@
 #pragma once
 
+#include <stdint.h>
+
 class CMouse
 {
 public:
-	static unsigned int x;
-	static unsigned int y;
+	static uint32_t x;
+	static uint32_t y;
 	static bool isLeftMouseDown;
 	static bool isRightMouseDown;
 };

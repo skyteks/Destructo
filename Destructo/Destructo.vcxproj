@@ -151,6 +151,7 @@
     <ClInclude Include="CAudio.h" />
     <ClInclude Include="CAudioChannel.h" />
     <ClInclude Include="CBucketAllocator.h" />
+    <ClInclude Include="CCollider.h" />
     <ClInclude Include="CFrameAllocator.h" />
     <ClInclude Include="CFreeListAllocator.h" />
     <ClInclude Include="CGameObject.h" />
@@ -195,7 +196,7 @@
     <ClInclude Include="SCircleBB.h" />
     <ClInclude Include="SMatrix4x4.h" />
     <ClInclude Include="SRect.h" />
-    <ClInclude Include="SRigidbody.h" />
+    <ClInclude Include="CRigidbody.h" />
     <ClInclude Include="SVector3.h" />
     <ClInclude Include="SVector4.h" />
     <ClInclude Include="SVertex.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="CAudio.cpp" />
     <ClCompile Include="CAudioChannel.cpp" />
     <ClCompile Include="CBucketAllocator.cpp" />
+    <ClCompile Include="CCollider.cpp" />
     <ClCompile Include="CFrameAllocator.cpp" />
     <ClCompile Include="CFreeListAllocator.cpp" />
     <ClCompile Include="CGameObject.cpp" />
@@ -238,7 +240,7 @@
     <ClCompile Include="SAABB.cpp" />
     <ClCompile Include="SCircleBB.cpp" />
     <ClCompile Include="SMatrix4x4.cpp" />
-    <ClCompile Include="SRigidbody.cpp" />
+    <ClCompile Include="CRigidbody.cpp" />
     <ClCompile Include="SVector3.cpp" />
     <ClCompile Include="CTime.cpp" />
     <ClCompile Include="SVector4.cpp" />

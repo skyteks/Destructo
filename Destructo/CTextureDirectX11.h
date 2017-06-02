@@ -17,17 +17,17 @@ public:
 
 	~CTextureDirectX11() override;
 
-	int GetWidth() override;
+	int GetWidth() const override;
 
-	int GetHeight() override;
+	int GetHeight() const override;
 
-	int GetPitch() override;
+	int GetPitch() const override;
 
-	int GetBPP() override;
+	int GetBPP() const override;
 
 	void SetPixel(int a_x, int a_y, int a_color) override;
 
-	ID3D11ShaderResourceView* GetShaderResourceView();
+	ID3D11ShaderResourceView* GetShaderResourceView() const;
 
 private:
 
@@ -40,6 +40,6 @@ private:
 
 	UINT* m_data = nullptr;
 	ID3D11Texture2D* m_texture = nullptr;
-	ID3D11ShaderResourceView* m_shaderResourceView = nullptr;
+	mutable ID3D11ShaderResourceView* m_shaderResourceView = nullptr;
 };
 

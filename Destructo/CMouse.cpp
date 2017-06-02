@@ -1,6 +1,6 @@
 #include "CMouse.h"
 
-unsigned int CMouse::y;
-unsigned int CMouse::x;
+uint32_t CMouse::y;
+uint32_t CMouse::x;
 bool CMouse::isLeftMouseDown;
 bool CMouse::isRightMouseDown;

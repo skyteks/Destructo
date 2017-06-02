@@ -18,7 +18,7 @@ public:
 
 	void Deallocate(char* chunk);
 
-	size_t GetBiggestFreeChunk();
+	size_t GetBiggestFreeChunk() const;
 private:
 	char* allocationBeginning;
 	size_t allocatedSize;

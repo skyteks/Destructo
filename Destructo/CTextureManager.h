@@ -18,9 +18,9 @@ public:
 	void Shutdown();
 	
 	static CTextureManager& GetInstance();
-	bool LoadTexture(std::string a_path);
-	ITexture* GetTextureByName(std::string a_path);
-	const char* GetNameByTexture(ITexture* a_texture);
+	bool LoadTexture(const std::string a_path);
+	ITexture* GetTextureByName(const std::string a_path) const;
+	const char* GetNameByTexture(const ITexture* a_texture) const;
 
 private:
 	TextureMap m_textureMap;

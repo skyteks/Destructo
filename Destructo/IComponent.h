@@ -2,8 +2,8 @@
 #include "CGameObject.h"
 class CGameObject;
 
-struct IComponent
+class IComponent
 {
 public:
-	virtual void Update(CGameObject* a_object) = 0;
+	virtual void Update(CGameObject& a_object) = 0;
 };

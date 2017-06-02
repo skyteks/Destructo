@@ -19,17 +19,17 @@ public:
 
 	~CTextureDirect2D() override;
 
-	int GetWidth() override;
+	int GetWidth() const override;
 
-	int GetHeight() override;
+	int GetHeight() const override;
 
-	int GetPitch() override;
+	int GetPitch() const override;
 
-	int GetBPP() override;
+	int GetBPP() const override;
 
 	void SetPixel(int a_x, int a_y, int a_color) override;
 
-	ID2D1Bitmap* GetBitmapHandle();
+	ID2D1Bitmap* GetBitmapHandle() const;
 
 	static ID2D1HwndRenderTarget* s_renderTarget;
 
@@ -40,7 +40,7 @@ private:
 	int m_bitsPerPixel;
 	bool m_isLocked;
 
-	ID2D1Bitmap *m_bitmap = nullptr;
+	mutable ID2D1Bitmap* m_bitmap = nullptr;
 };
 
 

@@ -36,7 +36,7 @@ public:
 
 	void Shutdown();
 
-	static LRESULT CALLBACK WndProc(HWND a_hwnd, unsigned int a_Message, WPARAM a_wParam, LPARAM a_lParam);
+	static LRESULT CALLBACK WndProc(HWND a_hwnd, uint32_t a_Message, WPARAM a_wParam, LPARAM a_lParam);
 
 	bool Failed(HRESULT aResult);
 

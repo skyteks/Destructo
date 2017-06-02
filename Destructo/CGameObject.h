@@ -4,17 +4,18 @@
 #include "SRect.h"
 #include "SMatrix4x4.h"
 #include "GlobalFunctions.h"
-#include "SRigidbody.h"
-#include "SCircleBB.h"
+#include "CRigidbody.h"
+#include "CCollider.h"
 
-class SRigidbody;
+class CRigidbody;
+class CCollider;
 
 class CGameObject
 {
 public:
 	CGameObject();
 
-	CGameObject(SVector3 a_position, SVector3 a_scale, float a_rotation, std::string a_textureName, std::string a_opacityMask, SRigidbody* a_rigid, SCircleBB* a_collider);
+	CGameObject(SVector3 a_position, SVector3 a_scale, float a_rotation, std::string a_textureName, std::string a_opacityMask, CRigidbody* a_rigid, CCollider* a_collider);
 
 	~CGameObject();
 
@@ -23,16 +24,16 @@ public:
 	void AddRotation(float a_rotation);
 	void SetScale(SVector3 a_scale);
 
-	const SVector3& GetPosition();
-	const SMatrix4x4& GetRotation();
-	float GetRotationAngle();
-	const SVector3& GetScale();
-	const SRect& GetImageSection();
-	SRigidbody* GetRigidbody();
-	SCircleBB* GetCircleCollider();
+	const SVector3& GetPosition() const;
+	const SMatrix4x4& GetRotation() const;
+	float GetRotationAngle() const;
+	const SVector3& GetScale() const;
+	const SRect& GetImageSection() const;
+	CRigidbody* GetRigidbody() const;
+	CCollider* GetCollider() const;
 
-	std::string GetTextureName();
-	std::string GetOpacityMaskName();
+	const std::string GetTextureName() const;
+	const std::string GetOpacityMaskName() const;
 
 	void Update();
 
@@ -45,7 +46,6 @@ private:
 	float m_rotationAngle;
 	SMatrix4x4 m_rotationMatrix;
 	
-	SRigidbody* m_rigid;
-	SCircleBB* m_collider;
+	CRigidbody* m_rigid = nullptr;
+	CCollider* m_col = nullptr;
 };
-

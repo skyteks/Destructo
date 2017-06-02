@@ -105,7 +105,7 @@ bool CRendererDirect2D::Initialize(HWND a_hwnd)
 }
 
 
-ITexture * CRendererDirect2D::LoadTextureFromFile(std::string a_path)
+ITexture* CRendererDirect2D::LoadTextureFromFile(std::string a_path)
 {
 	return new CTextureDirect2D(a_path);
 }
@@ -118,11 +118,11 @@ void CRendererDirect2D::Begin()
 
 void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 {
-	CTextureDirect2D* direct2DTexture = reinterpret_cast<CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
-	CTextureDirect2D* direct2DOpacityMask = nullptr;
+	const CTextureDirect2D* direct2DTexture = reinterpret_cast<const CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+	const CTextureDirect2D* direct2DOpacityMask = nullptr;
 	if (a_gameObject.GetOpacityMaskName() != "")
 	{
-		direct2DOpacityMask = reinterpret_cast<CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+		direct2DOpacityMask = reinterpret_cast<const CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
 	}
 
 	SVector3 position = a_gameObject.GetPosition();
@@ -154,9 +154,9 @@ void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 }
 
 
-void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
+void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
-	CTextureDirect2D* direct2DTexture = reinterpret_cast<CTextureDirect2D*>(a_texture);
+	const CTextureDirect2D* direct2DTexture = reinterpret_cast<const CTextureDirect2D*>(a_texture);
 
 	D2D1_RECT_F direct2DSource;
 	direct2DSource.left = a_imgX;
@@ -184,13 +184,13 @@ void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_h
 	m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), direct2DDest, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, direct2DSource);
 }
 
-void CRendererDirect2D::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture * a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture * a_opacityMask)
+void CRendererDirect2D::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, const ITexture* a_opacityMask)
 {
 
 }
 
 
-void CRendererDirect2D::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture * a_fontTexture)
+void CRendererDirect2D::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, const ITexture* a_fontTexture)
 {
 	if (a_string == nullptr)
 		return;
@@ -200,7 +200,7 @@ void CRendererDirect2D::DrawString(int a_posX, int a_posY, const char* a_string,
 		RECT rect;
 		GetClientRect(m_windowHandle, &rect);
 
-		unsigned int textLength = strlen(a_string);
+		uint32_t textLength = strlen(a_string);
 
 		D2D1_RECT_F layoutRect = D2D1::RectF(
 			(float)a_posX,
@@ -230,8 +230,8 @@ void CRendererDirect2D::DrawString(int a_posX, int a_posY, const char* a_string,
 		SRect source;
 		SRect dest;
 
-		unsigned int counter = 0;
-		unsigned int newLines = 0;
+		uint32_t counter = 0;
+		uint32_t newLines = 0;
 
 		while (*a_string)
 		{

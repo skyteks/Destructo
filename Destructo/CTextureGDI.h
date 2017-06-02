@@ -10,19 +10,19 @@ public:
 
 	~CTextureGDI() override;
 
-	int GetWidth() override;
+	int GetWidth() const override;
 
-	int GetHeight() override;
+	int GetHeight() const override;
 
-	int GetPitch() override;
+	int GetPitch() const override;
 
-	int GetBPP() override;
+	int GetBPP() const override;
 
 	void SetPixel(int a_x, int a_y, int a_color) override;
 
-	HBITMAP GetBitmapHandle();
+	HBITMAP GetBitmapHandle() const;
 
-	HDC GetBitmapDeviceContect();
+	HDC GetBitmapDeviceContect() const;
 
 private:
 

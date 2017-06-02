@@ -20,7 +20,7 @@ public:
 
 private:
 	//Elements-storage size indicator
-	static const int m_nodeCapacity = 4;
+	static const byte m_nodeCapacity = 4;
 
 	SAABB m_boundary;
 

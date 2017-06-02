@@ -11,7 +11,7 @@ CGameScene::~CGameScene()
 }
 
 
-bool CGameScene::Initialize(IRenderer* a_renderer)
+bool CGameScene::Initialize(IRenderer& a_renderer)
 {
 
 	CTextureManager::GetInstance().LoadTexture(TEXTURE_TERRAIN);
@@ -21,11 +21,12 @@ bool CGameScene::Initialize(IRenderer* a_renderer)
 	CTextureManager::GetInstance().LoadTexture(TEXTURE_PLAYER_2);
 	CTextureManager::GetInstance().LoadTexture(TEXTURE_FONT);
 
-	SRigidbody* playerRigid = new SRigidbody();
-	SCircleBB* playerCol = new SCircleBB(SVector3(0,0),100);
+	CRigidbody* playerRigid = new CRigidbody();
+	CCollider* playerCol = new CCollider(SCircleBB(SVector3(0, 0), 100));
 
-	SRigidbody* testRigid = new SRigidbody();
-	SCircleBB* testCol = new SCircleBB(SVector3(0, 0), 100);
+	CRigidbody* testRigid = new CRigidbody();
+	CCollider* testCol = new CCollider(SCircleBB(SVector3(0, 0), 100));
+
 
 	m_objectPlayer = new CGameObject(SVector3(100.0f, 100.0f), SVector3(1.0f, 1.0f), 45.0f, TEXTURE_PLAYER, "", playerRigid, playerCol);
 	m_objectTerrain = new CGameObject(SVector3(0.0f, 0.0f), SVector3(1.0f, 1.0f), 0.0f, TEXTURE_TERRAIN, TEXTURE_COLLISION, nullptr, nullptr);
@@ -99,46 +100,37 @@ void CGameScene::Update()
 }
 
 
-void CGameScene::Draw(IRenderer* a_renderer)
+void CGameScene::Draw(IRenderer& a_renderer) const
 {
-	if (a_renderer == nullptr)
-	{
-		return;
-	}
-
 	auto backgroundTexture = CTextureManager::GetInstance().GetTextureByName(TEXTURE_BACKGROUND);
 	auto terrainTexture = CTextureManager::GetInstance().GetTextureByName(TEXTURE_TERRAIN);
 	auto collisionTexture = CTextureManager::GetInstance().GetTextureByName(TEXTURE_COLLISION);
 	auto playerTexture = CTextureManager::GetInstance().GetTextureByName(TEXTURE_PLAYER);
 	auto fontTexture = CTextureManager::GetInstance().GetTextureByName(TEXTURE_FONT);
 
-	//a_renderer->DrawTexture(0, 0, 800, 600, backgroundTexture, 0, 0, backgroundTexture->GetWidth(), backgroundTexture->GetHeight());
-	a_renderer->DrawObject(*m_objectBackground);
-	//a_renderer->DrawTextureWithOpacityMask(0, 0, 800, 600, terrainTexture, 0, 0, terrainTexture->GetWidth(), terrainTexture->GetHeight(), collisionTexture);
-	a_renderer->DrawObject(*m_objectTerrain);
-	//a_renderer->DrawTexture(m_playerPosX, m_playerPosY, 32, 32, playerTexture, 0, 0, playerTexture->GetWidth(), playerTexture->GetHeight());
-	a_renderer->DrawObject(*m_objectPlayer);
+	//a_renderer.DrawTexture(0, 0, 800, 600, backgroundTexture, 0, 0, backgroundTexture->GetWidth(), backgroundTexture->GetHeight());
+	a_renderer.DrawObject(*m_objectBackground);
+	//a_renderer.DrawTextureWithOpacityMask(0, 0, 800, 600, terrainTexture, 0, 0, terrainTexture->GetWidth(), terrainTexture->GetHeight(), collisionTexture);
+	a_renderer.DrawObject(*m_objectTerrain);
+	//a_renderer.DrawTexture(m_playerPosX, m_playerPosY, 32, 32, playerTexture, 0, 0, playerTexture->GetWidth(), playerTexture->GetHeight());
+	a_renderer.DrawObject(*m_objectPlayer);
 
-	a_renderer->DrawObject(*m_objectPlayer2);
+	a_renderer.DrawObject(*m_objectPlayer2);
 
-	//a_renderer->DrawTexture(0, 0, 0, 0, buttonTexture, 0, 0, 0, 0);//DO NOT REMOVE (BUG)
+	//a_renderer.DrawTexture(0, 0, 0, 0, buttonTexture, 0, 0, 0, 0);//DO NOT REMOVE (BUG)
 
 	char buffer[200] = {};
-	sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i\n %f %f \n %f \n %f",
+	sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i\n %f %f \n",
 		CMouse::x,
 		CMouse::y,
 		CMouse::isLeftMouseDown ? "true" : "false",
 		CMouse::isRightMouseDown ? "true" : "false",
 		static_cast<int>(1 / CTime::GetInstance().DeltaTime()),
 		m_objectPlayer->GetPosition().x,
-		m_objectPlayer->GetPosition().y,
-		m_objectPlayer->GetRigidbody()->GetVelocity().y,
-		m_objectPlayer2->GetRigidbody()->GetVelocity().y
+		m_objectPlayer->GetPosition().y
 	);
-	a_renderer->DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
+	a_renderer.DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
 }
-
-
 
 
 void CGameScene::Shutdown()

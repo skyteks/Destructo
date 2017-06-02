@@ -88,12 +88,11 @@ void CRendererOpenGL::Begin()
 
 void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 {
-	CTextureOpenGL* openGLTexture = reinterpret_cast<CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
-
-	CTextureOpenGL* openGLOpacityMask = nullptr;
+	const CTextureOpenGL* openGLTexture = reinterpret_cast<const CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+	const CTextureOpenGL* openGLOpacityMask = nullptr;
 	if (a_gameObject.GetOpacityMaskName() != "")
 	{
-		openGLOpacityMask = reinterpret_cast<CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+		openGLOpacityMask = reinterpret_cast<const CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
 		openGLTexture->AddOpacityMask(openGLOpacityMask);
 	}
 
@@ -179,9 +178,9 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 	glEnd();
 }
 
-void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
+void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight)
 {
-	CTextureOpenGL* openGLTexture = reinterpret_cast<CTextureOpenGL*>(a_texture);
+	const CTextureOpenGL* openGLTexture = static_cast<const CTextureOpenGL*>(a_texture);
 
 	glBindTexture(GL_TEXTURE_2D, openGLTexture->GetTextureID());
 
@@ -228,10 +227,10 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 	glEnd();
 }
 
-void CRendererOpenGL::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, ITexture* a_opacityMask)
+void CRendererOpenGL::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, const ITexture* a_opacityMask)
 {
-	CTextureOpenGL* openGLTexture = reinterpret_cast<CTextureOpenGL*>(a_texture);
-	CTextureOpenGL* openGLOpacityMask = reinterpret_cast<CTextureOpenGL*>(a_opacityMask);
+	const CTextureOpenGL* openGLTexture = static_cast<const CTextureOpenGL*>(a_texture);
+	const CTextureOpenGL* openGLOpacityMask = static_cast<const CTextureOpenGL*>(a_opacityMask);
 
 	openGLTexture->AddOpacityMask(openGLOpacityMask);
 
@@ -280,7 +279,7 @@ void CRendererOpenGL::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_w
 	glEnd();
 }
 
-void CRendererOpenGL::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, ITexture* a_fontTexture)
+void CRendererOpenGL::DrawString(int a_posX, int a_posY, const char* a_string, int a_textColor, int a_backgroundColor, UINT a_format, const ITexture* a_fontTexture)
 {
 	if (a_string == nullptr)
 		return;
@@ -288,8 +287,8 @@ void CRendererOpenGL::DrawString(int a_posX, int a_posY, const char* a_string, i
 	SRect source;
 	SRect dest;
 
-	unsigned int counter = 0;
-	unsigned int newLines = 0;
+	uint32_t counter = 0;
+	uint32_t newLines = 0;
 
 	while (*a_string)
 	{

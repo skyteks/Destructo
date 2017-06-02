@@ -11,7 +11,7 @@
 #include "CTextureManager.h"
 #include "CGameObject.h"
 #include "CQuadTree.h"
-#include "SCircleBB.h"
+#include "CCollider.h"
 
 class CGameScene : public IScene
 {
@@ -20,13 +20,11 @@ public:
 
 	~CGameScene() override;
 
-	bool Initialize(IRenderer* a_renderer) override;
+	bool Initialize(IRenderer& a_renderer) override;
 
 	void Update() override;
 
-	void Draw(IRenderer* a_renderer) override;
-
-	
+	void Draw(IRenderer& a_renderer) const override;
 
 	void Shutdown() override;
 

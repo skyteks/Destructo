@@ -157,21 +157,21 @@ void CQuadTree::Update()
 {
 	if (m_elements.size() > 0)
 	{
-		for (auto &element : m_elements)
+		for (auto *element : m_elements)
 		{
-			for (auto &other : m_elements)
+			for (auto *other : m_elements)
 			{
 				if (other != element)
 				{
-					if (element->GetCircleCollider() != nullptr && other->GetCircleCollider() != nullptr &&
-						element->GetCircleCollider()->Intersects(*other->GetCircleCollider()))
+					if (//element->GetCollider() != nullptr && other->GetCollider() != nullptr &&
+						element->GetCollider()->GetCircleBB().Intersects(other->GetCollider()->GetCircleBB()))
 					{
 						int a = 1;
 					}
 				}
 				if (element->GetRigidbody() != nullptr)
 				{
-					element->GetRigidbody()->Update(element);
+					element->GetRigidbody()->Update(*element);
 				}
 			}
 			element->Update();

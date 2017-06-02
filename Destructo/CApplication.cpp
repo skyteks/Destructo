@@ -15,7 +15,6 @@ CApplication::CApplication()
 
 CApplication::~CApplication()
 {
-
 }
 
 
@@ -90,7 +89,7 @@ bool CApplication::ChangeScene(EScenes a_newScene)
 		break;
 	}
 	
-	wResult = m_scene->Initialize(m_renderer);
+	wResult = m_scene->Initialize(*m_renderer);
 	if (!wResult)
 		return false;
 
@@ -137,7 +136,7 @@ bool CApplication::ChangeRenderer(ERenderer a_newRenderer)
 		return false;
 
 	if (m_scene != nullptr)
-		m_scene->Initialize(m_renderer);
+		m_scene->Initialize(*m_renderer);
 
 	return true;
 }
@@ -203,7 +202,7 @@ void CApplication::Run()
 
 		// Draw scene
 		m_renderer->Begin();
-		m_scene->Draw(m_renderer);
+		m_scene->Draw(*m_renderer);
 		m_renderer->End();
 
 		deltaTimer.Tick();
@@ -247,7 +246,7 @@ void CApplication::Shutdown()
 }
 
 
-LRESULT CApplication::WndProc(HWND a_Hwnd, unsigned int a_Message, WPARAM a_WParam, LPARAM a_LPARAM)
+LRESULT CApplication::WndProc(HWND a_Hwnd, uint32_t a_Message, WPARAM a_WParam, LPARAM a_LPARAM)
 {
 	//CApplication* thiz = reinterpret_cast<CApplication*>(GetWindowLongPtr(a_Hwnd, GWLP_USERDATA));
 

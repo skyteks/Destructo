@@ -11,14 +11,14 @@ class CUIButton
 {
 public:
 	CUIButton();
-	CUIButton(ITexture* a_bitmap, const SRect& a_size);
-	CUIButton(ITexture* a_bitmap, const SRect& a_size, ButtonMap& a_map);
+	CUIButton(const ITexture* a_bitmap, const SRect& a_size);
+	CUIButton(const ITexture* a_bitmap, const SRect& a_size, ButtonMap& a_map);
 	void SetState(EButtonState a_state);
 	void SetButtonMap(ButtonMap& a_map);
 	void UpdateState();
-	ITexture* GetTexture();
-	SRect GetDestination();
-	SRect GetSource();
+	const ITexture& GetTexture() const;
+	const SRect& GetDestination() const;
+	const SRect& GetSource() const;
 
 private:
 	bool IsMouseHovering();
@@ -26,6 +26,6 @@ private:
 	EButtonState m_state;
 	EButtonState m_lastState;
 	ButtonMap m_buttonMap;
-	ITexture* m_bitmap = nullptr;
+	const ITexture* m_bitmap = nullptr;
 	SRect m_size;
 };

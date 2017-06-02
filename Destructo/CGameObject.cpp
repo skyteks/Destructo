@@ -10,11 +10,11 @@ CGameObject::CGameObject()
 	, m_textureName(nullptr)
 	, m_opacityMaskName(nullptr)
 	, m_rigid(nullptr)
-	, m_collider(nullptr)
+	, m_col(nullptr)
 {
 }
 
-CGameObject::CGameObject(SVector3 a_position, SVector3 a_scale, float a_rotation, std::string a_textureName, std::string a_opacityMaskName, SRigidbody* a_rigid, SCircleBB* a_collider)
+CGameObject::CGameObject(SVector3 a_position, SVector3 a_scale, float a_rotation, std::string a_textureName, std::string a_opacityMaskName, CRigidbody* a_rigid, CCollider* a_collider)
 	: m_position(a_position)
 	, m_scale(a_scale)
 	, m_rotationAngle(a_rotation)
@@ -22,9 +22,9 @@ CGameObject::CGameObject(SVector3 a_position, SVector3 a_scale, float a_rotation
 	, m_textureName(a_textureName)
 	, m_opacityMaskName(a_opacityMaskName)
 	, m_rigid(a_rigid)
-	, m_collider(a_collider)
+	, m_col(a_collider)
 {
-	ITexture* texture = CTextureManager::GetInstance().GetTextureByName(a_textureName);
+	const ITexture* texture = CTextureManager::GetInstance().GetTextureByName(a_textureName);
 	if (texture != nullptr)
 	{
 		m_imageSection.x1 = 0.0f;
@@ -57,7 +57,7 @@ CGameObject::~CGameObject()
 	//SafeDelete(m_opacityMaskName);
 
 	SafeDelete(m_rigid);
-	SafeDelete(m_collider);
+	SafeDelete(m_col);
 }
 
 void CGameObject::SetPosition(SVector3 a_position)
@@ -82,47 +82,47 @@ void CGameObject::SetScale(SVector3 a_scale)
 	m_scale = a_scale;
 }
 
-const SVector3& CGameObject::GetPosition()
+const SVector3& CGameObject::GetPosition() const
 {
 	return m_position;
 }
 
-const SVector3& CGameObject::GetScale()
+const SVector3& CGameObject::GetScale() const
 {
 	return m_scale;
 }
 
-const SRect& CGameObject::GetImageSection()
+const SRect& CGameObject::GetImageSection() const
 {
 	return m_imageSection;
 }
 
-SRigidbody * CGameObject::GetRigidbody()
+CRigidbody* CGameObject::GetRigidbody() const
 {
 	return m_rigid;
 }
 
-SCircleBB * CGameObject::GetCircleCollider()
+CCollider* CGameObject::GetCollider() const
 {
-	return m_collider;
+	return m_col;
 }
 
-const SMatrix4x4& CGameObject::GetRotation()
+const SMatrix4x4& CGameObject::GetRotation() const
 {
 	return m_rotationMatrix;
 }
 
-float CGameObject::GetRotationAngle()
+float CGameObject::GetRotationAngle() const
 {
 	return m_rotationAngle;
 }
 
-std::string CGameObject::GetTextureName()
+const std::string CGameObject::GetTextureName() const
 {
 	return m_textureName;
 }
 
-std::string CGameObject::GetOpacityMaskName()
+const std::string CGameObject::GetOpacityMaskName() const
 {
 	return m_opacityMaskName;
 }
@@ -131,6 +131,6 @@ void CGameObject::Update()
 {
 	if (m_rigid != nullptr)
 	{
-		m_rigid->Update(this);
+		m_rigid->Update(*this);
 	}
 }
