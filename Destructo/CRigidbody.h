@@ -11,26 +11,26 @@ class CRigidbody// : public IComponent
 {
 public:
 
-	CRigidbody();
+    CRigidbody();
 
-	static const SVector3 Gravity();
+    static const SVector3 Gravity();
 
-	void Update(CGameObject& a_object);
+    void Update(CGameObject& a_object);
 
-	const SVector3 GetVelocity() const;
-	void AddForce(SVector3 a_force);
+    const SVector3 GetVelocity() const;
+    void AddForce(SVector3 a_force);
 
-	bool m_useGravity;
+    bool m_useGravity;
 private:
 
-	SVector3 m_force;
-	float m_mass;
-	float m_momentOfInertia;
+    SVector3 m_force;
+    float m_mass;
+    float m_momentOfInertia;
 
-	SVector3 m_velocity;
-	float m_aceleration;
-	float m_angularVelocity;
-	float m_torque;
+    SVector3 m_velocity;
+    float m_aceleration;
+    float m_angularVelocity;
+    float m_torque;
 
 };
 

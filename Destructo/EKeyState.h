@@ -2,7 +2,7 @@
 
 enum class EKeyState
 {
-  UNPRESSED, // default
-  PRESSED,
-  UP
+    UNPRESSED, // default
+    PRESSED,
+    UP
 };

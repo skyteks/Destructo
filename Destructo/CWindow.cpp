@@ -1,7 +1,7 @@
 #include "CWindow.h"
 
 CWindow::CWindow()
-	: m_hwnd()
+    : m_hwnd()
 {
 
 }
@@ -14,35 +14,35 @@ CWindow::~CWindow()
 
 bool CWindow::Initialize(const SWindowDesc& a_windowDesc, CApplication* a_application)
 {
-	RECT m_rect = { 0,0,a_windowDesc.x2, a_windowDesc.y2 };
-	const int windowStyle = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_BORDER | WS_VISIBLE;
-	AdjustWindowRect(&m_rect, windowStyle, false);
+    RECT m_rect = { 0,0,a_windowDesc.x2, a_windowDesc.y2 };
+    const int windowStyle = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_BORDER | WS_VISIBLE;
+    AdjustWindowRect(&m_rect, windowStyle, false);
 
-	this->m_hwnd = CreateWindow(
-		a_windowDesc.WindowName.c_str(),
-		a_windowDesc.WindowName.c_str(),
-		windowStyle,
-		20, 20,
-		m_rect.right - m_rect.left, m_rect.bottom - m_rect.top,
-		NULL,
-		NULL,
-		GetModuleHandle(NULL),
-		a_application);
+    this->m_hwnd = CreateWindow(
+        a_windowDesc.WindowName.c_str(),
+        a_windowDesc.WindowName.c_str(),
+        windowStyle,
+        20, 20,
+        m_rect.right - m_rect.left, m_rect.bottom - m_rect.top,
+        NULL,
+        NULL,
+        GetModuleHandle(NULL),
+        a_application);
 
-	SetForegroundWindow(this->m_hwnd);
-	SetFocus(this->m_hwnd);
+    SetForegroundWindow(this->m_hwnd);
+    SetFocus(this->m_hwnd);
 
-	RECT r = {};
+    RECT r = {};
 
-	GetClientRect(this->m_hwnd, &r);
+    GetClientRect(this->m_hwnd, &r);
 
-	if (this->m_hwnd == nullptr)
-		return false;
+    if (this->m_hwnd == nullptr)
+        return false;
 
-	return true;
+    return true;
 }
 
 HWND CWindow::GetWindowHandle()
 {
-	return this->m_hwnd;
+    return this->m_hwnd;
 }

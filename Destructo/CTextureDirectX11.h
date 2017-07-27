@@ -13,33 +13,33 @@
 class CTextureDirectX11 : public ITexture
 {
 public:
-	CTextureDirectX11(ID3D11Texture2D* a_texture, ID3D11ShaderResourceView* a_shaderResView);
+    CTextureDirectX11(ID3D11Texture2D* a_texture, ID3D11ShaderResourceView* a_shaderResView);
 
-	~CTextureDirectX11() override;
+    ~CTextureDirectX11() override;
 
-	int GetWidth() const override;
+    int GetWidth() const override;
 
-	int GetHeight() const override;
+    int GetHeight() const override;
 
-	int GetPitch() const override;
+    int GetPitch() const override;
 
-	int GetBPP() const override;
+    int GetBPP() const override;
 
-	void SetPixel(int a_x, int a_y, int a_color) override;
+    void SetPixel(int a_x, int a_y, int a_color) override;
 
-	ID3D11ShaderResourceView* GetShaderResourceView() const;
+    ID3D11ShaderResourceView* GetShaderResourceView() const;
 
 private:
 
-	int m_width;
-	int m_height;
-	int m_pitch;
-	int m_bitsPerPixel;
-	bool m_isLocked;
-	char* m_name;
+    int m_width;
+    int m_height;
+    int m_pitch;
+    int m_bitsPerPixel;
+    bool m_isLocked;
+    char* m_name;
 
-	UINT* m_data = nullptr;
-	ID3D11Texture2D* m_texture = nullptr;
-	mutable ID3D11ShaderResourceView* m_shaderResourceView = nullptr;
+    UINT* m_data = nullptr;
+    ID3D11Texture2D* m_texture = nullptr;
+    mutable ID3D11ShaderResourceView* m_shaderResourceView = nullptr;
 };
 

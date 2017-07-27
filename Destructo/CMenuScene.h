@@ -9,33 +9,33 @@
 class CMenuScene : public IScene
 {
 public:
-	CMenuScene();
+    CMenuScene();
 
-	~CMenuScene();
-	bool Initialize(IRenderer& a_renderer) override;
+    ~CMenuScene();
+    bool Initialize(IRenderer& a_renderer) override;
 
-	void Update() override;
+    void Update() override;
 
-	void Draw(IRenderer& a_renderer) const override;
+    void Draw(IRenderer& a_renderer) const override;
 
-	void Shutdown() override;
+    void Shutdown() override;
 
-	void LoadButtons();
+    void LoadButtons();
 
 private:
 
-	CGameObject* m_objectBackground;
+    CGameObject* m_objectBackground;
 
-	ButtonMap m_buttonMapButtonGame;
-	CUIButton m_uiButtonGame;
+    ButtonMap m_buttonMapButtonGame;
+    CUIButton m_uiButtonGame;
 
-	ButtonMap m_buttonMapButtonGDI;
-	CUIButton m_uiButtonGDI;
-	ButtonMap m_buttonMapButtonOpenGL;
-	CUIButton m_uiButtonOpenGL;
-	ButtonMap m_buttonMapButtonDirectX11;
-	CUIButton m_uiButtonDirectX11;
-	ButtonMap m_buttonMapButtonDirect2D;
-	CUIButton m_uiButtonDirect2D;
+    ButtonMap m_buttonMapButtonGDI;
+    CUIButton m_uiButtonGDI;
+    ButtonMap m_buttonMapButtonOpenGL;
+    CUIButton m_uiButtonOpenGL;
+    ButtonMap m_buttonMapButtonDirectX11;
+    CUIButton m_uiButtonDirectX11;
+    ButtonMap m_buttonMapButtonDirect2D;
+    CUIButton m_uiButtonDirect2D;
 };
 

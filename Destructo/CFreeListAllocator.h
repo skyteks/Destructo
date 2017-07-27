@@ -3,26 +3,26 @@
 
 struct SFreeListHeader
 {
-	uint32_t inUse : 1;
-	uint32_t size : 31;
+    uint32_t inUse : 1;
+    uint32_t size : 31;
 };
 
 class CFreeListAllocator
 {
 public:
-	CFreeListAllocator(char* beginning, size_t memorySize);
+    CFreeListAllocator(char* beginning, size_t memorySize);
 
-	~CFreeListAllocator();
+    ~CFreeListAllocator();
 
-	char* Allocate(size_t contentSize);
+    char* Allocate(size_t contentSize);
 
-	void Deallocate(char* chunk);
+    void Deallocate(char* chunk);
 
-	size_t GetBiggestFreeChunk() const;
+    size_t GetBiggestFreeChunk() const;
 private:
-	char* allocationBeginning;
-	size_t allocatedSize;
+    char* allocationBeginning;
+    size_t allocatedSize;
 
-	SFreeListHeader* firstHeader;
+    SFreeListHeader* firstHeader;
 };
 

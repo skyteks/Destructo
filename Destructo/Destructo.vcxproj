@@ -168,6 +168,7 @@
     <ClInclude Include="CTextureGDI.h" />
     <ClInclude Include="CTextureManager.h" />
     <ClInclude Include="CTextureOpenGL.h" />
+    <ClInclude Include="CTransform.h" />
     <ClInclude Include="CUIButton.h" />
     <ClInclude Include="CUISystem.h" />
     <ClInclude Include="CWindow.h" />
@@ -182,6 +183,8 @@
     <ClInclude Include="IAudio.h" />
     <ClInclude Include="IAudioChannel.h" />
     <ClInclude Include="IComponent.h" />
+    <ClInclude Include="IComponentManager.h" />
+    <ClInclude Include="IComponentManager.hpp" />
     <ClInclude Include="IInput.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CWindowsInput.h" />
@@ -229,6 +232,7 @@
     <ClCompile Include="CTextureGDI.cpp" />
     <ClCompile Include="CTextureManager.cpp" />
     <ClCompile Include="CTextureOpenGL.cpp" />
+    <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="CUIButton.cpp" />
     <ClCompile Include="CUISystem.cpp" />
     <ClCompile Include="CWindow.cpp" />
@@ -236,6 +240,7 @@
     <ClCompile Include="GlobalFunctions.cpp" />
     <ClCompile Include="CWindowsInput.cpp" />
     <ClCompile Include="CInputManager.cpp" />
+    <ClCompile Include="IComponentManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SAABB.cpp" />
     <ClCompile Include="SCircleBB.cpp" />

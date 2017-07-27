@@ -2,6 +2,6 @@
 
 enum EScenes
 {
-	MENU,
-	GAME,
+    MENU,
+    GAME,
 };

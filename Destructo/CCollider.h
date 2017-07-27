@@ -8,12 +8,12 @@ class IComponent;
 class CCollider// : public IComponent
 {
 public:
-	CCollider(SCircleBB a_circleBB);
+    CCollider(SCircleBB a_circleBB);
 
-	void Update(CGameObject& a_object);
-	const SCircleBB GetCircleBB() const;
+    void Update(CGameObject& a_object);
+    const SCircleBB GetCircleBB() const;
 
 private:
-	SCircleBB m_circleBB;
+    SCircleBB m_circleBB;
 };
 

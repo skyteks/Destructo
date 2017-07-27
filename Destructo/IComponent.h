@@ -1,9 +1,14 @@
 #pragma once
-#include "CGameObject.h"
-class CGameObject;
+
+#include "IComponentManager.h"
+
+class IComponentManager;
 
 class IComponent
 {
 public:
-	virtual void Update(CGameObject& a_object) = 0;
+    virtual void Start() = 0;
+    virtual void Update() = 0;
+    virtual bool AddRequiredComponents(IComponentManager* a_componentManager) = 0;
+    virtual ~IComponent() {};
 };

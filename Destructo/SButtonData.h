@@ -7,8 +7,8 @@
 
 struct SButtonData
 {
-	SRect m_rect;
-	Function m_callback;
+    SRect m_rect;
+    Function m_callback;
 };
 
 typedef std::map<EButtonState, SButtonData> ButtonMap;

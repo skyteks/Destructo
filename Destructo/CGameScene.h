@@ -16,29 +16,29 @@
 class CGameScene : public IScene
 {
 public:
-	CGameScene();
+    CGameScene();
 
-	~CGameScene() override;
+    ~CGameScene() override;
 
-	bool Initialize(IRenderer& a_renderer) override;
+    bool Initialize(IRenderer& a_renderer) override;
 
-	void Update() override;
+    void Update() override;
 
-	void Draw(IRenderer& a_renderer) const override;
+    void Draw(IRenderer& a_renderer) const override;
 
-	void Shutdown() override;
+    void Shutdown() override;
 
 private:
 
-	void* m_testSound = nullptr;
+    void* m_testSound = nullptr;
 
-	float speed = 0;
+    float speed = 0;
 
-	CGameObject* m_objectPlayer;
-	CGameObject* m_objectTerrain;
-	CGameObject* m_objectBackground;
-	CGameObject* m_objectPlayer2;
+    CGameObject* m_objectPlayer;
+    CGameObject* m_objectTerrain;
+    CGameObject* m_objectBackground;
+    CGameObject* m_objectPlayer2;
 
-	CQuadTree* m_quadTree;
+    CQuadTree* m_quadTree;
 };
 

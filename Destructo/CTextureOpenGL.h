@@ -7,38 +7,38 @@
 class CTextureOpenGL : public ITexture
 {
 public:
-	CTextureOpenGL(std::string a_path);
-	
-	~CTextureOpenGL() override;
+    CTextureOpenGL(std::string a_path);
 
-	int GetWidth() const override;
+    ~CTextureOpenGL() override;
 
-	int GetHeight() const override;
+    int GetWidth() const override;
 
-	int GetPitch() const override;
+    int GetHeight() const override;
 
-	int GetBPP() const override;
+    int GetPitch() const override;
 
-	void SetPixel(int a_x, int a_y, int a_color) override;
+    int GetBPP() const override;
 
-	void AddOpacityMask(const CTextureOpenGL* a_opacityMask) const;
+    void SetPixel(int a_x, int a_y, int a_color) override;
 
-	GLuint GetTextureID() const;
+    void AddOpacityMask(const CTextureOpenGL* a_opacityMask) const;
 
-	void* GetData() const;
+    GLuint GetTextureID() const;
 
-	static CTextureOpenGL* s_collisionTexture;
+    void* GetData() const;
+
+    static CTextureOpenGL* s_collisionTexture;
 
 private:
 
-	int m_width;
-	int m_height;
-	int m_pitch;
-	int m_bitsPerPixel;
-	bool m_isLocked;
-	
-	UINT* m_data = nullptr;
+    int m_width;
+    int m_height;
+    int m_pitch;
+    int m_bitsPerPixel;
+    bool m_isLocked;
 
-	GLuint m_textureID;
+    UINT* m_data = nullptr;
+
+    GLuint m_textureID;
 };
 

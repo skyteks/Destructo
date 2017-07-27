@@ -18,18 +18,18 @@ typedef std::map<std::string, FMOD::Sound*> SoundMap;
 class CAudio : public IAudio
 {
 public:
-  CAudio();
-  ~CAudio();
+    CAudio();
+    ~CAudio();
 
-  // Interface functions
-  bool Initialize() override;
-  void Shutdown() override;
-  void Update() override;
-  bool Load(const std::string& a_path) override;
-  IAudioChannel* Play(const std::string& a_path) override;
+    // Interface functions
+    bool Initialize() override;
+    void Shutdown() override;
+    void Update() override;
+    bool Load(const std::string& a_path) override;
+    IAudioChannel* Play(const std::string& a_path) override;
 
 private:
-  SoundMap m_soundMap;
-  std::map<FMOD::Channel*, CAudioChannel> m_channelMap;
-  FMOD::System* m_system;
+    SoundMap m_soundMap;
+    std::map<FMOD::Channel*, CAudioChannel> m_channelMap;
+    FMOD::System* m_system;
 };

@@ -5,19 +5,19 @@
 class CTime
 {
 public:
-	static CTime& GetInstance();
-	float DeltaTime();
-	float TotalTime();
-	void Tick();
-	void Reset();
+    static CTime& GetInstance();
+    float DeltaTime();
+    float TotalTime();
+    void Tick();
+    void Reset();
 
-	void SetDeltaTime(float a_dt);
+    void SetDeltaTime(float a_dt);
 
 private:
-	CTime();
-	CTime(const CTime&);
-	CGameTimer m_gameTimer;
+    CTime();
+    CTime(const CTime&);
+    CGameTimer m_gameTimer;
 
-	float m_deltaTime;
+    float m_deltaTime;
 };
 

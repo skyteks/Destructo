@@ -19,24 +19,24 @@ CApplication* app = nullptr;
 // $(SolutionDir)Middleware\fmod\api\lowlevel\lib
 
 int CALLBACK WinMain(
-	_In_ HINSTANCE hInstance,
-	_In_ HINSTANCE hPrevInstance,
-	_In_ LPSTR     lpCmdLine,
-	_In_ int       nCmdShow)
+    _In_ HINSTANCE hInstance,
+    _In_ HINSTANCE hPrevInstance,
+    _In_ LPSTR     lpCmdLine,
+    _In_ int       nCmdShow)
 {
-	app = new CApplication();
+    app = new CApplication();
 
-	bool wResult = false;
-	ERenderer chosenRenderer = ERenderer::OpenGL;
-	wResult = app->Initialize(chosenRenderer, new CAudio(), new CWindowsInput());
-	if (!wResult)
-		return wResult;
+    bool wResult = false;
+    ERenderer chosenRenderer = ERenderer::OpenGL;
+    wResult = app->Initialize(chosenRenderer, new CAudio(), new CWindowsInput());
+    if (!wResult)
+        return wResult;
 
-	app->Run();
+    app->Run();
 
-	app->Shutdown();
+    app->Shutdown();
 
-	delete app;
+    delete app;
 
-	return 1;
+    return 1;
 }

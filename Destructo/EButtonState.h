@@ -2,7 +2,7 @@
 
 enum class EButtonState
 {
-	OnPress,
-	OnHover,
-	OnNormal
+    OnPress,
+    OnHover,
+    OnNormal
 };

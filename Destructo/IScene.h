@@ -4,13 +4,13 @@
 class IScene
 {
 public:
-	virtual ~IScene() {};
+    virtual ~IScene() {};
 
-	virtual bool Initialize(IRenderer& a_renderer) = 0;
+    virtual bool Initialize(IRenderer& a_renderer) = 0;
 
-	virtual void Update() = 0;
+    virtual void Update() = 0;
 
-	virtual void Draw(IRenderer& a_renderer) const = 0;
+    virtual void Draw(IRenderer& a_renderer) const = 0;
 
-	virtual void Shutdown() = 0;
+    virtual void Shutdown() = 0;
 };

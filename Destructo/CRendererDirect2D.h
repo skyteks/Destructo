@@ -17,46 +17,46 @@ class CRendererDirect2D : public IRenderer
 {
 public:
 
-	CRendererDirect2D();
+    CRendererDirect2D();
 
-	~CRendererDirect2D() override;
+    ~CRendererDirect2D() override;
 
-	bool Initialize(HWND a_hwnd) override;
+    bool Initialize(HWND a_hwnd) override;
 
-	ITexture* LoadTextureFromFile(std::string a_path) override;
+    ITexture* LoadTextureFromFile(std::string a_path) override;
 
-	void Begin() override;
+    void Begin() override;
 
-	void DrawObject(CGameObject& a_gameObject) override;
+    void DrawObject(CGameObject& a_gameObject) override;
 
-	void DrawTexture(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight) override;
+    void DrawTexture(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight) override;
 
-	void DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, const ITexture* a_opacityMask) override;
+    void DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, const ITexture* a_opacityMask) override;
 
-	void DrawString(int a_posX, int a_posY, const char * a_string, int a_textColor, int a_backgroundColor, UINT a_format, const ITexture* a_fontTexture) override;
-	
-	void End() override;
-	
-	void Shutdown() override;
+    void DrawString(int a_posX, int a_posY, const char * a_string, int a_textColor, int a_backgroundColor, UINT a_format, const ITexture* a_fontTexture) override;
 
-	D2D1_COLOR_F NewColor(int a_color);
+    void End() override;
 
-	void Clear(int a_color);
+    void Shutdown() override;
+
+    D2D1_COLOR_F NewColor(int a_color);
+
+    void Clear(int a_color);
 
 private:
 
-	HWND m_windowHandle;
-	HDC m_windowDC;
-	int m_windowWidth;
-	int m_windowHeight;
+    HWND m_windowHandle;
+    HDC m_windowDC;
+    int m_windowWidth;
+    int m_windowHeight;
 
-	ID2D1Factory* m_imageFactory = nullptr;
-	ID2D1HwndRenderTarget* m_renderTarget = nullptr;
-	IDWriteFactory* m_writeFactory = nullptr;
-	IDWriteTextFormat* m_writeTextFormat = nullptr;
+    ID2D1Factory* m_imageFactory = nullptr;
+    ID2D1HwndRenderTarget* m_renderTarget = nullptr;
+    IDWriteFactory* m_writeFactory = nullptr;
+    IDWriteTextFormat* m_writeTextFormat = nullptr;
 
-	ID2D1SolidColorBrush* m_colorBrush = nullptr;
-	D2D1::ColorF m_clearColor;
-	
+    ID2D1SolidColorBrush* m_colorBrush = nullptr;
+    D2D1::ColorF m_clearColor;
+
 };
 

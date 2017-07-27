@@ -258,6 +258,15 @@
     <ClInclude Include="CRigidbody.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="IComponentManager.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentManager.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp">
@@ -366,6 +375,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CRigidbody.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponentManager.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

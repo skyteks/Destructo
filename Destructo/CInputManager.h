@@ -9,26 +9,26 @@
 class CInputManager : public IInput
 {
 public:
-	CInputManager();
-	~CInputManager();
+    CInputManager();
+    ~CInputManager();
 
-	void Initialize(IInput* a_input);
-	void Shutdown();
-	
-	static CInputManager& GetInstance();
-	void SetInput(IInput* a_input);
+    void Initialize(IInput* a_input);
+    void Shutdown();
 
-	bool GetKeyDown(const EKeyCode a_key) override;
-	bool GetKeyUp(const EKeyCode a_key) override;
-	void SetKeyDown(const EKeyCode a_key) override;
-	void SetKeyUp(const EKeyCode a_key) override;
+    static CInputManager& GetInstance();
+    void SetInput(IInput* a_input);
 
-	bool GetKey(const EKeyCode a_key) override;
+    bool GetKeyDown(const EKeyCode a_key) override;
+    bool GetKeyUp(const EKeyCode a_key) override;
+    void SetKeyDown(const EKeyCode a_key) override;
+    void SetKeyUp(const EKeyCode a_key) override;
 
-	void Clear() override;
+    bool GetKey(const EKeyCode a_key) override;
+
+    void Clear() override;
 
 private:
-	CInputManager(const CInputManager&);
+    CInputManager(const CInputManager&);
 
-	IInput* m_input;
+    IInput* m_input;
 };
