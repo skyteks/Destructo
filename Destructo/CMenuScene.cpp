@@ -1,5 +1,9 @@
 #include "CMenuScene.h"
 #include "DataNames.h"
+#include "SVector3.h"
+#include "CGameObject.h"
+#include "ITexture.h"
+#include "CSprite.h"
 
 CMenuScene::CMenuScene()
 {
@@ -16,7 +20,8 @@ bool CMenuScene::Initialize(IRenderer& a_renderer)
     CTextureManager::GetInstance().LoadTexture(TEXTURE_FONT);
     CTextureManager::GetInstance().LoadTexture(TEXTURE_MENU);
 
-    m_objectBackground = new CGameObject(SVector3(0.0f, 0.0f), SVector3(1.0f, 1.0f), 0.0f, TEXTURE_MENU, "");
+    m_objectBackground = new CGameObject();//"Background");;
+    m_objectBackground->AddComponent<CSprite>(m_objectBackground)->SetTextureName(TEXTURE_MENU);
 
     LoadButtons();
     return true;

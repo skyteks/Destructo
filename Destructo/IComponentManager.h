@@ -1,6 +1,5 @@
 #pragma once
 #include <map>
-#include "IComponent.h"
 
 class IComponent;
 
@@ -14,10 +13,10 @@ public:
     T* AddComponent(Args ... args);
 
     template <typename T>
-    void RemoveComponent();
+    bool RemoveComponent();
 
     template <typename T>
-    T* GetComponent();
+    T* GetComponent() const;
 
 protected:
     void UpdateComponents();

@@ -1,7 +1,6 @@
-#pragma once
-
-//#include <typeinfo>
 #include "IComponentManager.h"
+#include <typeinfo>
+#include "GlobalFunctions.h"
 
 template<typename T, typename... Args>
 T* IComponentManager::AddComponent(Args ... args)
@@ -15,7 +14,7 @@ T* IComponentManager::AddComponent(Args ... args)
     // add new component with variadic arguments
     T* component = new T(args...);
 
-    if (!component)
+    if (component == nullptr)
     {
         return nullptr;
     }
@@ -23,36 +22,37 @@ T* IComponentManager::AddComponent(Args ... args)
     // check if required components exist / can be added
     if (!component->AddRequiredComponents(this))
     {
-        delete component;
-        component = nullptr;
+        SafeDelete(component);
     }
+
+    if (component == nullptr)
+    {
+        return nullptr;
+    }
+
+    m_components[typeid(T).hash_code()] = component;
 
     // start component
-    component->Start();
+    component->Initialize();
 
-    if (component)
-    {
-        m_components[typeid(T).hash_code()] = component;
-        return component;
-    }
-
-    return nullptr;
+    return component;
 }
 
 template <typename T>
-void IComponentManager::RemoveComponent()
+bool IComponentManager::RemoveComponent()
 {
     auto component = m_components.find(typeid(T).hash_code());
 
     if (component != m_components.end() && component->second != nullptr)
     {
-        delete component->second;
-        component->second = nullptr;
+        SafeDelete(component->second);
+        return true;
     }
+    return false;
 }
 
 template <typename T>
-T* IComponentManager::GetComponent()
+T* IComponentManager::GetComponent() const
 {
     auto component = m_components.find(typeid(T).hash_code());
 

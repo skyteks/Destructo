@@ -12,14 +12,21 @@ struct SVertex
     float m_b;
     float m_a;
 
-    SVertex() : m_coord()
+    SVertex()
+        : m_coord(SVector3::Zero())
     {
+        m_u = 0;
+        m_v = 0;
+
+        m_r = 0;
+        m_g = 0;
+        m_b = 0;
+        m_a = 0;
     }
 
-    SVertex(float a_x, float a_y, float a_z, float a_u, float a_v, float a_r, float a_g, float a_b, float a_a) : m_coord(a_x, a_y, a_z)
+    SVertex(float a_x, float a_y, float a_z, float a_u, float a_v, float a_r, float a_g, float a_b, float a_a)
+        : m_coord(a_x, a_y, a_z)
     {
-        //m_coord = SVector3(a_x, a_y, a_z);
-
         m_u = a_u;
         m_v = a_v;
 

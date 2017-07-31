@@ -1,13 +1,15 @@
 #include "SVector4.h"
+#include <math.h>
+#include <limits>
 
 
-SVector4::SVector4()
-    : x(0.0f)
-    , y(0.0f)
-    , z(0.0f)
-    , w(0.0f)
-{
-}
+//SVector4::SVector4()
+//    : x(0.0f)
+//    , y(0.0f)
+//    , z(0.0f)
+//    , w(0.0f)
+//{
+//}
 
 SVector4::SVector4(const float a_x, const float a_y, const float a_z, const float a_w)
     : x(a_x)
@@ -19,7 +21,7 @@ SVector4::SVector4(const float a_x, const float a_y, const float a_z, const floa
 
 SVector4 SVector4::Normalized() const
 {
-    SVector4 tmp;
+    SVector4 tmp = SVector4::Zero();
     float length = this->Length();
 
     tmp.x = this->x / length;
@@ -59,7 +61,7 @@ void SVector4::Normalize(SVector4& a_vector1)
 }
 SVector4 SVector4::Normalized(const SVector4& a_vector1)
 {
-    SVector4 tmp;
+    SVector4 tmp = SVector4::Zero();
     float length = a_vector1.Length();
 
     tmp.x = a_vector1.x / length;
@@ -71,7 +73,7 @@ SVector4 SVector4::Normalized(const SVector4& a_vector1)
 }
 float SVector4::Distance(const SVector4& a_vector1, const SVector4& a_vector2)
 {
-    auto tmp = a_vector1 - a_vector2;
+    SVector4 tmp = a_vector1 - a_vector2;
     return tmp.Length();
 }
 

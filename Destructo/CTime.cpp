@@ -2,8 +2,8 @@
 
 CTime& CTime::GetInstance()
 {
-    static CTime g_time;
-    return g_time;
+    static CTime s_time;
+    return s_time;
 }
 float CTime::DeltaTime()
 {

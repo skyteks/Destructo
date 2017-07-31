@@ -6,10 +6,10 @@ struct SAABB
 public:
     SAABB(SVector3 a_center, float a_halfWidths);
 
-    SVector3 GetCenter();
-    float GetHalfWidths();
-    bool ContainsPoint(SVector3 a_point);
-    bool intersectsAABB(SAABB a_other);
+    const SVector3 GetCenter() const;
+    float GetHalfWidths() const;
+    bool ContainsPoint(SVector3 a_point) const;
+    bool intersectsAABB(SAABB a_other) const;
 
 private:
     SVector3 m_center;

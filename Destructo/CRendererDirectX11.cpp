@@ -1,7 +1,13 @@
 #include "CRendererDirectX11.h"
+#include "CGameObject.h"
+#include "CTransform.h"
+#include "CSprite.h"
 
 CRendererDirectX11::CRendererDirectX11()
-    : m_swapChain(nullptr)
+    : m_windowWidth(0)
+    , m_windowHeight(0)
+    , vertices()
+    , m_swapChain(nullptr)
     , m_renderTargetView(nullptr)
     , m_device(nullptr)
     , m_deviceContext(nullptr)
@@ -11,7 +17,7 @@ CRendererDirectX11::CRendererDirectX11()
     , m_vertexShader(nullptr)
     , m_samplerState(nullptr)
     , m_blendState(nullptr)
-    , m_shaderResourceView(nullptr)
+    //, m_shaderResourceView(nullptr)
 {
     //memset(vertices, 0, sizeof(SVertex) * verticesMacCount);
 }
@@ -137,17 +143,6 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(std::string a_path)
     textureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
     textureDesc.CPUAccessFlags = 0; // previous: D3D11_CPU_ACCESS_WRITE
     textureDesc.MiscFlags = 0;
-    //	bmp.header.Width,
-    //	bmp.header.Height,
-    //	0,
-    //	1,
-    //	DXGI_FORMAT_R8G8B8A8_UNORM,
-    //	sampleDesc,
-    //	D3D11_USAGE_DEFAULT,
-    //	D3D11_BIND_SHADER_RESOURCE,
-    //	0,
-    //	0
-    //};
 
     D3D11_SUBRESOURCE_DATA textureData = {};
     textureData.pSysMem = bmp.m_data;
@@ -175,21 +170,21 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(std::string a_path)
 
 void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
 {
-    const CTextureDirectX11* directX11Texture = static_cast<const CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+    const CTextureDirectX11* directX11Texture = static_cast<const CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetTextureName()));
     const CTextureDirectX11* directX11OpacityMask = nullptr;
-    if (a_gameObject.GetOpacityMaskName() != "")
+    if (a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName() != "")
     {
-        directX11OpacityMask = static_cast<const CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+        directX11OpacityMask = static_cast<const CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName()));
     }
 
-    SVector3 position = a_gameObject.GetPosition();
-    SVector3 scale = a_gameObject.GetScale();
+    SVector3 position = a_gameObject.GetComponent<CTransform>()->GetPosition();
+    SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
 
     SRect dest;
-    dest.x1 = Map(a_gameObject.GetImageSection().x1, 0, directX11Texture->GetWidth(), 0, 1);
-    dest.y1 = Map(directX11Texture->GetHeight() - a_gameObject.GetImageSection().y1, 0, directX11Texture->GetHeight(), 0, 1);
-    dest.x2 = Map(a_gameObject.GetImageSection().x2, 0, directX11Texture->GetWidth(), 0, 1);
-    dest.y2 = -1.0f * Map(a_gameObject.GetImageSection().y2, 0, directX11Texture->GetHeight(), 0, 1);
+    dest.x1 = Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().x1, 0, directX11Texture->GetWidth(), 0, 1);
+    dest.y1 = Map(directX11Texture->GetHeight() - a_gameObject.GetComponent<CSprite>()->GetImageSection().y1, 0, directX11Texture->GetHeight(), 0, 1);
+    dest.x2 = Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().x2, 0, directX11Texture->GetWidth(), 0, 1);
+    dest.y2 = -1.0f * Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().y2, 0, directX11Texture->GetHeight(), 0, 1);
 
     SRect source;
     source.x1 = Map(position.x, 0, m_windowWidth, -1, 1);
@@ -208,7 +203,7 @@ void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
     SVector3 vec2(dest.x1 + dest.x2, dest.y1);
     SVector3 vec3(dest.x1, dest.y1 + dest.y2);
     SVector3 vec4(dest.x1 + dest.x2, dest.y1 + dest.y2);
-    SMatrix4x4 rotation = a_gameObject.GetRotation();
+    SMatrix4x4 rotation = SMatrix4x4::RotationZ(a_gameObject.GetComponent<CTransform>()->GetRotation().z);
 
     SVector4 point1 = rotation * vec1;
     SVector4 point2 = rotation * vec2;
@@ -268,28 +263,29 @@ void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_
     dest.x2 = Map(a_imgWidth, 0, a_texture->GetWidth(), 0, 1);
     dest.y2 = -Map(a_imgHeight, 0, a_texture->GetHeight(), 0, 1);
 
-    if (vertexIndex > 0)
-        vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
+    //if (vertexIndex > 0)
+    //    vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
 
     vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1, 1, 1, 1, 1);
     vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1, 0, dest.x1 + dest.x2, dest.y1, 1, 1, 1, 1);
     vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
     vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
 
-    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
+    //vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
 
-    m_deviceContext->PSSetShaderResources(0, 1, &m_shaderResourceView);
+    ID3D11ShaderResourceView* shaderResourceView = directX11Texture->GetShaderResourceView();
+    m_deviceContext->PSSetShaderResources(0, 1, &shaderResourceView);
+    //m_deviceContext->PSSetShaderResources(0, 1, &m_shaderResourceView);
     //if (m_shaderResourceView != directX11Texture->GetShaderResourceView())
-    {
+    //{
         Flush();
-    }
+    //}
     //m_shaderResourceView = directX11Texture->GetShaderResourceView();
 }
 
 
 void CRendererDirectX11::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, const ITexture* a_opacityMask)
 {
-
 }
 
 

@@ -1,23 +1,11 @@
 #include "CTransform.h"
 
 
-
-CTransform::CTransform()
-    : m_position(SVector3::Zero())
+CTransform::CTransform(CGameObject* a_owner)
+    : IComponent(a_owner)
+    , m_position(SVector3::Zero())
     , m_rotation(SVector3::Zero())
     , m_scale(SVector3::One())
-    , m_forward(SVector3::Zero())
-    , m_up(SVector3::Zero())
-    , m_side(SVector3::Zero())
-    , m_world(SMatrix4x4::Identity())
-{
-    UpdateForwardSideUp();
-}
-
-CTransform::CTransform(const SVector3& a_position, const SVector3& a_rotation, const SVector3& a_scale)
-    : m_position(a_position)
-    , m_rotation(a_rotation)
-    , m_scale(a_scale)
     , m_forward(SVector3::Zero())
     , m_up(SVector3::Zero())
     , m_side(SVector3::Zero())
@@ -30,7 +18,7 @@ CTransform::~CTransform()
 {
 }
 
-void CTransform::Start()
+void CTransform::Initialize()
 {
 }
 
@@ -39,7 +27,7 @@ void CTransform::Update()
     GetWorld();
 }
 
-bool CTransform::AddRequiredComponents(IComponentManager * a_componentManager)
+bool CTransform::AddRequiredComponents(IComponentManager* a_componentManager)
 {
     return true;
 }

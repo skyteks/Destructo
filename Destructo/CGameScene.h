@@ -1,23 +1,13 @@
 #pragma once
-#include <stdio.h>
-#include <memory>
 
 #include "IScene.h"
-
-#include "GlobalFunctions.h"
-#include "CInputManager.h"
-#include "CMouse.h"
-#include "CTime.h"
-#include "CTextureManager.h"
-#include "CGameObject.h"
 #include "CQuadTree.h"
-#include "CCollider.h"
 
 class CGameScene : public IScene
 {
 public:
     CGameScene();
-
+    
     ~CGameScene() override;
 
     bool Initialize(IRenderer& a_renderer) override;

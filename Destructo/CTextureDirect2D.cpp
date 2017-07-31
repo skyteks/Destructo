@@ -89,14 +89,14 @@ void CTextureDirect2D::SetPixel(int a_x, int a_y, int a_color)
 {
 }
 
-int CTextureDirect2D::GetPitch() const
-{
-    return m_pitch;
-}
-
-int CTextureDirect2D::GetBPP() const
-{
-    return m_bitsPerPixel;
-}
+//int CTextureDirect2D::GetPitch() const
+//{
+//    return m_pitch;
+//}
+//
+//int CTextureDirect2D::GetBPP() const
+//{
+//    return m_bitsPerPixel;
+//}
 
 

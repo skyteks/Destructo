@@ -148,7 +148,7 @@ void CApplication::Run()
 
     CTime::GetInstance().Reset();
     float totalTime = CTime::GetInstance().TotalTime();
-    const uint32_t capFPS = 60;
+    const uint32_t capFPS = 1000;
     uint32_t currentFPS = 0;
 
     float frameTime = 1.0f / capFPS;
@@ -156,12 +156,6 @@ void CApplication::Run()
 
     m_soundEngine->Load("Audio/Throw.mp3");
     m_soundEngine->Load("Audio/t.mp3");
-
-    // 200fps = 2,5
-    // 60 = 8,5
-
-    // 200 / 60 = 3,4
-    // 8,5 / 2,5 = 3,3
 
     CGameTimer m_timer;
     m_timer.Reset();
@@ -182,15 +176,15 @@ void CApplication::Run()
         if (CInputManager::GetInstance().GetKeyDown(EKeyCode::Escape))
         {
             auto channel = m_soundEngine->Play("Audio/Throw.mp3");
-            channel->SetPitch(2.0f); // funny how this changes the sound lol try 10, 50, 100
-            channel->SetVolume(0.2f);
+            //channel->SetPitch(2.0f); // funny how this changes the sound lol try 10, 50, 100
+            channel->SetVolume(0.4f);
         }
 
         if (CInputManager::GetInstance().GetKeyDown(EKeyCode::x))
         {
             auto channel = m_soundEngine->Play("Audio/t.mp3");
             //channel->SetPitch(5.0f); // funny how this changes the sound lol try 10, 50, 100
-            channel->SetVolume(0.3f);
+            channel->SetVolume(0.6f);
         }
 
         // Update everything inside the scene

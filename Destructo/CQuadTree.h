@@ -8,10 +8,13 @@
 class CQuadTree
 {
 public:
-    CQuadTree(SAABB a_boundary);
+
+    CQuadTree(const SAABB& a_boundary);
 
     ~CQuadTree();
-    SAABB GetBoundary();
+
+    void SetBoundary(const SAABB& a_boundary);
+    const SAABB& GetBoundary() const;
     bool Insert(CGameObject* a_object);
     void Subdivide();
     std::vector<CGameObject*> QueryRange(SAABB a_range);
@@ -20,7 +23,7 @@ public:
 
 private:
     //Elements-storage size indicator
-    static const byte m_nodeCapacity = 4;
+    static const size_t m_nodeCapacity = 4;
 
     SAABB m_boundary;
 

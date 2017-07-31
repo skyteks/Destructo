@@ -1,4 +1,7 @@
 #include "CRendererDirect2D.h"
+#include "CGameObject.h"
+#include "CTransform.h"
+#include "CSprite.h"
 
 CRendererDirect2D::CRendererDirect2D()
     : m_imageFactory(nullptr)
@@ -116,22 +119,22 @@ void CRendererDirect2D::Begin()
 
 void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 {
-    const CTextureDirect2D* direct2DTexture = reinterpret_cast<const CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+    const CTextureDirect2D* direct2DTexture = reinterpret_cast<const CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetTextureName()));
     const CTextureDirect2D* direct2DOpacityMask = nullptr;
-    if (a_gameObject.GetOpacityMaskName() != "")
+    if (a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName() != "")
     {
-        direct2DOpacityMask = reinterpret_cast<const CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+        direct2DOpacityMask = reinterpret_cast<const CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName()));
     }
 
-    SVector3 position = a_gameObject.GetPosition();
-    SVector3 scale = a_gameObject.GetScale();
-    SMatrix4x4 rotation = a_gameObject.GetRotation();
+    SVector3 position = a_gameObject.GetComponent<CTransform>()->GetPosition();
+    SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
+    SMatrix4x4 rotation = SMatrix4x4::RotationZ(a_gameObject.GetComponent<CTransform>()->GetRotation().z);
 
     D2D1_RECT_F direct2DSource;
-    direct2DSource.left = a_gameObject.GetImageSection().x1;
-    direct2DSource.top = a_gameObject.GetImageSection().y1;
-    direct2DSource.right = a_gameObject.GetImageSection().x2;
-    direct2DSource.bottom = a_gameObject.GetImageSection().y2;
+    direct2DSource.left = a_gameObject.GetComponent<CSprite>()->GetImageSection().x1;
+    direct2DSource.top = a_gameObject.GetComponent<CSprite>()->GetImageSection().y1;
+    direct2DSource.right = a_gameObject.GetComponent<CSprite>()->GetImageSection().x2;
+    direct2DSource.bottom = a_gameObject.GetComponent<CSprite>()->GetImageSection().y2;
 
     D2D1_RECT_F direct2DDest;
     direct2DDest.left = position.x;

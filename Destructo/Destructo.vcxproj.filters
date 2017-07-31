@@ -91,6 +91,12 @@
     <Filter Include="Quelldateien\Allocators">
       <UniqueIdentifier>{4ead1577-b3b7-4cc5-a563-a5384c9c82eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Components">
+      <UniqueIdentifier>{b8e04355-d961-4ccd-9c10-438fe8e5409c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Components">
+      <UniqueIdentifier>{697a3b9f-d7c7-4929-94da-76e0ed65b6be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CApplication.h">
@@ -246,26 +252,38 @@
     <ClInclude Include="CFreeListAllocator.h">
       <Filter>Headerdateien\Allocators</Filter>
     </ClInclude>
-    <ClInclude Include="IComponent.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="SCircleBB.h">
       <Filter>Headerdateien\Math</Filter>
     </ClInclude>
-    <ClInclude Include="CCollider.h">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="CSprite.h">
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="CRigidbody.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="IComponentManager.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="IComponentManager.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="CTransform.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SVector4.hpp">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SVector3.hpp">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="CInputController.h">
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -371,17 +389,26 @@
     <ClCompile Include="SCircleBB.cpp">
       <Filter>Quelldateien\Math</Filter>
     </ClCompile>
-    <ClCompile Include="CCollider.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CRigidbody.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="IComponentManager.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="CSprite.cpp">
+      <Filter>Quelldateien\Components</Filter>
     </ClCompile>
     <ClCompile Include="CTransform.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponentManager.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CRigidbody.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CInputController.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -14,9 +14,9 @@ public:
 
     int GetHeight() const override;
 
-    int GetPitch() const override;
-
-    int GetBPP() const override;
+    //int GetPitch() const override;
+    //
+    //int GetBPP() const override;
 
     void SetPixel(int a_x, int a_y, int a_color) override;
 
@@ -28,8 +28,8 @@ private:
 
     int m_width;
     int m_height;
-    int m_pitch;
-    int m_bitsPerPixel;
+    //int m_pitch;
+    //int m_bitsPerPixel;
     bool m_isLocked;
 
     UINT* m_data = nullptr;

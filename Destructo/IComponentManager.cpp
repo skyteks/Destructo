@@ -1,12 +1,12 @@
 #include "IComponentManager.h"
 #include "GlobalFunctions.h"
-
+#include "IComponent.h"
 
 IComponentManager::IComponentManager()
 {
     for (auto& component : m_components)
     {
-        component.second->Start();
+        component.second->Initialize();
     }
 }
 

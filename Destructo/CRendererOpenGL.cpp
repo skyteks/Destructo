@@ -1,5 +1,8 @@
 #include "CRendererOpenGL.h"
 #include "DataNames.h"
+#include "CGameObject.h"
+#include "CTransform.h"
+#include "CSprite.h"
 
 CRendererOpenGL::CRendererOpenGL()
 {
@@ -88,16 +91,16 @@ void CRendererOpenGL::Begin()
 
 void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 {
-    const CTextureOpenGL* openGLTexture = reinterpret_cast<const CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetTextureName()));
+    const CTextureOpenGL* openGLTexture = reinterpret_cast<const CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetTextureName()));
     const CTextureOpenGL* openGLOpacityMask = nullptr;
-    if (a_gameObject.GetOpacityMaskName() != "")
+    if (a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName() != "")
     {
-        openGLOpacityMask = reinterpret_cast<const CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetOpacityMaskName()));
+        openGLOpacityMask = reinterpret_cast<const CTextureOpenGL*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName()));
         openGLTexture->AddOpacityMask(openGLOpacityMask);
     }
 
-    SVector3 position = a_gameObject.GetPosition();
-    SVector3 scale = a_gameObject.GetScale();
+    SVector3 position = a_gameObject.GetComponent<CTransform>()->GetPosition();
+    SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
 
     glBindTexture(GL_TEXTURE_2D, openGLTexture->GetTextureID());
 
@@ -109,10 +112,10 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
     glBegin(GL_QUADS);
 
     SRect source;
-    source.x1 = a_gameObject.GetImageSection().x1;
-    source.y1 = a_gameObject.GetImageSection().y1;
-    source.x2 = a_gameObject.GetImageSection().x2;
-    source.y2 = a_gameObject.GetImageSection().y2;
+    source.x1 = a_gameObject.GetComponent<CSprite>()->GetImageSection().x1;
+    source.y1 = a_gameObject.GetComponent<CSprite>()->GetImageSection().y1;
+    source.x2 = a_gameObject.GetComponent<CSprite>()->GetImageSection().x2;
+    source.y2 = a_gameObject.GetComponent<CSprite>()->GetImageSection().y2;
 
     SRect dest;
     dest.x1 = position.x;
@@ -140,7 +143,7 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
     SVector3 vec2(dest.x1 + dest.x2, dest.y1);
     SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2);
     SVector3 vec4(dest.x1, dest.y1 + dest.y2);
-    SMatrix4x4 rotation = a_gameObject.GetRotation();
+    SMatrix4x4 rotation = SMatrix4x4::RotationZ(a_gameObject.GetComponent<CTransform>()->GetRotation().z);
 
     SVector4 point1 = rotation * vec1;
     SVector4 point2 = rotation * vec2;

@@ -1,23 +1,23 @@
 #pragma once
 #include "IComponent.h"
+#include "IComponentManager.h"
 #include "SVector3.h"
-#include "CTime.h"
-#include "CGameObject.h"
 
-class CGameObject;
-class IComponent;
-
-class CRigidbody// : public IComponent
+class CRigidbody : public IComponent
 {
 public:
 
-    CRigidbody();
+    CRigidbody(CGameObject* a_owner);
+    virtual ~CRigidbody();
 
+    void Initialize() override;
+    void Update() override;
+    bool AddRequiredComponents(IComponentManager * a_componentManager) override;
+    
     static const SVector3 Gravity();
 
-    void Update(CGameObject& a_object);
-
     const SVector3 GetVelocity() const;
+
     void AddForce(SVector3 a_force);
 
     bool m_useGravity;
@@ -31,6 +31,5 @@ private:
     float m_aceleration;
     float m_angularVelocity;
     float m_torque;
-
 };
 

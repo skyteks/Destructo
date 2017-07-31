@@ -1,11 +1,13 @@
 #include "SVector3.h"
+#include <math.h>
+#include <limits>
 
-SVector3::SVector3()
-    : x(0.0f)
-    , y(0.0f)
-    , z(0.0f)
-{
-}
+//SVector3::SVector3()
+//    : x(0.0f)
+//    , y(0.0f)
+//    , z(0.0f)
+//{
+//}
 
 SVector3::SVector3(float a_x, float a_y, float a_z)
     : x(a_x)
@@ -33,7 +35,7 @@ void SVector3::Normalize(SVector3& a_vector1)
 }
 SVector3 SVector3::Normalized(const SVector3& a_vector1)
 {
-    SVector3 tmp;
+    SVector3 tmp = SVector3::Zero();
     float length = a_vector1.Length();
 
     tmp.x = a_vector1.x / length;
@@ -50,11 +52,11 @@ float SVector3::Distance(const SVector3& a_vector1, const SVector3& a_vector2)
 
 SVector3 SVector3::Cross(const SVector3 & a_vector1, const SVector3 & a_vector2)
 {
-    SVector3 result;
-    result.x = a_vector1.y * a_vector2.z - a_vector2.y * a_vector1.z;
-    result.y = a_vector1.z * a_vector2.x - a_vector2.z * a_vector1.x;
-    result.z = a_vector1.x * a_vector2.y - a_vector2.x * a_vector1.y;
-    return result;
+    SVector3 tmp = SVector3::Zero();
+    tmp.x = a_vector1.y * a_vector2.z - a_vector2.y * a_vector1.z;
+    tmp.y = a_vector1.z * a_vector2.x - a_vector2.z * a_vector1.x;
+    tmp.z = a_vector1.x * a_vector2.y - a_vector2.x * a_vector1.y;
+    return tmp;
 }
 
 SVector3 SVector3::Zero()

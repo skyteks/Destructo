@@ -15,9 +15,9 @@ public:
 
     int GetHeight() const override;
 
-    int GetPitch() const override;
-
-    int GetBPP() const override;
+    //int GetPitch() const override;
+    //
+    //int GetBPP() const override;
 
     void SetPixel(int a_x, int a_y, int a_color) override;
 

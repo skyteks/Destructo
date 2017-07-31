@@ -155,6 +155,7 @@
     <ClInclude Include="CFrameAllocator.h" />
     <ClInclude Include="CFreeListAllocator.h" />
     <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CInputController.h" />
     <ClInclude Include="CMenuScene.h" />
     <ClInclude Include="CMouse.h" />
     <ClInclude Include="CQuadTree.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="CRendererGDI.h" />
     <ClInclude Include="CRendererOpenGL.h" />
     <ClInclude Include="CGameScene.h" />
+    <ClInclude Include="CSprite.h" />
     <ClInclude Include="CTextureDirect2D.h" />
     <ClInclude Include="CTextureDirectX11.h" />
     <ClInclude Include="CTextureGDI.h" />
@@ -201,7 +203,9 @@
     <ClInclude Include="SRect.h" />
     <ClInclude Include="CRigidbody.h" />
     <ClInclude Include="SVector3.h" />
+    <ClInclude Include="SVector3.hpp" />
     <ClInclude Include="SVector4.h" />
+    <ClInclude Include="SVector4.hpp" />
     <ClInclude Include="SVertex.h" />
     <ClInclude Include="CTime.h" />
   </ItemGroup>
@@ -219,6 +223,7 @@
     <ClCompile Include="CFrameAllocator.cpp" />
     <ClCompile Include="CFreeListAllocator.cpp" />
     <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CInputController.cpp" />
     <ClCompile Include="CMenuScene.cpp" />
     <ClCompile Include="CMouse.cpp" />
     <ClCompile Include="CQuadTree.cpp" />
@@ -227,6 +232,7 @@
     <ClCompile Include="CRendererGDI.cpp" />
     <ClCompile Include="CRendererOpenGL.cpp" />
     <ClCompile Include="CGameScene.cpp" />
+    <ClCompile Include="CSprite.cpp" />
     <ClCompile Include="CTextureDirect2D.cpp" />
     <ClCompile Include="CTextureDirectX11.cpp" />
     <ClCompile Include="CTextureGDI.cpp" />
@@ -240,6 +246,7 @@
     <ClCompile Include="GlobalFunctions.cpp" />
     <ClCompile Include="CWindowsInput.cpp" />
     <ClCompile Include="CInputManager.cpp" />
+    <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SAABB.cpp" />

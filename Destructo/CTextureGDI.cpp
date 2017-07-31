@@ -24,35 +24,41 @@ CTextureGDI::~CTextureGDI()
     DeleteDC(m_bitmapDC);
 }
 
+
 int CTextureGDI::GetWidth() const
 {
     return m_width;
 }
+
 
 int CTextureGDI::GetHeight() const
 {
     return m_height;
 }
 
+
 HBITMAP CTextureGDI::GetBitmapHandle() const
 {
     return m_bitmapHandle;
 }
+
 
 HDC CTextureGDI::GetBitmapDeviceContect() const
 {
     return m_bitmapDC;
 }
 
-int CTextureGDI::GetPitch() const
-{
-    return m_pitch;
-}
 
-int CTextureGDI::GetBPP() const
-{
-    return m_bitsPerPixel;
-}
+//int CTextureGDI::GetPitch() const
+//{
+//    return m_pitch;
+//}
+//
+//int CTextureGDI::GetBPP() const
+//{
+//    return m_bitsPerPixel;
+//}
+
 
 void CTextureGDI::SetPixel(int a_x, int a_y, int a_color)
 {

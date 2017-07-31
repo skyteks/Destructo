@@ -52,16 +52,16 @@ void * CTextureOpenGL::GetData() const
 }
 
 
-int CTextureOpenGL::GetPitch() const
-{
-    return m_pitch;
-}
-
-
-int CTextureOpenGL::GetBPP() const
-{
-    return m_bitsPerPixel;
-}
+//int CTextureOpenGL::GetPitch() const
+//{
+//    return m_pitch;
+//}
+//
+//
+//int CTextureOpenGL::GetBPP() const
+//{
+//    return m_bitsPerPixel;
+//}
 
 
 void CTextureOpenGL::SetPixel(int a_x, int a_y, int a_color)

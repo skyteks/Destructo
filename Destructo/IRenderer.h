@@ -1,8 +1,10 @@
 #pragma once
 
 #include <Windows.h>
-#include "ITexture.h"
-#include "CGameObject.h"
+#include <string>
+
+class ITexture;
+class CGameObject;
 
 class IRenderer
 {

@@ -1,5 +1,4 @@
 #pragma once
-#include <limits>
 #include "SVector3.h"
 #include "SVector4.h"
 
@@ -14,7 +13,7 @@ public:
 
 
 public:
-    SMatrix4x4();
+    //SMatrix4x4();
     SMatrix4x4(
         float a_m11, float a_m12, float a_m13, float a_m14,
         float a_m21, float a_m22, float a_m23, float a_m24,
@@ -25,13 +24,11 @@ public:
 
     friend SMatrix4x4 operator +(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
     friend SMatrix4x4 operator -(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
-
     friend SMatrix4x4 operator *(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
     friend SMatrix4x4 operator *(SMatrix4x4 a_matrix, float a_f);
     friend SMatrix4x4 operator *(float a_f, SMatrix4x4 a_matrix);
     friend SVector4 operator *(SMatrix4x4 a_matrix, SVector3 a_vector);
     friend SVector4 operator *(SVector3 a_vector, SMatrix4x4 a_matrix);
-
     friend bool operator ==(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
     friend bool operator !=(SMatrix4x4 a_matrix1, SMatrix4x4 a_matrix2);
 

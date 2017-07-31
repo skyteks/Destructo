@@ -1,12 +1,13 @@
 #include "SMatrix4x4.h"
+#include <limits>
 
-SMatrix4x4::SMatrix4x4() :
-    m11(1.0f), m21(0.0f), m31(0.0f), m41(0.0f),
-    m12(0.0f), m22(1.0f), m32(0.0f), m42(0.0f),
-    m13(0.0f), m23(0.0f), m33(1.0f), m43(0.0f),
-    m14(0.0f), m24(0.0f), m34(0.0f), m44(1.0f)
-{
-}
+//SMatrix4x4::SMatrix4x4() :
+//    m11(1.0f), m21(0.0f), m31(0.0f), m41(0.0f),
+//    m12(0.0f), m22(1.0f), m32(0.0f), m42(0.0f),
+//    m13(0.0f), m23(0.0f), m33(1.0f), m43(0.0f),
+//    m14(0.0f), m24(0.0f), m34(0.0f), m44(1.0f)
+//{
+//}
 
 SMatrix4x4::SMatrix4x4(
     float a_m11, float a_m12, float a_m13, float a_m14,
@@ -18,22 +19,6 @@ SMatrix4x4::SMatrix4x4(
     m13(a_m31), m23(a_m32), m33(a_m33), m43(a_m34),
     m14(a_m41), m24(a_m42), m34(a_m43), m44(a_m44)
 {
-    //m11 = a_m11;
-    //m12 = a_m12;
-    //m13 = a_m13;
-    //m14 = a_m14;
-    //m21 = a_m21;
-    //m22 = a_m22;
-    //m23 = a_m23;
-    //m24 = a_m24;
-    //m31 = a_m31;
-    //m32 = a_m32;
-    //m33 = a_m33;
-    //m34 = a_m34;
-    //m41 = a_m41;
-    //m42 = a_m42;
-    //m43 = a_m43;
-    //m44 = a_m44;
 }
 
 SMatrix4x4 SMatrix4x4::Identity()
@@ -100,7 +85,7 @@ SMatrix4x4 operator *(float a_f, SMatrix4x4 a_matrix)
 
 SVector4 operator *(SMatrix4x4 a_matrix, SVector3 a_vectorector)
 {
-    SVector4 result;
+    SVector4 tmp = SVector4::Zero();
 
     /*
         return CVector3(
@@ -109,12 +94,12 @@ SVector4 operator *(SMatrix4x4 a_matrix, SVector3 a_vectorector)
         (lhs.x * rhs.mtx[1][3]) + (lhs.y * rhs.mtx[1][2]) + (lhs.z * rhs.mtx[2][2]));
     */
 
-    result.x = a_matrix.m11 * a_vectorector.x + a_matrix.m12 * a_vectorector.y + a_matrix.m13 * a_vectorector.z + a_matrix.m14 * 1.0f;
-    result.y = a_matrix.m21 * a_vectorector.x + a_matrix.m22 * a_vectorector.y + a_matrix.m23 * a_vectorector.z + a_matrix.m24 * 1.0f;
-    result.z = a_matrix.m31 * a_vectorector.x + a_matrix.m32 * a_vectorector.y + a_matrix.m33 * a_vectorector.z + a_matrix.m34 * 1.0f;
-    result.w = a_matrix.m41 * a_vectorector.x + a_matrix.m42 * a_vectorector.y + a_matrix.m43 * a_vectorector.z + a_matrix.m44 * 1.0f;
+    tmp.x = a_matrix.m11 * a_vectorector.x + a_matrix.m12 * a_vectorector.y + a_matrix.m13 * a_vectorector.z + a_matrix.m14 * 1.0f;
+    tmp.y = a_matrix.m21 * a_vectorector.x + a_matrix.m22 * a_vectorector.y + a_matrix.m23 * a_vectorector.z + a_matrix.m24 * 1.0f;
+    tmp.z = a_matrix.m31 * a_vectorector.x + a_matrix.m32 * a_vectorector.y + a_matrix.m33 * a_vectorector.z + a_matrix.m34 * 1.0f;
+    tmp.w = a_matrix.m41 * a_vectorector.x + a_matrix.m42 * a_vectorector.y + a_matrix.m43 * a_vectorector.z + a_matrix.m44 * 1.0f;
 
-    return result;
+    return tmp;
 }
 SVector4 operator *(SVector3 a_vector, SMatrix4x4 a_matrix)
 {

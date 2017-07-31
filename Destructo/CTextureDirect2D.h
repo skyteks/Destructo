@@ -23,9 +23,9 @@ public:
 
     int GetHeight() const override;
 
-    int GetPitch() const override;
-
-    int GetBPP() const override;
+    //int GetPitch() const override;
+    //
+    //int GetBPP() const override;
 
     void SetPixel(int a_x, int a_y, int a_color) override;
 
@@ -36,8 +36,8 @@ public:
 private:
     int m_width;
     int m_height;
-    int m_pitch;
-    int m_bitsPerPixel;
+    //int m_pitch;
+    //int m_bitsPerPixel;
     bool m_isLocked;
 
     mutable ID2D1Bitmap* m_bitmap = nullptr;

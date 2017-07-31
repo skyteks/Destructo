@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-//#include "IManager.h"
+#include "IManager.h"
 #include "IRenderer.h"
 #include "GlobalFunctions.h"
 

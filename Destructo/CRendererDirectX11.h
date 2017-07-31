@@ -74,6 +74,6 @@ private:
     D3D11_PRIMITIVE_TOPOLOGY m_primitiveTopology;
     ID3D11SamplerState* m_samplerState = nullptr;
     ID3D11BlendState* m_blendState = nullptr;
-    ID3D11ShaderResourceView* m_shaderResourceView = nullptr;
+    //ID3D11ShaderResourceView* m_shaderResourceView = nullptr;
 };
 

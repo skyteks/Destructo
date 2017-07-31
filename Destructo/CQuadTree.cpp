@@ -1,13 +1,14 @@
 #include "CQuadTree.h"
+#include "GlobalFunctions.h"
+#include "CTransform.h"
 
-CQuadTree::CQuadTree(SAABB a_boundary)
+CQuadTree::CQuadTree(const SAABB& a_boundary)
     : m_boundary(a_boundary)
     , m_northWest(nullptr)
     , m_northEast(nullptr)
     , m_southWest(nullptr)
     , m_southEast(nullptr)
 {
-    m_elements = std::vector<CGameObject*>();
 }
 
 CQuadTree::~CQuadTree()
@@ -18,7 +19,12 @@ CQuadTree::~CQuadTree()
     SafeDelete(m_southEast);
 }
 
-SAABB CQuadTree::GetBoundary()
+void CQuadTree::SetBoundary(const SAABB& a_boundary)
+{
+    m_boundary = a_boundary;
+}
+
+const SAABB& CQuadTree::GetBoundary() const
 {
     return m_boundary;
 }
@@ -26,7 +32,7 @@ SAABB CQuadTree::GetBoundary()
 bool CQuadTree::Insert(CGameObject* a_object)
 {
     // Ignore objects that do not belong in this quad tree
-    if (!m_boundary.ContainsPoint(a_object->GetPosition()))
+    if (!m_boundary.ContainsPoint(a_object->GetComponent<CTransform>()->GetPosition()))
     {
         return false;
     }
@@ -74,25 +80,25 @@ void CQuadTree::Subdivide()
 
     for (int i = m_elements.size(); i > 0; i--)
     {
-        if (m_northWest->GetBoundary().ContainsPoint(m_elements.at(i)->GetPosition()))
+        if (m_northWest->GetBoundary().ContainsPoint(m_elements.at(i)->GetComponent<CTransform>()->GetPosition()))
         {
             m_northWest->Insert(m_elements.at(i));
             m_elements.pop_back();
         }
 
-        if (m_northEast->GetBoundary().ContainsPoint(m_elements.at(i)->GetPosition()))
+        if (m_northEast->GetBoundary().ContainsPoint(m_elements.at(i)->GetComponent<CTransform>()->GetPosition()))
         {
             m_northEast->Insert(m_elements.at(i));
             m_elements.pop_back();
         }
 
-        if (m_southWest->GetBoundary().ContainsPoint(m_elements.at(i)->GetPosition()))
+        if (m_southWest->GetBoundary().ContainsPoint(m_elements.at(i)->GetComponent<CTransform>()->GetPosition()))
         {
             m_northWest->Insert(m_elements.at(i));
             m_elements.pop_back();
         }
 
-        if (m_southEast->GetBoundary().ContainsPoint(m_elements.at(i)->GetPosition()))
+        if (m_southEast->GetBoundary().ContainsPoint(m_elements.at(i)->GetComponent<CTransform>()->GetPosition()))
         {
             m_northWest->Insert(m_elements.at(i));
             m_elements.pop_back();
@@ -115,7 +121,7 @@ std::vector<CGameObject*> CQuadTree::QueryRange(SAABB a_range)
     // Check objects at this quad level
     for (int p = 0; p < m_elements.size(); p++)
     {
-        if (a_range.ContainsPoint(m_elements.at(p)->GetPosition()))
+        if (a_range.ContainsPoint(m_elements.at(p)->GetComponent<CTransform>()->GetPosition()))
         {
             elementsInRange.push_back(m_elements.at(p));
             break;

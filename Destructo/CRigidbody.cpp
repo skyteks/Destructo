@@ -1,8 +1,10 @@
 #include "CRigidbody.h"
+#include "CTime.h"
 
 
-CRigidbody::CRigidbody()
-    : m_useGravity(true)
+CRigidbody::CRigidbody(CGameObject* a_owner)
+    : IComponent(a_owner)
+    , m_useGravity(true)
     , m_force(SVector3::Zero())
     , m_mass(1.0f)
     , m_momentOfInertia(0.0f)
@@ -13,12 +15,23 @@ CRigidbody::CRigidbody()
 {
 }
 
+CRigidbody::~CRigidbody()
+{
+}
+
+
 const SVector3 CRigidbody::Gravity()
 {
     return SVector3(0.0f, 9.81f * 0.1f);
 }
 
-void CRigidbody::Update(CGameObject& a_object)
+
+void CRigidbody::Initialize()
+{
+}
+
+
+void CRigidbody::Update()
 {
     float dt = CTime::GetInstance().DeltaTime();
     if (m_useGravity)
@@ -30,14 +43,22 @@ void CRigidbody::Update(CGameObject& a_object)
     {
         m_angularVelocity += m_torque * (1.0f / m_momentOfInertia) * dt;
     }
-    a_object.SetPosition(a_object.GetPosition() + m_velocity * dt);
-    a_object.AddRotation(m_angularVelocity * dt);
+    //a_object.GetComponent<CTransform>()->SetPosition(a_object.GetComponent<CTransform>().GetPosition() + m_velocity * dt);
+    //a_object.GetComponent<CTransform>()->AddRotation(m_angularVelocity * dt);
 }
+
+
+bool CRigidbody::AddRequiredComponents(IComponentManager* a_componentManager)
+{
+    return true;
+}
+
 
 const SVector3 CRigidbody::GetVelocity() const
 {
     return m_velocity;
 }
+
 
 void CRigidbody::AddForce(SVector3 a_force)
 {
