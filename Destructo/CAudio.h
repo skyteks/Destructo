@@ -14,6 +14,7 @@
 #include "GlobalFunctions.h"
 
 typedef std::map<std::string, FMOD::Sound*> SoundMap;
+typedef std::map<FMOD::Channel*, CAudioChannel> ChannelMap;
 
 class CAudio : public IAudio
 {
@@ -30,6 +31,6 @@ public:
 
 private:
     SoundMap m_soundMap;
-    std::map<FMOD::Channel*, CAudioChannel> m_channelMap;
+    ChannelMap m_channelMap;
     FMOD::System* m_system;
 };

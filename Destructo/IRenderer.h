@@ -2,8 +2,8 @@
 
 #include <Windows.h>
 #include <string>
+#include "ITexture.h"
 
-class ITexture;
 class CGameObject;
 
 class IRenderer

@@ -6,15 +6,6 @@ SAABB::SAABB(SVector3 a_center, float a_halfWidths)
 {
 }
 
-const SVector3 SAABB::GetCenter() const
-{
-    return m_center;
-}
-
-float SAABB::GetHalfWidths() const
-{
-    return m_halfWidths;
-}
 
 bool SAABB::ContainsPoint(SVector3 a_point) const
 {
@@ -24,6 +15,7 @@ bool SAABB::ContainsPoint(SVector3 a_point) const
     return topLeft.x <= a_point.x && topLeft.y <= a_point.x &&
         bottomRight.x >= a_point.x && bottomRight.y >= a_point.x;
 }
+
 
 bool SAABB::intersectsAABB(SAABB a_other) const
 {

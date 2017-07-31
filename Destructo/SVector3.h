@@ -17,13 +17,13 @@ public:
 
 
     /// @brief Default Constructor.
-    //SVector3();
+    SVector3();
 
     /// @brief Constructor with arguments.
     /// @param a_x float value which will initialize the x-component of vector.
     /// @param a_y float value which will initialize the y-component of vector.
     /// @param a_z float value which will initialize the z-component of vector.
-    SVector3(float a_x, float a_y, float a_z = 0.0f);
+    SVector3(const float a_x, const float a_y, const float a_z = 0.0f);
 
     ////=======================================================================
     //// Public Member functions
@@ -32,7 +32,7 @@ public:
 
     /// @brief Returns the vector with normalization.
     /// @return Returns the vector with length = 1.0f.
-    SVector3 Normalized();
+    SVector3 Normalized() const;
 
     /// @brief Normalizes the vector.
     void Normalize();
@@ -40,6 +40,7 @@ public:
     /// @brief Calculates the length (magnitude) of vector.
     /// @return Returns the length of the vector.
     float Length() const;
+#define Magnitude() Length()
 
     ////=======================================================================
     //// Operator overload

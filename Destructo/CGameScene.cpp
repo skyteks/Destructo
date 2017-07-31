@@ -40,24 +40,24 @@ bool CGameScene::Initialize(IRenderer& a_renderer)
     //CRigidbody* testRigid = new CRigidbody();
     //CCollider* testCol = new CCollider(SCircleBB(SVector3(0, 0), 100));
 
-    m_objectPlayer = new CGameObject();//"Player1");
+    m_objectPlayer = new CGameObject("Player1");
     m_objectPlayer->GetComponent<CTransform>()->SetPosition(SVector3(100.0f, 100.0f));
     m_objectPlayer->GetComponent<CTransform>()->SetRotation(SVector3(0.0f, 0.0f, 45.0f));
     m_objectPlayer->AddComponent<CSprite>(m_objectPlayer)->SetTextureName(TEXTURE_PLAYER);
     m_objectPlayer->AddComponent<CInputController>(m_objectPlayer)->SetMovementControlls(EKeyCode::W, EKeyCode::S, EKeyCode::A, EKeyCode::D);
 
-    m_objectPlayer2 = new CGameObject();//"Player2");
-    m_objectPlayer2->GetComponent<CTransform>()->SetPosition(SVector3(100.0f, 100.0f));
-    m_objectPlayer2->GetComponent<CTransform>()->SetRotation(SVector3(0.0f, 0.0f, 0.0f));
-    m_objectPlayer2->AddComponent<CSprite>(m_objectPlayer2)->SetTextureName(TEXTURE_PLAYER_2);
-    m_objectPlayer2->AddComponent<CInputController>(m_objectPlayer2)->SetMovementControlls(EKeyCode::Up, EKeyCode::Down, EKeyCode::Left, EKeyCode::Right);
+    //m_objectPlayer2 = new CGameObject("Player2");
+    //m_objectPlayer2->GetComponent<CTransform>()->SetPosition(SVector3(100.0f, 100.0f));
+    //m_objectPlayer2->GetComponent<CTransform>()->SetRotation(SVector3(0.0f, 0.0f, 0.0f));
+    //m_objectPlayer2->AddComponent<CSprite>(m_objectPlayer2)->SetTextureName(TEXTURE_PLAYER_2);
+    //m_objectPlayer2->AddComponent<CInputController>(m_objectPlayer2)->SetMovementControlls(EKeyCode::Up, EKeyCode::Down, EKeyCode::Left, EKeyCode::Right);
 
 
-    m_objectTerrain = new CGameObject();//"Terrain");
+    m_objectTerrain = new CGameObject("Terrain");
     m_objectTerrain->AddComponent<CSprite>(m_objectTerrain)->SetTextureName(TEXTURE_TERRAIN);
     m_objectTerrain->GetComponent<CSprite>()->SetOpacityMaskName(TEXTURE_COLLISION);
 
-    m_objectBackground = new CGameObject();//"Background");
+    m_objectBackground = new CGameObject("Background");
     m_objectBackground->AddComponent<CSprite>(m_objectBackground)->SetTextureName(TEXTURE_BACKGROUND);
 
     m_quadTree = new CQuadTree(SAABB(SVector3(400.0f, 400.0f), 800.0f));
@@ -94,9 +94,7 @@ void CGameScene::Draw(IRenderer& a_renderer) const
     //a_renderer.DrawTexture(m_playerPosX, m_playerPosY, 32, 32, playerTexture, 0, 0, playerTexture->GetWidth(), playerTexture->GetHeight());
     a_renderer.DrawObject(*m_objectPlayer);
 
-    a_renderer.DrawObject(*m_objectPlayer2);
-
-    //a_renderer.DrawTexture(0, 0, 0, 0, buttonTexture, 0, 0, 0, 0);//DO NOT REMOVE (BUG)
+    //a_renderer.DrawObject(*m_objectPlayer2);
 
     char buffer[200] = {};
     sprintf_s(buffer, "MouseX: %i\nMouseY: %i\nMouseL: %s\nMouseR: %s\nFPS: %i\nPlayerPos: %f %f \n",

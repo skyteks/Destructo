@@ -14,7 +14,6 @@ struct SRect
     //	, x2(0.0f)
     //	, y2(0.0f)
     //{
-
     //}
 
     //SRect(float a_x1, float a_y1, float a_x2, float a_y2)
@@ -23,7 +22,6 @@ struct SRect
     //	, x2(a_x2)
     //	, y2(a_y2)
     //{
-
     //}
 };
 

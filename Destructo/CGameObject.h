@@ -5,12 +5,13 @@ class CGameObject : public IComponentManager
 {
 public:
     CGameObject();
-    //CGameObject(std::string a_name);
+    CGameObject(std::string a_name);
 
     virtual ~CGameObject();
 
     void Initialize();
     void Update();
 
-    //std::string m_name;
+private:
+    std::string m_name;
 };

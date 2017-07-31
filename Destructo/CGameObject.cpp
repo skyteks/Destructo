@@ -2,17 +2,17 @@
 #include "CTransform.h"
 
 CGameObject::CGameObject()
-    //: m_name("New GameObject")
+    : m_name("New GameObject")
 {
-    Initialize();
+    AddComponent<CTransform>(this);
 }
 
 
-//CGameObject::CGameObject(std::string a_name)
-//    : m_name(a_name)
-//{
-//    Initialize();
-//}
+CGameObject::CGameObject(std::string a_name)
+    : m_name(a_name)
+{
+    AddComponent<CTransform>(this);
+}
 
 
 CGameObject::~CGameObject()
@@ -22,7 +22,6 @@ CGameObject::~CGameObject()
 
 void CGameObject::Initialize()
 {
-    AddComponent<CTransform>(this);
 }
 
 

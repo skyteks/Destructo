@@ -73,10 +73,10 @@ bool CQuadTree::Insert(CGameObject* a_object)
 
 void CQuadTree::Subdivide()
 {
-    m_northWest = &CQuadTree(SAABB(m_boundary.GetCenter() + SVector3(-m_boundary.GetHalfWidths() * 0.5f, -m_boundary.GetHalfWidths() * 0.5f), m_boundary.GetHalfWidths() * 0.25f));
-    m_northEast = &CQuadTree(SAABB(m_boundary.GetCenter() + SVector3(-m_boundary.GetHalfWidths() * 0.5f, m_boundary.GetHalfWidths() * 0.5f), m_boundary.GetHalfWidths() * 0.25f));
-    m_southWest = &CQuadTree(SAABB(m_boundary.GetCenter() + SVector3(m_boundary.GetHalfWidths() * 0.5f, -m_boundary.GetHalfWidths() * 0.5f), m_boundary.GetHalfWidths() * 0.25f));
-    m_southEast = &CQuadTree(SAABB(m_boundary.GetCenter() + SVector3(m_boundary.GetHalfWidths() * 0.5f, m_boundary.GetHalfWidths() * 0.5f), m_boundary.GetHalfWidths() * 0.25f));
+    m_northWest = &CQuadTree(SAABB(m_boundary.m_center + SVector3(-m_boundary.m_halfWidths * 0.5f, -m_boundary.m_halfWidths * 0.5f), m_boundary.m_halfWidths * 0.25f));
+    m_northEast = &CQuadTree(SAABB(m_boundary.m_center + SVector3(-m_boundary.m_halfWidths * 0.5f, m_boundary.m_halfWidths * 0.5f), m_boundary.m_halfWidths * 0.25f));
+    m_southWest = &CQuadTree(SAABB(m_boundary.m_center + SVector3(m_boundary.m_halfWidths * 0.5f, -m_boundary.m_halfWidths * 0.5f), m_boundary.m_halfWidths * 0.25f));
+    m_southEast = &CQuadTree(SAABB(m_boundary.m_center + SVector3(m_boundary.m_halfWidths * 0.5f, m_boundary.m_halfWidths * 0.5f), m_boundary.m_halfWidths * 0.25f));
 
     for (int i = m_elements.size(); i > 0; i--)
     {
@@ -137,22 +137,22 @@ std::vector<CGameObject*> CQuadTree::QueryRange(SAABB a_range)
     // Otherwise, add the points from the children
     std::vector<CGameObject*> tmp;
     tmp = m_northWest->QueryRange(a_range);
-    for (int i = 0; i < tmp.size(); i++)
+    for (size_t i = 0; i < tmp.size(); i++)
     {
         elementsInRange.push_back(tmp.at(i));
     }
     tmp = m_northEast->QueryRange(a_range);
-    for (int i = 0; i < tmp.size(); i++)
+    for (size_t i = 0; i < tmp.size(); i++)
     {
         elementsInRange.push_back(tmp.at(i));
     }
     tmp = m_southWest->QueryRange(a_range);
-    for (int i = 0; i < tmp.size(); i++)
+    for (size_t i = 0; i < tmp.size(); i++)
     {
         elementsInRange.push_back(tmp.at(i));
     }
     tmp = m_southEast->QueryRange(a_range);
-    for (int i = 0; i < tmp.size(); i++)
+    for (size_t i = 0; i < tmp.size(); i++)
     {
         elementsInRange.push_back(tmp.at(i));
     }

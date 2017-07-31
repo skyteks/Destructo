@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class CGameObject;
 class IComponentManager;

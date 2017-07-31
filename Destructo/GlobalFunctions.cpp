@@ -33,8 +33,8 @@ SBitmap LoadBitmapAndAddAlpha(std::string a_path)
 
     unsigned char* buffer = (unsigned char*)malloc(bmp.m_header.m_sizeOfImageData * 4 / 3);
 
-    int i = 0;
-    int j = 0;
+    size_t i = 0;
+    uint32_t j = 0;
     while (i < bmp.m_header.m_sizeOfImageData)
     {
         unsigned char r = bmp.m_data[i + 2];
@@ -69,8 +69,14 @@ float Map(float a_value, float a_inMin, float a_inMax, float a_outMin, float a_o
 }
 
 
-static unsigned long long newCounter = 0;
-static unsigned long long memoryLeaksCounter = 0;
+int Map(int a_value, int a_inMin, int a_inMax, int a_outMin, int a_outMax)
+{
+    return (a_value - a_inMin) * (a_outMax - a_outMin) / (a_inMax - a_inMin) + a_outMin;
+}
+
+
+static size_t newCounter = 0;
+static size_t memoryLeaksCounter = 0;
 #include <map>
 #include <Windows.h>
 #include <WinBase.h>
@@ -83,7 +89,8 @@ void NewDeleteLeaks()
 
     //leakdetektor
     //valgrind
-    printf("New Allocations: %d, MemoryLeaks: %d\n", newCounter, memoryLeaksCounter);
+
+    printf("New Allocations: %u, MemoryLeaks: %u\n", newCounter, memoryLeaksCounter);
 }
 
 void* operator new (size_t a_size)

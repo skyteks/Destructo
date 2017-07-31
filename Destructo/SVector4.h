@@ -15,7 +15,7 @@ public:
     ////=======================================================================
 
     /// @brief Default Constructor.
-    //SVector4();
+    SVector4();
 
     /// @brief Constructor with arguments.
     /// @param a_x float value which will initialize the x-component of vector.
@@ -38,6 +38,7 @@ public:
     /// @brief Calculates the length (magnitude) of vector.
     /// @return Returns the length of the vector.
     float Length() const;
+#define Magnitude() Length()
 
     ////=======================================================================
     //// Operator overload

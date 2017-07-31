@@ -1,7 +1,8 @@
 #pragma once
 #include <map>
+#include "IComponent.h"
 
-class IComponent;
+typedef std::map<size_t, IComponent*> ComponentMap;
 
 class IComponentManager
 {
@@ -19,9 +20,10 @@ public:
     T* GetComponent() const;
 
 protected:
+
     void UpdateComponents();
 
-    std::map<size_t, IComponent*> m_components; // key = hash, value = ptr
+    ComponentMap m_components;
 };
 
 #include "IComponentManager.hpp"
