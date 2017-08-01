@@ -31,6 +31,11 @@ const SAABB& CQuadTree::GetBoundary() const
 
 bool CQuadTree::Insert(CGameObject* a_object)
 {
+    if (a_object == nullptr)
+    {
+        return false;
+    }
+
     // Ignore objects that do not belong in this quad tree
     if (!m_boundary.ContainsPoint(a_object->GetComponent<CTransform>()->GetPosition()))
     {

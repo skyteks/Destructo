@@ -17,9 +17,12 @@ public:
     const SVector3 GetRotation();
     const SVector3 GetScale();
 
-    void SetPosition(SVector3& a_position);
-    void SetRotation(SVector3& a_rotation);
-    void SetScale(SVector3& a_scale);
+    void SetPosition(const SVector3& a_position);
+    void SetRotation(const SVector3& a_rotation);
+    void SetScale(const SVector3& a_scale);
+
+    void AddPosition(const SVector3& a_position);
+    void AddRotation(const SVector3& a_rotation);
 
     SMatrix4x4& GetWorld();
     const SVector3& GetForward();

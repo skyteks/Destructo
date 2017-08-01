@@ -1,6 +1,8 @@
 #include "CInputController.h"
 #include "CTime.h"
 #include "SVector3.h"
+#include "CGameObject.h"
+#include "CTransform.h"
 
 CInputController::CInputController(CGameObject* a_owner)
     : IComponent(a_owner)
@@ -29,34 +31,35 @@ void CInputController::Update()
     float playerPosX = 0.0f;
     float playerPosY = 0.0f;
 
-    //if (m_objectPlayer->GetPosition().x < 800 - 32 && CInputManager::GetInstance().GetKey(EKeyCode::D))
-    //    playerPosX += speed;
-    //if (m_objectPlayer->GetPosition().x >= 0 && CInputManager::GetInstance().GetKey(EKeyCode::A))
-    //    playerPosX -= speed;
-    //if (m_objectPlayer->GetPosition().y < 600 - 32 && CInputManager::GetInstance().GetKey(EKeyCode::S))
-    //    playerPosY += speed;
-    //if (m_objectPlayer->GetPosition().y >= 0 && CInputManager::GetInstance().GetKey(EKeyCode::W))
-    //    playerPosY -= speed;
-    //
-    //m_objectPlayer->SetPosition(m_objectPlayer->GetPosition() + SVector3(playerPosX, playerPosY));
-    //
-    //if (CInputManager::GetInstance().GetKey(EKeyCode::E))
-    //{
-    //    m_objectPlayer->AddRotation(CTime::GetInstance().DeltaTime());
-    //}
-    //if (CInputManager::GetInstance().GetKey(EKeyCode::Q))
-    //{
-    //    m_objectPlayer->AddRotation(-1.0f * CTime::GetInstance().DeltaTime());
-    //}
-    //
-    //if (CInputManager::GetInstance().GetKey(EKeyCode::R))
-    //{
-    //    m_objectPlayer->SetScale(m_objectPlayer->GetScale() + SVector3::One() * CTime::GetInstance().DeltaTime());
-    //}
-    //if (CInputManager::GetInstance().GetKey(EKeyCode::F))
-    //{
-    //    m_objectPlayer->SetScale(m_objectPlayer->GetScale() - SVector3::One() * CTime::GetInstance().DeltaTime());
-    //}
+    CTransform* transform = m_owner->GetComponent<CTransform>();
+    if (transform->GetPosition().x < 800 - 32 && CInputManager::GetInstance().GetKey(m_keyRight))
+        playerPosX += speed;
+    if (transform->GetPosition().x >= 0 && CInputManager::GetInstance().GetKey(m_keyLeft))
+        playerPosX -= speed;
+    if (transform->GetPosition().y < 600 - 32 && CInputManager::GetInstance().GetKey(m_keyDown))
+        playerPosY += speed;
+    if (transform->GetPosition().y >= 0 && CInputManager::GetInstance().GetKey(m_keyUp))
+        playerPosY -= speed;
+
+    transform->AddPosition(SVector3(playerPosX, playerPosY));
+
+    if (CInputManager::GetInstance().GetKey(EKeyCode::E))
+    {
+        transform->AddRotation(SVector3::Forward() * CTime::GetInstance().DeltaTime());
+    }
+    if (CInputManager::GetInstance().GetKey(EKeyCode::Q))
+    {
+        transform->AddRotation(SVector3::Backward() * CTime::GetInstance().DeltaTime());
+    }
+    
+    if (CInputManager::GetInstance().GetKey(EKeyCode::R))
+    {
+        transform->SetScale(transform->GetScale() + SVector3::One() * CTime::GetInstance().DeltaTime());
+    }
+    if (CInputManager::GetInstance().GetKey(EKeyCode::F))
+    {
+        transform->SetScale(transform->GetScale() - SVector3::One() * CTime::GetInstance().DeltaTime());
+    }
 }
 
 bool CInputController::AddRequiredComponents(IComponentManager* a_componentManager)

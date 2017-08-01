@@ -62,7 +62,7 @@ bool CGameScene::Initialize(IRenderer& a_renderer)
 
     m_quadTree = new CQuadTree(SAABB(SVector3(400.0f, 400.0f), 800.0f));
     m_quadTree->Insert(m_objectPlayer);
-    m_quadTree->Insert(m_objectPlayer2);
+    //m_quadTree->Insert(m_objectPlayer2);
 
     return true;
 }

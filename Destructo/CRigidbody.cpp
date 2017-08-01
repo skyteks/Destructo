@@ -1,6 +1,7 @@
 #include "CRigidbody.h"
 #include "CTime.h"
-
+#include "CTransform.h"
+#include "CGameObject.h"
 
 CRigidbody::CRigidbody(CGameObject* a_owner)
     : IComponent(a_owner)
@@ -43,8 +44,9 @@ void CRigidbody::Update()
     {
         m_angularVelocity += m_torque * (1.0f / m_momentOfInertia) * dt;
     }
-    //a_object.GetComponent<CTransform>()->SetPosition(a_object.GetComponent<CTransform>().GetPosition() + m_velocity * dt);
-    //a_object.GetComponent<CTransform>()->AddRotation(m_angularVelocity * dt);
+    CTransform* transform = m_owner->GetComponent<CTransform>();
+    transform->AddPosition(m_velocity * dt);
+    transform->AddRotation(SVector3::Forward() * m_angularVelocity * dt);
 }
 
 

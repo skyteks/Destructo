@@ -14,33 +14,40 @@ CTransform::CTransform(CGameObject* a_owner)
     UpdateForwardSideUp();
 }
 
+
 CTransform::~CTransform()
 {
 }
 
+
 void CTransform::Initialize()
 {
 }
+
 
 void CTransform::Update()
 {
     GetWorld();
 }
 
+
 bool CTransform::AddRequiredComponents(IComponentManager* a_componentManager)
 {
     return true;
 }
+
 
 const SVector3 CTransform::GetPosition()
 {
     return m_position;
 }
 
+
 const SVector3 CTransform::GetRotation()
 {
     return m_rotation;
 }
+
 
 const SVector3 CTransform::GetScale()
 {
@@ -48,13 +55,13 @@ const SVector3 CTransform::GetScale()
 }
 
 
-void CTransform::SetPosition(SVector3& a_position)
+void CTransform::SetPosition(const SVector3& a_position)
 {
     m_position = a_position;
 }
 
 
-void CTransform::SetRotation(SVector3& a_rotation)
+void CTransform::SetRotation(const SVector3& a_rotation)
 {
     m_rotation = a_rotation;
 
@@ -62,10 +69,21 @@ void CTransform::SetRotation(SVector3& a_rotation)
 }
 
 
-void CTransform::SetScale(SVector3& a_scale)
+void CTransform::SetScale(const SVector3& a_scale)
 {
     m_scale = a_scale;
 }
+
+void CTransform::AddPosition(const SVector3 & a_position)
+{
+    m_position += a_position;
+}
+
+void CTransform::AddRotation(const SVector3 & a_rotation)
+{
+    m_rotation += a_rotation;
+}
+
 
 SMatrix4x4& CTransform::GetWorld()
 {
@@ -81,20 +99,24 @@ SMatrix4x4& CTransform::GetWorld()
     return m_world;
 }
 
+
 const SVector3& CTransform::GetForward()
 {
     return m_forward;
 }
+
 
 const SVector3& CTransform::GetSide()
 {
     return m_side;
 }
 
+
 const SVector3& CTransform::GetUp()
 {
     return m_up;
 }
+
 
 void CTransform::UpdateForwardSideUp()
 {
