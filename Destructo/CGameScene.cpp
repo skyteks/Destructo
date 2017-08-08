@@ -9,6 +9,7 @@
 #include "CSprite.h"
 #include "CTime.h"
 #include "CInputController.h"
+#include "CRigidbody.h"
 
 CGameScene::CGameScene()
     : m_quadTree(nullptr)
@@ -45,6 +46,7 @@ bool CGameScene::Initialize(IRenderer& a_renderer)
     m_objectPlayer->GetComponent<CTransform>()->SetRotation(SVector3(0.0f, 0.0f, 45.0f));
     m_objectPlayer->AddComponent<CSprite>(m_objectPlayer)->SetTextureName(TEXTURE_PLAYER);
     m_objectPlayer->AddComponent<CInputController>(m_objectPlayer)->SetMovementControlls(EKeyCode::W, EKeyCode::S, EKeyCode::A, EKeyCode::D);
+    m_objectPlayer->AddComponent<CRigidbody>(m_objectPlayer)->m_useGravity == true;
 
     //m_objectPlayer2 = new CGameObject("Player2");
     //m_objectPlayer2->GetComponent<CTransform>()->SetPosition(SVector3(100.0f, 100.0f));
@@ -74,6 +76,14 @@ void CGameScene::Update()
     {
         CTextureManager::GetInstance().GetTextureByName(TEXTURE_COLLISION)->SetPixel(CMouse::x, CMouse::y, 0xFF000000);
     }
+    //if (CMouse::isRightMouseDown)
+    //{
+    //    m_objectPlayer.
+    //}
+    //else
+    //{
+    //    
+    //}
 
     m_quadTree->Update();
 }
