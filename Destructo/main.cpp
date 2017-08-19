@@ -6,9 +6,10 @@ CApplication* app = nullptr;
 
 // Install DirectX SDK 2010 https://www.microsoft.com/en-us/download/details.aspx?id=6812
 // Copy fmod.dll from Destructo\Middleware\fmod\api\lowlevel\lib into Destructo\Debug (same folder as program .exe)
-// Change property of Shader.hlsl to "Not part of build"
 
 // Project Setting:
+
+// Change property of Shader.hlsl to "Not part of build"
 
 // Additional includes:
 // C:\Program Files(x86)\Microsoft DirectX SDK(June 2010)\Include
