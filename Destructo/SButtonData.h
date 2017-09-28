@@ -7,7 +7,7 @@
 
 struct SButtonData
 {
-    SRect m_rect;
+    SRect<float> m_rect;
     Function m_callback;
 };
 

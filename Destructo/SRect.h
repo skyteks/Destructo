@@ -1,11 +1,11 @@
 #pragma once
 
-
+template <typename T>
 struct SRect
 {
-    float x1;
-    float y1;
-    float x2;
-    float y2;
+    T x1;
+    T y1;
+    T x2;
+    T y2;
 };
 

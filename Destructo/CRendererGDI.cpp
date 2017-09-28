@@ -62,13 +62,13 @@ void CRendererGDI::DrawObject(CGameObject& a_gameObject)
     SVector3 position = a_gameObject.GetComponent<CTransform>()->GetPosition();
     SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
 
-    SRect source;
+    SRect<float> source;
     source.x1 = a_gameObject.GetComponent<CSprite>()->GetImageSection().x1;
     source.y1 = a_gameObject.GetComponent<CSprite>()->GetImageSection().y1;
     source.x2 = a_gameObject.GetComponent<CSprite>()->GetImageSection().x2;
     source.y2 = a_gameObject.GetComponent<CSprite>()->GetImageSection().y2;
 
-    SRect dest;
+    SRect<float> dest;
     dest.x1 = position.x;
     dest.y1 = position.y;
     dest.x2 = gdiTexture->GetWidth() * scale.x;
@@ -109,21 +109,22 @@ void CRendererGDI::DrawObject(CGameObject& a_gameObject)
     point4.y += dest.y1;
 
     POINT points[3];
-    points[0].x = point1.x;
-    points[0].y = point1.y;
+    points[0].x = static_cast<long>(point1.x);
+    points[0].y = static_cast<long>(point1.y);
 
-    points[1].x = point2.x;
-    points[1].y = point2.y;
+    points[1].x = static_cast<long>(point2.x);
+    points[1].y = static_cast<long>(point2.y);
 
-    points[2].x = point4.x;
-    points[2].y = point4.y;
+    points[2].x = static_cast<long>(point4.x);
+    points[2].y = static_cast<long>(point4.y);
+
     if (gdiOpacityMask != nullptr)
     {
-        PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), source.x1, source.y1, source.x2, source.y2, gdiOpacityMask->GetBitmapHandle(), source.x1, source.y1);
+        PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), static_cast<int>(source.x1), static_cast<int>(source.y1), static_cast<int>(source.x2), static_cast<int>(source.y2), gdiOpacityMask->GetBitmapHandle(), static_cast<int>(source.x1), static_cast<int>(source.y1));
     }
     else
     {
-        PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), source.x1, source.y1, source.x2, source.y2, nullptr, 0, 0);
+        PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), static_cast<int>(source.x1), static_cast<int>(source.y1), static_cast<int>(source.x2), static_cast<int>(source.y2), nullptr, 0, 0);
     }
     //PlgBlt(m_backbufferDC, points, gdiTexture->GetBitmapDeviceContect(), source.x1, source.y1, source.x2, source.y2, (gdiOpacityMask != nullptr ? gdiOpacityMask->GetBitmapHandle() : nullptr), 0, 0);
 }
@@ -145,10 +146,10 @@ void CRendererGDI::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_widt
         gdiOpacityMask = static_cast<const CTextureGDI*>(a_opacityMask);
     }
 
-    float texWidth = static_cast<float>(gdiTexture->GetWidth());
-    float texHeight = static_cast<float>(gdiTexture->GetHeight());
+    int texWidth = gdiTexture->GetWidth();
+    int texHeight = gdiTexture->GetHeight();
 
-    SRect tex;
+    SRect<int> tex;
     tex.x1 = a_imgX / texWidth;
     tex.x2 = a_imgWidth / texWidth;
     tex.y1 = a_imgY / texHeight;
@@ -213,8 +214,8 @@ void CRendererGDI::DrawString(int a_posX, int a_posY, const char* a_string, int 
     }
     else
     {
-        SRect source;
-        SRect dest;
+        SRect<int> source;
+        SRect<int> dest;
 
         uint32_t counter = 0;
         uint32_t newLines = 0;

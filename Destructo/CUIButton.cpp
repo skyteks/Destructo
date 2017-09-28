@@ -5,7 +5,7 @@ CUIButton::CUIButton()
     m_bitmap = nullptr;
 }
 
-CUIButton::CUIButton(const ITexture* a_bitmap, const SRect& a_size)
+CUIButton::CUIButton(const ITexture* a_bitmap, const SRect<float>& a_size)
     : m_bitmap(a_bitmap)
     , m_size(a_size)
     , m_state(EButtonState::OnNormal)
@@ -13,7 +13,7 @@ CUIButton::CUIButton(const ITexture* a_bitmap, const SRect& a_size)
 {
 }
 
-CUIButton::CUIButton(const ITexture* a_bitmap, const SRect& a_size, ButtonMap& a_map)
+CUIButton::CUIButton(const ITexture* a_bitmap, const SRect<float>& a_size, ButtonMap& a_map)
     : m_bitmap(a_bitmap)
     , m_size(a_size)
     , m_state(EButtonState::OnNormal)
@@ -82,11 +82,11 @@ const ITexture& CUIButton::GetTexture() const
 {
     return *m_bitmap;
 }
-const SRect& CUIButton::GetDestination() const
+const SRect<float>& CUIButton::GetDestination() const
 {
     return m_size;
 }
-const SRect& CUIButton::GetSource() const
+const SRect<float>& CUIButton::GetSource() const
 {
     return m_buttonMap.at(m_state).m_rect;
 }

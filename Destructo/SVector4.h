@@ -22,7 +22,7 @@ public:
     /// @param a_y float value which will initialize the y-component of vector.
     /// @param a_z float value which will initialize the z-component of vector.
     /// @param a_w float value which will initialize the w-component of vector.
-    SVector4(const float a_x, const float a_y, const float a_z, const float a_w);
+    SVector4(float a_x, float a_y, float a_z, float a_w);
 
     ////=======================================================================
     //// Public Member functions

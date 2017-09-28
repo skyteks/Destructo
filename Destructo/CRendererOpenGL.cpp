@@ -111,13 +111,13 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
 
     glBegin(GL_QUADS);
 
-    SRect source;
+    SRect<float> source;
     source.x1 = a_gameObject.GetComponent<CSprite>()->GetImageSection().x1;
     source.y1 = a_gameObject.GetComponent<CSprite>()->GetImageSection().y1;
     source.x2 = a_gameObject.GetComponent<CSprite>()->GetImageSection().x2;
     source.y2 = a_gameObject.GetComponent<CSprite>()->GetImageSection().y2;
 
-    SRect dest;
+    SRect<float> dest;
     dest.x1 = position.x;
     dest.y1 = position.y;
     dest.x2 = openGLTexture->GetWidth() * scale.x;
@@ -126,7 +126,7 @@ void CRendererOpenGL::DrawObject(CGameObject& a_gameObject)
     float texWidth = static_cast<float>(openGLTexture->GetWidth());
     float texHeight = static_cast<float>(openGLTexture->GetHeight());
 
-    SRect tex;
+    SRect<float> tex;
     tex.x1 = source.x1 / texWidth;
     tex.x2 = source.x2 / texWidth;
     tex.y1 = source.y1 / texHeight;
@@ -194,22 +194,22 @@ void CRendererOpenGL::DrawTexture(int a_posX, int a_posY, int a_width, int a_hei
 
     glBegin(GL_QUADS);
 
-    SRect source;
-    source.x1 = a_imgX;
-    source.x2 = a_imgWidth;
-    source.y1 = a_imgY;
-    source.y2 = a_imgHeight;
+    SRect<float> source;
+    source.x1 = static_cast<float>(a_imgX);
+    source.x2 = static_cast<float>(a_imgWidth);
+    source.y1 = static_cast<float>(a_imgY);
+    source.y2 = static_cast<float>(a_imgHeight);
 
-    SRect dest;
-    dest.x1 = a_posX;
-    dest.x2 = a_width;
-    dest.y1 = a_posY;
-    dest.y2 = a_height;
+    SRect<float> dest;
+    dest.x1 = static_cast<float>(a_posX);
+    dest.x2 = static_cast<float>(a_width);
+    dest.y1 = static_cast<float>(a_posY);
+    dest.y2 = static_cast<float>(a_height);
 
     float texWidth = static_cast<float>(a_texture->GetWidth());
     float texHeight = static_cast<float>(a_texture->GetHeight());
 
-    SRect tex;
+    SRect<float> tex;
     tex.x1 = source.x1 / texWidth;
     tex.x2 = source.x2 / texWidth;
     tex.y1 = source.y1 / texHeight;
@@ -246,22 +246,22 @@ void CRendererOpenGL::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_w
 
     glBegin(GL_QUADS);
 
-    SRect source;
-    source.x1 = a_imgX;
-    source.x2 = a_imgWidth;
-    source.y1 = a_imgY;
-    source.y2 = a_imgHeight;
+    SRect<float> source;
+    source.x1 = static_cast<float>(a_imgX);
+    source.x2 = static_cast<float>(a_imgWidth);
+    source.y1 = static_cast<float>(a_imgY);
+    source.y2 = static_cast<float>(a_imgHeight);
 
-    SRect dest;
-    dest.x1 = a_posX;
-    dest.x2 = a_width;
-    dest.y1 = a_posY;
-    dest.y2 = a_height;
+    SRect<float> dest;
+    dest.x1 = static_cast<float>(a_posX);
+    dest.x2 = static_cast<float>(a_width);
+    dest.y1 = static_cast<float>(a_posY);
+    dest.y2 = static_cast<float>(a_height);
 
     float texWidth = static_cast<float>(a_texture->GetWidth());
     float texHeight = static_cast<float>(a_texture->GetHeight());
 
-    SRect tex;
+    SRect<float> tex;
     tex.x1 = source.x1 / texWidth;
     tex.x2 = source.x2 / texWidth;
     tex.y1 = source.y1 / texHeight;
@@ -287,8 +287,8 @@ void CRendererOpenGL::DrawString(int a_posX, int a_posY, const char* a_string, i
     if (a_string == nullptr)
         return;
 
-    SRect source;
-    SRect dest;
+    SRect<int> source;
+    SRect<int> dest;
 
     uint32_t counter = 0;
     uint32_t newLines = 0;

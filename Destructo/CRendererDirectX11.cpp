@@ -180,23 +180,23 @@ void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
     SVector3 position = a_gameObject.GetComponent<CTransform>()->GetPosition();
     SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
 
-    SRect dest;
-    dest.x1 = Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().x1, 0, directX11Texture->GetWidth(), 0, 1);
-    dest.y1 = Map(directX11Texture->GetHeight() - a_gameObject.GetComponent<CSprite>()->GetImageSection().y1, 0, directX11Texture->GetHeight(), 0, 1);
-    dest.x2 = Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().x2, 0, directX11Texture->GetWidth(), 0, 1);
-    dest.y2 = -1.0f * Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().y2, 0, directX11Texture->GetHeight(), 0, 1);
+    SRect<float> dest;
+    dest.x1 = Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().x1, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
+    dest.y1 = Map(directX11Texture->GetHeight() - a_gameObject.GetComponent<CSprite>()->GetImageSection().y1, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
+    dest.x2 = Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().x2, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
+    dest.y2 = -1.0f * Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().y2, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
 
-    SRect source;
-    source.x1 = Map(position.x, 0, m_windowWidth, -1, 1);
-    source.y1 = Map(position.y, 0, m_windowHeight, -1, 1);
-    source.x2 = Map(directX11Texture->GetWidth() * scale.x, 0, m_windowWidth, 0, 2);
-    source.y2 = Map(directX11Texture->GetHeight() * scale.y, 0, m_windowHeight, 0, 2);
+    SRect<float> source;
+    source.x1 = Map(position.x, 0.0f, static_cast<float>(m_windowWidth), -1.0f, 1.0f);
+    source.y1 = Map(position.y, 0.0f, static_cast<float>(m_windowHeight), -1.0f, 1.0f);
+    source.x2 = Map(static_cast<float>(directX11Texture->GetWidth()) * scale.x, 0.0f, static_cast<float>(m_windowWidth), 0.0f, 2.0f);
+    source.y2 = Map(static_cast<float>(directX11Texture->GetHeight()) * scale.y, 0.0f, static_cast<float>(m_windowHeight), 0.0f, 2.0f);
 
     // rotate
     if (dest.x1 != 0.0f && dest.y1 != 0.0f)
     {
-        dest.x1 -= position.x + dest.x2 / 2;
-        dest.y1 -= position.y + dest.y2 / 2;
+        dest.x1 -= position.x + dest.x2 / 2.0f;
+        dest.y1 -= position.y + dest.y2 / 2.0f;
     }
 
     SVector3 vec1(dest.x1, dest.y1);
@@ -212,8 +212,8 @@ void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
 
     if (dest.x1 != 0.0f && dest.y1 != 0.0f)
     {
-        dest.x1 += position.x + dest.x2 / 2;
-        dest.y1 += position.y + dest.y2 / 2;
+        dest.x1 += position.x + dest.x2 / 2.0f;
+        dest.y1 += position.y + dest.y2 / 2.0f;
     }
 
     //point1.x += dest.x1;
@@ -227,14 +227,14 @@ void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
     //point4.y += dest.y1;
 
     //if (vertexIndex > 0)
-    //	vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0, point3.x, point3.y, 1, 1, 1, 1);
+    //	vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0.0f, point3.x, point3.y, 1.0f, 1.0f, 1.0f, 1.0f);
 
-    vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, point1.x, point1.y, 1, 1, 1, 1);
-    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1, 0, point2.x, point2.y, 1, 1, 1, 1);
-    vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0, point3.x, point3.y, 1, 1, 1, 1);
-    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, point4.x, point4.y, 1, 1, 1, 1);
+    vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0.0f, point1.x, point1.y, 1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1, 0.0f, point2.x, point2.y, 1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0.0f, point3.x, point3.y, 1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0.0f, point4.x, point4.y, 1.0f, 1.0f, 1.0f, 1.0f);
 
-    //vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, point4.x, point4.y, 1, 1, 1, 1);
+    //vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0.0f, point4.x, point4.y, 1.0f, 1.0f, 1.0f, 1.0f);
 
     ID3D11ShaderResourceView* shaderResourceView = directX11Texture->GetShaderResourceView();
     m_deviceContext->PSSetShaderResources(0, 1, &shaderResourceView);
@@ -251,34 +251,34 @@ void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_
 {
     const CTextureDirectX11* directX11Texture = reinterpret_cast<const CTextureDirectX11*>(a_texture);
 
-    SRect source;
-    source.x1 = Map(a_posX, 0, m_windowWidth, -1, 1);
-    source.y1 = Map(a_posY, 0, m_windowHeight, -1, 1);
-    source.x2 = Map(a_width, 0, m_windowWidth, 0, 2);
-    source.y2 = Map(a_height, 0, m_windowHeight, 0, 2);
+    SRect<float> source;
+    source.x1 = Map(static_cast<float>(a_posX), 0.0f, static_cast<float>(m_windowWidth), -1.0f, 1.0f);
+    source.y1 = Map(static_cast<float>(a_posY), 0.0f, static_cast<float>(m_windowHeight), -1.0f, 1.0f);
+    source.x2 = Map(static_cast<float>(a_width), 0.0f, static_cast<float>(m_windowWidth), 0.0f, 2.0f);
+    source.y2 = Map(static_cast<float>(a_height), 0.0f, static_cast<float>(m_windowHeight), 0.0f, 2.0f);
 
-    SRect dest;
-    dest.x1 = Map(a_imgX, 0, a_texture->GetWidth(), 0, 1);
-    dest.y1 = Map(a_texture->GetHeight() - a_imgY, 0, a_texture->GetHeight(), 0, 1);
-    dest.x2 = Map(a_imgWidth, 0, a_texture->GetWidth(), 0, 1);
-    dest.y2 = -Map(a_imgHeight, 0, a_texture->GetHeight(), 0, 1);
+    SRect<float> dest;
+    dest.x1 = Map(static_cast<float>(a_imgX), 0.0f, static_cast<float>(a_texture->GetWidth()), 0.0f, 1.0f);
+    dest.y1 = Map(static_cast<float>(a_texture->GetHeight() - a_imgY), 0.0f, static_cast<float>(a_texture->GetHeight()), 0.0f, 1.0f);
+    dest.x2 = Map(static_cast<float>(a_imgWidth), 0.0f, static_cast<float>(a_texture->GetWidth()), 0.0f, 1.0f);
+    dest.y2 = -Map(static_cast<float>(a_imgHeight), 0.0f, static_cast<float>(a_texture->GetHeight()), 0.0f, 1.0f);
 
     //if (vertexIndex > 0)
-    //    vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
+    //    vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0.0f, dest.x1, dest.y1 + dest.y2, 1.0f, 1.0f, 1.0f, 1.0f);
 
-    vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0, dest.x1, dest.y1, 1, 1, 1, 1);
-    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1, 0, dest.x1 + dest.x2, dest.y1, 1, 1, 1, 1);
-    vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0, dest.x1, dest.y1 + dest.y2, 1, 1, 1, 1);
-    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
+    vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0.0f, dest.x1, dest.y1, 1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1, 0.0f, dest.x1 + dest.x2, dest.y1, 1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[vertexIndex++] = SVertex(source.x1, source.y1 + source.y2, 0.0f, dest.x1, dest.y1 + dest.y2, 1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0.0f, dest.x1 + dest.x2, dest.y1 + dest.y2, 1.0f, 1.0f, 1.0f, 1.0f);
 
-    //vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0, dest.x1 + dest.x2, dest.y1 + dest.y2, 1, 1, 1, 1);
+    //vertices[vertexIndex++] = SVertex(source.x1 + source.x2, source.y1 + source.y2, 0.0f, dest.x1 + dest.x2, dest.y1 + dest.y2, 1.0f, 1.0f, 1.0f, 1.0f);
 
     ID3D11ShaderResourceView* shaderResourceView = directX11Texture->GetShaderResourceView();
     m_deviceContext->PSSetShaderResources(0, 1, &shaderResourceView);
     //m_deviceContext->PSSetShaderResources(0, 1, &m_shaderResourceView);
     //if (m_shaderResourceView != directX11Texture->GetShaderResourceView())
     //{
-        Flush();
+    Flush();
     //}
     //m_shaderResourceView = directX11Texture->GetShaderResourceView();
 }
@@ -294,8 +294,8 @@ void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string
     if (a_string == nullptr)
         return;
 
-    SRect source;
-    SRect dest;
+    SRect<int> source;
+    SRect<int> dest;
 
     uint32_t counter = 0;
     uint32_t newLines = 0;
@@ -330,7 +330,7 @@ void CRendererDirectX11::DrawString(int a_posX, int a_posY, const char* a_string
 
 void CRendererDirectX11::Begin()
 {
-    float color[4] = { 1, 0, 1, 1 };
+    float color[4] = { 1.0f, 0.0f, 1.0f, 1.0f };
     m_deviceContext->ClearRenderTargetView(m_renderTargetView, color);
 }
 
@@ -552,12 +552,12 @@ bool CRendererDirectX11::CreatePrimitives()
 
     //viewport
     D3D11_VIEWPORT viewport = { 0 };
-    viewport.Height = m_windowHeight;
-    viewport.Width = m_windowWidth;
-    viewport.TopLeftX = 0;
-    viewport.TopLeftY = 0;
-    viewport.MinDepth = 0;
-    viewport.MaxDepth = 1;
+    viewport.Height = static_cast<float>(m_windowHeight);
+    viewport.Width = static_cast<float>(m_windowWidth);
+    viewport.TopLeftX = 0.0f;
+    viewport.TopLeftY = 0.0f;
+    viewport.MinDepth = 0.0f;
+    viewport.MaxDepth = 1.0f;
     m_deviceContext->RSSetViewports(1, &viewport);
 
     //input layout

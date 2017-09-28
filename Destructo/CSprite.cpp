@@ -16,7 +16,7 @@ CSprite::~CSprite()
 }
 
 
-const SRect& CSprite::GetImageSection() const
+const SRect<float> CSprite::GetImageSection() const
 {
     return m_imageSection;
 }

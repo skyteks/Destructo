@@ -160,16 +160,16 @@ void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_h
     const CTextureDirect2D* direct2DTexture = reinterpret_cast<const CTextureDirect2D*>(a_texture);
 
     D2D1_RECT_F direct2DSource;
-    direct2DSource.left = a_imgX;
-    direct2DSource.top = a_imgY;
-    direct2DSource.right = a_imgWidth;
-    direct2DSource.bottom = a_imgHeight;
+    direct2DSource.left = static_cast<float>(a_imgX);
+    direct2DSource.top = static_cast<float>(a_imgY);
+    direct2DSource.right = static_cast<float>(a_imgWidth);
+    direct2DSource.bottom = static_cast<float>(a_imgHeight);
 
     D2D1_RECT_F direct2DDest;
-    direct2DDest.left = a_posX;
-    direct2DDest.top = a_posY;
-    direct2DDest.right = a_posX + a_width;
-    direct2DDest.bottom = a_posY + a_height;
+    direct2DDest.left = static_cast<float>(a_posX);
+    direct2DDest.top = static_cast<float>(a_posY);
+    direct2DDest.right = static_cast<float>(a_posX + a_width);
+    direct2DDest.bottom = static_cast<float>(a_posY + a_height);
 
     SMatrix4x4 rotation = SMatrix4x4::Identity();
 
@@ -204,10 +204,10 @@ void CRendererDirect2D::DrawString(int a_posX, int a_posY, const char* a_string,
         uint32_t textLength = strlen(a_string);
 
         D2D1_RECT_F layoutRect = D2D1::RectF(
-            (float)a_posX,
-            (float)a_posY,
-            (float)(a_posX + textLength * m_writeTextFormat->GetFontSize()), // X +  chars count * charactersize
-            (float)(a_posY + textLength * m_writeTextFormat->GetFontSize()));
+            static_cast<float>(a_posX),
+            static_cast<float>(a_posY),
+            static_cast<float>(a_posX + textLength * m_writeTextFormat->GetFontSize()), // X +  chars count * charactersize
+            static_cast<float>(a_posY + textLength * m_writeTextFormat->GetFontSize()));
 
         // convert color to D2D1_COLOR_F
         D2D1::ColorF colorConverter = D2D1::ColorF(a_textColor, 1.0f);
@@ -228,8 +228,8 @@ void CRendererDirect2D::DrawString(int a_posX, int a_posY, const char* a_string,
     }
     else
     {
-        SRect source;
-        SRect dest;
+        SRect<int> source;
+        SRect<int> dest;
 
         uint32_t counter = 0;
         uint32_t newLines = 0;

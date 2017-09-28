@@ -12,7 +12,7 @@ SVector4::SVector4()
 }
 
 
-SVector4::SVector4(const float a_x, const float a_y, const float a_z, const float a_w)
+SVector4::SVector4(float a_x, float a_y, float a_z, float a_w)
     : x(a_x)
     , y(a_y)
     , z(a_z)

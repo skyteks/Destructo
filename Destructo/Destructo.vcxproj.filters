@@ -207,9 +207,6 @@
     <ClInclude Include="SVertex.h">
       <Filter>Headerdateien\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="SRect.h">
-      <Filter>Headerdateien\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="SVector4.h">
       <Filter>Headerdateien\Math</Filter>
     </ClInclude>
@@ -290,6 +287,9 @@
     </ClInclude>
     <ClInclude Include="CColliderTypeCollisions.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SRect.h">
+      <Filter>Headerdateien\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

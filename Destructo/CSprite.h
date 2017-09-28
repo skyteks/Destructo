@@ -17,13 +17,13 @@ public:
     void SetTextureName(std::string a_textureName);
     void SetOpacityMaskName(std::string a_opacityMaskName);
 
-    const SRect& GetImageSection() const;
+    const SRect<float> GetImageSection() const;
     const std::string GetTextureName() const;
     const std::string GetOpacityMaskName() const;
 
 private:
     std::string m_textureName;
     std::string m_opacityMaskName;
-    SRect m_imageSection;
+    SRect<float> m_imageSection;
 };
 

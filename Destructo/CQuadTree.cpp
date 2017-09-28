@@ -127,7 +127,7 @@ std::vector<CGameObject*> CQuadTree::QueryRange(SAABB a_range)
     }
 
     // Check objects at this quad level
-    for (int p = 0; p < m_elements.size(); p++)
+    for (size_t p = 0; p < m_elements.size(); p++)
     {
         if (a_range.ContainsPoint(m_elements.at(p)->GetComponent<CTransform>()->GetPosition()))
         {
@@ -189,13 +189,13 @@ void CQuadTree::Update()
                             case EColliderType::AABB:
                                 if (CColliderTypeCollisions::IntersectBoxBox(collider1->GetAABB(), collider2->GetAABB()))
                                 {
-                                    _beep(1000, 300);
+
                                 }
                                 break;
                             case EColliderType::BCirle:
                                 if (CColliderTypeCollisions::IntersectBoxCircle(collider1->GetAABB(), collider2->GetBCircle()))
                                 {
-                                    _beep(2000, 300);
+
                                 }
                                 break;
                             default:
@@ -208,13 +208,13 @@ void CQuadTree::Update()
                             case EColliderType::AABB:
                                 if (CColliderTypeCollisions::IntersectCircleBox(collider1->GetBCircle(), collider2->GetAABB()))
                                 {
-                                    _beep(3000, 300);
+
                                 }
                                 break;
                             case EColliderType::BCirle:
                                 if (CColliderTypeCollisions::IntersectCircleCircle(collider1->GetBCircle(), collider2->GetBCircle()))
                                 {
-                                    _beep(4000, 300);
+
                                 }
                                 break;
                             default:
