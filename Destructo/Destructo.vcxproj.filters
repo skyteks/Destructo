@@ -252,9 +252,6 @@
     <ClInclude Include="CFreeListAllocator.h">
       <Filter>Headerdateien\Allocators</Filter>
     </ClInclude>
-    <ClInclude Include="SCircleBB.h">
-      <Filter>Headerdateien\Math</Filter>
-    </ClInclude>
     <ClInclude Include="CSprite.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
@@ -267,23 +264,32 @@
     <ClInclude Include="IComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
-    <ClInclude Include="IComponentManager.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="IComponentManager.hpp">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
     <ClInclude Include="CTransform.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SVector4.hpp">
-      <Filter>Headerdateien\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="SVector3.hpp">
-      <Filter>Headerdateien\Math</Filter>
-    </ClInclude>
     <ClInclude Include="CInputController.h">
       <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentManager.h">
+      <Filter>Headerdateien\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentManager.hpp">
+      <Filter>Quelldateien\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SVector4.hpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SVector3.hpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="EColliderType.h">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SBCircle.h">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="CColliderTypeCollisions.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -386,16 +392,10 @@
     <ClCompile Include="CFreeListAllocator.cpp">
       <Filter>Quelldateien\Allocators</Filter>
     </ClCompile>
-    <ClCompile Include="SCircleBB.cpp">
-      <Filter>Quelldateien\Math</Filter>
-    </ClCompile>
     <ClCompile Include="CSprite.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
     <ClCompile Include="CTransform.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="IComponentManager.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
     <ClCompile Include="CCollider.cpp">
@@ -409,6 +409,15 @@
     </ClCompile>
     <ClCompile Include="IComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponentManager.cpp">
+      <Filter>Quelldateien\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SBCircle.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CColliderTypeCollisions.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

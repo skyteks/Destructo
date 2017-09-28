@@ -36,17 +36,17 @@ bool CGameScene::Initialize(IRenderer& a_renderer)
     CTextureManager::GetInstance().LoadTexture(TEXTURE_FONT);
 
     //CRigidbody* playerRigid = new CRigidbody();
-    //CCollider* playerCol = new CCollider(SCircleBB(SVector3(0, 0), 100));
+    //CCollider* playerCol = new CCollider(SBCircle(SVector3(0, 0), 100));
     //
     //CRigidbody* testRigid = new CRigidbody();
-    //CCollider* testCol = new CCollider(SCircleBB(SVector3(0, 0), 100));
+    //CCollider* testCol = new CCollider(SBCircle(SVector3(0, 0), 100));
 
     m_objectPlayer = new CGameObject("Player1");
     m_objectPlayer->GetComponent<CTransform>()->SetPosition(SVector3(100.0f, 100.0f));
     m_objectPlayer->GetComponent<CTransform>()->SetRotation(SVector3(0.0f, 0.0f, 45.0f));
     m_objectPlayer->AddComponent<CSprite>(m_objectPlayer)->SetTextureName(TEXTURE_PLAYER);
     m_objectPlayer->AddComponent<CInputController>(m_objectPlayer)->SetMovementControlls(EKeyCode::W, EKeyCode::S, EKeyCode::A, EKeyCode::D);
-    m_objectPlayer->AddComponent<CRigidbody>(m_objectPlayer)->m_useGravity == true;
+    m_objectPlayer->AddComponent<CRigidbody>(m_objectPlayer)->m_useGravity = true;
 
     //m_objectPlayer2 = new CGameObject("Player2");
     //m_objectPlayer2->GetComponent<CTransform>()->SetPosition(SVector3(100.0f, 100.0f));

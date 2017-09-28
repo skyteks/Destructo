@@ -13,12 +13,12 @@ public:
     virtual ~CGameObject();
 
     void Update();
-    const CGameObject* GetRoot() const;
-    const CGameObject* GetParent() const;
-    void SetParent(CGameObject* a_parent);
+    //const CGameObject* GetRoot() const;
+    //const CGameObject* GetParent() const;
+    //void SetParent(CGameObject* a_parent);
 
 protected:
     std::string m_name;
-    CGameObject* m_parent;
-    std::vector<CGameObject*> m_children;
+    //CGameObject* m_parent;
+    //std::vector<CGameObject*> m_children;
 };

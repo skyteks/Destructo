@@ -55,8 +55,8 @@ void CSprite::SetTextureName(std::string a_textureName)
     {
         m_imageSection.x1 = 0.0f;
         m_imageSection.y1 = 0.0f;
-        m_imageSection.x2 = texture->GetWidth();
-        m_imageSection.y2 = texture->GetHeight();
+        m_imageSection.x2 = static_cast<float>(texture->GetWidth());
+        m_imageSection.y2 = static_cast<float>(texture->GetHeight());
     }
 }
 

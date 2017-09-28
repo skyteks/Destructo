@@ -3,9 +3,12 @@
 
 CCollider::CCollider(CGameObject* a_owner)
     : IComponent(a_owner)
-    , m_circleBB(SVector3::Zero(), 1.0f)
+    , m_BCircle(SVector3::Zero(), 1.0f)
+    , m_AABB(SVector3::Zero(), 1.0f)
+    , m_type(EColliderType::BCirle)
 {
 }
+
 
 CCollider::~CCollider()
 {
@@ -28,12 +31,33 @@ bool CCollider::AddRequiredComponents(IComponentManager* a_componentManager)
 }
 
 
-void CCollider::SetCircleBB(const SCircleBB a_circleBB)
+EColliderType CCollider::GetType() const
 {
-    m_circleBB = a_circleBB;
+    return m_type;
 }
 
-const SCircleBB CCollider::GetCircleBB() const
+
+void CCollider::SetBCircle(const SBCircle a_BCircle)
 {
-    return m_circleBB;
+    m_BCircle = a_BCircle;
+    m_type = EColliderType::BCirle;
+}
+
+
+SBCircle CCollider::GetBCircle() const
+{
+    return m_BCircle;
+}
+
+
+void CCollider::SetAABB(const SAABB a_AABB)
+{
+    m_AABB = a_AABB;
+    m_type = EColliderType::AABB;
+}
+
+
+SAABB CCollider::GetAABB() const
+{
+    return m_AABB;
 }

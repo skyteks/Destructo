@@ -1,6 +1,9 @@
 #include "CQuadTree.h"
 #include "GlobalFunctions.h"
 #include "CTransform.h"
+#include "CCollider.h"
+#include "CRigidbody.h"
+#include "CColliderTypeCollisions.h"
 
 CQuadTree::CQuadTree(const SAABB& a_boundary)
     : m_boundary(a_boundary)
@@ -118,7 +121,7 @@ std::vector<CGameObject*> CQuadTree::QueryRange(SAABB a_range)
     std::vector<CGameObject*> elementsInRange;
 
     // Automatically abort if the range does not intersect this quad
-    if (m_boundary.intersectsAABB(a_range))
+    if (m_boundary.Intersects(a_range))
     {
         return elementsInRange;
     }
@@ -172,18 +175,57 @@ void CQuadTree::Update()
         {
             for (auto *other : m_elements)
             {
-                //if (other != element)
-                //{
-                //	if (//element->GetCollider() != nullptr && other->GetCollider() != nullptr &&
-                //		element->GetCollider()->GetCircleBB().Intersects(other->GetCollider()->GetCircleBB()))
-                //	{
-                //		int a = 1;
-                //	}
-                //}
-                //if (element->GetRigidbody() != nullptr)
-                //{
-                //	element->GetRigidbody()->Update(*element);
-                //}
+                if (other != element)
+                {
+                    CCollider* collider1 = element->GetComponent<CCollider>();
+                    CCollider* collider2 = other->GetComponent<CCollider>();
+                    if (collider1 != nullptr && collider2 != nullptr)
+                    {
+                        switch (collider1->GetType())
+                        {
+                        case EColliderType::AABB:
+                            switch (collider1->GetType())
+                            {
+                            case EColliderType::AABB:
+                                if (CColliderTypeCollisions::IntersectBoxBox(collider1->GetAABB(), collider2->GetAABB()))
+                                {
+                                    _beep(1000, 300);
+                                }
+                                break;
+                            case EColliderType::BCirle:
+                                if (CColliderTypeCollisions::IntersectBoxCircle(collider1->GetAABB(), collider2->GetBCircle()))
+                                {
+                                    _beep(2000, 300);
+                                }
+                                break;
+                            default:
+                                break;
+                            }
+                            break;
+                        case EColliderType::BCirle:
+                            switch (collider1->GetType())
+                            {
+                            case EColliderType::AABB:
+                                if (CColliderTypeCollisions::IntersectCircleBox(collider1->GetBCircle(), collider2->GetAABB()))
+                                {
+                                    _beep(3000, 300);
+                                }
+                                break;
+                            case EColliderType::BCirle:
+                                if (CColliderTypeCollisions::IntersectCircleCircle(collider1->GetBCircle(), collider2->GetBCircle()))
+                                {
+                                    _beep(4000, 300);
+                                }
+                                break;
+                            default:
+                                break;
+                            }
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                }
             }
             element->Update();
         }

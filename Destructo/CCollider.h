@@ -1,6 +1,8 @@
 #pragma once
 #include "IComponent.h"
-#include "SCircleBB.h"
+#include "SBCircle.h"
+#include "SAABB.h"
+#include "EColliderType.h"
 
 class CGameObject;
 class IComponent;
@@ -15,10 +17,16 @@ public:
     void Update() override;
     bool AddRequiredComponents(IComponentManager* a_componentManager) override;
 
-    void SetCircleBB(const SCircleBB a_circleBB);
-    const SCircleBB GetCircleBB() const;
+    EColliderType GetType() const;
+
+    void SetBCircle(const SBCircle a_BCircle);
+    SBCircle GetBCircle() const;
+    void SetAABB(const SAABB a_AABB);
+    SAABB GetAABB() const;
 
 private:
-    SCircleBB m_circleBB;
+    SBCircle m_BCircle;
+    SAABB m_AABB;
+    EColliderType m_type;
 };
 

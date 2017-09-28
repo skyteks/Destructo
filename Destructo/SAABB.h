@@ -7,7 +7,8 @@ public:
     SAABB(SVector3 a_center, float a_halfWidths);
 
     bool ContainsPoint(SVector3 a_point) const;
-    bool intersectsAABB(SAABB a_other) const;
+    bool Intersects(SAABB a_other) const;
+    SVector3 GetBorderPoint(short a_index) const;
 
     SVector3 m_center;
     float m_halfWidths;

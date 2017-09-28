@@ -4,7 +4,6 @@
 #include "CGameObject.h"
 #include "SAABB.h"
 
-
 class CQuadTree
 {
 public:
