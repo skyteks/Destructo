@@ -10,7 +10,7 @@ public:
 
     CQuadTree(const SAABB& a_boundary);
 
-    ~CQuadTree();
+    virtual ~CQuadTree();
 
     void SetBoundary(const SAABB& a_boundary);
     const SAABB& GetBoundary() const;

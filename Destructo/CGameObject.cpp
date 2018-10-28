@@ -10,7 +10,7 @@ CGameObject::CGameObject()
 }
 
 
-CGameObject::CGameObject(std::string a_name)
+CGameObject::CGameObject(std::string& a_name)
     : m_name(a_name)
     //, m_parent(nullptr)
     //, m_children()

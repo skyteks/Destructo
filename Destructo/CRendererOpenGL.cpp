@@ -50,7 +50,6 @@ bool CRendererOpenGL::Initialize(HWND a_hwnd)
     m_windowWidth = rc.right;
     m_windowHeight = rc.bottom;
 
-
     glViewport(0, 0, m_windowWidth, m_windowHeight);
 
     glMatrixMode(GL_MODELVIEW);

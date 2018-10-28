@@ -4,20 +4,20 @@
 
 CApplication* app = nullptr;
 
-// Install DirectX SDK 2010 https://www.microsoft.com/en-us/download/details.aspx?id=6812
-// Copy fmod.dll from Destructo\Middleware\fmod\api\lowlevel\lib into Destructo\Debug (same folder as program .exe)
+/// Install DirectX SDK 2010 https://www.microsoft.com/en-us/download/details.aspx?id=6812
+/// Copy fmod.dll from Destructo\Middleware\fmod\api\lowlevel\lib into Destructo\Debug (same folder as program .exe)
 
-// Project Setting:
+/// Project Setting:
 
-// Change property of Shader.hlsl to "Not part of build"
+/// Change property of Shader.hlsl to "Not part of build"
 
-// Additional includes:
-// C:\Program Files(x86)\Microsoft DirectX SDK(June 2010)\Include
-// $(SolutionDir)Middleware\fmod\api\lowlevel\inc
+/// Additional includes:
+/// C:\Program Files(x86)\Microsoft DirectX SDK(June 2010)\Include
+/// $(SolutionDir)Middleware\fmod\api\lowlevel\inc
 
-// Additional librarys:
-// C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86
-// $(SolutionDir)Middleware\fmod\api\lowlevel\lib
+/// Additional librarys:
+/// C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86
+/// $(SolutionDir)Middleware\fmod\api\lowlevel\lib
 
 int CALLBACK WinMain(
     _In_ HINSTANCE hInstance,

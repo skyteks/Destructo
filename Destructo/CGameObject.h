@@ -8,7 +8,7 @@ public:
     //#define GetTransform() GetComponent<CTransform>();
 
     CGameObject();
-    CGameObject(std::string a_name);
+    CGameObject(std::string& a_name);
 
     virtual ~CGameObject();
 

@@ -325,7 +325,7 @@ bool CApplication::Failed(HRESULT a_aResult)
     return false;
 }
 
-void CApplication::SetSoundEngine(IAudio * a_soundEngine)
+void CApplication::SetSoundEngine(IAudio* a_soundEngine)
 {
     if (a_soundEngine == nullptr)
     {
