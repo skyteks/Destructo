@@ -28,7 +28,5 @@ private:
     CGameObject* m_objectTerrain;
     CGameObject* m_objectBackground;
     CGameObject* m_objectPlayer2;
-
-    CQuadTree* m_quadTree;
 };
 

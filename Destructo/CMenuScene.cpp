@@ -20,7 +20,7 @@ bool CMenuScene::Initialize(IRenderer& a_renderer)
     CTextureManager::GetInstance().LoadTexture(TEXTURE_FONT);
     CTextureManager::GetInstance().LoadTexture(TEXTURE_MENU);
 
-    m_objectBackground = new CGameObject("Background");;
+    m_objectBackground = new CGameObject((std::string)"Background");;
     m_objectBackground->AddComponent<CSprite>(m_objectBackground)->SetTextureName(TEXTURE_MENU);
 
     LoadButtons();

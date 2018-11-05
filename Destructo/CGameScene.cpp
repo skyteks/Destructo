@@ -12,8 +12,7 @@
 #include "CRigidbody.h"
 
 CGameScene::CGameScene()
-    : m_quadTree(nullptr)
-    , m_objectPlayer(nullptr)
+    : m_objectPlayer(nullptr)
     , m_objectPlayer2(nullptr)
     , m_objectTerrain(nullptr)
     , m_objectBackground(nullptr)
@@ -41,30 +40,25 @@ bool CGameScene::Initialize(IRenderer& a_renderer)
     //CRigidbody* testRigid = new CRigidbody();
     //CCollider* testCol = new CCollider(SBCircle(SVector3(0, 0), 100));
 
-    m_objectPlayer = new CGameObject("Player1");
+    m_objectPlayer = new CGameObject((std::string)"Player1");
     m_objectPlayer->GetComponent<CTransform>()->SetPosition(SVector3(100.0f, 100.0f));
     m_objectPlayer->GetComponent<CTransform>()->SetRotation(SVector3(0.0f, 0.0f, 45.0f));
     m_objectPlayer->AddComponent<CSprite>(m_objectPlayer)->SetTextureName(TEXTURE_PLAYER);
     m_objectPlayer->AddComponent<CInputController>(m_objectPlayer)->SetMovementControlls(EKeyCode::W, EKeyCode::S, EKeyCode::A, EKeyCode::D);
     m_objectPlayer->AddComponent<CRigidbody>(m_objectPlayer)->m_useGravity = true;
 
-    //m_objectPlayer2 = new CGameObject("Player2");
+    //m_objectPlayer2 = new CGameObject((std::string)"Player2");
     //m_objectPlayer2->GetComponent<CTransform>()->SetPosition(SVector3(100.0f, 100.0f));
     //m_objectPlayer2->GetComponent<CTransform>()->SetRotation(SVector3(0.0f, 0.0f, 0.0f));
     //m_objectPlayer2->AddComponent<CSprite>(m_objectPlayer2)->SetTextureName(TEXTURE_PLAYER_2);
     //m_objectPlayer2->AddComponent<CInputController>(m_objectPlayer2)->SetMovementControlls(EKeyCode::Up, EKeyCode::Down, EKeyCode::Left, EKeyCode::Right);
 
-
-    m_objectTerrain = new CGameObject("Terrain");
+    m_objectTerrain = new CGameObject((std::string)"Terrain");
     m_objectTerrain->AddComponent<CSprite>(m_objectTerrain)->SetTextureName(TEXTURE_TERRAIN);
     m_objectTerrain->GetComponent<CSprite>()->SetOpacityMaskName(TEXTURE_COLLISION);
 
-    m_objectBackground = new CGameObject("Background");
+    m_objectBackground = new CGameObject((std::string)"Background");
     m_objectBackground->AddComponent<CSprite>(m_objectBackground)->SetTextureName(TEXTURE_BACKGROUND);
-
-    m_quadTree = new CQuadTree(SAABB(SVector3(400.0f, 400.0f), 800.0f));
-    m_quadTree->Insert(m_objectPlayer);
-    //m_quadTree->Insert(m_objectPlayer2);
 
     return true;
 }
@@ -76,16 +70,9 @@ void CGameScene::Update()
     {
         CTextureManager::GetInstance().GetTextureByName(TEXTURE_COLLISION)->SetPixel(CMouse::x, CMouse::y, 0xFF000000);
     }
-    //if (CMouse::isRightMouseDown)
-    //{
-    //    m_objectPlayer.
-    //}
-    //else
-    //{
-    //    
-    //}
 
-    m_quadTree->Update();
+    m_objectPlayer->GetComponent<CRigidbody>()->Update();
+    //m_objectPlayer2->GetComponent<CRigidbody>()->Update();
 }
 
 

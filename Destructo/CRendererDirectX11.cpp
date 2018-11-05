@@ -152,8 +152,7 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(std::string a_path)
 
     HRESULT hResult = m_device->CreateTexture2D(&textureDesc, &textureData, &texture2D);
 
-    free(bmp.m_data);
-    bmp.m_data = nullptr;
+    bmp.FreeData();
 
     if (Failed(hResult))
         return nullptr;
@@ -181,16 +180,16 @@ void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
     SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
 
     SRect<float> dest;
-    dest.x1 = Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().x1, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
-    dest.y1 = Map(directX11Texture->GetHeight() - a_gameObject.GetComponent<CSprite>()->GetImageSection().y1, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
-    dest.x2 = Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().x2, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
-    dest.y2 = -1.0f * Map(a_gameObject.GetComponent<CSprite>()->GetImageSection().y2, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
+    dest.x1 = LinearRemap(a_gameObject.GetComponent<CSprite>()->GetImageSection().x1, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
+    dest.y1 = LinearRemap(directX11Texture->GetHeight() - a_gameObject.GetComponent<CSprite>()->GetImageSection().y1, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
+    dest.x2 = LinearRemap(a_gameObject.GetComponent<CSprite>()->GetImageSection().x2, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
+    dest.y2 = -1.0f * LinearRemap(a_gameObject.GetComponent<CSprite>()->GetImageSection().y2, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
 
     SRect<float> source;
-    source.x1 = Map(position.x, 0.0f, static_cast<float>(m_windowWidth), -1.0f, 1.0f);
-    source.y1 = Map(position.y, 0.0f, static_cast<float>(m_windowHeight), -1.0f, 1.0f);
-    source.x2 = Map(static_cast<float>(directX11Texture->GetWidth()) * scale.x, 0.0f, static_cast<float>(m_windowWidth), 0.0f, 2.0f);
-    source.y2 = Map(static_cast<float>(directX11Texture->GetHeight()) * scale.y, 0.0f, static_cast<float>(m_windowHeight), 0.0f, 2.0f);
+    source.x1 = LinearRemap(position.x, 0.0f, static_cast<float>(m_windowWidth), -1.0f, 1.0f);
+    source.y1 = LinearRemap(position.y, 0.0f, static_cast<float>(m_windowHeight), -1.0f, 1.0f);
+    source.x2 = LinearRemap(static_cast<float>(directX11Texture->GetWidth()) * scale.x, 0.0f, static_cast<float>(m_windowWidth), 0.0f, 2.0f);
+    source.y2 = LinearRemap(static_cast<float>(directX11Texture->GetHeight()) * scale.y, 0.0f, static_cast<float>(m_windowHeight), 0.0f, 2.0f);
 
     // rotate
     if (dest.x1 != 0.0f && dest.y1 != 0.0f)
@@ -252,16 +251,16 @@ void CRendererDirectX11::DrawTexture(int a_posX, int a_posY, int a_width, int a_
     const CTextureDirectX11* directX11Texture = reinterpret_cast<const CTextureDirectX11*>(a_texture);
 
     SRect<float> source;
-    source.x1 = Map(static_cast<float>(a_posX), 0.0f, static_cast<float>(m_windowWidth), -1.0f, 1.0f);
-    source.y1 = Map(static_cast<float>(a_posY), 0.0f, static_cast<float>(m_windowHeight), -1.0f, 1.0f);
-    source.x2 = Map(static_cast<float>(a_width), 0.0f, static_cast<float>(m_windowWidth), 0.0f, 2.0f);
-    source.y2 = Map(static_cast<float>(a_height), 0.0f, static_cast<float>(m_windowHeight), 0.0f, 2.0f);
+    source.x1 = LinearRemap(static_cast<float>(a_posX), 0.0f, static_cast<float>(m_windowWidth), -1.0f, 1.0f);
+    source.y1 = LinearRemap(static_cast<float>(a_posY), 0.0f, static_cast<float>(m_windowHeight), -1.0f, 1.0f);
+    source.x2 = LinearRemap(static_cast<float>(a_width), 0.0f, static_cast<float>(m_windowWidth), 0.0f, 2.0f);
+    source.y2 = LinearRemap(static_cast<float>(a_height), 0.0f, static_cast<float>(m_windowHeight), 0.0f, 2.0f);
 
     SRect<float> dest;
-    dest.x1 = Map(static_cast<float>(a_imgX), 0.0f, static_cast<float>(a_texture->GetWidth()), 0.0f, 1.0f);
-    dest.y1 = Map(static_cast<float>(a_texture->GetHeight() - a_imgY), 0.0f, static_cast<float>(a_texture->GetHeight()), 0.0f, 1.0f);
-    dest.x2 = Map(static_cast<float>(a_imgWidth), 0.0f, static_cast<float>(a_texture->GetWidth()), 0.0f, 1.0f);
-    dest.y2 = -Map(static_cast<float>(a_imgHeight), 0.0f, static_cast<float>(a_texture->GetHeight()), 0.0f, 1.0f);
+    dest.x1 = LinearRemap(static_cast<float>(a_imgX), 0.0f, static_cast<float>(a_texture->GetWidth()), 0.0f, 1.0f);
+    dest.y1 = LinearRemap(static_cast<float>(a_texture->GetHeight() - a_imgY), 0.0f, static_cast<float>(a_texture->GetHeight()), 0.0f, 1.0f);
+    dest.x2 = LinearRemap(static_cast<float>(a_imgWidth), 0.0f, static_cast<float>(a_texture->GetWidth()), 0.0f, 1.0f);
+    dest.y2 = -LinearRemap(static_cast<float>(a_imgHeight), 0.0f, static_cast<float>(a_texture->GetHeight()), 0.0f, 1.0f);
 
     //if (vertexIndex > 0)
     //    vertices[vertexIndex++] = SVertex(source.x1, source.y1, 0.0f, dest.x1, dest.y1 + dest.y2, 1.0f, 1.0f, 1.0f, 1.0f);

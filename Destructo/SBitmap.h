@@ -8,5 +8,7 @@ struct SBitmap
     SBitmapHeader m_header;
     int m_pitch;
     unsigned char* m_data;
+
+    void FreeData();
 };
 #pragma pack(pop)

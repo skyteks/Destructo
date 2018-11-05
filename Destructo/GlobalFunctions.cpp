@@ -16,7 +16,7 @@ SBitmap LoadBitmapAndAddAlpha(std::string a_path)
     bmp.m_header.m_sizeOfImageData = length - bmp.m_header.m_imageDataOffset;
     fseek(file, bmp.m_header.m_imageDataOffset, SEEK_SET);
 
-    bmp.m_data = (unsigned char*)malloc(bmp.m_header.m_sizeOfImageData);
+    bmp.m_data = reinterpret_cast<unsigned char*>(malloc(bmp.m_header.m_sizeOfImageData));
 
     fread(bmp.m_data, bmp.m_header.m_sizeOfImageData, 1, file);
 
@@ -31,7 +31,7 @@ SBitmap LoadBitmapAndAddAlpha(std::string a_path)
 
     bmp.m_pitch -= (bmp.m_header.m_width * 3);
 
-    unsigned char* buffer = (unsigned char*)malloc(bmp.m_header.m_sizeOfImageData * 4 / 3);
+    unsigned char* buffer = reinterpret_cast<unsigned char*>(malloc(bmp.m_header.m_sizeOfImageData * 4 / 3));
 
     size_t i = 0;
     uint32_t j = 0;
@@ -55,7 +55,7 @@ SBitmap LoadBitmapAndAddAlpha(std::string a_path)
     bmp.m_header.m_sizeOfImageData = bmp.m_header.m_sizeOfImageData * 4 / 3;
     bmp.m_header.m_size = bmp.m_header.m_sizeOfImageData + sizeof(SBitmapHeader);
 
-    free(bmp.m_data);
+    bmp.FreeData();
 
     bmp.m_data = buffer;
 
@@ -63,18 +63,18 @@ SBitmap LoadBitmapAndAddAlpha(std::string a_path)
 }
 
 
-float Map(float a_value, float a_inMin, float a_inMax, float a_outMin, float a_outMax)
+float LinearRemap(float a_value, float a_inMin, float a_inMax, float a_outMin, float a_outMax)
 {
     return (a_value - a_inMin) * (a_outMax - a_outMin) / (a_inMax - a_inMin) + a_outMin;
 }
 
 
-int Map(int a_value, int a_inMin, int a_inMax, int a_outMin, int a_outMax)
+int LinearRemap(int a_value, int a_inMin, int a_inMax, int a_outMin, int a_outMax)
 {
     return (a_value - a_inMin) * (a_outMax - a_outMin) / (a_inMax - a_inMin) + a_outMin;
 }
 
-
+/*
 static size_t newCounter = 0;
 static size_t memoryLeaksCounter = 0;
 #include <map>
@@ -117,3 +117,4 @@ void operator delete (void* a_pData)
         free(a_pData);
     }
 }
+*/

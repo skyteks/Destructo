@@ -254,6 +254,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SAABB.cpp" />
     <ClCompile Include="SBCircle.cpp" />
+    <ClCompile Include="SBitmap.cpp" />
     <ClCompile Include="SMatrix4x4.cpp" />
     <ClCompile Include="CRigidbody.cpp" />
     <ClCompile Include="SVector3.cpp" />
