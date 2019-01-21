@@ -15,7 +15,7 @@ CInputManager& CInputManager::GetInstance()
     return inputMgr;
 }
 
-void CInputManager::SetInput(IInput * a_input)
+void CInputManager::SetInput(IInput* a_input)
 {
     if (m_input)
     {
@@ -55,7 +55,7 @@ void CInputManager::Clear()
     m_input->Clear();
 }
 
-void CInputManager::Initialize(IInput * a_input)
+void CInputManager::Initialize(IInput* a_input)
 {
     SetInput(a_input);
 }

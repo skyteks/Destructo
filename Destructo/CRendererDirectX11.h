@@ -42,6 +42,8 @@ public:
 
     void Shutdown() override;
 
+    ERenderer GetRendererType() override;
+
     bool Failed(HRESULT a_aResult);
 
     bool LoadShader();

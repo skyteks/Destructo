@@ -54,6 +54,7 @@ HDC CTextureGDI::GetBitmapDeviceContect() const
 //    return m_pitch;
 //}
 //
+//
 //int CTextureGDI::GetBPP() const
 //{
 //    return m_bitsPerPixel;

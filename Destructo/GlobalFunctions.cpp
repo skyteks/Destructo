@@ -74,6 +74,23 @@ int LinearRemap(int a_value, int a_inMin, int a_inMax, int a_outMin, int a_outMa
     return (a_value - a_inMin) * (a_outMax - a_outMin) / (a_inMax - a_inMin) + a_outMin;
 }
 
+char* RendererTypeToString(ERenderer var)
+{
+    switch (var)
+    {
+    case GDI:
+        return "GDI";
+    case OpenGL:
+        return "OpenGL";
+    case DirectX11:
+        return "DirectX11";
+    case Direct2D:
+        return "Direct2D";
+    default:
+        return "NONE";
+    }
+}
+
 /*
 static size_t newCounter = 0;
 static size_t memoryLeaksCounter = 0;

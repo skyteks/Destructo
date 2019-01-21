@@ -2,6 +2,7 @@
 #include "CGameObject.h"
 #include "CTransform.h"
 #include "CSprite.h"
+#include "ERenderer.h"
 
 CRendererDirectX11::CRendererDirectX11()
     : m_windowWidth(0)
@@ -169,21 +170,26 @@ ITexture* CRendererDirectX11::LoadTextureFromFile(std::string a_path)
 
 void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
 {
-    const CTextureDirectX11* directX11Texture = static_cast<const CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetTextureName()));
+    CSprite* tmpSprite = a_gameObject.GetComponent<CSprite>();
+    CTransform* tmpTransform = a_gameObject.GetComponent<CTransform>();
+    CTextureManager& tmpTextureManager = CTextureManager::GetInstance();
+
+    const CTextureDirectX11* directX11Texture = static_cast<const CTextureDirectX11*>(tmpTextureManager.GetTextureByName(tmpSprite->GetTextureName()));
     const CTextureDirectX11* directX11OpacityMask = nullptr;
-    if (a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName() != "")
+    if (tmpSprite->GetOpacityMaskName() != "")
     {
-        directX11OpacityMask = static_cast<const CTextureDirectX11*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName()));
+        directX11OpacityMask = static_cast<const CTextureDirectX11*>(tmpTextureManager.GetTextureByName(tmpSprite->GetOpacityMaskName()));
     }
 
-    SVector3 position = a_gameObject.GetComponent<CTransform>()->GetPosition();
-    SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
+    SVector3 position = tmpTransform->GetPosition();
+    SVector3 scale = tmpTransform->GetScale();
 
+    SRect<float> tmpRect = tmpSprite->GetImageSection();
     SRect<float> dest;
-    dest.x1 = LinearRemap(a_gameObject.GetComponent<CSprite>()->GetImageSection().x1, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
-    dest.y1 = LinearRemap(directX11Texture->GetHeight() - a_gameObject.GetComponent<CSprite>()->GetImageSection().y1, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
-    dest.x2 = LinearRemap(a_gameObject.GetComponent<CSprite>()->GetImageSection().x2, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
-    dest.y2 = -1.0f * LinearRemap(a_gameObject.GetComponent<CSprite>()->GetImageSection().y2, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
+    dest.x1 = LinearRemap(tmpRect.x1, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
+    dest.y1 = LinearRemap(directX11Texture->GetHeight() - tmpRect.y1, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
+    dest.x2 = LinearRemap(tmpRect.x2, 0.0f, static_cast<float>(directX11Texture->GetWidth()), 0.0f, 1.0f);
+    dest.y2 = -1.0f * LinearRemap(tmpRect.y2, 0.0f, static_cast<float>(directX11Texture->GetHeight()), 0.0f, 1.0f);
 
     SRect<float> source;
     source.x1 = LinearRemap(position.x, 0.0f, static_cast<float>(m_windowWidth), -1.0f, 1.0f);
@@ -202,7 +208,7 @@ void CRendererDirectX11::DrawObject(CGameObject& a_gameObject)
     SVector3 vec2(dest.x1 + dest.x2, dest.y1);
     SVector3 vec3(dest.x1, dest.y1 + dest.y2);
     SVector3 vec4(dest.x1 + dest.x2, dest.y1 + dest.y2);
-    SMatrix4x4 rotation = SMatrix4x4::RotationZ(a_gameObject.GetComponent<CTransform>()->GetRotation().z);
+    SMatrix4x4 rotation = SMatrix4x4::RotationZ(tmpTransform->GetRotation().z);
 
     SVector4 point1 = rotation * vec1;
     SVector4 point2 = rotation * vec2;
@@ -356,6 +362,13 @@ void CRendererDirectX11::Shutdown()
     SafeRelease(m_blendState);
 }
 
+
+ERenderer CRendererDirectX11::GetRendererType()
+{
+    return ERenderer::DirectX11;
+}
+
+
 bool CRendererDirectX11::Failed(HRESULT a_aResult)
 {
     if (FAILED(a_aResult))
@@ -369,6 +382,7 @@ bool CRendererDirectX11::Failed(HRESULT a_aResult)
     }
     return false;
 }
+
 
 bool CRendererDirectX11::LoadShader()
 {
@@ -521,6 +535,7 @@ bool CRendererDirectX11::LoadShader()
     return true;
 }
 
+
 bool CRendererDirectX11::CreatePrimitives()
 {
     //vertex buffer
@@ -565,10 +580,12 @@ bool CRendererDirectX11::CreatePrimitives()
     return true;
 }
 
+
 void CRendererDirectX11::Draw()
 {
     //deviceContext->Draw(4, 0);
 }
+
 
 void CRendererDirectX11::Flush()
 {

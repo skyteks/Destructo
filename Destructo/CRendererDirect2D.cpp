@@ -2,6 +2,7 @@
 #include "CGameObject.h"
 #include "CTransform.h"
 #include "CSprite.h"
+#include "ERenderer.h"
 
 CRendererDirect2D::CRendererDirect2D()
     : m_imageFactory(nullptr)
@@ -117,24 +118,30 @@ void CRendererDirect2D::Begin()
     m_renderTarget->BeginDraw();
 }
 
+
 void CRendererDirect2D::DrawObject(CGameObject& a_gameObject)
 {
-    const CTextureDirect2D* direct2DTexture = reinterpret_cast<const CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetTextureName()));
+    CSprite* tmpSprite = a_gameObject.GetComponent<CSprite>();
+    CTransform* tmpTransform = a_gameObject.GetComponent<CTransform>();
+    CTextureManager& tmpTextureManager = CTextureManager::GetInstance();
+
+    const CTextureDirect2D* direct2DTexture = reinterpret_cast<const CTextureDirect2D*>(tmpTextureManager.GetTextureByName(tmpSprite->GetTextureName()));
     const CTextureDirect2D* direct2DOpacityMask = nullptr;
-    if (a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName() != "")
+    if (tmpSprite->GetOpacityMaskName() != "")
     {
-        direct2DOpacityMask = reinterpret_cast<const CTextureDirect2D*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName()));
+        direct2DOpacityMask = reinterpret_cast<const CTextureDirect2D*>(tmpTextureManager.GetTextureByName(tmpSprite->GetOpacityMaskName()));
     }
 
-    SVector3 position = a_gameObject.GetComponent<CTransform>()->GetPosition();
-    SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
-    SMatrix4x4 rotation = SMatrix4x4::RotationZ(a_gameObject.GetComponent<CTransform>()->GetRotation().z);
+    SVector3 position = tmpTransform->GetPosition();
+    SVector3 scale = tmpTransform->GetScale();
+    SMatrix4x4 rotation = SMatrix4x4::RotationZ(tmpTransform->GetRotation().z);
 
+    SRect<float> tmpRect = tmpSprite->GetImageSection();
     D2D1_RECT_F direct2DSource;
-    direct2DSource.left = a_gameObject.GetComponent<CSprite>()->GetImageSection().x1;
-    direct2DSource.top = a_gameObject.GetComponent<CSprite>()->GetImageSection().y1;
-    direct2DSource.right = a_gameObject.GetComponent<CSprite>()->GetImageSection().x2;
-    direct2DSource.bottom = a_gameObject.GetComponent<CSprite>()->GetImageSection().y2;
+    direct2DSource.left = tmpRect.x1;
+    direct2DSource.top = tmpRect.y1;
+    direct2DSource.right = tmpRect.x2;
+    direct2DSource.bottom = tmpRect.y2;
 
     D2D1_RECT_F direct2DDest;
     direct2DDest.left = position.x;
@@ -184,6 +191,7 @@ void CRendererDirect2D::DrawTexture(int a_posX, int a_posY, int a_width, int a_h
 
     m_renderTarget->DrawBitmap(direct2DTexture->GetBitmapHandle(), direct2DDest, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, direct2DSource);
 }
+
 
 void CRendererDirect2D::DrawTextureWithOpacityMask(int a_posX, int a_posY, int a_width, int a_height, const ITexture* a_texture, int a_imgX, int a_imgY, int a_imgWidth, int a_imgHeight, const ITexture* a_opacityMask)
 {
@@ -278,6 +286,13 @@ void CRendererDirect2D::Shutdown()
     SafeRelease(m_writeTextFormat);
 }
 
+
+ERenderer CRendererDirect2D::GetRendererType()
+{
+    return ERenderer::Direct2D;
+}
+
+
 D2D1_COLOR_F CRendererDirect2D::NewColor(int a_color)
 {
     // convert color to D2D1_COLOR_F
@@ -298,6 +313,7 @@ D2D1_COLOR_F CRendererDirect2D::NewColor(int a_color)
     newColor.b = colorConverter.b;
     return newColor;
 }
+
 
 void CRendererDirect2D::Clear(int a_color)
 {

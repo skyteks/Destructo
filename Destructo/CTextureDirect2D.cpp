@@ -80,19 +80,23 @@ int CTextureDirect2D::GetHeight() const
     return m_height;
 }
 
+
 ID2D1Bitmap* CTextureDirect2D::GetBitmapHandle() const
 {
     return m_bitmap;
 }
 
+
 void CTextureDirect2D::SetPixel(int a_x, int a_y, int a_color)
 {
 }
+
 
 //int CTextureDirect2D::GetPitch() const
 //{
 //    return m_pitch;
 //}
+//
 //
 //int CTextureDirect2D::GetBPP() const
 //{

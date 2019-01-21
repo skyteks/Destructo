@@ -28,7 +28,7 @@ int CALLBACK WinMain(
     app = new CApplication();
 
     bool wResult = false;
-    ERenderer chosenRenderer = ERenderer::OpenGL;
+    ERenderer chosenRenderer = ERenderer::GDI;
     wResult = app->Initialize(chosenRenderer, new CAudio(), new CWindowsInput());
     if (!wResult)
         return wResult;

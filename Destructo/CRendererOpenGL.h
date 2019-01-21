@@ -40,12 +40,12 @@ public:
 
     void Shutdown() override;
 
+    ERenderer GetRendererType() override;
+
 private:
     HWND m_windowHandle;
     HDC m_windowDC;
     int m_windowWidth;
     int m_windowHeight;
-
-    ITexture* m_fontTexture = nullptr;
 };
 

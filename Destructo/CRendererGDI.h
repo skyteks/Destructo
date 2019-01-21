@@ -35,6 +35,8 @@ public:
 
     void Shutdown() override;
 
+    ERenderer GetRendererType() override;
+
 private:
 
     HWND m_windowHandle;

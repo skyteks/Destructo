@@ -15,11 +15,6 @@ CTextureOpenGL::CTextureOpenGL(std::string a_path)
     glGenTextures(1, &m_textureID);
     glBindTexture(GL_TEXTURE_2D, m_textureID);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_data);
-
-    if (m_textureID == 2)
-    {
-        s_collisionTexture = this;
-    }
 }
 
 
@@ -74,6 +69,7 @@ void CTextureOpenGL::SetPixel(int a_x, int a_y, int a_color)
     *(p + index) = 0xFF000000; // ABGR
 }
 
+
 void CTextureOpenGL::AddOpacityMask(const CTextureOpenGL* a_opacityMask) const
 {
     for (auto y = 0; y < m_height; y++)
@@ -97,5 +93,3 @@ void CTextureOpenGL::AddOpacityMask(const CTextureOpenGL* a_opacityMask) const
     glBindTexture(GL_TEXTURE_2D, m_textureID);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_data);
 }
-
-CTextureOpenGL* CTextureOpenGL::s_collisionTexture = nullptr;

@@ -39,6 +39,8 @@ public:
 
     void Shutdown() override;
 
+    ERenderer GetRendererType() override;
+
     D2D1_COLOR_F NewColor(int a_color);
 
     void Clear(int a_color);

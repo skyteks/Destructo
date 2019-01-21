@@ -5,10 +5,13 @@
 #include <string>
 
 #include "SBitmap.h"
+#include "ERenderer.h"
 
 SBitmap LoadBitmapAndAddAlpha(std::string a_path);
 
 float LinearRemap(float a_value, float a_inMin, float a_inMax, float a_outMin, float a_outMax);
+
+char* RendererTypeToString(ERenderer var);
 
 template<typename T> void SafeRelease(T* a_interface)
 {

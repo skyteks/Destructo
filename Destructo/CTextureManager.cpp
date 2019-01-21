@@ -9,10 +9,12 @@ CTextureManager::~CTextureManager()
 {
 }
 
+
 void CTextureManager::Initialize(IRenderer ** a_renderer)
 {
     m_renderer = a_renderer;
 }
+
 
 void CTextureManager::Shutdown()
 {
@@ -27,11 +29,13 @@ void CTextureManager::Shutdown()
     m_textureMap.clear();
 }
 
+
 CTextureManager& CTextureManager::GetInstance()
 {
     static CTextureManager s_textureManager;
     return s_textureManager;
 }
+
 
 bool CTextureManager::LoadTexture(const std::string a_path)
 {
@@ -49,10 +53,12 @@ bool CTextureManager::LoadTexture(const std::string a_path)
     return true;
 }
 
+
 ITexture* CTextureManager::GetTextureByName(const std::string a_path) const
 {
     return m_textureMap.at(a_path);
 }
+
 
 const char* CTextureManager::GetNameByTexture(const ITexture* a_texture) const
 {

@@ -2,6 +2,7 @@
 
 enum ERenderer
 {
+    NONE,
     GDI,
     OpenGL,
     DirectX11,

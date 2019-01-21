@@ -40,13 +40,13 @@ public:
 
     bool Failed(HRESULT aResult);
 
-    static bool engineRunning;
-    static ERenderer currentRenderer;
-
     void SetSoundEngine(IAudio* a_soundEngine);
 
 private:
-    SWindowDesc m_wndDesc = { "Destructo", 800, 600 };
+    static bool s_engineRunning;
+
+    ERenderer m_currentRenderer;
+    SWindowDesc m_wndDesc;
     CWindow m_window;
     IRenderer* m_renderer = nullptr;
     IScene* m_scene = nullptr;

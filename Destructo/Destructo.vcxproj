@@ -261,6 +261,17 @@
     <ClCompile Include="CTime.cpp" />
     <ClCompile Include="SVector4.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\background.bmp" />
+    <Image Include="Textures\button.bmp" />
+    <Image Include="Textures\collision.bmp" />
+    <Image Include="Textures\font.bmp" />
+    <Image Include="Textures\goblin.bmp" />
+    <Image Include="Textures\player.bmp" />
+    <Image Include="Textures\player2.bmp" />
+    <Image Include="Textures\projectile.bmp" />
+    <Image Include="Textures\terrain.bmp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

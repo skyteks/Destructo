@@ -97,6 +97,9 @@
     <Filter Include="Quelldateien\Components">
       <UniqueIdentifier>{697a3b9f-d7c7-4929-94da-76e0ed65b6be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ressourcendateien\Textures">
+      <UniqueIdentifier>{ed263f4d-1719-4ac9-86a4-195a07e77f54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CApplication.h">
@@ -427,5 +430,34 @@
     <None Include="Shader.hlsl">
       <Filter>Ressourcendateien</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\background.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
+    <Image Include="Textures\button.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
+    <Image Include="Textures\collision.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
+    <Image Include="Textures\font.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
+    <Image Include="Textures\goblin.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
+    <Image Include="Textures\player.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
+    <Image Include="Textures\player2.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
+    <Image Include="Textures\terrain.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
+    <Image Include="Textures\projectile.bmp">
+      <Filter>Ressourcendateien\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

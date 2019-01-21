@@ -1,13 +1,12 @@
 ﻿#include "CApplication.h"
 
-bool CApplication::engineRunning = false;
-ERenderer CApplication::currentRenderer;
+bool CApplication::s_engineRunning = false;
 
 CApplication::CApplication()
-    : m_window()
-    , m_renderer(nullptr)
+    : m_currentRenderer(ERenderer::NONE)
+    , m_wndDesc({"Destructo", 800, 600 })
+    , m_window()
     , m_instance(GetModuleHandle(nullptr))
-    , m_soundEngine(nullptr)
 {
 }
 
@@ -110,9 +109,9 @@ bool CApplication::ChangeRenderer(ERenderer a_newRenderer)
 
 
     // Create newDeleteCounter new Renderer
-    currentRenderer = a_newRenderer;
+    m_currentRenderer = a_newRenderer;
 
-    switch (currentRenderer)
+    switch (m_currentRenderer)
     {
     case GDI:
         m_renderer = new CRendererGDI();
@@ -127,7 +126,7 @@ bool CApplication::ChangeRenderer(ERenderer a_newRenderer)
         m_renderer = new CRendererDirect2D();
         break;
     default:
-        break;
+        return false;
     }
 
     wResult = this->m_renderer->Initialize(m_window.GetWindowHandle());
@@ -144,7 +143,7 @@ bool CApplication::ChangeRenderer(ERenderer a_newRenderer)
 void CApplication::Run()
 {
     MSG message;
-    engineRunning = true;
+    s_engineRunning = true;
 
     CTime::GetInstance().Reset();
     float totalTime = CTime::GetInstance().TotalTime();
@@ -164,7 +163,7 @@ void CApplication::Run()
     deltaTimer.Reset();
 
     // Start "Gameloop"
-    while (engineRunning)
+    while (s_engineRunning)
     {
         // Go trought all events
         while (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
@@ -212,6 +211,7 @@ void CApplication::Run()
             while (CTime::GetInstance().TotalTime() - currentTime < sleep)
             {
                 // wait
+                //Sleep(static_cast<DWORD>(sleep));
             }
         }
 
@@ -231,11 +231,13 @@ void CApplication::Shutdown()
     SafeDelete(m_scene);
     SafeDelete(m_renderer);
 
-    ; // unload sound from memory
+    // unload sound from memory
     m_soundEngine->Shutdown(); // shutdown sound engine
     SafeDelete(m_soundEngine); // delete sound engine
 
     CInputManager::GetInstance().Shutdown();
+
+    s_engineRunning = false;
 }
 
 
@@ -301,7 +303,7 @@ LRESULT CApplication::WndProc(HWND a_Hwnd, uint32_t a_Message, WPARAM a_WParam, 
     case WM_CLOSE:
         printf("Engine stopped\n");
         PostQuitMessage(0);
-        engineRunning = false;
+        s_engineRunning = false;
         break;
     default:
         break;

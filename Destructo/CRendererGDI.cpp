@@ -2,16 +2,15 @@
 #include "CGameObject.h"
 #include "CTransform.h"
 #include "CSprite.h"
+#include "ERenderer.h"
 
 CRendererGDI::CRendererGDI()
 {
-
 }
 
 
 CRendererGDI::~CRendererGDI()
 {
-
 }
 
 
@@ -52,21 +51,21 @@ ITexture* CRendererGDI::LoadTextureFromFile(std::string a_path)
 
 void CRendererGDI::DrawObject(CGameObject& a_gameObject)
 {
-    const CTextureGDI* gdiTexture = static_cast<const CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetTextureName()));
+    CSprite* tmpSprite = a_gameObject.GetComponent<CSprite>();
+    CTransform* tmpTransform = a_gameObject.GetComponent<CTransform>();
+    CTextureManager& tmpTextureManager = CTextureManager::GetInstance();
+
+    const CTextureGDI* gdiTexture = static_cast<const CTextureGDI*>(tmpTextureManager.GetTextureByName(tmpSprite->GetTextureName()));
     const CTextureGDI* gdiOpacityMask = nullptr;
-    if (a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName() != "")
+    if (tmpSprite->GetOpacityMaskName() != "")
     {
-        gdiOpacityMask = static_cast<const CTextureGDI*>(CTextureManager::GetInstance().GetTextureByName(a_gameObject.GetComponent<CSprite>()->GetOpacityMaskName()));
+        gdiOpacityMask = static_cast<const CTextureGDI*>(tmpTextureManager.GetTextureByName(tmpSprite->GetOpacityMaskName()));
     }
 
-    SVector3 position = a_gameObject.GetComponent<CTransform>()->GetPosition();
-    SVector3 scale = a_gameObject.GetComponent<CTransform>()->GetScale();
+    SVector3 position = tmpTransform->GetPosition();
+    SVector3 scale = tmpTransform->GetScale();
 
-    SRect<float> source;
-    source.x1 = a_gameObject.GetComponent<CSprite>()->GetImageSection().x1;
-    source.y1 = a_gameObject.GetComponent<CSprite>()->GetImageSection().y1;
-    source.x2 = a_gameObject.GetComponent<CSprite>()->GetImageSection().x2;
-    source.y2 = a_gameObject.GetComponent<CSprite>()->GetImageSection().y2;
+    SRect<float> source = tmpSprite->GetImageSection();
 
     SRect<float> dest;
     dest.x1 = position.x;
@@ -85,7 +84,7 @@ void CRendererGDI::DrawObject(CGameObject& a_gameObject)
     SVector3 vec2(dest.x1 + dest.x2, dest.y1);
     SVector3 vec3(dest.x1 + dest.x2, dest.y1 + dest.y2);
     SVector3 vec4(dest.x1, dest.y1 + dest.y2);
-    SMatrix4x4 rotation = SMatrix4x4::RotationZ(a_gameObject.GetComponent<CTransform>()->GetRotation().z);
+    SMatrix4x4 rotation = SMatrix4x4::RotationZ(tmpTransform->GetRotation().z);
 
     SVector4 point1 = rotation * vec1;
     SVector4 point2 = rotation * vec2;
@@ -264,4 +263,10 @@ void CRendererGDI::End()
 void CRendererGDI::Shutdown()
 {
 
+}
+
+
+ERenderer CRendererGDI::GetRendererType()
+{
+    return ERenderer::GDI;
 }

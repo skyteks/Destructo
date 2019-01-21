@@ -21,7 +21,7 @@ CFrameAllocator::~CFrameAllocator()
 
 char* CFrameAllocator::Allocate(size_t size)
 {
-    if (size <= 0 || currentPosition + size - allocationBeginning > allocatedSize)
+    if (size <= 0u || static_cast<size_t>(currentPosition + size - allocationBeginning) > allocatedSize)
     {
         throw std::bad_alloc();
         //return nullptr;

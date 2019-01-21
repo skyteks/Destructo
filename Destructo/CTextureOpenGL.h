@@ -27,8 +27,6 @@ public:
 
     void* GetData() const;
 
-    static CTextureOpenGL* s_collisionTexture;
-
 private:
 
     int m_width;

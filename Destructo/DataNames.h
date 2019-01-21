@@ -8,3 +8,13 @@
 #define TEXTURE_BUTTON "Textures/button.bmp"
 #define TEXTURE_FONT "Textures/font.bmp"
 #define TEXTURE_MENU "Textures/goblin.bmp"
+
+//#define TEXTURE_CANNON_BLUE "Textures/blue_cannon.bmp"
+//#define TEXTURE_CANNON_RED "Textures/red_cannon.bmp"
+//#define TEXTURE_CANNON_YELLOW "Textures/yellow_cannon.bmp"
+//#define TEXTURE_CANNON_GREEN "Textures/green_cannon.bmp"
+//#define TEXTURE_TANK_BLUE "Textures/blue_tank.bmp"
+//#define TEXTURE_TANK_RED "Textures/red_tank.bmp"
+//#define TEXTURE_TANK_YELLOW "Textures/yellow_tank.bmp"
+//#define TEXTURE_TANK_GREEN "Textures/green_tank.bmp"
+#define TEXTURE_PROJECTILE "Textures/projectile.bmp"

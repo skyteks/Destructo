@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <string>
 #include "ITexture.h"
+#include "ERenderer.h"
 
 class CGameObject;
 
@@ -31,4 +32,6 @@ public:
     virtual void End() = 0;
 
     virtual void Shutdown() = 0;
+
+    virtual ERenderer GetRendererType() = 0;
 };
