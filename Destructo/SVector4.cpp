@@ -23,7 +23,7 @@ SVector4::SVector4(float a_x, float a_y, float a_z, float a_w)
 
 SVector4 SVector4::Normalized() const
 {
-    float length = Length();
+    float length = Magnitude();
     SVector4 tmp = SVector4::Zero();
     if (length != 0.0f)
     {
@@ -38,7 +38,7 @@ SVector4 SVector4::Normalized() const
 
 void SVector4::Normalize()
 {
-    float length = Length();
+    float length = Magnitude();
     if (length == 0.0f)
     {
         return;
@@ -50,9 +50,15 @@ void SVector4::Normalize()
 }
 
 
-float SVector4::Length() const
+float SVector4::Magnitude() const
 {
-    return sqrtf(this->x * this->x + this->y * this->y + this->z * this->z + this->w * this->w);
+    return sqrtf(x * x + y * y + z * z + w * w);
+}
+
+
+float SVector4::SqrMagnitude() const
+{
+    return x * x + y * y + z * z + w * w;
 }
 
 
@@ -64,7 +70,7 @@ float SVector4::Dot(const SVector4& a_vector1, const SVector4& a_vector2)
 
 SVector4 SVector4::Normalized(const SVector4& a_vector1)
 {
-    float length = a_vector1.Length();
+    float length = a_vector1.Magnitude();
     SVector4 tmp = SVector4::Zero();
     if (length != 0.0f)
     {
@@ -79,7 +85,7 @@ SVector4 SVector4::Normalized(const SVector4& a_vector1)
 
 void SVector4::Normalize(SVector4& a_vector1)
 {
-    float length = a_vector1.Length();
+    float length = a_vector1.Magnitude();
     if (length == 0.0f)
     {
         return;
@@ -94,7 +100,7 @@ void SVector4::Normalize(SVector4& a_vector1)
 float SVector4::Distance(const SVector4& a_vector1, const SVector4& a_vector2)
 {
     SVector4 tmp = a_vector1 - a_vector2;
-    return tmp.Length();
+    return tmp.Magnitude();
 }
 
 

@@ -3,24 +3,20 @@
 #include <limits>
 
 SVector3::SVector3()
-    : x(0.0f)
-    , y(0.0f)
-    , z(0.0f)
+    : x(0.0f), y(0.0f), z(0.0f)
 {
 }
 
 
 SVector3::SVector3(float a_x, float a_y, float a_z)
-    : x(a_x)
-    , y(a_y)
-    , z(a_z)
+    : x(a_x), y(a_y), z(a_z)
 {
 }
 
 
 SVector3 SVector3::Normalized() const
 {
-    float length = Length();
+    float length = Magnitude();
     SVector3 tmp = SVector3::Zero();
     if (length != 0.0f)
     {
@@ -34,7 +30,7 @@ SVector3 SVector3::Normalized() const
 
 void SVector3::Normalize()
 {
-    float length = Length();
+    float length = Magnitude();
     if (length == 0.0f)
     {
         return;
@@ -45,9 +41,15 @@ void SVector3::Normalize()
 }
 
 
-float SVector3::Length() const
+float SVector3::Magnitude() const
 {
     return sqrtf(x * x + y * y + z * z);
+}
+
+
+float SVector3::SqrMagnitude() const
+{
+    return x * x + y * y + z * z;
 }
 
 
@@ -59,7 +61,7 @@ float SVector3::Dot(const SVector3& a_vector1, const SVector3& a_vector2)
 
 SVector3 SVector3::Normalized(const SVector3& a_vector1)
 {
-    float length = a_vector1.Length();
+    float length = a_vector1.Magnitude();
     SVector3 tmp = SVector3::Zero();
     if (length != 0.0f)
     {
@@ -73,7 +75,7 @@ SVector3 SVector3::Normalized(const SVector3& a_vector1)
 
 void SVector3::Normalize(SVector3& a_vector1)
 {
-    float length = a_vector1.Length();
+    float length = a_vector1.Magnitude();
     if (length == 0.0f)
     {
         return;
@@ -87,7 +89,7 @@ void SVector3::Normalize(SVector3& a_vector1)
 float SVector3::Distance(const SVector3& a_vector1, const SVector3& a_vector2)
 {
     auto tmp = a_vector1 - a_vector2;
-    return tmp.Length();
+    return tmp.Magnitude();
 }
 
 

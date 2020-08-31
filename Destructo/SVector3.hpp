@@ -1,46 +1,49 @@
 #include <limits>
 
-
 ////=======================================================================
 //// Global Operator overload
 ////=======================================================================
 inline void SVector3::operator=(const SVector3& a_vector2)
 {
-    this->x = a_vector2.x;
-    this->y = a_vector2.y;
-    this->z = a_vector2.z;
+    x = a_vector2.x;
+    y = a_vector2.y;
+    z = a_vector2.z;
 }
 inline void SVector3::operator+=(const SVector3& a_vector2)
 {
-    this->x += a_vector2.x;
-    this->y += a_vector2.y;
-    this->z += a_vector2.z;
+    x += a_vector2.x;
+    y += a_vector2.y;
+    z += a_vector2.z;
 }
 inline void SVector3::operator-=(const SVector3& a_vector2)
 {
-    this->x -= a_vector2.x;
-    this->y -= a_vector2.y;
-    this->z -= a_vector2.z;
+    x -= a_vector2.x;
+    y -= a_vector2.y;
+    z -= a_vector2.z;
 }
 inline void SVector3::operator*=(const SVector3& a_vector2)
 {
-    this->x *= a_vector2.x;
-    this->y *= a_vector2.y;
-    this->z *= a_vector2.z;
+    x *= a_vector2.x;
+    y *= a_vector2.y;
+    z *= a_vector2.z;
 }
 inline void SVector3::operator*=(const float a_scalar)
 {
-    this->x *= a_scalar;
-    this->y *= a_scalar;
-    this->z *= a_scalar;
+    x *= a_scalar;
+    y *= a_scalar;
+    z *= a_scalar;
 }
-
+inline void SVector3::operator/=(const float a_scalar)
+{
+    x /= a_scalar;
+    y /= a_scalar;
+    z /= a_scalar;
+}
 
 /// @brief Adds two vectors.
 /// @param a_vector1 A vector as reference.
 /// @param a_vector2 A vector as reference.
 /// @return Returns the sum of both vectors.
-
 inline SVector3 operator+(const SVector3& a_vector1, const SVector3& a_vector2)
 {
     SVector3 tmp = SVector3::Zero();
@@ -112,6 +115,19 @@ inline SVector3 operator/(const SVector3& a_vector1, const SVector3& a_vector2)
     tmp.x = a_vector1.x / a_vector2.x;
     tmp.y = a_vector1.y / a_vector2.y;
     tmp.z = a_vector1.z / a_vector2.z;
+    return tmp;
+}
+
+/// @brief Divides a vector.
+/// @param a_vector1 A vector as reference.
+/// @param a_scalar A scalar which will divide the vector.
+/// @return Returns the division of both vectors.
+inline SVector3 operator/(const SVector3& a_vector1, const float a_scalar)
+{
+    SVector3 tmp = SVector3::Zero();
+    tmp.x = a_vector1.x / a_scalar;
+    tmp.y = a_vector1.y / a_scalar;
+    tmp.z = a_vector1.z / a_scalar;
     return tmp;
 }
 

@@ -39,8 +39,12 @@ public:
 
     /// @brief Calculates the length (magnitude) of vector.
     /// @return Returns the length of the vector.
-    float Length() const;
-#define Magnitude() Length()
+    float Magnitude() const;
+#define Length() Magnitude()
+
+    /// @brief Calculates the magnitude but doesn't get the square of it
+    /// @return Returns the square of the length of the vector.
+    float SqrMagnitude() const;
 
     ////=======================================================================
     //// Operator overload
@@ -65,6 +69,8 @@ public:
     /// @brief Adds a scalar.
     /// @param a_scalar Scalar which will be multiplied.
     void operator*=(const float a_scalar);
+
+    void operator/=(const float a_scalar);
 
     ////=======================================================================
     //// Static Functions
