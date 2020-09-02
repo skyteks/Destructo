@@ -256,17 +256,29 @@ void CRendererGDI::Begin()
 
 void CRendererGDI::End()
 {
-
 }
 
 
 void CRendererGDI::Shutdown()
 {
-
 }
 
 
 ERenderer CRendererGDI::GetRendererType()
 {
     return ERenderer::GDI;
+}
+
+void CRendererGDI::DrawRectangle(int a_posX, int a_posY, int a_width, int a_height)
+{
+    SelectObject(m_backbufferDC, GetStockObject(DC_BRUSH));
+    SetDCBrushColor(m_backbufferDC, RGB(0, 0, 0));
+
+    RECT rect = RECT();
+    rect.left = a_posX;
+    rect.top = a_posY;
+    rect.right = a_width;
+    rect.bottom = a_height;
+    HBRUSH brush = HBRUSH();
+    FrameRect(m_backbufferDC, &rect, brush);
 }

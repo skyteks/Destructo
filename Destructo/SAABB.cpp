@@ -7,6 +7,17 @@ SAABB::SAABB(SVector3 a_center, float a_halfWidths)
 }
 
 
+SAABB::SAABB(SVector3 a_topLeft, SVector3 a_widths)
+    : m_center(a_topLeft + SVector3(a_widths.x, a_widths.x) * 0.5f)
+    , m_halfWidths(a_widths.x * 0.5f)
+{
+    if (a_widths.x != a_widths.y)
+    {
+        throw "Width and height must be the same in an AABB";
+    }
+}
+
+
 bool SAABB::ContainsPoint(SVector3 a_point) const
 {
     SVector3 topLeft = SVector3(m_center.x - m_halfWidths, m_center.y - m_halfWidths);
@@ -26,6 +37,7 @@ bool SAABB::Intersects(SAABB a_other) const
 
     return ContainsPoint(topLeft) || ContainsPoint(topRight) || ContainsPoint(bottomLeft) || ContainsPoint(bottomRight);
 }
+
 
 SVector3 SAABB::GetBorderPoint(short a_index) const
 {

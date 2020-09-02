@@ -37,6 +37,8 @@ public:
 
     ERenderer GetRendererType() override;
 
+    void DrawRectangle(int a_posX, int a_posY, int a_width, int a_height);
+
 private:
 
     HWND m_windowHandle;

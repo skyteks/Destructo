@@ -167,83 +167,83 @@ std::vector<CGameObject*> CQuadTree::QueryRange(SAABB a_range)
     return elementsInRange;
 }
 
-void CQuadTree::Update()
-{
-    if (m_elements.size() > 0)
-    {
-        for (auto *element : m_elements)
-        {
-            for (auto *other : m_elements)
-            {
-                if (other != element)
-                {
-                    CCollider* collider1 = element->GetComponent<CCollider>();
-                    CCollider* collider2 = other->GetComponent<CCollider>();
-                    if (collider1 != nullptr && collider2 != nullptr)
-                    {
-                        switch (collider1->GetType())
-                        {
-                        case EColliderType::AABB:
-                            switch (collider1->GetType())
-                            {
-                            case EColliderType::AABB:
-                                if (CColliderTypeCollisions::IntersectBoxBox(collider1->GetAABB(), collider2->GetAABB()))
-                                {
-
-                                }
-                                break;
-                            case EColliderType::BCirle:
-                                if (CColliderTypeCollisions::IntersectBoxCircle(collider1->GetAABB(), collider2->GetBCircle()))
-                                {
-
-                                }
-                                break;
-                            default:
-                                break;
-                            }
-                            break;
-                        case EColliderType::BCirle:
-                            switch (collider1->GetType())
-                            {
-                            case EColliderType::AABB:
-                                if (CColliderTypeCollisions::IntersectCircleBox(collider1->GetBCircle(), collider2->GetAABB()))
-                                {
-
-                                }
-                                break;
-                            case EColliderType::BCirle:
-                                if (CColliderTypeCollisions::IntersectCircleCircle(collider1->GetBCircle(), collider2->GetBCircle()))
-                                {
-
-                                }
-                                break;
-                            default:
-                                break;
-                            }
-                            break;
-                        default:
-                            break;
-                        }
-                    }
-                }
-            }
-            element->Update();
-        }
-    }
-    if (m_northWest != nullptr)
-    {
-        m_northWest->Update();
-    }
-    if (m_northEast != nullptr)
-    {
-        m_northEast->Update();
-    }
-    if (m_southWest != nullptr)
-    {
-        m_southWest->Update();
-    }
-    if (m_southEast != nullptr)
-    {
-        m_southEast->Update();
-    }
-}
+//void CQuadTree::Update()
+//{
+//    if (m_elements.size() > 0)
+//    {
+//        for (auto *element : m_elements)
+//        {
+//            for (auto *other : m_elements)
+//            {
+//                if (other != element)
+//                {
+//                    CCollider* collider1 = element->GetComponent<CCollider>();
+//                    CCollider* collider2 = other->GetComponent<CCollider>();
+//                    if (collider1 != nullptr && collider2 != nullptr)
+//                    {
+//                        switch (collider1->GetType())
+//                        {
+//                        case EColliderType::AABB:
+//                            switch (collider1->GetType())
+//                            {
+//                            case EColliderType::AABB:
+//                                if (CColliderTypeCollisions::IntersectBoxBox(collider1->GetAABB(), collider2->GetAABB()))
+//                                {
+//
+//                                }
+//                                break;
+//                            case EColliderType::BCirle:
+//                                if (CColliderTypeCollisions::IntersectBoxCircle(collider1->GetAABB(), collider2->GetBCircle()))
+//                                {
+//
+//                                }
+//                                break;
+//                            default:
+//                                break;
+//                            }
+//                            break;
+//                        case EColliderType::BCirle:
+//                            switch (collider1->GetType())
+//                            {
+//                            case EColliderType::AABB:
+//                                if (CColliderTypeCollisions::IntersectCircleBox(collider1->GetBCircle(), collider2->GetAABB()))
+//                                {
+//
+//                                }
+//                                break;
+//                            case EColliderType::BCirle:
+//                                if (CColliderTypeCollisions::IntersectCircleCircle(collider1->GetBCircle(), collider2->GetBCircle()))
+//                                {
+//
+//                                }
+//                                break;
+//                            default:
+//                                break;
+//                            }
+//                            break;
+//                        default:
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//            element->Update();
+//        }
+//    }
+//    if (m_northWest != nullptr)
+//    {
+//        m_northWest->Update();
+//    }
+//    if (m_northEast != nullptr)
+//    {
+//        m_northEast->Update();
+//    }
+//    if (m_southWest != nullptr)
+//    {
+//        m_southWest->Update();
+//    }
+//    if (m_southEast != nullptr)
+//    {
+//        m_southEast->Update();
+//    }
+//}

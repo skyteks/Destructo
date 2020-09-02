@@ -11,6 +11,9 @@
 #include "CInputController.h"
 #include "CRigidbody.h"
 
+#include "CRendererGDI.h"
+#include "CRendererOpenGL.h"
+
 CGameScene::CGameScene()
     : m_objectPlayer(nullptr)
     , m_objectPlayer2(nullptr)
@@ -102,6 +105,19 @@ void CGameScene::Draw(IRenderer& a_renderer) const
         m_objectPlayer->GetComponent<CTransform>()->GetPosition().x,
         m_objectPlayer->GetComponent<CTransform>()->GetPosition().y);
     a_renderer.DrawString(10, 10, buffer, RGB(255, 255, 255), RGB(0, 0, 0), DT_TOP | DT_LEFT, fontTexture);
+
+    SAABB boundary = SAABB(SVector3(0, 0), SVector3(800, 800));
+    CQuadTree tree = CQuadTree(boundary);
+    tree.Update()
+
+    if (a_renderer.GetRendererType() == ERenderer::GDI)
+    {
+        reinterpret_cast<CRendererGDI&>(a_renderer).DrawRectangle(100, 100, 600, 400);
+    }
+    if (a_renderer.GetRendererType() == ERenderer::OpenGL)
+    {
+        reinterpret_cast<CRendererOpenGL&>(a_renderer).DrawRectangle(100, 100, 600, 400);
+    }
 }
 
 

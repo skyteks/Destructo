@@ -336,3 +336,21 @@ ERenderer CRendererOpenGL::GetRendererType()
 {
     return ERenderer::OpenGL;
 }
+
+void CRendererOpenGL::DrawRectangle(int a_posX, int a_posY, int a_width, int a_height)
+{
+    //glRecti(a_posX, a_posY, a_width, a_height);
+
+    for (size_t i = 0; i < 5; i++)
+    {
+        glColor3f(0.0f, 0.0f, 0.0f);
+        glBegin(GL_LINE_STRIP);
+        glVertex3f(a_posX, a_posY, 0);
+        glVertex3f(a_posX + a_width, a_posY, 0);
+        glVertex3f(a_posX + a_width, a_posY + a_height, 0);
+        glVertex3f(a_posX, a_posY + a_height, 0);
+        glVertex3f(a_posX, a_posY, 0);
+        glEnd();
+    }
+    glColor3f(1.0f, 1.0f, 1.0f);
+}
